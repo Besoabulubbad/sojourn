@@ -9,8 +9,8 @@ Rules for this table: stable releases only (no alpha/beta/RC) unless marked; eve
 | Tool | Version | Notes | Docs |
 |---|---|---|---|
 | Kotlin | 2.4.21 | Latest stable (2.5.0 at RC) | [kotlinlang.org](https://kotlinlang.org/docs/home.html) |
-| Gradle | 9.5.1 | Wrapper; configuration cache and build cache on | [docs.gradle.org](https://docs.gradle.org/current/userguide/userguide.html) |
-| Android Gradle Plugin | 9.5.1 | Bump from 9.1.1; uses `com.android.kotlin.multiplatform.library` and the AGP 9 DSL | [AGP release notes](https://developer.android.com/build/releases/gradle-plugin) |
+| Gradle | 9.7.1 | Wrapper; configuration cache, build cache and parallel on. Newest release inside KGP 2.4.21's fully supported range (≤ 9.7.0 documented; 9.7.1 is its patch) | [docs.gradle.org](https://docs.gradle.org/current/userguide/userguide.html) · [KGP compatibility](https://kotlinlang.org/docs/gradle-configure-project.html) |
+| Android Gradle Plugin | 9.3.1 | Bump from 9.1.1; the newest AGP inside KGP 2.4.21's documented window (8.5.2–9.3.1). AGP 9.5.1 exists but requires Gradle ≥ 9.6 and is outside that window, so it waits for the Kotlin release that lists it. Uses `com.android.kotlin.multiplatform.library` and the AGP 9 DSL | [AGP release notes](https://developer.android.com/build/releases/gradle-plugin) |
 | JDK (toolchain) | 21 (Azul, via Foojay) | `gradle/gradle-daemon-jvm.properties`; JVM target 11 for Android bytecode | — |
 | compileSdk / targetSdk / minSdk | 37 / 37 / 24 | Android 17 SDK present locally | — |
 | KSP | 2.3.14 | For Koin Annotations if adopted; version is independent of Kotlin since 2.x | [KSP](https://kotlinlang.org/docs/ksp-overview.html) |
@@ -57,7 +57,7 @@ Rules for this table: stable releases only (no alpha/beta/RC) unless marked; eve
 |---|---|---|---|
 | detekt | 1.23.8 | single linter; formatting rules via `detekt-formatting` | [detekt.dev](https://detekt.dev/) |
 | Compose rules for detekt (nlopez) | 0.6.8 | `io.nlopez.compose.rules:detekt` | [mrmans0n/compose-rules](https://mrmans0n.github.io/compose-rules/) |
-| Gradle dependency-analysis | 3.9.0 | `buildHealth` — unused/misdeclared deps | [dependency-analysis-gradle-plugin](https://github.com/autonomousapps/dependency-analysis-gradle-plugin) |
+| Gradle dependency-analysis | 3.9.0 | `buildHealth` — unused/misdeclared deps; applied per module; Compose Multiplatform bundle configured at the root. Its authors test up to AGP 9.1.0; runs on 9.3.1 with a warning (Renovate tracks the plugin) | [dependency-analysis-gradle-plugin](https://github.com/autonomousapps/dependency-analysis-gradle-plugin) |
 | Dokka | 2.3.0 | API docs for `core:*` → `/api` on the site | [Dokka](https://kotlinlang.org/docs/dokka-introduction.html) |
 | MkDocs Material | 9.8.1 | docs site — EOL announced 2027-05-05; successor [Zensical](https://zensical.org) reads the same `mkdocs.yml` (see ADR 0012) | [squidfunk.github.io/mkdocs-material](https://squidfunk.github.io/mkdocs-material/) |
 | Renovate | GitHub App | dependency PRs, weekly, grouped | [Renovate](https://docs.renovatebot.com/) |

@@ -59,7 +59,7 @@ flowchart LR
 
 | | |
 |---|---|
-| **Platform** | Kotlin 2.4 · Compose Multiplatform 1.12 · AGP 9.5 · Gradle 9.5 · convention plugins |
+| **Platform** | Kotlin 2.4 · Compose Multiplatform 1.12 · AGP 9.3 · Gradle 9.7 · convention plugins |
 | **Architecture** | `core/*` + `feature/*` modules · MVI / unidirectional data flow · Navigation 3 · Koin 4 |
 | **Data** | SQLDelight 2.4, offline-first · Ktor 3.6 seam · kotlinx.serialization · Coil 3 |
 | **Design system** | tokens generated from `design/tokens.json` → `SojournTheme`; Material 3 confined to one module |

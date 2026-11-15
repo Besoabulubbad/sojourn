@@ -32,7 +32,7 @@ The design system's standards are explicit that "a rule without enforcement is a
 | Compose best practices | `io.nlopez.compose.rules:detekt` 0.6.8 | modifier ordering, parameter order, preview naming, etc. |
 | Design-system standards (C-01, M-01, L-02, S-01/S-02, I-01) | **custom detekt rule set** in `tooling/detekt-rules` | PSI rules: literal `Color(`/hex/`.dp`/`.sp`/ms in `feature:*` and `core:ui`; `left`/`right`/`absoluteOffset`/negative `scaleX`; string literals or templates passed to text parameters; `windowInsetsPadding`/`statusBarsPadding`/`navigationBarsPadding`/`imePadding` outside the five inset owners |
 | Module graph, naming, forbidden imports, "every ViewModel has a test" | Konsist 0.18.1 in `tooling/konsist` | declaration-level assertions across the repo |
-| Dependency correctness | dependency-analysis 3.9.0 `buildHealth` | fails on unused or undeclared (transitively used) dependencies |
+| Dependency correctness | dependency-analysis 3.9.0 `buildHealth` | applied per module by the convention plugins (3.x no longer auto-applies from the root); fails on undeclared (transitively used) or misconfigured dependencies; "unused" warns while modules are skeletons and flips to fail at the end of Phase 2. A `compose-multiplatform` bundle stops it asking for the `androidx.compose.*` twins of the `org.jetbrains.compose.*` coordinates we declare. Tested by its authors with AGP ≤ 9.1.0; runs with 9.3.1 under a warning |
 | Dependency updates | Renovate (GitHub App) | weekly, grouped by ecosystem (Kotlin/Compose/AndroidX together), no auto-merge initially |
 
 Division of labour: detekt sees expressions (literals, call arguments); Konsist sees declarations and files (imports, class hierarchies, module membership). Both run in `check`.

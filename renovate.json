@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":dependencyDashboard",
+    "schedule:weekly"
+  ],
+  "labels": ["dependencies"],
+  "semanticCommitType": "build",
+  "packageRules": [
+    {
+      "description": "Kotlin, Compose Multiplatform and the JetBrains multiplatform AndroidX forks move together.",
+      "groupName": "Kotlin and Compose",
+      "matchPackageNames": ["/^org\\.jetbrains\\.kotlin/", "/^org\\.jetbrains\\.compose/", "/^org\\.jetbrains\\.androidx/"]
+    },
+    {
+      "description": "Android Gradle Plugin stays inside the Kotlin Gradle Plugin's documented window; majors need a human.",
+      "groupName": "Android Gradle Plugin",
+      "matchPackageNames": ["/^com\\.android\\.tools\\.build/", "/^com\\.android\\./"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "groupName": "AndroidX",
+      "matchPackageNames": ["/^androidx\\./"]
+    },
+    {
+      "groupName": "Koin",
+      "matchPackageNames": ["/^io\\.insert-koin/"]
+    },
+    {
+      "groupName": "Ktor and Coil",
+      "matchPackageNames": ["/^io\\.ktor/", "/^io\\.coil-kt/"]
+    },
+    {
+      "groupName": "Test and quality tooling",
+      "matchPackageNames": ["/^io\\.github\\.takahirom\\.roborazzi/", "/^org\\.robolectric/", "/^com\\.lemonappdev/", "/^io\\.gitlab\\.arturbosch\\.detekt/", "/^io\\.nlopez\\.compose\\.rules/", "/^app\\.cash\\.turbine/", "/^com\\.autonomousapps/"]
+    },
+    {
+      "groupName": "GitHub Actions",
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "description": "Docs toolchain pin (requirements-docs.txt).",
+      "matchManagers": ["pip_requirements"],
+      "groupName": "Docs toolchain"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    }
+  ],
+  "ignoreDeps": []
+}
