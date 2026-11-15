@@ -1,0 +1,2 @@
+# Docs site toolchain (docs.yml and local preview). Material for MkDocs: EOL 2027-05-05, see ADR 0012.
+mkdocs-material==9.8.1

@@ -13,7 +13,7 @@ What you need on a Mac to build, test and run Sojourn. Linux works for everythin
 | Homebrew | any | tool installs below | [brew.sh](https://brew.sh) |
 | GitHub CLI | 2.x | PRs, checks, secrets from the terminal | `brew install gh` then `gh auth login` |
 | Maestro | 2.x | run end-to-end flows locally | `curl -fsSL "https://get.maestro.mobile.dev" \| bash` |
-| Python + pipx | 3.11+ | preview the docs site | `brew install pipx && pipx install mkdocs-material` |
+| Python | 3.12+ | preview the docs site | `python3 -m venv .venv && .venv/bin/pip install -r requirements-docs.txt` (same pin CI uses) |
 
 `local.properties` (git-ignored) must contain `sdk.dir=/Users/<you>/Library/Android/sdk`.
 
