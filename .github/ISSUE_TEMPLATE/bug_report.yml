@@ -1,0 +1,62 @@
+name: Bug report
+description: Something looks or behaves wrong
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Explore
+        2. …
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [Android, iOS, Both]
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and OS version
+      placeholder: Pixel 9 · Android 17 / iPhone 16 · iOS 19
+  - type: dropdown
+    id: language
+    attributes:
+      label: App language
+      description: The matrix matters here — a bug in one variant is a bug.
+      options: [English, Arabic, Both]
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options: [Light, Dark, Both]
+    validations:
+      required: true
+  - type: dropdown
+    id: fontscale
+    attributes:
+      label: Font scale
+      options: ["100%", "200%", Other]
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or recording
+      description: Drag images or a short recording here.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      render: text
