@@ -1,0 +1,69 @@
+# Automated first-pass review on every pull request (ADR 0013).
+# Advisory: every merge is still a human decision.
+# Needs the ANTHROPIC_API_KEY repository secret; without it the job logs a notice and passes.
+name: Claude review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Review
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    env:
+      HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+    steps:
+      - name: Skip when no API key is configured
+        if: env.HAS_ANTHROPIC_KEY != 'true'
+        run: echo "::notice title=Claude review skipped::ANTHROPIC_API_KEY is not set. Add the repository secret to enable automated review (docs/adr/0013-ai-agents-dev-loop.md)."
+
+      - uses: actions/checkout@v7
+        if: env.HAS_ANTHROPIC_KEY == 'true'
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        if: env.HAS_ANTHROPIC_KEY == 'true'
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          use_sticky_comment: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            You are reviewing a pull request in Sojourn, a Kotlin Multiplatform app with a shared Compose UI.
+            The PR branch is already checked out. First read CLAUDE.md, docs/architecture/overview.md and the
+            accepted ADRs in docs/adr/ — they are the rules this review enforces. Then read the diff (gh pr diff).
+
+            Check, in this order:
+            1. Architecture — module dependency rules (feature:* never touches core:data, core:database,
+               core:network or another feature); Material imports only in core:designsystem; Koin modules named
+               <module>Module; NavKeys only in core:navigation.
+            2. Design-system standards — no raw dp/sp/Color/hex/millisecond literals in feature:* or core:ui;
+               start/end only (no left/right, absoluteOffset, scaleX = -1f); no user-facing string literals or
+               string templates into text; prices only via SojournPrice(PriceDisplay); ScreenState handled
+               exhaustively; inset modifiers only in SojournScaffold/TopBar/BottomNav/BookingBar/Sheet.
+            3. Localization — every new string present in values/ and values-ar/; plurals carry all six Arabic
+               forms; numbers, dates and money go through SojournFormatter.
+            4. Tests — a *ViewModelTest for every new ViewModel; screenshot tests for new components and screen
+               states; any changed screenshot baseline is listed and justified in the PR description.
+            5. Documentation duties (CLAUDE.md) — ADR for a new library or pattern; modules.md / mapping.md rows;
+               KDoc on public core APIs; showcase exports for a new screen.
+            6. Correctness, security and performance of the changed code.
+
+            Post inline comments on specific lines for concrete issues, and one summary comment containing:
+            a verdict (approve / request changes), the six checks above as pass/fail with one line each, and any
+            Definition of Done items that remain unchecked. Be specific and brief; do not restate the diff.
+            Only use GitHub comments to communicate.
+          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"'

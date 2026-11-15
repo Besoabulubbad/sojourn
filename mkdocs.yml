@@ -1,0 +1,102 @@
+site_name: Sojourn
+site_description: Architecture, decisions and guides for Sojourn — a Kotlin Multiplatform demo app with shared Compose UI.
+repo_url: https://github.com/Besoabulubbad/sojourn
+site_url: https://besoabulubbad.github.io/sojourn/
+edit_uri: edit/main/docs/
+docs_dir: docs
+strict: true
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Readex Pro
+    code: JetBrains Mono
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Plan: plan.md
+  - Tech stack: tech-stack.md
+  - Showcase: showcase/index.md
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Modules: architecture/modules.md
+  - Design system:
+      - Mapping to code: design-system/mapping.md
+      - Brand book: design-system/brand-book.md
+      - Engineering standards: design-system/engineering-standards.md
+      - Motion: design-system/motion.md
+      - Design rationale: design-system/rationale.md
+  - Guides:
+      - Local setup: guides/local-setup.md
+      - Adding a feature: guides/adding-a-feature.md
+      - Adding a component: guides/adding-a-component.md
+      - Testing: guides/testing.md
+      - Localization: guides/localization.md
+      - Release: guides/release.md
+  - Decisions (ADRs):
+      - Index: adr/README.md
+      - "0001 Kotlin Multiplatform with shared Compose UI": adr/0001-kotlin-multiplatform-shared-compose-ui.md
+      - "0002 Scope and build order": adr/0002-scope-and-build-order.md
+      - "0003 Modularization and convention plugins": adr/0003-modularization-and-convention-plugins.md
+      - "0004 Dependency injection with Koin": adr/0004-dependency-injection-koin.md
+      - "0005 Navigation 3": adr/0005-navigation-3.md
+      - "0006 MVI presentation": adr/0006-mvi-presentation.md
+      - "0007 Offline-first data with SQLDelight": adr/0007-offline-first-sqldelight.md
+      - "0008 Design tokens generated from tokens.json": adr/0008-design-tokens-generated.md
+      - "0009 Localization": adr/0009-localization-applocale.md
+      - "0010 Testing pyramid": adr/0010-testing-pyramid.md
+      - "0011 CI/CD and releases": adr/0011-ci-cd-github-actions.md
+      - "0012 Docs as code": adr/0012-docs-as-code.md
+      - "0013 AI agents in the dev loop": adr/0013-ai-agents-dev-loop.md
+      - "0014 Static analysis and dependency hygiene": adr/0014-static-analysis-dependency-hygiene.md
+  # Enabled in Phase 7 once Dokka output is published under docs/api:
+  # - API reference (Dokka): api/index.html

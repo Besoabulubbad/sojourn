@@ -1,0 +1,69 @@
+# 0007 — Offline-first data with SQLDelight and a Ktor-ready API seam
+
+- **Status:** accepted
+- **Date:** 2026-11-15
+- **Deciders:** Mohammad Abu Lubad, Claude
+- **Tags:** architecture, data
+
+## Context and problem statement
+
+The demo has no live backend. It still has to show loading, empty, error and offline states convincingly (I-05, the States screen), keep "one price everywhere" consistent across surfaces (P-02), and be deterministic on stage. We need to decide where data lives, what the source of truth is, and how a real API would plug in later.
+
+## Decision drivers
+
+- Deterministic, offline, fast demo — no network flakiness on stage.
+- Real persistence and offline-first patterns worth showing.
+- A clean seam so a real API is a configuration change.
+- Multiplatform drivers that are stable on Android and iOS.
+
+## Options considered
+
+1. **Mock repository over bundled JSON** — in-memory, no persistence.
+2. **Local database (SQLDelight), seeded, as source of truth** with an API seam (`SojournApi`) implemented locally for now.
+3. **Real Ktor API** against a hosted or mock server.
+
+## Decision outcome
+
+**Chosen: Option 2.** SQLDelight 2.4.1 is the source of truth; repositories in `core:data` expose `Flow`s from the database; a refresh pulls from the `SojournApi` seam and writes back. `SojournApi` is implemented by `LocalSojournApi` (bundled JSON with simulated latency and injectable failures) today and `KtorSojournApi` (configured, flag-gated) tomorrow. Features never know which.
+
+Why SQLDelight over Room (which also supports KMP now): SQL-first schema and queries we can read in review, mature `native-driver` on iOS, migrations as `.sqm` files, `coroutines-extensions` for `Flow`, and a JVM `sqlite-driver` for fast tests. Room KMP is a reasonable alternative and would be a contained change inside `core:database`.
+
+### Consequences
+
+- Good: the offline state is a real state (cached content + banner), not a spinner.
+- Good: loading/error/offline are reproducible in tests and demos via `FakeNetworkConditions`.
+- Good: the Ktor client, serialization and DTO mappers are real; swapping to a backend touches `core:network` only.
+- Good: pricing invariants (breakdown sums to total; same quote id across card, pin, bar, checkout, pay) are tested at the repository/use-case level.
+- Bad: more infrastructure than a mock. Mitigated by the `sojourn.sqldelight` convention plugin and a small schema.
+- Bad: seed data has to be authored (cities, ~40 stays, photos, policies, quotes). Mitigated by generating it once from the design system's sample data and committing it.
+- Neutral: SQLDelight generates code at build time; IDE needs a Gradle sync to see it.
+
+### Confirmation
+
+- `core:data` tests: reads come from the database; a network failure leaves cached content visible with `Offline` state.
+- `core:domain` tests: P-03 (`PriceDisplay.From` requires exclusions), P-05 (breakdown lines sum), N-04 (ratings hidden under 3 reviews).
+- Konsist: only `core:data` depends on `core:database` and `core:network`.
+
+## Pros and cons of the options
+
+### Option 1 — Mock repository over JSON
+
+- Good: fastest, simplest, fully deterministic.
+- Bad: no persistence story; offline is fake; saved/bookings do not survive restart.
+
+### Option 2 — SQLDelight + API seam
+
+- Good: real offline-first; deterministic; swappable; demonstrates data layer craft.
+- Bad: more setup; seed authoring.
+
+### Option 3 — Real Ktor API
+
+- Good: most "real".
+- Bad: no real backend; a hosted mock adds infrastructure and live-demo risk.
+
+## Links
+
+- [SQLDelight 2.x — Multiplatform SQLite](https://sqldelight.github.io/sqldelight/2.4.1/multiplatform_sqlite/)
+- [Ktor Client — multiplatform](https://ktor.io/docs/client-create-multiplatform-application.html)
+- [Android — offline-first guidance](https://developer.android.com/topic/architecture/data-layer/offline-first)
+- Related: ADR 0003, ADR 0010
