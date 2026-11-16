@@ -17,8 +17,10 @@ Sojourn is a premium flexible-stay reservation app (nights to a year): a Kotlin 
 ```bash
 ./gradlew check                         # everything CI runs on a PR (unit, konsist, screenshots, detekt)
 ./gradlew :core:designsystem:allTests   # one module
-./gradlew verifyRoborazziAndroidHostTest   # screenshot compare (check also verifies)
-./gradlew recordRoborazziAndroidHostTest   # re-record baselines (only after a reviewed visual change)
+./gradlew verifyRoborazziAndroidHostTest   # Android screenshot compare (check also verifies)
+./gradlew iosSimulatorArm64Test            # iOS unit tests + iOS screenshot verify (needs Xcode)
+./gradlew recordRoborazziAndroidHostTest   # re-record Android baselines (only after a reviewed visual change)
+./gradlew recordRoborazziIosSimulatorArm64 # re-record iOS baselines (same rule)
 ./gradlew :core:localization:verifyPlurals # every locale has every key; Arabic plurals have six forms
 ./gradlew detekt                        # static analysis
 ./gradlew buildHealth                   # dependency analysis
@@ -60,7 +62,7 @@ detekt's `sojourn` rule set (`tooling/detekt-rules`) enforces the token, motion,
 
 - New library or pattern → new ADR (`docs/adr/`, copy `0000-template.md`).
 - New module → entry in `docs/architecture/modules.md` and a module `README.md`.
-- New design-system component → row in `docs/design-system/mapping.md`, KDoc on the public composable, a preview, and a screenshot test extending `SojournScreenshotTest`.
+- New design-system component → row in `docs/design-system/mapping.md`, KDoc on the public composable, a preview, and `SnapshotCase`s in `commonTest` (rendered on Android and iOS).
 - A module gets its first code → remove it from `skeletonModules` in the root `build.gradle.kts` so "unused dependency" fails for it too.
 - Public API changes in `core:*` → update KDoc; Dokka publishes it.
 - New screen merged → its showcase screenshots are exported (`docs/showcase/`) in the same PR or the follow-up noted.

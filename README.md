@@ -72,8 +72,8 @@ flowchart LR
 | **Data** | SQLDelight 2.4, offline-first · Ktor 3.6 seam · kotlinx.serialization · Coil 3 |
 | **Design system** | tokens generated from `design/tokens.json` → `SojournTheme`; Material 3 confined to one module |
 | **Localization** | `AppLocale` single source · six Arabic plural forms · bidi-safe formatters · RTL by construction |
-| **Quality gates** | detekt + Compose rules + custom standards rules · Konsist architecture tests · Roborazzi screenshot matrix · Compose UI tests · Maestro E2E · dependency-analysis |
-| **Delivery** | GitHub Actions: PR · main (incl. iOS on macOS) · release (signed builds) · docs · Conventional Commits · release-please |
+| **Quality gates** | detekt + Compose rules + custom standards rules · Konsist architecture tests · Roborazzi screenshot matrix on **Android and iOS** · Compose UI tests · Maestro E2E · dependency-analysis |
+| **Delivery** | GitHub Actions: PR (Linux + macOS for iOS) · main · release (signed builds) · docs · Conventional Commits · release-please |
 | **Docs** | MkDocs Material + Dokka on GitHub Pages · 14 ADRs · guides that double as agent playbooks |
 
 Every "never" in the docs is a rule a tool enforces: raw `dp`/`sp`/colours in a feature, a Material import outside the design system, a left/right modifier, a string literal in UI, a price that is not a `PriceDisplay` — each fails the build. [Architecture overview →](docs/architecture/overview.md)

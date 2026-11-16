@@ -110,9 +110,10 @@ class ArchitectureTest {
     }
 
     @Test
-    fun `every public design-system component has a screenshot test`() {
+    fun `every public design-system component has a screenshot case`() {
+        // Cases live in commonTest and run on Android and iOS (SnapshotCase, ADR 0010).
         val screenshotTests = scope.files
-            .filter { it.path.contains("/core/designsystem/src/androidHostTest/") }
+            .filter { it.path.contains("/core/designsystem/src/commonTest/") }
             .joinToString("\n") { it.text }
         val components = scope.files
             .filter { it.path.contains("/core/designsystem/src/commonMain/") && it.path.contains("/components/") }
@@ -120,7 +121,9 @@ class ArchitectureTest {
             .filter { it.name.startsWith("Sojourn") && it.hasPublicOrDefaultModifier }
             .filter { it.hasAnnotationWithName("Composable") }
             .filterNot { it.name.endsWith("Preview") }
-        components.assertTrue(additionalMessage = "Every Sojourn* component needs a screenshot test (ADR 0010).") {
+        components.assertTrue(
+            additionalMessage = "Every Sojourn* component needs a SnapshotCase in commonTest (ADR 0010).",
+        ) {
             "${it.name}(" in screenshotTests
         }
     }

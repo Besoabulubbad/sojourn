@@ -72,6 +72,10 @@ Secrets (added when available): `ANTHROPIC_API_KEY`, `ANDROID_KEYSTORE_BASE64`, 
 - Good: stakeholders get builds on their phones automatically.
 - Bad: needs accounts, certificates and secrets up front; adds moving parts before there is an app to distribute.
 
+## Implementation notes
+
+**2026-11-16.** `pr.yml` has a second job, **iOS tests and screenshots (macOS)** on `macos-latest`, in parallel with the Linux job: `./gradlew iosSimulatorArm64Test` runs every common and iOS unit test on the simulator plus the iOS screenshot verify, with a JUnit report and diff images on failure. It is a required check, decided with the maintainer, so an iOS regression cannot merge. macOS minutes are free for public repositories.
+
 ## Links
 
 - [GitHub Actions — workflow syntax](https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions)

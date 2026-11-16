@@ -16,7 +16,7 @@ The design system in code (ADR 0003, 0008): generated tokens, `SojournTheme`, fo
 
 ## Components
 
-One package per component under `components/<name>/`: `Sojourn<Comp>.kt` (the composable), its variant types and samples in their own files, `Sojourn<Comp>Previews.kt`, and a screenshot test in `androidHostTest`.
+One package per component under `components/<name>/`: `Sojourn<Comp>.kt` (the composable), its variant types and samples in their own files, `Sojourn<Comp>Previews.kt`, and `Sojourn<Comp>Snapshots.kt` in `commonTest` (screenshots on Android and iOS).
 
 ### Price — `SojournPrice(price: PriceDisplay, modifier, size = SojournPriceSize.Card)`
 
@@ -26,9 +26,9 @@ The only component allowed to print a price (P-01). A `PriceDisplay.Total` leads
 
 - `TokenParityTest`: one property per token, both themes share the token set, dark is a full theme (only saffron is shared), motion ceiling is `dur-slower`, only directional icons mirror.
 - `ContrastTest`: every text pair named in the token usage notes meets 4.5:1 and every graphic pair 3:1, in both themes (C-02).
-- `TokenSheetScreenshotTest`: the five token-sheet sections in the four variants, baselines in `src/androidHostTest/screenshots`.
+- Screenshots: `designSystemSnapshots` (`commonTest`) lists every case (the five token-sheet sections, each component's states). `DesignSystemScreenshots` renders them on Android and `DesignSystemScreenshotsIos` on iOS; baselines in `screenshots/androidHostTest/` and `screenshots/iosSimulatorArm64/`.
 - `AppLanguagePairsTest`: the four device/app language pairs (EN/EN, EN/AR, AR/EN, AR/AR) render the app language's text and direction through `SojournTheme` (L-03).
-- One screenshot test per component (Konsist fails the build if a public `Sojourn*` component has none).
+- Every public `Sojourn*` component has `SnapshotCase`s (Konsist fails the build otherwise).
 
 ## Third-party assets
 

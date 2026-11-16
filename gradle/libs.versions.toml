@@ -135,6 +135,7 @@ robolectric-shadowsFramework = { module = "org.robolectric:shadows-framework", v
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 roborazzi-core = { module = "io.github.takahirom.roborazzi:roborazzi-core", version.ref = "roborazzi" }
 roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
+roborazzi-composeIos = { module = "io.github.takahirom.roborazzi:roborazzi-compose-ios", version.ref = "roborazzi" }
 roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
 roborazzi-junitRule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "roborazzi" }
 roborazzi-previewScannerSupport = { module = "io.github.takahirom.roborazzi:roborazzi-compose-preview-scanner-support", version.ref = "roborazzi" }

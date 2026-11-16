@@ -44,7 +44,7 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 - Bad: baseline churn when the design changes. Mitigated by per-module baselines, the review rule, and recording only via a reviewed re-record.
 - Bad: emulator jobs are slow and occasionally flaky. Mitigated by keeping them off the PR gate (`main.yml`/nightly), retries, and a small Maestro suite (golden path + language switch).
 - Bad: Robolectric images are not pixel-identical to devices. Acceptable for regression detection; device checks happen in Phase 6.
-- Neutral: Roborazzi can also render iOS Compose (`roborazzi-compose-ios`); not enabled initially.
+- Neutral: Roborazzi can also render iOS Compose (`roborazzi-compose-ios`); enabled from Phase 3 (see the implementation notes).
 
 ### Confirmation
 
@@ -73,9 +73,11 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 **2026-11-16 (Phase 2).** Verified against the Roborazzi plugin source: the Gradle plugin configures the AGP KMP library plugin and registers `recordRoborazziAndroidHostTest` / `verifyRoborazziAndroidHostTest`, so screenshots live in each module's `androidHostTest` as planned. Two findings changed the details, not the decision:
 
 - Screenshots render on the **API 36** Robolectric runtime. On Robolectric 4.18's API 37 runtime, Compose content was intermittently not drawn before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). API 36 renders every probe. Unit tests keep the default runtime.
-- `SojournScreenshotTest` is a parameterized Robolectric test (one capture per variant per test) that renders through a compose test rule and captures the node, the pattern Roborazzi documents for Compose.
+- `SojournScreenshotTest` is a parameterized Robolectric test (one capture per variant per test) that renders through a compose test rule and captures the node, the pattern Roborazzi documents for Compose. (Since replaced by `SnapshotCase` with per-platform runners; see the iOS note below.)
 
-**2026-11-16 (Phase 3 start), matrix size.** Decided with the maintainer: every state of every component and screen is captured in the four shipped variants (EN/AR × light/dark), and each component's and screen's **default state** additionally runs the full 16-cell matrix (200 % font, 320 dp width). That catches RTL, theme and overflow problems at about a third of the images a full matrix for every state would need. `SojournScreenshotTest` is parameterized over all 16 cells; `snapshot(name, fullMatrix = true)` opts a state into the extra 12, and the other cells are reported as skipped.
+**2026-11-16 (Phase 3 start), matrix size.** Decided with the maintainer: every state of every component and screen is captured in the four shipped variants (EN/AR × light/dark), and each component's and screen's **default state** additionally runs the full 16-cell matrix (200 % font, 320 dp width). That catches RTL, theme and overflow problems at about a third of the images a full matrix for every state would need. A state opts into the extra 12 cells with `fullMatrix = true` (now on `SnapshotCase`).
+
+**2026-11-16, iOS screenshots (decided with the maintainer).** iOS screenshots are in scope, replacing "`roborazzi-compose-ios` not enabled initially". Each state is written once as a `SnapshotCase` in `commonTest`. Android renders it with `SojournScreenshotSuite` (Robolectric) and iOS with `verifySnapshots` (Roborazzi's experimental iOS support on Compose's Skiko test runtime, simulator, 412 × 915 dp at 3×). iOS covers every state in the four shipped variants; 200 % font and 320 dp stay Android-only because the layout that would wrap or clip is the same shared code. A spike confirmed bundled fonts and Arabic resources load in the iOS test binary. iOS runs on **every PR** in a required macOS job (`iosSimulatorArm64Test`), in parallel with the Linux job. Baselines live in `<module>/screenshots/<androidHostTest|iosSimulatorArm64>/`, with Roborazzi's `separateOutputDirs` (which also stops the two platforms' finalizers racing over one directory under `check`).
 
 **2026-11-16, language pairs.** `AppLanguagePairsTest` in `core:designsystem` runs the four device/app language pairs on Robolectric (L-03). It was added after the Price screenshots showed Arabic layout with English text. Compose Multiplatform resources read the platform default locale, so `ProvideAppLocale` now sets it, following JetBrains' resource-environment guide. With that line removed, the test fails the two mismatched pairs.
 
