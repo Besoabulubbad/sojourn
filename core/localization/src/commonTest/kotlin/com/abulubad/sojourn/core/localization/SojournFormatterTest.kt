@@ -8,6 +8,7 @@ import com.abulubad.sojourn.core.model.Money
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -28,6 +29,16 @@ class SojournFormatterTest {
         assertEquals("${FSI}4.8$PDI", en.rating(4.8))
         assertEquals("${FSI}5.0$PDI", ar.rating(5.0))
         assertEquals("${FSI}4.7$PDI", en.rating(4.66))
+    }
+
+    @Test
+    fun `calendar headers and currency placement follow the language`() {
+        assertEquals("March 2027", en.monthYear(YearMonth(2027, 3)))
+        assertEquals("مارس 2027", ar.monthYear(YearMonth(2027, 3)))
+        assertEquals("£", en.currencySymbol(Currency.GBP))
+        assertEquals("د.ج", ar.currencySymbol(Currency.DZD))
+        assertEquals(true, en.currencyLeads)
+        assertEquals(false, ar.currencyLeads)
     }
 
     @Test

@@ -7,6 +7,7 @@ import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.Month
+import kotlinx.datetime.YearMonth
 
 /**
  * The only formatter for money, dates, ranges, counts and counters (L-04, P-06, S-04, ADR 0009).
@@ -85,6 +86,15 @@ class SojournFormatter(private val locale: AppLocale) {
 
     /** `15:00` — 24-hour clock in both languages (brand book: the clock never mirrors). */
     fun time(time: LocalTime): String = isolate("${time.hour.pad()}:${time.minute.pad()}")
+
+    /** `March 2027` / `مارس 2027`: a calendar header. */
+    fun monthYear(month: YearMonth): String = "${monthLong(month.month)} ${month.year}"
+
+    /** The currency's symbol in the current language (`£`, `€`, `DA`, `د.ج`), for price entry fields. */
+    fun currencySymbol(currency: Currency): String = symbol(currency).text
+
+    /** Whether the symbol comes before the number when reading (`£1,383`) or after it (`1,383 £`). */
+    val currencyLeads: Boolean get() = locale == AppLocale.EN_GB
 
     /** Short month name in the current language. */
     fun monthShort(month: Month): String = when (locale) {
