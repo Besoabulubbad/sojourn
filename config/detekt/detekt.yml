@@ -1,0 +1,110 @@
+# Sojourn detekt configuration — layered on detekt's defaults (buildUponDefaultConfig = true).
+# Three rule sets: detekt core, formatting (ktlint rules), and the Compose rules (io.nlopez.compose.rules).
+# Design-system standards (tokens only, start/end only, …) come from the custom rule set in tooling/detekt-rules.
+
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+  warningsAsErrors: false
+  # compose-rules ships these optional keys commented out in its bundled config, so detekt's validator
+  # does not know them; they are documented at https://mrmans0n.github.io/compose-rules/detekt/
+  excludes: 'Compose>CompositionLocalAllowlist>allowedCompositionLocals,Compose>ViewModelInjection>viewModelFactories'
+
+formatting:
+  active: true
+  android: true
+  autoCorrect: false
+  MaximumLineLength:
+    active: true
+    maxLineLength: 120
+  TrailingCommaOnCallSite:
+    active: true
+    useTrailingCommaOnCallSite: true
+  TrailingCommaOnDeclarationSite:
+    active: true
+    useTrailingCommaOnDeclarationSite: true
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: ['Composable']
+
+style:
+  MaxLineLength:
+    maxLineLength: 120
+  MagicNumber:
+    ignoreAnnotated: ['Preview']
+    ignorePropertyDeclaration: true
+    excludes: ['**/test/**', '**/*Test/**', '**/*Test.kt', '**/*Previews.kt', '**/build/**']
+  UnusedPrivateMember:
+    ignoreAnnotated: ['Preview']
+  UnusedPrivateProperty:
+    active: true
+  ReturnCount:
+    max: 3
+  ForbiddenComment:
+    active: true
+    comments:
+      - reason: 'Track work in an issue, not a comment.'
+        value: 'FIXME:'
+  WildcardImport:
+    active: true
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+  TopLevelPropertyNaming:
+    # Composition locals (LocalAppLocale) and Koin modules (exploreModule) are top-level vals.
+    propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
+
+complexity:
+  LongParameterList:
+    functionThreshold: 8
+    constructorThreshold: 8
+    ignoreAnnotated: ['Composable']
+  LongMethod:
+    threshold: 60
+    ignoreAnnotated: ['Composable', 'Preview']
+  TooManyFunctions:
+    thresholdInFiles: 20
+    thresholdInClasses: 20
+    thresholdInObjects: 20
+    ignorePrivate: true
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+Compose:
+  active: true
+  CompositionLocalAllowlist:
+    active: true
+    allowedCompositionLocals: ['LocalAppLocale', 'LocalReduceMotion', 'LocalSojournColors', 'LocalSojournType', 'LocalSojournElevation', 'LocalSojournVariant']
+  ContentEmitterReturningValues:
+    active: true
+  ModifierMissing:
+    active: true
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+  MutableParams:
+    active: true
+  ComposableParamOrder:
+    active: true
+  PreviewPublic:
+    # Previews stay public so the screenshot scanner can find them (ADR 0010).
+    active: false
+  PreviewNaming:
+    active: true
+  RememberMissing:
+    active: true
+  UnstableCollections:
+    active: false
+  ViewModelForwarding:
+    active: true
+  ViewModelInjection:
+    active: true
+    viewModelFactories: ['koinViewModel']

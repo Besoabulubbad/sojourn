@@ -63,9 +63,9 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 
 | Plugin id | Applies / configures |
 |---|---|
-| `sojourn.kmp.library` | Kotlin Multiplatform with `android` (AGP KMP library DSL), `iosArm64`, `iosSimulatorArm64`; JVM target; explicit API mode for `core:*`; common test deps; detekt |
+| `sojourn.kmp.library` | Kotlin Multiplatform with `android` (AGP KMP library DSL, namespace derived from the project path), `iosArm64`, `iosSimulatorArm64`; JVM target 11; host tests with Android resources; common test deps; detekt |
 | `sojourn.kmp.feature` | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.koin` + `sojourn.screenshot` + the standard feature dependency set |
-| `sojourn.compose` | Compose Multiplatform plugin and compiler, resources, preview tooling, stability config |
+| `sojourn.compose` | Compose Multiplatform plugin and compiler; `runtime`/`foundation`/`ui` as `api` (they appear in every UI module's public signatures), resources and preview tooling as `implementation` |
 | `sojourn.android.application` | Android application, `compileSdk`/`targetSdk`/`minSdk` from the catalog, signing from env, R8 on release |
 | `sojourn.koin` | Koin core/compose/viewmodel deps |
 | `sojourn.sqldelight` | SQLDelight plugin, `SojournDatabase` config, drivers per target |

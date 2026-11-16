@@ -52,7 +52,7 @@ Make the repo a place where every later change has a home and a rule — and a p
 Make the rules executable before there is code to break them.
 
 - `build-logic/` convention plugins: `sojourn.kmp.library`, `sojourn.kmp.feature`, `sojourn.compose`, `sojourn.android.application`, `sojourn.koin`, `sojourn.sqldelight`, `sojourn.screenshot`, `sojourn.detekt`, `sojourn.dokka`, `sojourn.tokens`.
-- Version catalog completed with the verified versions in [tech-stack.md](tech-stack.md); AGP 9.1.1 → 9.5.1.
+- Version catalog completed with the verified versions in [tech-stack.md](tech-stack.md); Gradle 9.5.1 → 9.7.1 and AGP 9.1.1 → 9.3.1 — the newest pair inside Kotlin 2.4.21's documented compatibility window (AGP 9.5 would need Gradle 9.6+ and sits outside KGP's tested range). `sojourn.screenshot` is wired in Phase 2 with the first screenshot test.
 - detekt with Compose rules; `tooling/detekt-rules` custom rule set (tokens only, start/end only, no literals into text, insets only in owners, motion tokens only) with tests.
 - `dependency-analysis` (`buildHealth`); Renovate config.
 - `tooling/konsist`: module-dependency rules, naming rules, "no Material outside designsystem".
@@ -77,7 +77,7 @@ The parts every screen depends on.
 - `core:testing` — fixtures, fake repositories, screenshot test base, Turbine/coroutines helpers, Koin test rules.
 - **Showcase:** wordmark and app icon drawn from the tokens (`design/brand/`), applied to both platforms; theme swatch sheet exported to `docs/showcase/`.
 
-**Exit:** `SojournTheme` renders every token in 4 variants in screenshot tests; contrast test passes; `AppLocale` switching flips direction and formatting in unit tests; app icon visible on both launchers.
+**Exit:** `SojournTheme` renders every token in 4 variants in screenshot tests; contrast test passes; `AppLocale` switching flips direction and formatting in unit tests; app icon visible on both launchers; `buildHealth` switched from warn to fail on unused dependencies now that modules carry code.
 
 ### Phase 3 — Design system components
 
