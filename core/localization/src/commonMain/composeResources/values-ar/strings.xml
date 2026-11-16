@@ -37,6 +37,13 @@
     <string name="action_open_in_maps">افتح في الخرائط</string>
     <string name="action_edit">تعديل</string>
     <string name="action_cancel_booking">ألغِ الحجز</string>
+    <string name="action_undo">تراجع</string>
+
+    <!-- Feedback -->
+    <string name="saved_removed">أُزيلت من المحفوظات</string>
+    <string name="offline_banner">لا يوجد اتصال. نعرض النتائج المحفوظة.</string>
+    <string name="empty_no_matches_title">لا توجد إقامات مطابقة</string>
+    <string name="empty_no_matches_body">جرّب تواريخ أوسع أو أزل أحد خيارات التصفية.</string>
 
     <!-- Screen states -->
     <string name="state_loading">جارٍ التحميل</string>

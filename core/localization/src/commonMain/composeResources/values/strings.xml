@@ -37,6 +37,13 @@
     <string name="action_open_in_maps">Open in maps</string>
     <string name="action_edit">Edit</string>
     <string name="action_cancel_booking">Cancel booking</string>
+    <string name="action_undo">Undo</string>
+
+    <!-- Feedback: snackbars, banners, empty states -->
+    <string name="saved_removed">Removed from Saved</string>
+    <string name="offline_banner">You are offline. Showing saved results.</string>
+    <string name="empty_no_matches_title">No stays match</string>
+    <string name="empty_no_matches_body">Try wider dates or remove a filter.</string>
 
     <!-- Screen states (I-05) -->
     <string name="state_loading">Loading</string>

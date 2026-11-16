@@ -10,7 +10,7 @@ The design system in code (ADR 0003, 0008): generated tokens, `SojournTheme`, fo
 | `SojournTheme(locale, darkTheme, reduceMotion) { }` | `theme/SojournTheme.kt` | Provides colours, type and elevation for the theme, the locale environment (via `ProvideAppLocale`), `LocalReduceMotion`, and a Material theme bridged from the same tokens. Read with `SojournTheme.colors.brand`, `SojournTheme.type.price`. |
 | `SojournFonts` | `theme/SojournFonts.kt` + `composeResources/font` | Alexandria (display, titles, price) and Readex Pro (text) at 400/500/600. Both cover Latin and Arabic. |
 | Motion helpers | `theme/SojournMotionExtensions.kt` | `settleSpring()`, `popSpring()`, `exitDuration()`, and `enter`/`exit`/`move` specs that fall back to a 150 ms fade when reduce motion is on (M-03). |
-| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke) plus filled variants where a card needs them (`StarFilled`, `SavedFilled`). Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
+| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke) plus filled variants where a card needs them (`StarFilled`, `SavedFilled`); `NoResults` (Lucide `search-x`) since the Feedback group. Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
 | `SojournVariant`, `SojournVariants`, `SojournPreview` | `preview/` | The 4-variant set and 16-cell matrix (language × theme × font scale × width) and the wrapper previews and screenshot tests share. |
 | `SojournTokenSheet` | `showcase/` | Every token on one sheet per family; the Phase 2 screenshot exit test and the showcase swatches. |
 
@@ -37,6 +37,18 @@ A compact choice. Selected is a filled `ink` chip with a semibold label, so stat
 ### IconButton — `SojournIconButton(icon, contentDescription, onClick, modifier, variant, tint, badge, enabled)`
 
 An icon-only action with a 48 dp target; `contentDescription` is a required parameter (C-05). `Plain`, `Outline` and `Floating` (its own `surface` disc with `shadow-2`, for photos and the map). `tint = Saved` draws the filled heart in `save`. `badge` shows a count at the top-end corner, formatted by `SojournFormatter` and announced after the description.
+
+### Skeleton — `SojournSkeleton(modifier, shape)` and `SojournStayCardSkeleton(modifier)`
+
+Loading placeholders shaped like the content they replace; no full-screen spinners. `surfaceSunken` with a `hairline` pulse every 1.4 s, still under reduce motion. Skeletons are hidden from screen readers; `SojournStayCardSkeleton` announces "Loading" once for the whole card.
+
+### Snackbar — `SojournSnackbar`, `SojournSnackbarHost` + `SojournSnackbarHostState`, `SojournOfflineBanner`
+
+A brief confirmation with an optional action ("Removed from Saved · Undo"): an `ink` bar, announced politely. `SojournSnackbarHostState.show(message, actionLabel)` queues one at a time, keeps it 5 seconds unless the action is taken, and returns `ActionPerformed` or `Dismissed` (our own queue, so Material stays out of the public API). `SojournOfflineBanner` is the standing offline condition in `dangerTint`; it takes its place in the layout and never overlays content.
+
+### EmptyState — `SojournEmptyState(icon, title, body, modifier, action)`
+
+What a screen shows when there is nothing to list: a 64 dp `brandTint` icon disc, a heading that says what happened, a body that says what to do, and at most one `SojournEmptyStateAction` that changes the outcome (a secondary button).
 
 ## Tests
 

@@ -16,6 +16,10 @@ kotlin {
             api(libs.compose.animation)
             api(libs.compose.components.resources)
             implementation(libs.compose.material3)
+            implementation(libs.kotlinx.coroutines.core)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlinx.coroutines.test)
         }
         named("androidHostTest").dependencies {
             // AppLanguagePairsTest drives Robolectric and a compose rule directly (device locale per test).

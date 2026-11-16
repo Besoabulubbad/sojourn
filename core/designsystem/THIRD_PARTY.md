@@ -4,7 +4,7 @@
 |---|---|---|---|---|
 | Alexandria (400, 500, 600) | [google/fonts `ofl/alexandria`](https://github.com/google/fonts/tree/main/ofl/alexandria) | variable `Alexandria[wght].ttf`, fetched 2026-11-16 | SIL OFL 1.1 — `licenses/OFL-Alexandria.txt` | Static instances cut from the variable font with fontTools `instancer` at `wght` 400/500/600 |
 | Readex Pro (400, 500, 600) | [google/fonts `ofl/readexpro`](https://github.com/google/fonts/tree/main/ofl/readexpro) | variable `ReadexPro[HEXP,wght].ttf`, fetched 2026-11-16 | SIL OFL 1.1 — `licenses/OFL-ReadexPro.txt` | Same, with `HEXP` pinned to 0 |
-| 58 icons | [lucide-static](https://www.npmjs.com/package/lucide-static) | 1.73.0 | ISC — `licenses/LICENSE-Lucide.txt` | `tooling/scripts/lucide_to_vector.py` → Android vector XML, stroke 1.75 |
+| 59 icons + 2 filled variants | [lucide-static](https://www.npmjs.com/package/lucide-static) | 1.73.0 | ISC — `licenses/LICENSE-Lucide.txt` | `tooling/scripts/lucide_to_vector.py` → Android vector XML, stroke 1.75 |
 
 Static instances are bundled instead of the variable files because Compose Multiplatform's `Font(resource, weight)` selects a file per weight; three weights cover every type token.
 

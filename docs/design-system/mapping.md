@@ -59,9 +59,9 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 | StayCard | Listing | `SojournStayCard(stay: StayCardModel, price: PriceDisplay, saved, onSave, onOpen)` | 16:10 swipeable photos, area, rating, facts, price, heart; no shadow in lists |
 | BookingBar | Booking | `SojournBookingBar(price: PriceDisplay, action: BookingAction, onAction)` | docked, opaque, owns inset (I-03); never disabled |
 | PriceBreakdown | Booking | `SojournPriceBreakdown(breakdown: PriceBreakdown)` | lines sum to total — `PriceBreakdown` validates on construction (P-05) |
-| EmptyState | Feedback | `SojournEmptyState(icon: SojournIcon, title, body, action?)` | icon disc `brandTint` |
-| Skeleton | Feedback | `SojournSkeleton.StayCard()`, `.Text(lines)`, `.Block(shape)` | 1.4s pulse; stops under reduce motion |
-| Snackbar | Feedback | `SojournSnackbarHost` + `SojournSnackbarData(message, action?)` / `SojournOfflineBanner` | offline banner uses `dangerTint` |
+| EmptyState | Feedback | `SojournEmptyState(icon, title, body, modifier, action: SojournEmptyStateAction?)` ✅ | title says what happened, body what to do, at most one action that changes the outcome; 64 dp `brandTint` icon disc; title is a heading |
+| Skeleton | Feedback | `SojournSkeleton(modifier, shape)` / `SojournStayCardSkeleton(modifier)` ✅ | 1.4 s `hairline` pulse that stops under reduce motion; hidden from screen readers, the container announces "Loading" |
+| Snackbar | Feedback | `SojournSnackbar(message, modifier, actionLabel?, onAction)` + `SojournSnackbarHost(state)` with `SojournSnackbarHostState.show()`; `SojournOfflineBanner(message, modifier, actionLabel?, onAction)` ✅ | 5 s on screen, announced politely, undo instead of confirmation dialogs; the offline banner uses `dangerTint` and pushes content down |
 | Icons | Foundations | `SojournIcon` sealed class (58 icons: `SojournIcon.Back`, `.Search`, `.Saved`, … with `autoMirror`) + `SojournIcon(icon, contentDescription, modifier, tint, size)` | Lucide 24dp / 1.75 stroke as vector resources (`lucide-static` 1.73.0); only Back, Forward and the start/end chevrons mirror, inside the composable (L-05) |
 | Motion | Foundations | `SojournMotion` + `SojournTransitions` (container transform, step slide, sheet enter, pin select, save pop, price swap) | ceiling `slower` (M-02); `reduced` → 150ms fade (M-03); direction from `LayoutDirection` (M-04) |
 
