@@ -25,6 +25,18 @@ class SojournFormatter(private val locale: AppLocale) {
     /** `£1,383` / `1,383 £`, isolated. */
     fun money(amount: Money): String = isolate(moneyPlain(amount))
 
+    /**
+     * An all-in average such as the nightly figure under a total: [total] / [units], rounded half up to whole major
+     * units (`£1,383` over 15 nights → `£92`). Only for figures labelled as averages; totals use [money].
+     */
+    fun moneyAverage(total: Money, units: Int): String {
+        require(units > 0) { "An average needs at least one unit" }
+        val perUnit = total.minor.toDouble() / units
+        val step = total.currency.minorUnitsPerMajor
+        val rounded = kotlin.math.floor(perUnit / step + HALF).toLong() * step
+        return money(Money(rounded, total.currency))
+    }
+
     /** `1,383` — grouped, isolated. For counts inserted into sentences via plural resources. */
     fun count(value: Int): String = isolate(group(value.toLong()))
 
@@ -125,6 +137,7 @@ class SojournFormatter(private val locale: AppLocale) {
         private const val EN_DASH = "–"
         private const val EN_DASH_SPACED = "– "
         private const val GROUP_SIZE = 3
+        private const val HALF = 0.5
 
         /** Wraps [text] in a bidi isolate (S-04). */
         fun isolate(text: String): String = "$FSI$text$PDI"

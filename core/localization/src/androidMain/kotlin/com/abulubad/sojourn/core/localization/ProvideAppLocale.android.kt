@@ -13,9 +13,13 @@ import androidx.compose.ui.platform.LocalResources
 import java.util.Locale
 
 /**
- * Android: a copy of the current [Configuration] with the app locale, provided together with a context created
- * from it, so Compose Multiplatform resources and any platform resource lookups resolve the app language.
- * Follows the pattern in the Compose Multiplatform "resource environment" guide.
+ * Android, following the Compose Multiplatform "Manage local resource environment" guide:
+ *
+ * 1. `Locale.setDefault` — Compose Multiplatform resources (1.12) resolve `stringResource` from Compose's
+ *    `Locale.current`, which reads the JVM default locale, not the composition's `Configuration`. Without this the
+ *    Arabic UI shows English strings (caught by the Price screenshot test).
+ * 2. A copy of the current [Configuration] and a context created from it, so platform resource lookups agree.
+ * 3. `key(locale)` so everything below recomposes and re-resolves its resources when the language changes.
  */
 @Composable
 actual fun ProvideAppLocale(locale: AppLocale, content: @Composable () -> Unit) {
@@ -23,6 +27,7 @@ actual fun ProvideAppLocale(locale: AppLocale, content: @Composable () -> Unit) 
     val baseConfiguration = LocalConfiguration.current
     val configuration = remember(locale, baseConfiguration) {
         val javaLocale = Locale.forLanguageTag(locale.tag)
+        Locale.setDefault(javaLocale)
         Configuration(baseConfiguration).apply {
             setLocales(LocaleList(javaLocale))
             setLayoutDirection(javaLocale)

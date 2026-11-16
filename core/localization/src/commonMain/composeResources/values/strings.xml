@@ -52,12 +52,11 @@
 
     <!-- Prices (every amount is pre-formatted by SojournFormatter, P-06) -->
     <string name="price_total">%1$s total</string>
-    <string name="price_per_night">%1$s night</string>
-    <string name="price_per_month">%1$s month</string>
     <string name="price_from_night">from %1$s a night</string>
     <string name="price_from_month">from %1$s a month</string>
-    <string name="price_all_fees_included">all fees included</string>
-    <string name="price_excludes">Excludes %1$s</string>
+    <!-- Price card: the nightly figure under a total is always all-in; a raw nightly rate is never shown. -->
+    <string name="price_nightly_all_in">%1$s a night, all fees included</string>
+    <string name="price_before_fees">Before %1$s. Add dates for the exact total.</string>
     <string name="price_long_stay">Long-stay price</string>
     <string name="price_long_stay_saving">%1$s on stays of %2$s or more</string>
     <string name="exclusion_utilities">utilities</string>
@@ -142,6 +141,10 @@
     <string name="booking_status_completed">Completed</string>
     <string name="booking_status_cancelled">Cancelled</string>
     <string name="booking_reference">Reference %1$s</string>
+
+    <!-- Lists of names (exclusions, amenities): built from these, never by joining strings in code. -->
+    <string name="list_pair">%1$s and %2$s</string>
+    <string name="list_series">%1$s, %2$s</string>
 
     <!-- Content descriptions for icon-only controls (C-05) -->
     <string name="cd_back">Back</string>

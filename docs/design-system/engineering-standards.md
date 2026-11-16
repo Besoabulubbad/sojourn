@@ -105,6 +105,8 @@ Screenshot tests run for every screen and every component in:
 - widths 320dp and 412dp
 - each `ScreenState`: content, loading, empty, error, offline
 
+In this repository every state runs in the 2 languages × 2 themes, and each component's and screen's default state runs the full 16-cell matrix (ADR 0010).
+
 A change that alters a screenshot needs a designer's approval on the pull request.
 
 ## Definition of done for a screen

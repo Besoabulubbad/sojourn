@@ -53,7 +53,7 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 | Gallery | Listing | `SojournGallery(photos, index, onIndexChange, onOpen)` / `SojournFullScreenGallery` | placeholder / loaded / failed-with-retry per slot; counter in bidi isolate (S-04) |
 | KeyFacts | Listing | `SojournKeyFacts(facts: StayFacts)` | four counts, one icon each; "Studio" never "0 bedrooms" (N-01) |
 | PolicyRow | Listing | `SojournPolicyRow(policy: Policy)` | policy carries its number (N-03) — `Policy` type requires it |
-| Price | Listing | `SojournPrice(display: PriceDisplay, emphasis: Lead \| Inline \| Caption)` | **the only price renderer** (P-01); `PriceDisplay.Total(quoteId, amount, nights)` or `.From(amount, per, excludes)` (P-03) |
+| Price | Listing | `SojournPrice(price: PriceDisplay, modifier, size: SojournPriceSize = Card \| Compact)` ✅ | **the only price renderer** (P-01); `Total` leads with the stay total over the all-in nightly average; `From` says "from … a month/night" over what it excludes (P-03) |
 | PricePin | Listing | `SojournPricePin(display, selected, seen, onClick)` / `SojournClusterPin(count)` | select: scale 1.12 + invert, `SojournMotion.fast` |
 | Rating | Listing | `SojournRating(score, count, compact)` | returns nothing under 3 reviews (N-04) — enforced in the composable and tested |
 | StayCard | Listing | `SojournStayCard(stay: StayCardModel, price: PriceDisplay, saved, onSave, onOpen)` | 16:10 swipeable photos, area, rating, facts, price, heart; no shadow in lists |

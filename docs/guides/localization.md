@@ -70,7 +70,13 @@ Titles and descriptions written by hosts render through `HostText` in their own 
 
 ## Changing the language
 
-`AppLocaleController.set(AppLocale.AR)` updates the persisted value, recomposes the app, and asks the OS to set the per-app language through `PlatformLocaleSync` (Android `LocaleManager` on API 33+; iOS `AppleLanguages`, with a relaunch prompt if required) so keyboards and system dialogs follow. Inside the app, `ProvideAppLocale` (called by `SojournTheme`) makes resources resolve the chosen language: on Android it overrides the composition's `Configuration` and `Context`, so the four device/app language pairs work. The Profile screen lists languages by their own names — "English", "العربية" — no flags.
+`AppLocaleController.set(AppLocale.AR)` updates the persisted value, recomposes the app, and asks the OS to set the per-app language through `PlatformLocaleSync` (Android `LocaleManager` on API 33+; iOS `AppleLanguages`, with a relaunch prompt if required) so keyboards and system dialogs follow. Inside the app, `ProvideAppLocale` (called by `SojournTheme`) makes resources resolve the chosen language. Compose Multiplatform 1.12 resolves `stringResource` from Compose's `Locale.current`, which reads the platform default, so `ProvideAppLocale` sets that default as JetBrains' resource-environment guide does: `Locale.setDefault` on Android, plus the composition's `Configuration` and `Context`, and the `AppleLanguages` default on iOS. `AppLanguagePairsTest` proves the four device/app pairs.
+
+## In composables
+
+- `rememberSojournFormatter()` gives the formatter for the current `LocalAppLocale`.
+- `localizedList(names)` joins localized names from the `list_pair` / `list_series` resources: "cleaning fee and city tax", "رسوم التنظيف وضريبة المدينة".
+- `formatter.moneyAverage(total, nights)` is the all-in nightly figure under a total, rounded to whole units (`£1,383` over 15 nights is `£92`). Use it only where the text says it is an average. The Profile screen lists languages by their own names — "English", "العربية" — no flags.
 
 ## Testing
 

@@ -68,11 +68,17 @@ class TokenSheetScreenshotTest(variant: SojournVariant) : SojournScreenshotTest(
 }
 ```
 
+The base class is parameterized over all 16 cells of the matrix. `snapshot(name)` captures a state in the four shipped variants, and `snapshot(name, fullMatrix = true)` adds 200 % font and 320 dp width. Use `fullMatrix` for each component's and screen's default state; the other cells are skipped (ADR 0010).
+
 `snapshot` renders the content through `SojournPreview` (theme, language, direction, font scale, width) with a compose test rule and captures the node with Roborazzi, writing `<name>_<variant>.png`. Each module's baselines live in `<module>/src/androidHostTest/screenshots/` (configured by `sojourn.screenshot`) and are committed. Plain test runs verify against them because `gradle.properties` sets `roborazzi.test.verify=true`, so `check` fails on any visual change.
 
 Robolectric renders on the **API 36** runtime (`@Config(sdk = [36])`) with native graphics and a fixed `w412dp-h915dp-xxhdpi` device. Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture: blank `#FAFAFA` images, reproduced with a plain coloured box and no app code. Unit tests are unaffected. Revisit when Robolectric ships its next release.
 
 **Baseline policy.** A PR that changes any baseline must say so and why; the reviewer looks at the diff images (uploaded as a CI artefact on failure, or regenerate locally with `compareRoborazziDebug`). Recording new baselines to make CI pass without a reviewed visual change is not allowed (`CLAUDE.md`).
+
+### Device and app language
+
+`AppLanguagePairsTest` (`core:designsystem`) sets the device language with Robolectric qualifiers and `Locale.setDefault`, sets the app language through `SojournTheme`, and asserts the text and layout direction for EN/EN, EN/AR, AR/EN and AR/AR (L-03). Tests are the one place outside `core:localization` allowed to touch platform locale APIs.
 
 ## Compose UI tests
 

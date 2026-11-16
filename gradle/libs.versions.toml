@@ -131,6 +131,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 junit = { module = "junit:junit", version.ref = "junit" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 robolectric-annotations = { module = "org.robolectric:annotations", version.ref = "robolectric" }
+robolectric-shadowsFramework = { module = "org.robolectric:shadows-framework", version.ref = "robolectric" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 roborazzi-core = { module = "io.github.takahirom.roborazzi:roborazzi-core", version.ref = "roborazzi" }
 roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }

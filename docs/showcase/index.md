@@ -42,7 +42,14 @@ Every token rendered by `SojournTheme`, exported from the `TokenSheetScreenshotT
 
 ## Components
 
-*pending — Phase 3.* One row per component: default, states, EN/AR, light/dark.
+Components land one per pull request, in dependency order. Each row shows English light and Arabic dark; every state is verified in all four variants, and the default state in the full 16-cell matrix.
+
+| Component | EN · light | AR · dark |
+|---|---|---|
+| Price, dated | ![](components/price-dated-en-light.png){ width="300" } | ![](components/price-dated-ar-dark.png){ width="300" } |
+| Price, from | ![](components/price-from-en-light.png){ width="300" } | ![](components/price-from-ar-dark.png){ width="300" } |
+
+The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 
 ## Screens
 
