@@ -55,7 +55,7 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 | PolicyRow | Listing | `SojournPolicyRow(policy: Policy)` | policy carries its number (N-03) — `Policy` type requires it |
 | Price | Listing | `SojournPrice(price: PriceDisplay, modifier, size: SojournPriceSize = Card \| Compact)` ✅ | **the only price renderer** (P-01); `Total` leads with the stay total over the all-in nightly average; `From` says "from … a month/night" over what it excludes (P-03) |
 | PricePin | Listing | `SojournPricePin(display, selected, seen, onClick)` / `SojournClusterPin(count)` | select: scale 1.12 + invert, `SojournMotion.fast` |
-| Rating | Listing | `SojournRating(score, count, compact)` | returns nothing under 3 reviews (N-04) — enforced in the composable and tested |
+| Rating | Listing | `SojournRating(rating: Rating?, modifier, showCount = true)` ✅ | renders nothing under 3 reviews or when missing (N-04), tested on the semantics tree; read aloud as one phrase "Rated 4.8 out of 5, 32 reviews" |
 | StayCard | Listing | `SojournStayCard(stay: StayCardModel, price: PriceDisplay, saved, onSave, onOpen)` | 16:10 swipeable photos, area, rating, facts, price, heart; no shadow in lists |
 | BookingBar | Booking | `SojournBookingBar(price: PriceDisplay, action: BookingAction, onAction)` | docked, opaque, owns inset (I-03); never disabled |
 | PriceBreakdown | Booking | `SojournPriceBreakdown(breakdown: PriceBreakdown)` | lines sum to total — `PriceBreakdown` validates on construction (P-05) |

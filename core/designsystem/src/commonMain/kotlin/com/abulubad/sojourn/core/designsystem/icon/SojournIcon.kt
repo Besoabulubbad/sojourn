@@ -60,6 +60,7 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_shield_check
 import com.abulubad.sojourn.core.designsystem.resources.ic_sliders_horizontal
 import com.abulubad.sojourn.core.designsystem.resources.ic_sparkles
 import com.abulubad.sojourn.core.designsystem.resources.ic_star
+import com.abulubad.sojourn.core.designsystem.resources.ic_star_filled
 import com.abulubad.sojourn.core.designsystem.resources.ic_sun
 import com.abulubad.sojourn.core.designsystem.resources.ic_train_front
 import com.abulubad.sojourn.core.designsystem.resources.ic_trash_2
@@ -117,6 +118,9 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
     data object Walk : SojournIcon(Res.drawable.ic_footprints)
     data object Transit : SojournIcon(Res.drawable.ic_train_front)
     data object Star : SojournIcon(Res.drawable.ic_star)
+
+    /** The rating star (Rating card): filled, tinted `accentInk`. */
+    data object StarFilled : SojournIcon(Res.drawable.ic_star_filled)
     data object Sparkles : SojournIcon(Res.drawable.ic_sparkles)
 
     // Policies and booking
@@ -152,17 +156,22 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
     data object Settings : SojournIcon(Res.drawable.ic_settings)
 
     companion object {
-        /** Every icon, for the showcase sheet and tests. */
-        val all: kotlin.collections.List<SojournIcon> = listOf(
-            Back, Forward, ChevronStart, ChevronEnd, ChevronDown, ChevronUp, Close, ExternalLink,
-            Explore, Saved, Bookings, Profile, Home,
-            Search, Filters, Map, MapPin, List, Calendar, Guests, City,
-            Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Walk, Transit, Star, Sparkles,
-            Key, Clock, Deposit, DoorOpen, Payment, Rewards, Bookmark,
-            Check, CheckCircle, Info, Alert, Offline, Retry, ImageFailed,
-            Plus, Minus, Share, Copy, Delete, Phone, Message,
-            Language, ThemeLight, ThemeDark, ThemeSystem, Settings,
-        )
+        /**
+         * Every icon, for the showcase sheet and tests. Lazy on purpose: the nested objects extend this class, so an
+         * eager list built during class initialisation would hold `null` for whichever icon was touched first.
+         */
+        val all: kotlin.collections.List<SojournIcon> by lazy {
+            listOf(
+                Back, Forward, ChevronStart, ChevronEnd, ChevronDown, ChevronUp, Close, ExternalLink,
+                Explore, Saved, Bookings, Profile, Home,
+                Search, Filters, Map, MapPin, List, Calendar, Guests, City,
+                Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Walk, Transit, Star, StarFilled, Sparkles,
+                Key, Clock, Deposit, DoorOpen, Payment, Rewards, Bookmark,
+                Check, CheckCircle, Info, Alert, Offline, Retry, ImageFailed,
+                Plus, Minus, Share, Copy, Delete, Phone, Message,
+                Language, ThemeLight, ThemeDark, ThemeSystem, Settings,
+            )
+        }
     }
 }
 

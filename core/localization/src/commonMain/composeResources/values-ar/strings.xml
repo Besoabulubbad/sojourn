@@ -131,8 +131,7 @@
     <string name="filters_title">التصفية</string>
 
     <!-- Ratings -->
-    <string name="rating_new">جديد</string>
-    <string name="rating_with_count">%1$s · %2$s</string>
+    <string name="rating_count">(%1$s)</string>
 
     <!-- Bookings -->
     <string name="booking_status_upcoming">قادمة</string>
@@ -158,7 +157,6 @@
     <string name="cd_increase">زيادة</string>
     <string name="cd_decrease">إنقاص</string>
     <string name="cd_photo_counter">الصورة %1$s</string>
-    <string name="cd_rating">التقييم %1$s من 5</string>
     <string name="cd_saved_heart">محفوظة</string>
 
     <!-- Plurals: all six forms. The count placeholder is pre-formatted (Western digits, isolated). -->
@@ -241,6 +239,14 @@
         <item quantity="few">%1$s تقييمات</item>
         <item quantity="many">%1$s تقييمًا</item>
         <item quantity="other">%1$s تقييم</item>
+    </plurals>
+    <plurals name="rating_spoken">
+        <item quantity="zero">التقييم %1$s من 5، لا تقييمات</item>
+        <item quantity="one">التقييم %1$s من 5، تقييم واحد</item>
+        <item quantity="two">التقييم %1$s من 5، تقييمان</item>
+        <item quantity="few">التقييم %1$s من 5، %2$s تقييمات</item>
+        <item quantity="many">التقييم %1$s من 5، %2$s تقييمًا</item>
+        <item quantity="other">التقييم %1$s من 5، %2$s تقييم</item>
     </plurals>
     <plurals name="photos">
         <item quantity="zero">لا صور</item>

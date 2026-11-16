@@ -87,7 +87,7 @@ Each module lists its cases in one place (`designSystemSnapshots`, `uiSnapshots`
 ./gradlew iosSimulatorArm64Test                 # iOS unit tests + iOS screenshot verify
 ```
 
-**Platform notes.** Robolectric renders on the API 36 runtime: Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). Roborazzi's iOS support is experimental; it needs an explicit file name per capture, which the runner derives from the case and variant. Elevation shadows render fainter on iOS than on Android; the baselines record each platform as it is.
+**Platform notes.** Robolectric renders on the API 36 runtime: Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). Roborazzi's iOS support is experimental; it needs an explicit file name per capture, which the runner derives from the case and variant. iOS compares with a 0.5 % pixel tolerance because text edges anti-alias slightly differently across simulator devices and runtimes; Android compares exactly (ADR 0010). Elevation shadows render fainter on iOS than on Android; the baselines record each platform as it is.
 
 **Baseline policy.** A PR that changes any baseline must say so and why; the reviewer looks at the diff images (uploaded as CI artefacts on failure, `screenshot-diffs` and `ios-screenshot-diffs`, or regenerate locally with the compare tasks). Recording new baselines to make CI pass without a reviewed visual change is not allowed (`CLAUDE.md`).
 

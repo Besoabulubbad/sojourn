@@ -48,6 +48,7 @@ Components land one per pull request, in dependency order. Each row shows Englis
 |---|---|---|
 | Price, dated | ![](components/price-dated-en-light.png){ width="300" } | ![](components/price-dated-ar-dark.png){ width="300" } |
 | Price, from | ![](components/price-from-en-light.png){ width="300" } | ![](components/price-from-ar-dark.png){ width="300" } |
+| Rating | ![](components/rating-en-light.png){ width="300" } | ![](components/rating-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 

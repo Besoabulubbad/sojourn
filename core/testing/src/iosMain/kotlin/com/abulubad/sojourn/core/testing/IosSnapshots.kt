@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.Density
 import com.abulubad.sojourn.core.designsystem.preview.SojournPreview
 import com.abulubad.sojourn.core.designsystem.preview.SojournVariants
 import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
+import com.github.takahirom.roborazzi.RoborazziOptions
 import io.github.takahirom.roborazzi.captureRoboImage
 
 /** The iOS virtual device: the same 412 × 915 dp at 3× as the Android screenshots, so images line up. */
@@ -18,6 +19,14 @@ private const val DEVICE_DENSITY = 3f
 private const val DEVICE_WIDTH_DP = 412f
 private const val DEVICE_HEIGHT_DP = 915f
 private const val SNAPSHOT_TAG = "sojourn-snapshot"
+
+/**
+ * iOS compares with a 0.5 % pixel tolerance; Android stays exact. Text and icon edges anti-alias slightly differently
+ * across simulator devices and runtimes (measured: 0.07–0.15 % of pixels, alpha unchanged, after a new iOS 27.2
+ * simulator runtime appeared locally). Roborazzi's iOS documentation uses the same mechanism (its example: 1 %).
+ * A changed glyph, colour or layout moves far more pixels than this.
+ */
+private const val IOS_CHANGE_THRESHOLD = 0.005f
 
 /**
  * The iOS screenshot runner (ADR 0010). A module declares one test in `iosTest`:
@@ -49,7 +58,13 @@ fun verifySnapshots(cases: List<SnapshotCase>) {
                             SojournPreview(variant) { case.content() }
                         }
                     }
-                    onNodeWithTag(SNAPSHOT_TAG).captureRoboImage(this, filePath = fileName)
+                    onNodeWithTag(SNAPSHOT_TAG).captureRoboImage(
+                        this,
+                        filePath = fileName,
+                        roborazziOptions = RoborazziOptions(
+                            compareOptions = RoborazziOptions.CompareOptions(changeThreshold = IOS_CHANGE_THRESHOLD),
+                        ),
+                    )
                 }
             } catch (e: AssertionError) {
                 failures += "$fileName: ${e.message}"

@@ -24,6 +24,13 @@ class SojournFormatterTest {
     }
 
     @Test
+    fun `ratings show one decimal in western digits`() {
+        assertEquals("${FSI}4.8$PDI", en.rating(4.8))
+        assertEquals("${FSI}5.0$PDI", ar.rating(5.0))
+        assertEquals("${FSI}4.7$PDI", en.rating(4.66))
+    }
+
+    @Test
     fun `averages round half up to whole units`() {
         assertEquals("$FSI£92$PDI", en.moneyAverage(Money.of(1383, Currency.GBP), 15))
         assertEquals("${FSI}93 £$PDI", ar.moneyAverage(Money.of(1395, Currency.GBP), 15))
