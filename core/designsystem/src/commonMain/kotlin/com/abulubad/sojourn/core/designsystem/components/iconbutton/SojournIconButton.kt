@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -54,6 +55,10 @@ fun SojournIconButton(
     val interactionSource = remember { MutableInteractionSource() }
     val formatter = rememberSojournFormatter()
     val badgeText = badge?.takeIf { it > 0 }?.let { formatter.count(it) }
+    val badgeStyle = with(LocalDensity.current) {
+        val base = SojournTheme.type.labelSm
+        base.copy(fontSize = base.fontSize.value.dp.toSp(), lineHeight = base.lineHeight.value.dp.toSp())
+    }
     val iconColor = when {
         !enabled -> c.inkSubtle
         tint == SojournIconButtonTint.Saved -> c.save
@@ -108,7 +113,9 @@ fun SojournIconButton(
                     .defaultMinSize(SojournIconButtonDefaults.BadgeMinSize, SojournIconButtonDefaults.BadgeMinSize)
                     .background(c.brand, SojournShapes.full)
                     .padding(horizontal = SojournIconButtonDefaults.BadgePadding),
-                style = SojournTheme.type.labelSm.copy(
+                // The badge is part of the icon, which does not scale with text: at 200 % it would cover the icon.
+                // The count is still read out through the button's state description.
+                style = badgeStyle.copy(
                     color = c.onBrand,
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center,

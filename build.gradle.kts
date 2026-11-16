@@ -61,6 +61,10 @@ dependencyAnalysis {
             includeGroup("org.jetbrains.androidx.navigationevent")
             includeGroup("androidx.navigationevent")
         }
+        // coil-compose is the one artifact we declare; its core modules come with it.
+        bundle("coil") {
+            includeGroup("io.coil-kt.coil3")
+        }
     }
     issues {
         all {

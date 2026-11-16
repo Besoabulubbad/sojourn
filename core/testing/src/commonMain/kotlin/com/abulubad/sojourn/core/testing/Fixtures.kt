@@ -49,6 +49,7 @@ object StayFixtures {
         location = GeoPoint(51.5074, -0.1278),
         stayCount = 14,
         fromPrice = PriceDisplay.From(Money.of(2100, Currency.GBP), PriceBasis.Month, listOf(PriceExclusion.Utilities)),
+        photo = Photo(PhotoId("city-london"), "https://example.invalid/city/london.jpg"),
     )
 
     val canalStudio = Stay(

@@ -3,6 +3,10 @@ package com.abulubad.sojourn.core.localization
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.abulubad.sojourn.core.localization.resources.Res
+import com.abulubad.sojourn.core.localization.resources.area_hydra
+import com.abulubad.sojourn.core.localization.resources.area_le_marais
+import com.abulubad.sojourn.core.localization.resources.area_paddington
+import com.abulubad.sojourn.core.localization.resources.area_shoreditch
 import com.abulubad.sojourn.core.localization.resources.city_algiers
 import com.abulubad.sojourn.core.localization.resources.city_constantine
 import com.abulubad.sojourn.core.localization.resources.city_lisbon
@@ -48,4 +52,17 @@ fun localizedCityName(id: CityId): String = when (id.value) {
     "constantine" -> stringResource(Res.string.city_constantine)
     "oran" -> stringResource(Res.string.city_oran)
     else -> id.value
+}
+
+/**
+ * An area's name from its catalogue key ("area_paddington" → "Paddington" / "بادينغتون"), or null when the key has no
+ * translation yet; callers then show the city alone rather than a raw key.
+ */
+@Composable
+fun localizedAreaName(key: String): String? = when (key) {
+    "area_paddington" -> stringResource(Res.string.area_paddington)
+    "area_shoreditch" -> stringResource(Res.string.area_shoreditch)
+    "area_le_marais" -> stringResource(Res.string.area_le_marais)
+    "area_hydra" -> stringResource(Res.string.area_hydra)
+    else -> null
 }

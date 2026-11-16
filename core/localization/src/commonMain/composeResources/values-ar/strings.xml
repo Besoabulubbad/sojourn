@@ -112,6 +112,9 @@
     <string name="check_in_self_check_in">تسجيل وصول ذاتي</string>
     <string name="check_in_host">يستقبلك المضيف</string>
     <string name="check_in_lockbox">صندوق مفاتيح</string>
+    <string name="policy_cancellation_detail">بعد ذلك لا تُسترد قيمة أول %1$s.</string>
+    <string name="policy_deposit_detail">يُحجز على بطاقتك ويُفرج عنه خلال %1$s من المغادرة.</string>
+    <string name="check_in_self_check_in_detail">يصلك رمز المفتاح برسالة في يوم الوصول.</string>
 
     <!-- Catalogue names -->
     <string name="city_london">لندن</string>
@@ -124,6 +127,12 @@
     <string name="country_fr">فرنسا</string>
     <string name="country_pt">البرتغال</string>
     <string name="country_dz">الجزائر</string>
+    <string name="area_in_city">%1$s، %2$s</string>
+    <string name="area_paddington">بادينغتون</string>
+    <string name="area_shoreditch">شورديتش</string>
+    <string name="area_le_marais">لو ماريه</string>
+    <string name="area_hydra">حيدرة</string>
+    <string name="city_card_summary">%1$s · %2$s</string>
 
     <!-- Search -->
     <string name="search_where">أين</string>
@@ -192,6 +201,8 @@
     <string name="cd_previous_month">الشهر السابق</string>
     <string name="cd_next_month">الشهر التالي</string>
     <string name="cd_photo_counter">الصورة %1$s</string>
+    <string name="photo_failed">تعذّر تحميل الصورة</string>
+    <string name="cd_photo_retry">أعد تحميل الصورة</string>
     <string name="cd_saved_heart">محفوظة</string>
 
     <!-- Plurals: all six forms. The count placeholder is pre-formatted (Western digits, isolated). -->
@@ -298,5 +309,13 @@
         <item quantity="few">%1$s دقائق سيرًا</item>
         <item quantity="many">%1$s دقيقة سيرًا</item>
         <item quantity="other">%1$s دقيقة سيرًا</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="zero">لا أيام</item>
+        <item quantity="one">يوم واحد</item>
+        <item quantity="two">يومان</item>
+        <item quantity="few">%1$s أيام</item>
+        <item quantity="many">%1$s يومًا</item>
+        <item quantity="other">%1$s يوم</item>
     </plurals>
 </resources>

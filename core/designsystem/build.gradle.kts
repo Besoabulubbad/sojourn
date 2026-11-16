@@ -19,6 +19,8 @@ kotlin {
             api(libs.kotlinx.datetime)
             implementation(libs.compose.material3)
             implementation(libs.kotlinx.coroutines.core)
+            // SojournStayCard and SojournGallery load photos (the app supplies the network-backed ImageLoader).
+            implementation(libs.coil.compose)
             // SojournSheet closes on system back (Android back, iOS edge swipe).
             implementation(libs.navigationevent.compose)
         }

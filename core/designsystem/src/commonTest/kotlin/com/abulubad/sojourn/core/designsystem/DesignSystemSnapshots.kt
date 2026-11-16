@@ -3,6 +3,7 @@ package com.abulubad.sojourn.core.designsystem
 import com.abulubad.sojourn.core.designsystem.components.actions.actionsSnapshots
 import com.abulubad.sojourn.core.designsystem.components.feedback.feedbackSnapshots
 import com.abulubad.sojourn.core.designsystem.components.inputs.inputsSnapshots
+import com.abulubad.sojourn.core.designsystem.components.listing.listingSnapshots
 import com.abulubad.sojourn.core.designsystem.components.navigation.navigationSnapshots
 import com.abulubad.sojourn.core.designsystem.components.price.priceSnapshots
 import com.abulubad.sojourn.core.designsystem.components.rating.ratingSnapshots
@@ -20,4 +21,5 @@ val designSystemSnapshots: List<SnapshotCase> =
         actionsSnapshots +
         feedbackSnapshots +
         inputsSnapshots +
-        navigationSnapshots
+        navigationSnapshots +
+        listingSnapshots

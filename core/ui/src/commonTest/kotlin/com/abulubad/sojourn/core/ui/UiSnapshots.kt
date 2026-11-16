@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import com.abulubad.sojourn.core.designsystem.components.hosttext.HostText
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.testing.SnapshotCase
 import com.abulubad.sojourn.core.testing.StayFixtures

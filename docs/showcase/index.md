@@ -64,6 +64,12 @@ Components land one design-system group per pull request. Each row shows English
 | BottomNav | ![](components/bottom-nav-tabs-en-light.png){ width="300" } | ![](components/bottom-nav-tabs-ar-dark.png){ width="300" } |
 | Sheet | ![](components/sheet-filters-en-light.png){ width="300" } | ![](components/sheet-filters-ar-dark.png){ width="300" } |
 | ViewToggle | ![](components/view-toggle-pills-en-light.png){ width="300" } | ![](components/view-toggle-pills-ar-dark.png){ width="300" } |
+| KeyFacts | ![](components/key-facts-en-light.png){ width="300" } | ![](components/key-facts-ar-dark.png){ width="300" } |
+| PolicyRow | ![](components/policy-rows-en-light.png){ width="300" } | ![](components/policy-rows-ar-dark.png){ width="300" } |
+| PricePin | ![](components/price-pins-en-light.png){ width="300" } | ![](components/price-pins-ar-dark.png){ width="300" } |
+| CityCard | ![](components/city-cards-en-light.png){ width="300" } | ![](components/city-cards-ar-dark.png){ width="300" } |
+| StayCard | ![](components/stay-card-full-en-light.png){ width="300" } | ![](components/stay-card-full-ar-dark.png){ width="300" } |
+| Gallery | ![](components/gallery-states-en-light.png){ width="300" } | ![](components/gallery-states-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 
