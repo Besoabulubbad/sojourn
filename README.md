@@ -124,7 +124,7 @@ core/           model · common · localization · designsystem · ui · navigat
                 database · network · data · domain · testing
 feature/        explore · search · results · filters · details · checkout · map · saved · bookings · profile
 build-logic/    Gradle convention plugins
-tooling/        konsist (architecture tests) · scripts (icon and brand generators) · detekt-rules (next)
+tooling/        konsist (architecture tests) · detekt-rules (design-system standards as lint) · scripts (icon and brand generators)
 design/         tokens.json — source of the generated theme · brand/ (wordmark, icon)
 docs/           plan · architecture · ADRs · guides · design system · showcase
 .maestro/       end-to-end flows

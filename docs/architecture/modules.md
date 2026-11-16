@@ -53,7 +53,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `build-logic/` | Convention plugins (`sojourn.*`), the token generator (`GenerateDesignTokensTask`) and the resource check (`VerifyPluralsTask`) with their unit tests, shared detekt and Roborazzi configuration. Included build; its tests run in the root `check`. |
 | `tooling/scripts` | `lucide_to_vector.py` (icon set → vector drawables) and `make_brand.py` (mark, wordmark, Android and iOS app icons from the tokens). |
 | `tooling/konsist` | Architecture tests over the whole repository (module graph, naming, forbidden imports). Runs in `check`. |
-| `tooling/detekt-rules` | Custom detekt rule set encoding the design-system standards (tokens only, start/end only, no string literals into text, insets only in owners, motion tokens only), with tests. Applied via `detektPlugins`. |
+| `tooling/detekt-rules` | The `sojourn` detekt rule set: `TokensOnly`, `MotionTokensOnly`, `StartEndOnly`, `NoTextLiterals`, `InsetsOnlyInOwners`, with tests. Applied to every module via `detektPlugins` in `sojourn.detekt`; scopes in `config/detekt/detekt.yml`. |
 | `design/tokens.json` | Verbatim copy of the design system's token file. Input to `sojourn.tokens` and `make_brand.py`. |
 | `design/brand/` | Generated mark, wordmark and lockup (light and dark). |
 | `config/detekt/` | `detekt.yml`, custom rule set wiring, baseline (ideally empty). |

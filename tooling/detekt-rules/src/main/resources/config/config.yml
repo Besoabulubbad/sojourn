@@ -1,0 +1,19 @@
+# Defaults for the Sojourn design-system rules; detekt validates config/detekt/detekt.yml against this file.
+sojourn:
+  active: true
+  TokensOnly:
+    active: true
+  MotionTokensOnly:
+    active: true
+  StartEndOnly:
+    active: true
+  NoTextLiterals:
+    active: true
+  InsetsOnlyInOwners:
+    active: true
+    allowedFiles:
+      - 'SojournScaffold.kt'
+      - 'SojournTopBar.kt'
+      - 'SojournBottomNav.kt'
+      - 'SojournBookingBar.kt'
+      - 'SojournSheet.kt'

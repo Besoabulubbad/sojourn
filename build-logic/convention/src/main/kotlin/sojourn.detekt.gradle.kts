@@ -30,4 +30,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 dependencies {
     "detektPlugins"(libs.library("detekt-formatting"))
     "detektPlugins"(libs.library("detekt-composeRules"))
+    // The design-system standards as lint (ADR 0014). Loaded everywhere, including the rule module itself, so the
+    // `sojourn` config section validates in every run; each rule's includes keep it to the code it governs.
+    "detektPlugins"(project(":tooling:detekt-rules"))
 }

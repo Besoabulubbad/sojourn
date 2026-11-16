@@ -53,7 +53,7 @@ Make the rules executable before there is code to break them.
 
 - `build-logic/` convention plugins: `sojourn.kmp.library`, `sojourn.kmp.feature`, `sojourn.compose`, `sojourn.android.application`, `sojourn.koin`, `sojourn.sqldelight`, `sojourn.screenshot`, `sojourn.detekt`, `sojourn.dokka`, `sojourn.tokens`.
 - Version catalog completed with the verified versions in [tech-stack.md](tech-stack.md); Gradle 9.5.1 → 9.7.1 and AGP 9.1.1 → 9.3.1 — the newest pair inside Kotlin 2.4.21's documented compatibility window (AGP 9.5 would need Gradle 9.6+ and sits outside KGP's tested range). `sojourn.screenshot` is wired in Phase 2 with the first screenshot test.
-- detekt with Compose rules; `tooling/detekt-rules` custom rule set (tokens only, start/end only, no literals into text, insets only in owners, motion tokens only) with tests.
+- detekt with Compose rules; `tooling/detekt-rules` custom rule set (tokens only, start/end only, no literals into text, insets only in owners, motion tokens only) with tests. *Landed 2026-11-16 as a follow-up after Phase 2, before the first component.*
 - `dependency-analysis` (`buildHealth`); Renovate config.
 - `tooling/konsist`: module-dependency rules, naming rules, "no Material outside designsystem".
 - Empty module skeleton for every `core:*`, `feature:*` and `app:*` module, each with a README, so the rules are exercised from day one.

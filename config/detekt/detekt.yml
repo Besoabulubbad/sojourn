@@ -110,3 +110,35 @@ Compose:
   ViewModelInjection:
     active: true
     viewModelFactories: ['koinViewModel']
+
+# Design-system standards as lint (tooling/detekt-rules, ADR 0014). Scopes follow the standards: tokens, motion,
+# direction and text rules govern screens (feature:*) and core:ui; core:designsystem is where tokens are turned into
+# components and is exempt. Insets are owned by five named components everywhere.
+sojourn:
+  active: true
+  TokensOnly:
+    active: true
+    includes: ['**/feature/**', '**/core/ui/**']
+    excludes: ['**/commonTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/iosTest/**']
+  MotionTokensOnly:
+    active: true
+    includes: ['**/feature/**', '**/core/ui/**']
+    excludes: ['**/commonTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/iosTest/**']
+  StartEndOnly:
+    active: true
+    includes: ['**/feature/**', '**/core/ui/**']
+    excludes: ['**/commonTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/iosTest/**']
+  NoTextLiterals:
+    active: true
+    includes: ['**/feature/**', '**/core/ui/**']
+    excludes: ['**/commonTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/iosTest/**']
+  InsetsOnlyInOwners:
+    active: true
+    includes: ['**/core/**', '**/feature/**', '**/app/**']
+    excludes: ['**/commonTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/iosTest/**']
+    allowedFiles:
+      - 'SojournScaffold.kt'
+      - 'SojournTopBar.kt'
+      - 'SojournBottomNav.kt'
+      - 'SojournBookingBar.kt'
+      - 'SojournSheet.kt'
