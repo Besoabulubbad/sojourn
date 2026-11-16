@@ -51,6 +51,15 @@ Components land one per pull request, in dependency order. Each row shows Englis
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 
+## Android and iOS
+
+Every case renders on both platforms from the same Kotlin, and both sets of baselines are verified on every pull request (Linux and macOS jobs).
+
+| | Android | iOS |
+|---|---|---|
+| Price, Arabic dark | ![](platforms/price-dated-ar-dark-android.png){ width="300" } | ![](platforms/price-dated-ar-dark-ios.png){ width="300" } |
+| Type, English light | ![](platforms/type-en-light-android.png){ width="300" } | ![](platforms/type-en-light-ios.png){ width="300" } |
+
 ## Screens
 
 *pending — Phase 5.* One grid per screen (Explore, Search, Results, Filters, Details, Checkout, Map, Saved, Bookings, Profile) in the four variants, plus each `ScreenState`.

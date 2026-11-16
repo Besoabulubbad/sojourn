@@ -8,7 +8,7 @@ What we test, with which tool, where it lives and when it runs. The reasoning is
 |---|---|---|---|
 | Unit | kotlin-test · Turbine · kotlinx-coroutines-test | `src/commonTest` of each module | PR |
 | Architecture | Konsist | `tooling/konsist/src/test` | PR |
-| Screenshot | Roborazzi + Robolectric | `src/androidHostTest` of `core:designsystem`, `core:ui`, each `feature:*` | PR |
+| Screenshot | Roborazzi: Robolectric (Android), Skiko test runtime on the simulator (iOS) | cases in `src/commonTest` of `core:designsystem`, `core:ui`, each `feature:*`; baselines in `screenshots/` | PR (Linux job and macOS job) |
 | Compose UI | Compose UI Test | `src/androidDeviceTest` | `main`, nightly (emulator) |
 | End-to-end | Maestro | `.maestro/` | `main`, nightly (emulator) |
 | Static | detekt · dependency-analysis | — | PR |
@@ -20,9 +20,8 @@ What we test, with which tool, where it lives and when it runs. The reasoning is
 ./gradlew allTests                    # unit tests for all available targets
 ./gradlew :feature:details:allTests   # one module
 ./gradlew :tooling:konsist:test
-./gradlew verifyRoborazziAndroidHostTest    # compare with baselines (check does this too)
-./gradlew recordRoborazziAndroidHostTest    # re-record baselines
-./gradlew compareRoborazziAndroidHostTest   # produce diff images without failing
+./gradlew verifyRoborazziAndroidHostTest    # compare Android screenshots with baselines (check does this too)
+./gradlew iosSimulatorArm64Test             # iOS unit tests and iOS screenshot verify (needs Xcode)
 ./gradlew connectedAndroidTest        # Compose UI tests on a connected device/emulator
 maestro test .maestro/
 ```
@@ -44,37 +43,53 @@ Live in `tooling/konsist`. They assert, over the whole repo:
 - the allowed-dependency matrix from [modules.md](../architecture/modules.md);
 - no Material imports outside `core:designsystem`; no platform locale APIs outside `core:localization`; no `KoinComponent` outside `app:shared`; no `NavKey` outside `core:navigation`;
 - naming: `*ViewModel : SojournViewModel`, `*UiState`, `*Intent`, `*Effect`, `*Route`, `*Screen`, `Sojourn*` components;
-- every `*ViewModel` has a `*ViewModelTest`; every public `Sojourn*` composable has a screenshot test.
+- every `*ViewModel` has a `*ViewModelTest`; every public `Sojourn*` composable has a `SnapshotCase`.
 
 Add a rule when a convention is written down anywhere in `docs/`.
 
-## Screenshot tests (Roborazzi)
+## Screenshot tests (Roborazzi, Android and iOS)
 
-The matrix for every component and every screen state:
+Every visual state is written **once**, as a `SnapshotCase` in the module's `commonTest`, and rendered on both platforms:
+
+| | Android | iOS |
+|---|---|---|
+| Runner | `SojournScreenshotSuite` (`core:testing`, Robolectric) | `verifySnapshots` (`core:testing`, Compose's Skiko test runtime on the simulator) |
+| Variants per state | the four shipped variants; the default state in the full 16-cell matrix | the four shipped variants |
+| Device | `w412dp-h915dp-xxhdpi`, Robolectric API 36 | 412 × 915 dp at 3× |
+| Baselines | `<module>/screenshots/androidHostTest/` | `<module>/screenshots/iosSimulatorArm64/` |
+| Runs | `check` on the Linux PR job | `iosSimulatorArm64Test` on the macOS PR job |
+
+The matrix dimensions:
 
 | Dimension | Values |
 |---|---|
 | Language | `en-GB`, `ar` (sets `LayoutDirection`) |
 | Theme | light, dark |
-| Font scale | 1.0, 2.0 |
-| Width | 320 dp, 412 dp |
+| Font scale | 1.0, 2.0 (Android, default state) |
+| Width | 320 dp, 412 dp (Android, default state) |
 | State | each `ScreenState`, each component state |
 
-`SojournVariants` in `core:designsystem` defines the four shipped variants (`Four`) and the 16-cell `Matrix`. A screenshot test extends `SojournScreenshotTest` from `core:testing`, which is parameterized over the variants, so each variant is its own test with one capture:
+Writing cases (`commonTest`):
 
 ```kotlin
-class TokenSheetScreenshotTest(variant: SojournVariant) : SojournScreenshotTest(variant) {
-    @Test fun colors() = snapshot("tokens_color") { SojournTokenSheet(TokenSection.Color) }
-}
+val priceSnapshots: List<SnapshotCase> = listOf(
+    SnapshotCase("price_dated", fullMatrix = true) { SojournPrice(SojournPriceSamples.dated) },
+    SnapshotCase("price_from_month") { SojournPrice(SojournPriceSamples.fromMonth) },
+)
 ```
 
-The base class is parameterized over all 16 cells of the matrix. `snapshot(name)` captures a state in the four shipped variants, and `snapshot(name, fullMatrix = true)` adds 200 % font and 320 dp width. Use `fullMatrix` for each component's and screen's default state; the other cells are skipped (ADR 0010).
+Each module lists its cases in one place (`designSystemSnapshots`, `uiSnapshots`) and has a two-line runner per platform: a `SojournScreenshotSuite` subclass in `androidHostTest` and a test calling `verifySnapshots(…)` in `iosTest`. Every case renders through `SojournPreview` (theme, language, direction, font scale, width) and is captured from its node, as `<name>_<variant>.png`. Plain test runs verify against the committed baselines because `gradle.properties` sets `roborazzi.test.verify=true`. A changed image fails `check` on Android and `iosSimulatorArm64Test` on iOS, and the iOS runner lists every mismatch, not just the first.
 
-`snapshot` renders the content through `SojournPreview` (theme, language, direction, font scale, width) with a compose test rule and captures the node with Roborazzi, writing `<name>_<variant>.png`. Each module's baselines live in `<module>/src/androidHostTest/screenshots/` (configured by `sojourn.screenshot`) and are committed. Plain test runs verify against them because `gradle.properties` sets `roborazzi.test.verify=true`, so `check` fails on any visual change.
+```bash
+./gradlew recordRoborazziAndroidHostTest        # re-record Android baselines
+./gradlew recordRoborazziIosSimulatorArm64      # re-record iOS baselines (needs Xcode)
+./gradlew compareRoborazziAndroidHostTest       # diff images without failing
+./gradlew iosSimulatorArm64Test                 # iOS unit tests + iOS screenshot verify
+```
 
-Robolectric renders on the **API 36** runtime (`@Config(sdk = [36])`) with native graphics and a fixed `w412dp-h915dp-xxhdpi` device. Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture: blank `#FAFAFA` images, reproduced with a plain coloured box and no app code. Unit tests are unaffected. Revisit when Robolectric ships its next release.
+**Platform notes.** Robolectric renders on the API 36 runtime: Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). Roborazzi's iOS support is experimental; it needs an explicit file name per capture, which the runner derives from the case and variant. Elevation shadows render fainter on iOS than on Android; the baselines record each platform as it is.
 
-**Baseline policy.** A PR that changes any baseline must say so and why; the reviewer looks at the diff images (uploaded as a CI artefact on failure, or regenerate locally with `compareRoborazziDebug`). Recording new baselines to make CI pass without a reviewed visual change is not allowed (`CLAUDE.md`).
+**Baseline policy.** A PR that changes any baseline must say so and why; the reviewer looks at the diff images (uploaded as CI artefacts on failure, `screenshot-diffs` and `ios-screenshot-diffs`, or regenerate locally with the compare tasks). Recording new baselines to make CI pass without a reviewed visual change is not allowed (`CLAUDE.md`).
 
 ### Device and app language
 

@@ -44,7 +44,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `:core:network` | `SojournApi` interface, DTOs + mappers, `LocalSojournApi` (bundled JSON, `FakeNetworkConditions`), `KtorSojournApi` (configured, flag-gated), `HttpClient` factory. | core-base, Ktor, kotlinx-serialization | `sojourn.kmp.library` |
 | `:core:data` | Repository interfaces **and** implementations: `StayRepository`, `CityRepository`, `SearchRepository`, `PricingRepository`, `SavedRepository`, `BookingRepository`, `PreferencesRepository`. Offline-first sync policy. Koin `dataModule`. | `:core:database`, `:core:network`, core-base, multiplatform-settings | `sojourn.kmp.library` + `sojourn.koin` |
 | `:core:domain` | Use cases, one class each with `operator fun invoke`: `SearchStays`, `GetStayDetails`, `GetQuote`, `ToggleSaved`, `ObserveSaved`, `ListBookings`, `CreateBooking`, `ObserveFilters`, `UpdateFilters`, `GetCities`. Business rules and their tests. Koin `domainModule`. | `:core:data` (interfaces), core-base | `sojourn.kmp.library` + `sojourn.koin` |
-| `:core:testing` | Fixtures (`StayFixtures`, `QuoteFixtures`, `FixedAppClock`), `TestDispatcherProvider` + `runSojournTest`, `SojournScreenshotTest` (parameterized Roborazzi + Robolectric base); fake repositories and the Koin test module from Phase 4. Test-scoped only. | everything in `core`, test libraries | `sojourn.kmp.library` + `sojourn.compose` |
+| `:core:testing` | Fixtures (`StayFixtures`, `QuoteFixtures`, `FixedAppClock`), `TestDispatcherProvider` + `runSojournTest`, `SnapshotCase` with the Android (`SojournScreenshotSuite`) and iOS (`verifySnapshots`) screenshot runners; fake repositories and the Koin test module from Phase 4. Test-scoped only. | everything in `core`, test libraries | `sojourn.kmp.library` + `sojourn.compose` |
 
 ## Tooling and build
 
@@ -71,7 +71,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `sojourn.android.application` | Android application, `compileSdk`/`targetSdk`/`minSdk` from the catalog, signing from env, R8 on release |
 | `sojourn.koin` | `koin-core`; modules that test a graph add `koin-test` themselves |
 | `sojourn.sqldelight` | SQLDelight plugin, `SojournDatabase` config, drivers per target |
-| `sojourn.screenshot` | Roborazzi plugin on the AGP KMP library's `androidHostTest` (`recordRoborazziAndroidHostTest` / `verifyRoborazziAndroidHostTest`), baselines in `src/androidHostTest/screenshots`, `core:testing` for the base class, an Espresso 3.7 constraint for the API 37 runtime |
+| `sojourn.screenshot` | Roborazzi on Android (`androidHostTest`, Robolectric) and iOS (`iosSimulatorArm64`); cases in `commonTest` via `core:testing`; baselines in `screenshots/<platform>/` (`separateOutputDirs`); an Espresso 3.7 constraint for the API 37 runtime |
 | `sojourn.tokens` | `generateDesignTokens` task reading `design/tokens.json` into `build/generated/tokens`, added to `commonMain` so every compile depends on it |
 | `sojourn.localization` | `verifyPlurals` in `check`: every locale declares the same string and plural keys; Arabic plurals carry all six forms |
 | `sojourn.detekt` | detekt with Compose rules and the project config |

@@ -1,7 +1,8 @@
-// Screenshot tests with Roborazzi on Robolectric, in the AGP KMP library plugin's `androidHostTest` source set
-// (ADR 0010). Roborazzi registers `recordRoborazziAndroidHostTest` / `verifyRoborazziAndroidHostTest` /
-// `compareRoborazziAndroidHostTest`; plain test tasks verify because gradle.properties sets
-// `roborazzi.test.verify=true`. Baselines are committed per module under src/androidHostTest/screenshots.
+// Screenshot tests on Android and iOS with Roborazzi (ADR 0010). Cases are written once in `commonTest` as
+// SnapshotCase lists; `androidHostTest` runs them on Robolectric (SojournScreenshotSuite) and `iosTest` on the
+// simulator (verifySnapshots). Tasks: record/verify/compareRoborazziAndroidHostTest and …IosSimulatorArm64. Plain
+// test tasks verify because gradle.properties sets `roborazzi.test.verify=true`. Baselines are committed per module
+// under screenshots/<androidHostTest|iosSimulatorArm64>/ (separate directories also stop the two finalizers racing).
 import com.abulubad.sojourn.buildlogic.libs
 import com.abulubad.sojourn.buildlogic.library
 
@@ -12,18 +13,20 @@ plugins {
 }
 
 roborazzi {
-    outputDir.set(layout.projectDirectory.dir("src/androidHostTest/screenshots"))
+    outputDir.set(layout.projectDirectory.dir("screenshots"))
+    separateOutputDirs.set(true)
 }
 
 kotlin {
     sourceSets {
+        commonTest.dependencies {
+            // SnapshotCase; the platform runners come with it.
+            implementation(project(":core:testing"))
+        }
         // Created by the Android target's withHostTest {}; match lazily so plugin order does not matter.
         matching { it.name == "androidHostTest" }.configureEach {
             dependencies {
-                // SojournScreenshotTest brings Roborazzi, Robolectric and the compose test rule; tests only
-                // write @Test methods against it.
-                implementation(project(":core:testing"))
-                implementation(libs.library("junit"))
+                implementation(libs.library("robolectric"))
             }
         }
     }
