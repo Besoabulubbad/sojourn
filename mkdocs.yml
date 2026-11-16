@@ -98,5 +98,6 @@ nav:
       - "0012 Docs as code": adr/0012-docs-as-code.md
       - "0013 AI agents in the dev loop": adr/0013-ai-agents-dev-loop.md
       - "0014 Static analysis and dependency hygiene": adr/0014-static-analysis-dependency-hygiene.md
+      - "0015 Our own bottom sheet": adr/0015-own-bottom-sheet.md
   # Enabled in Phase 7 once Dokka output is published under docs/api:
   # - API reference (Dokka): api/index.html

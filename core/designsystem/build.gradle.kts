@@ -19,6 +19,8 @@ kotlin {
             api(libs.kotlinx.datetime)
             implementation(libs.compose.material3)
             implementation(libs.kotlinx.coroutines.core)
+            // SojournSheet closes on system back (Android back, iOS edge swipe).
+            implementation(libs.navigationevent.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.coroutines.test)
