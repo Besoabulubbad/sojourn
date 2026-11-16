@@ -10,7 +10,7 @@ The design system in code (ADR 0003, 0008): generated tokens, `SojournTheme`, fo
 | `SojournTheme(locale, darkTheme, reduceMotion) { }` | `theme/SojournTheme.kt` | Provides colours, type and elevation for the theme, the locale environment (via `ProvideAppLocale`), `LocalReduceMotion`, and a Material theme bridged from the same tokens. Read with `SojournTheme.colors.brand`, `SojournTheme.type.price`. |
 | `SojournFonts` | `theme/SojournFonts.kt` + `composeResources/font` | Alexandria (display, titles, price) and Readex Pro (text) at 400/500/600. Both cover Latin and Arabic. |
 | Motion helpers | `theme/SojournMotionExtensions.kt` | `settleSpring()`, `popSpring()`, `exitDuration()`, and `enter`/`exit`/`move` specs that fall back to a 150 ms fade when reduce motion is on (M-03). |
-| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke). Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
+| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke) plus filled variants where a card needs them (`StarFilled`). Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
 | `SojournVariant`, `SojournVariants`, `SojournPreview` | `preview/` | The 4-variant set and 16-cell matrix (language × theme × font scale × width) and the wrapper previews and screenshot tests share. |
 | `SojournTokenSheet` | `showcase/` | Every token on one sheet per family; the Phase 2 screenshot exit test and the showcase swatches. |
 
@@ -21,6 +21,10 @@ One package per component under `components/<name>/`: `Sojourn<Comp>.kt` (the co
 ### Price — `SojournPrice(price: PriceDisplay, modifier, size = SojournPriceSize.Card)`
 
 The only component allowed to print a price (P-01). A `PriceDisplay.Total` leads with the stay total ("£1,383 total") over the all-in nightly average ("£92 a night, all fees included"). A raw nightly rate that excludes fees is never shown. A `PriceDisplay.From` reads "from £2,450 a month" over what it excludes ("Before cleaning fee. Add dates for the exact total."), and never drops "from" (P-03). Amounts come from `SojournFormatter` inside bidi isolates and sentences from string resources (S-02, S-04, P-06). `Compact` shows the lead line only. Screen readers read both lines as one. Screenshots cover dated (full 16-cell matrix), from-a-month, from-a-night with two exclusions, and compact.
+
+### Rating — `SojournRating(rating: Rating?, modifier, showCount = true)`
+
+A filled star in `accentInk`, the score and the review count: ★ 4.8 (32). Renders **nothing** for a missing rating or fewer than three reviews (N-04); there is no empty, zero or "new" rating. Screen readers hear one phrase, "Rated 4.8 out of 5, 32 reviews", from a plural resource with all six Arabic forms. Score and count come from `SojournFormatter` (one decimal, Western digits, bidi isolates). The 14 dp star is `SojournRatingDefaults.StarSize`, smaller than the `icon-sm` token so it sits inside `body-sm` text. `SojournRatingBehaviourTest` checks the hidden states and the spoken label on the semantics tree.
 
 ## Tests
 

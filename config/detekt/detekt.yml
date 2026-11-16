@@ -55,6 +55,8 @@ style:
 naming:
   FunctionNaming:
     ignoreAnnotated: ['Composable']
+    # detekt's defaults plus the AGP KMP library plugin's test source sets, so backticked test names are allowed.
+    excludes: ['**/test/**', '**/commonTest/**', '**/iosTest/**', '**/androidHostTest/**', '**/androidDeviceTest/**', '**/jvmTest/**']
   TopLevelPropertyNaming:
     # Composition locals (LocalAppLocale) and Koin modules (exploreModule) are top-level vals.
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'

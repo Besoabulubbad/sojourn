@@ -131,9 +131,8 @@
     <string name="sort_rating">Rating</string>
     <string name="filters_title">Filters</string>
 
-    <!-- Ratings (N-04 hides ratings under three reviews) -->
-    <string name="rating_new">New</string>
-    <string name="rating_with_count">%1$s · %2$s</string>
+    <!-- Ratings (N-04 hides ratings under three reviews; there is no "New" or empty rating) -->
+    <string name="rating_count">(%1$s)</string>
 
     <!-- Bookings -->
     <string name="booking_status_upcoming">Upcoming</string>
@@ -159,7 +158,6 @@
     <string name="cd_increase">Increase</string>
     <string name="cd_decrease">Decrease</string>
     <string name="cd_photo_counter">Photo %1$s</string>
-    <string name="cd_rating">Rated %1$s out of 5</string>
     <string name="cd_saved_heart">Saved</string>
 
     <!-- Plurals: English has two forms; Arabic declares all six (S-03). -->
@@ -202,6 +200,11 @@
     <plurals name="reviews">
         <item quantity="one">%1$s review</item>
         <item quantity="other">%1$s reviews</item>
+    </plurals>
+    <!-- Read aloud for a rating: %1$s is the score, %2$s the number of reviews. -->
+    <plurals name="rating_spoken">
+        <item quantity="one">Rated %1$s out of 5, %2$s review</item>
+        <item quantity="other">Rated %1$s out of 5, %2$s reviews</item>
     </plurals>
     <plurals name="photos">
         <item quantity="one">%1$s photo</item>

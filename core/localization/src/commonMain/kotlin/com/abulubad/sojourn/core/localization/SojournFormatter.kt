@@ -37,6 +37,12 @@ class SojournFormatter(private val locale: AppLocale) {
         return money(Money(rounded, total.currency))
     }
 
+    /** A guest rating on the five-point scale with one decimal: `4.8`, `5.0`. Isolated. */
+    fun rating(score: Double): String {
+        val tenths = kotlin.math.round(score * TENTHS).toInt()
+        return isolate("${tenths / TENTHS_INT}.${tenths % TENTHS_INT}")
+    }
+
     /** `1,383` — grouped, isolated. For counts inserted into sentences via plural resources. */
     fun count(value: Int): String = isolate(group(value.toLong()))
 
@@ -138,6 +144,8 @@ class SojournFormatter(private val locale: AppLocale) {
         private const val EN_DASH_SPACED = "– "
         private const val GROUP_SIZE = 3
         private const val HALF = 0.5
+        private const val TENTHS = 10.0
+        private const val TENTHS_INT = 10
 
         /** Wraps [text] in a bidi isolate (S-04). */
         fun isolate(text: String): String = "$FSI$text$PDI"

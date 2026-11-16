@@ -23,6 +23,9 @@ from pathlib import Path
 STROKE_WIDTH = "1.75"
 SVG_NS = "{http://www.w3.org/2000/svg}"
 
+# Icons that also ship a filled variant (`ic_<name>_filled`): the rating star, later the saved heart.
+FILLED = ["star"]
+
 # Lucide name → drawable name (ic_<name> with underscores). One icon per meaning.
 ICONS = [
     "arrow-left", "arrow-right", "chevron-left", "chevron-right", "chevron-down", "chevron-up", "x", "search",
@@ -101,7 +104,7 @@ def element_to_path(element: ET.Element) -> str | None:
     raise SystemExit(f"Unsupported SVG element <{tag}>")
 
 
-def convert(svg_file: Path) -> str:
+def convert(svg_file: Path, filled: bool = False) -> str:
     root = ET.parse(svg_file).getroot()
     view_box = root.attrib.get("viewBox", "0 0 24 24").split()
     paths = []
@@ -115,18 +118,20 @@ def convert(svg_file: Path) -> str:
         raise SystemExit(f"{svg_file.name}: no drawable elements")
     lines = [
         '<?xml version="1.0" encoding="utf-8"?>',
-        f"<!-- Generated from Lucide '{svg_file.stem}' by tooling/scripts/lucide_to_vector.py. Do not edit. -->",
+        f"<!-- Generated from Lucide '{svg_file.stem}'{' (filled)' if filled else ''} by "
+        "tooling/scripts/lucide_to_vector.py. Do not edit. -->",
         '<vector xmlns:android="http://schemas.android.com/apk/res/android"',
         '    android:width="24dp"',
         '    android:height="24dp"',
         f'    android:viewportWidth="{view_box[2]}"',
         f'    android:viewportHeight="{view_box[3]}">',
     ]
+    fill = "#FF000000" if filled else "#00000000"
     for data in paths:
         lines += [
             "    <path",
             f'        android:pathData="{data}"',
-            '        android:fillColor="#00000000"',
+            f'        android:fillColor="{fill}"',
             '        android:strokeColor="#FF000000"',
             f'        android:strokeWidth="{STROKE_WIDTH}"',
             '        android:strokeLineCap="round"',
@@ -147,7 +152,10 @@ def main(argv: list[str]) -> None:
         if not svg.exists():
             raise SystemExit(f"Missing Lucide icon: {svg}")
         (target / f"ic_{name.replace('-', '_')}.xml").write_text(convert(svg), encoding="utf-8")
-    print(f"Converted {len(ICONS)} icons into {target}")
+    for name in FILLED:
+        svg = source / f"{name}.svg"
+        (target / f"ic_{name.replace('-', '_')}_filled.xml").write_text(convert(svg, filled=True), encoding="utf-8")
+    print(f"Converted {len(ICONS)} icons and {len(FILLED)} filled variants into {target}")
 
 
 if __name__ == "__main__":
