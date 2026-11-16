@@ -28,6 +28,9 @@ Sojourn is a premium flexible-stay reservation app (nights to a year): a Kotlin 
 
 ## Non-negotiable rules (enforced by Konsist, detekt or the type system)
 
+detekt's `sojourn` rule set (`tooling/detekt-rules`) enforces the token, motion, direction, text and inset rules below; a finding names the rule and the standard it breaks.
+
+
 - **Modules.** `feature:*` may depend on `core:ui`, `core:designsystem`, `core:localization`, `core:domain`, `core:model`, `core:navigation`, `core:platform`, `core:common` — never on `core:data`, `core:database`, `core:network` or another feature. `app:shared` is the only module that sees everything.
 - **Material stays inside `core:designsystem`.** No `androidx.compose.material3` or `org.jetbrains.compose.material3` import anywhere else. Features compose `Sojourn*` components.
 - **Tokens by name only.** No raw `Color(...)`, hex, `.dp`, `.sp` or millisecond literals in `feature:*` or `core:ui`. Use `SojournTheme.colors.*`, `SojournTheme.type.*`, `SojournSpacing.*`, `SojournShapes.*`, `SojournMotion.*`. Generated token files are never edited by hand — change `design/tokens.json`.

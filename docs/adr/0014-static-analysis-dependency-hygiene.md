@@ -72,6 +72,8 @@ Division of labour: detekt sees expressions (literals, call arguments); Konsist 
 
 **2026-11-16 (end of Phase 2).** "Unused" now fails like every other category. Modules that are still skeletons warn instead; they are listed explicitly as `skeletonModules` in the root `build.gradle.kts` and each leaves the list in the PR that gives it code. Two more bundles, `lifecycle` and `savedstate`, cover the JetBrains multiplatform forks that resolve to Google's AndroidX artifacts on Android, as the Compose bundle already did. Konsist rules now scope to product code (`app/`, `core/`, `feature/`): the build logic and tooling may use JDK APIs.
 
+**2026-11-16 (design-system rules).** `tooling/detekt-rules` ships five rules in the `sojourn` rule set: `TokensOnly` (C-01), `MotionTokensOnly` (M-01), `StartEndOnly` (L-02, L-05), `NoTextLiterals` (S-01, S-02) and `InsetsOnlyInOwners` (I-01, I-03). Each has a failing and a passing snippet in `SojournRulesTest`, and all five were seen firing in a real feature module before merge. Two choices: hex strings are not matched separately because a colour in Compose is always a `Color(…)` call, and `0.dp` is allowed because zero is the absence of a value. Scopes live in `config/detekt/detekt.yml`; `core:designsystem` is exempt from the token, motion and direction rules because it is where tokens become components.
+
 ## Links
 
 - [detekt](https://detekt.dev/) · [Writing custom detekt rules](https://detekt.dev/docs/introduction/extensions) · [Compose rules](https://mrmans0n.github.io/compose-rules/)

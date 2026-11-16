@@ -60,3 +60,4 @@ include(":feature:profile")
 
 // Tooling
 include(":tooling:konsist")
+include(":tooling:detekt-rules")
