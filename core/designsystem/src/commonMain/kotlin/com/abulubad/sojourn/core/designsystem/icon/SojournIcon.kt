@@ -36,6 +36,7 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_external_link
 import com.abulubad.sojourn.core.designsystem.resources.ic_footprints
 import com.abulubad.sojourn.core.designsystem.resources.ic_gift
 import com.abulubad.sojourn.core.designsystem.resources.ic_heart
+import com.abulubad.sojourn.core.designsystem.resources.ic_heart_filled
 import com.abulubad.sojourn.core.designsystem.resources.ic_house
 import com.abulubad.sojourn.core.designsystem.resources.ic_image_off
 import com.abulubad.sojourn.core.designsystem.resources.ic_info
@@ -93,6 +94,9 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
     // Tabs and destinations
     data object Explore : SojournIcon(Res.drawable.ic_compass)
     data object Saved : SojournIcon(Res.drawable.ic_heart)
+
+    /** The saved heart once a stay is saved: filled, tinted `save` (IconButton card). */
+    data object SavedFilled : SojournIcon(Res.drawable.ic_heart_filled)
     data object Bookings : SojournIcon(Res.drawable.ic_briefcase)
     data object Profile : SojournIcon(Res.drawable.ic_user)
     data object Home : SojournIcon(Res.drawable.ic_house)
@@ -163,7 +167,7 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
         val all: kotlin.collections.List<SojournIcon> by lazy {
             listOf(
                 Back, Forward, ChevronStart, ChevronEnd, ChevronDown, ChevronUp, Close, ExternalLink,
-                Explore, Saved, Bookings, Profile, Home,
+                Explore, Saved, SavedFilled, Bookings, Profile, Home,
                 Search, Filters, Map, MapPin, List, Calendar, Guests, City,
                 Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Walk, Transit, Star, StarFilled, Sparkles,
                 Key, Clock, Deposit, DoorOpen, Payment, Rewards, Bookmark,

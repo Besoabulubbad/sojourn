@@ -37,9 +37,9 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 
 | Card | Group | Composable(s) | Notes from the card we encode in the API |
 |---|---|---|---|
-| Button | Actions | `SojournButton(variant: Primary \| Secondary \| Tertiary \| Destructive, size, enabled, loading, leadingIcon?)` | one primary per screen (lint cannot check; review does); press scale 0.98 via `SojournMotion.instant` |
-| Chip | Actions | `SojournChip(selected, onClick, label, leadingIcon?)` / `SojournChipRow` | selected state changes fill **and** weight (C-04) |
-| IconButton | Actions | `SojournIconButton(icon: SojournIcon, contentDescription: String, style: Plain \| Floating \| OnPhoto)` | `contentDescription` required (C-05); 48dp target always |
+| Button | Actions | `SojournButton(text, onClick, modifier, variant: Primary \| Secondary \| Ghost \| Danger, leadingIcon?, loading, enabled)` ✅ | one primary per screen (review); labels wrap, never truncate; loading keeps label and width and blocks a second tap; press scale 0.98 + 8 % darken over `SojournMotion.instant`; 2 dp focus ring |
+| Chip | Actions | `SojournChip(label, selected, onClick, modifier, icon?)` / `SojournFactChip(label, modifier, icon?)` ✅ | selected changes fill **and** weight (C-04), read as "selected"; 40 dp visual, 48 dp target; fact chips are read-only `brandTint` |
+| IconButton | Actions | `SojournIconButton(icon, contentDescription, onClick, modifier, variant: Plain \| Outline \| Floating, tint: Default \| Saved, badge?, enabled)` ✅ | `contentDescription` required (C-05); 48 dp target always; floating carries its own `surface` disc for photos and the map; badge text is `label-sm` (the card's 11 px is below the brand book's minimum) |
 | SearchBar | Inputs | `SojournSearchBar(summary: SearchSummary?, compact: Boolean, onClick)` | the single entry to search; container-transform source |
 | DateRangePicker | Inputs | `SojournDateRangePicker(state, onRangeChange, unavailable: Set<LocalDate>)` | month grid; first day of week from `AppLocale` (L-04); range tint sweep `SojournMotion.fast` |
 | RangeSlider | Inputs | `SojournPriceRange(range, bounds, histogram, basis: PriceBasis, onChange)` | `basis` required (P-04); two editable fields; thumbs `SojournElevation.level2` |

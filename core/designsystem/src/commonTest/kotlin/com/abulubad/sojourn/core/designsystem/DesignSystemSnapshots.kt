@@ -1,5 +1,6 @@
 package com.abulubad.sojourn.core.designsystem
 
+import com.abulubad.sojourn.core.designsystem.components.actions.actionsSnapshots
 import com.abulubad.sojourn.core.designsystem.components.price.priceSnapshots
 import com.abulubad.sojourn.core.designsystem.components.rating.ratingSnapshots
 import com.abulubad.sojourn.core.designsystem.showcase.tokenSheetSnapshots
@@ -12,4 +13,5 @@ import com.abulubad.sojourn.core.testing.SnapshotCase
 val designSystemSnapshots: List<SnapshotCase> =
     tokenSheetSnapshots +
         priceSnapshots +
-        ratingSnapshots
+        ratingSnapshots +
+        actionsSnapshots
