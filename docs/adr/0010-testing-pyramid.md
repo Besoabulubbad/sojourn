@@ -68,6 +68,13 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 - Good: familiar.
 - Bad: no visual regression across themes/RTL; no architecture enforcement; slow device tests on the PR path.
 
+## Implementation notes
+
+**2026-11-16 (Phase 2).** Verified against the Roborazzi plugin source: the Gradle plugin configures the AGP KMP library plugin and registers `recordRoborazziAndroidHostTest` / `verifyRoborazziAndroidHostTest`, so screenshots live in each module's `androidHostTest` as planned. Two findings changed the details, not the decision:
+
+- Screenshots render on the **API 36** Robolectric runtime. On Robolectric 4.18's API 37 runtime, Compose content was intermittently not drawn before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). API 36 renders every probe. Unit tests keep the default runtime.
+- `SojournScreenshotTest` is a parameterized Robolectric test (one capture per variant per test) that renders through a compose test rule and captures the node, the pattern Roborazzi documents for Compose.
+
 ## Links
 
 - [Roborazzi](https://takahirom.github.io/roborazzi/) · [Robolectric](https://robolectric.org/)

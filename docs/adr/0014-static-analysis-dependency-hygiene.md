@@ -68,6 +68,10 @@ Division of labour: detekt sees expressions (literals, call arguments); Konsist 
 - Good: Spotless is a good formatter driver; Dependabot is built in.
 - Bad: two tools where `detekt-formatting` covers it; Dependabot lacks Renovate's grouping and version-catalog awareness.
 
+## Implementation notes
+
+**2026-11-16 (end of Phase 2).** "Unused" now fails like every other category. Modules that are still skeletons warn instead; they are listed explicitly as `skeletonModules` in the root `build.gradle.kts` and each leaves the list in the PR that gives it code. Two more bundles, `lifecycle` and `savedstate`, cover the JetBrains multiplatform forks that resolve to Google's AndroidX artifacts on Android, as the Compose bundle already did. Konsist rules now scope to product code (`app/`, `core/`, `feature/`): the build logic and tooling may use JDK APIs.
+
 ## Links
 
 - [detekt](https://detekt.dev/) · [Writing custom detekt rules](https://detekt.dev/docs/introduction/extensions) · [Compose rules](https://mrmans0n.github.io/compose-rules/)

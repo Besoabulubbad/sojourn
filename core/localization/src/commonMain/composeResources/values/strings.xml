@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  British English (the default locale). Every key here must also exist in values-ar/strings.xml: the
+  verifyPlurals task fails the build otherwise (S-03, S-05). Keys follow the glossary in docs/design-system/brand-book.md:
+  one term per concept. Sentence case; buttons are verb + object; no exclamation marks.
+-->
+<resources>
+    <!-- App -->
+    <string name="app_name">Sojourn</string>
+    <string name="app_tagline">Furnished homes for a few nights to a year</string>
+
+    <!-- Languages are named in their own script, never with flags (L-06). Same value in every locale. -->
+    <string name="language_en">English</string>
+    <string name="language_ar">العربية</string>
+
+    <!-- Tabs -->
+    <string name="tab_explore">Explore</string>
+    <string name="tab_saved">Saved</string>
+    <string name="tab_bookings">Bookings</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- Actions (verb + object) -->
+    <string name="action_back">Back</string>
+    <string name="action_close">Close</string>
+    <string name="action_search">Search</string>
+    <string name="action_reserve">Reserve</string>
+    <string name="action_share">Share</string>
+    <string name="action_save">Save</string>
+    <string name="action_unsave">Remove from saved</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_translate">Translate</string>
+    <string name="action_show_original">Show original</string>
+    <string name="action_choose_dates">Choose dates</string>
+    <string name="action_clear_filters">Clear filters</string>
+    <string name="action_show_stays">Show %1$s</string>
+    <string name="action_pay">Pay %1$s</string>
+    <string name="action_open_in_maps">Open in maps</string>
+
+    <!-- Screen states (I-05) -->
+    <string name="state_loading">Loading</string>
+    <string name="state_empty_title">Nothing here yet</string>
+    <string name="state_empty_body">Change your dates or filters to see more stays.</string>
+    <string name="state_error_title">Something went wrong</string>
+    <string name="state_error_body">Check your connection and try again.</string>
+    <string name="state_offline_title">You are offline</string>
+    <string name="state_offline_body">Showing stays saved on this device.</string>
+
+    <!-- Appearance -->
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <!-- Prices (every amount is pre-formatted by SojournFormatter, P-06) -->
+    <string name="price_total">%1$s total</string>
+    <string name="price_per_night">%1$s night</string>
+    <string name="price_per_month">%1$s month</string>
+    <string name="price_from_night">from %1$s a night</string>
+    <string name="price_from_month">from %1$s a month</string>
+    <string name="price_all_fees_included">all fees included</string>
+    <string name="price_excludes">Excludes %1$s</string>
+    <string name="price_long_stay">Long-stay price</string>
+    <string name="price_long_stay_saving">%1$s on stays of %2$s or more</string>
+    <string name="exclusion_utilities">utilities</string>
+    <string name="exclusion_cleaning_fee">cleaning fee</string>
+    <string name="exclusion_deposit">deposit</string>
+    <string name="exclusion_city_tax">city tax</string>
+    <string name="line_nights">%1$s × %2$s</string>
+    <string name="line_long_stay_discount">Long-stay discount</string>
+    <string name="line_cleaning_fee">Cleaning fee</string>
+    <string name="line_service_fee">Service fee</string>
+    <string name="line_city_tax">City tax</string>
+    <string name="line_deposit">Refundable deposit</string>
+    <string name="line_total">Total</string>
+
+    <!-- Facts (N-01: a studio is "Studio", never "0 bedrooms") -->
+    <string name="facts_studio">Studio</string>
+    <string name="facts_sleeps">Sleeps %1$s</string>
+    <string name="facts_separator"> · </string>
+    <string name="transit_walk">%1$s to %2$s</string>
+
+    <!-- Amenities (glossary) -->
+    <string name="amenity_wifi">Wi‑Fi</string>
+    <string name="amenity_washer">Washer</string>
+    <string name="amenity_workspace">Workspace</string>
+    <string name="amenity_lift">Lift</string>
+    <string name="amenity_kitchen">Kitchen</string>
+    <string name="amenity_air_conditioning">Air conditioning</string>
+    <string name="amenity_heating">Heating</string>
+    <string name="amenity_parking">Parking</string>
+    <string name="amenity_balcony">Balcony</string>
+    <string name="amenity_dishwasher">Dishwasher</string>
+    <string name="amenity_tv">TV</string>
+    <string name="amenity_pet_friendly">Pets welcome</string>
+
+    <!-- Policies carry their numbers (N-03) -->
+    <string name="policy_free_cancellation">Free cancellation until %1$s</string>
+    <string name="policy_deposit">%1$s refundable deposit</string>
+    <string name="policy_deposit_non_refundable">%1$s deposit, not refunded</string>
+    <string name="policy_check_in">Check-in from %1$s · %2$s</string>
+    <string name="policy_check_out">Check-out by %1$s</string>
+    <string name="policy_minimum_stay">Minimum stay %1$s</string>
+    <string name="check_in_self_check_in">Self check-in</string>
+    <string name="check_in_host">Your host welcomes you</string>
+    <string name="check_in_lockbox">Lockbox</string>
+
+    <!-- Catalogue names, localized by id (S-05) -->
+    <string name="city_london">London</string>
+    <string name="city_paris">Paris</string>
+    <string name="city_lisbon">Lisbon</string>
+    <string name="city_algiers">Algiers</string>
+    <string name="city_constantine">Constantine</string>
+    <string name="city_oran">Oran</string>
+    <string name="country_gb">United Kingdom</string>
+    <string name="country_fr">France</string>
+    <string name="country_pt">Portugal</string>
+    <string name="country_dz">Algeria</string>
+
+    <!-- Search -->
+    <string name="search_where">Where</string>
+    <string name="search_when">When</string>
+    <string name="search_who">Who</string>
+    <string name="search_anywhere">Anywhere</string>
+    <string name="search_any_dates">Any dates</string>
+    <string name="search_summary_separator"> · </string>
+    <string name="stay_length_weekend">Weekend</string>
+    <string name="stay_length_week">A week</string>
+    <string name="stay_length_month">A month</string>
+    <string name="stay_length_longer">Longer</string>
+    <string name="sort_recommended">Recommended</string>
+    <string name="sort_price_low_to_high">Price, low to high</string>
+    <string name="sort_price_high_to_low">Price, high to low</string>
+    <string name="sort_rating">Rating</string>
+    <string name="filters_title">Filters</string>
+
+    <!-- Ratings (N-04 hides ratings under three reviews) -->
+    <string name="rating_new">New</string>
+    <string name="rating_with_count">%1$s · %2$s</string>
+
+    <!-- Bookings -->
+    <string name="booking_status_upcoming">Upcoming</string>
+    <string name="booking_status_active">Staying now</string>
+    <string name="booking_status_completed">Completed</string>
+    <string name="booking_status_cancelled">Cancelled</string>
+    <string name="booking_reference">Reference %1$s</string>
+
+    <!-- Content descriptions for icon-only controls (C-05) -->
+    <string name="cd_back">Back</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_filters">Filters</string>
+    <string name="cd_share">Share</string>
+    <string name="cd_save">Save this stay</string>
+    <string name="cd_unsave">Remove from saved</string>
+    <string name="cd_show_map">Show map</string>
+    <string name="cd_show_list">Show list</string>
+    <string name="cd_increase">Increase</string>
+    <string name="cd_decrease">Decrease</string>
+    <string name="cd_photo_counter">Photo %1$s</string>
+    <string name="cd_rating">Rated %1$s out of 5</string>
+    <string name="cd_saved_heart">Saved</string>
+
+    <!-- Plurals: English has two forms; Arabic declares all six (S-03). -->
+    <plurals name="nights">
+        <item quantity="one">%1$s night</item>
+        <item quantity="other">%1$s nights</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">%1$s month</item>
+        <item quantity="other">%1$s months</item>
+    </plurals>
+    <plurals name="guests">
+        <item quantity="one">%1$s guest</item>
+        <item quantity="other">%1$s guests</item>
+    </plurals>
+    <plurals name="adults">
+        <item quantity="one">%1$s adult</item>
+        <item quantity="other">%1$s adults</item>
+    </plurals>
+    <plurals name="children">
+        <item quantity="one">%1$s child</item>
+        <item quantity="other">%1$s children</item>
+    </plurals>
+    <plurals name="bedrooms">
+        <item quantity="one">%1$s bedroom</item>
+        <item quantity="other">%1$s bedrooms</item>
+    </plurals>
+    <plurals name="beds">
+        <item quantity="one">%1$s bed</item>
+        <item quantity="other">%1$s beds</item>
+    </plurals>
+    <plurals name="bathrooms">
+        <item quantity="one">%1$s bath</item>
+        <item quantity="other">%1$s baths</item>
+    </plurals>
+    <plurals name="stays">
+        <item quantity="one">%1$s stay</item>
+        <item quantity="other">%1$s stays</item>
+    </plurals>
+    <plurals name="reviews">
+        <item quantity="one">%1$s review</item>
+        <item quantity="other">%1$s reviews</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="one">%1$s photo</item>
+        <item quantity="other">%1$s photos</item>
+    </plurals>
+    <plurals name="minutes_walk">
+        <item quantity="one">%1$s min walk</item>
+        <item quantity="other">%1$s min walk</item>
+    </plurals>
+</resources>

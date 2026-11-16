@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Arabic (Modern Standard Arabic, written for the screen, not translated word for word). Must declare exactly the
+  keys of values/strings.xml; every plural lists all six CLDR forms (zero, one, two, few, many, other — S-03).
+  Glossary (brand book): إقامة, المحفوظات, حجوزاتي, التصفية, واي فاي, غسالة, مكتب عمل, استوديو, مصعد, تأمين مسترد, احجز.
+  Digits stay Western; amounts and counters arrive pre-formatted and isolated from SojournFormatter.
+-->
+<resources>
+    <!-- App -->
+    <string name="app_name">Sojourn</string>
+    <string name="app_tagline">منازل مفروشة لبضع ليالٍ أو لعام كامل</string>
+
+    <string name="language_en">English</string>
+    <string name="language_ar">العربية</string>
+
+    <!-- Tabs -->
+    <string name="tab_explore">استكشف</string>
+    <string name="tab_saved">المحفوظات</string>
+    <string name="tab_bookings">حجوزاتي</string>
+    <string name="tab_profile">حسابي</string>
+
+    <!-- Actions -->
+    <string name="action_back">رجوع</string>
+    <string name="action_close">إغلاق</string>
+    <string name="action_search">ابحث</string>
+    <string name="action_reserve">احجز</string>
+    <string name="action_share">شارك</string>
+    <string name="action_save">احفظ</string>
+    <string name="action_unsave">أزل من المحفوظات</string>
+    <string name="action_retry">حاول مجددًا</string>
+    <string name="action_translate">ترجم</string>
+    <string name="action_show_original">اعرض النص الأصلي</string>
+    <string name="action_choose_dates">اختر التواريخ</string>
+    <string name="action_clear_filters">امسح التصفية</string>
+    <string name="action_show_stays">اعرض %1$s</string>
+    <string name="action_pay">ادفع %1$s</string>
+    <string name="action_open_in_maps">افتح في الخرائط</string>
+
+    <!-- Screen states -->
+    <string name="state_loading">جارٍ التحميل</string>
+    <string name="state_empty_title">لا شيء هنا بعد</string>
+    <string name="state_empty_body">غيّر التواريخ أو التصفية لترى إقامات أكثر.</string>
+    <string name="state_error_title">حدث خطأ ما</string>
+    <string name="state_error_body">تحقق من اتصالك ثم حاول مجددًا.</string>
+    <string name="state_offline_title">أنت غير متصل بالإنترنت</string>
+    <string name="state_offline_body">نعرض الإقامات المحفوظة على هذا الجهاز.</string>
+
+    <!-- Appearance -->
+    <string name="theme_system">حسب النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+
+    <!-- Prices -->
+    <string name="price_total">الإجمالي %1$s</string>
+    <string name="price_per_night">%1$s لليلة</string>
+    <string name="price_per_month">%1$s للشهر</string>
+    <string name="price_from_night">من %1$s لليلة</string>
+    <string name="price_from_month">من %1$s للشهر</string>
+    <string name="price_all_fees_included">شاملًا جميع الرسوم</string>
+    <string name="price_excludes">لا يشمل %1$s</string>
+    <string name="price_long_stay">سعر الإقامة الطويلة</string>
+    <string name="price_long_stay_saving">%1$s على إقامات %2$s أو أكثر</string>
+    <string name="exclusion_utilities">المرافق</string>
+    <string name="exclusion_cleaning_fee">رسوم التنظيف</string>
+    <string name="exclusion_deposit">التأمين</string>
+    <string name="exclusion_city_tax">ضريبة المدينة</string>
+    <string name="line_nights">%1$s × %2$s</string>
+    <string name="line_long_stay_discount">خصم الإقامة الطويلة</string>
+    <string name="line_cleaning_fee">رسوم التنظيف</string>
+    <string name="line_service_fee">رسوم الخدمة</string>
+    <string name="line_city_tax">ضريبة المدينة</string>
+    <string name="line_deposit">تأمين مسترد</string>
+    <string name="line_total">الإجمالي</string>
+
+    <!-- Facts -->
+    <string name="facts_studio">استوديو</string>
+    <string name="facts_sleeps">يتسع لـ %1$s</string>
+    <string name="facts_separator"> · </string>
+    <string name="transit_walk">%1$s إلى %2$s</string>
+
+    <!-- Amenities -->
+    <string name="amenity_wifi">واي فاي</string>
+    <string name="amenity_washer">غسالة</string>
+    <string name="amenity_workspace">مكتب عمل</string>
+    <string name="amenity_lift">مصعد</string>
+    <string name="amenity_kitchen">مطبخ</string>
+    <string name="amenity_air_conditioning">تكييف</string>
+    <string name="amenity_heating">تدفئة</string>
+    <string name="amenity_parking">موقف سيارات</string>
+    <string name="amenity_balcony">شرفة</string>
+    <string name="amenity_dishwasher">غسالة أطباق</string>
+    <string name="amenity_tv">تلفاز</string>
+    <string name="amenity_pet_friendly">يسمح بالحيوانات الأليفة</string>
+
+    <!-- Policies -->
+    <string name="policy_free_cancellation">إلغاء مجاني حتى %1$s</string>
+    <string name="policy_deposit">تأمين مسترد %1$s</string>
+    <string name="policy_deposit_non_refundable">تأمين %1$s غير مسترد</string>
+    <string name="policy_check_in">تسجيل الوصول من %1$s · %2$s</string>
+    <string name="policy_check_out">تسجيل المغادرة قبل %1$s</string>
+    <string name="policy_minimum_stay">الحد الأدنى للإقامة %1$s</string>
+    <string name="check_in_self_check_in">تسجيل وصول ذاتي</string>
+    <string name="check_in_host">يستقبلك المضيف</string>
+    <string name="check_in_lockbox">صندوق مفاتيح</string>
+
+    <!-- Catalogue names -->
+    <string name="city_london">لندن</string>
+    <string name="city_paris">باريس</string>
+    <string name="city_lisbon">لشبونة</string>
+    <string name="city_algiers">الجزائر العاصمة</string>
+    <string name="city_constantine">قسنطينة</string>
+    <string name="city_oran">وهران</string>
+    <string name="country_gb">المملكة المتحدة</string>
+    <string name="country_fr">فرنسا</string>
+    <string name="country_pt">البرتغال</string>
+    <string name="country_dz">الجزائر</string>
+
+    <!-- Search -->
+    <string name="search_where">أين</string>
+    <string name="search_when">متى</string>
+    <string name="search_who">من</string>
+    <string name="search_anywhere">أي مكان</string>
+    <string name="search_any_dates">أي تواريخ</string>
+    <string name="search_summary_separator"> · </string>
+    <string name="stay_length_weekend">عطلة نهاية الأسبوع</string>
+    <string name="stay_length_week">أسبوع</string>
+    <string name="stay_length_month">شهر</string>
+    <string name="stay_length_longer">أطول</string>
+    <string name="sort_recommended">الموصى بها</string>
+    <string name="sort_price_low_to_high">السعر، من الأقل إلى الأعلى</string>
+    <string name="sort_price_high_to_low">السعر، من الأعلى إلى الأقل</string>
+    <string name="sort_rating">التقييم</string>
+    <string name="filters_title">التصفية</string>
+
+    <!-- Ratings -->
+    <string name="rating_new">جديد</string>
+    <string name="rating_with_count">%1$s · %2$s</string>
+
+    <!-- Bookings -->
+    <string name="booking_status_upcoming">قادمة</string>
+    <string name="booking_status_active">إقامة حالية</string>
+    <string name="booking_status_completed">منتهية</string>
+    <string name="booking_status_cancelled">ملغاة</string>
+    <string name="booking_reference">المرجع %1$s</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_back">رجوع</string>
+    <string name="cd_close">إغلاق</string>
+    <string name="cd_search">بحث</string>
+    <string name="cd_filters">التصفية</string>
+    <string name="cd_share">مشاركة</string>
+    <string name="cd_save">احفظ هذه الإقامة</string>
+    <string name="cd_unsave">أزل من المحفوظات</string>
+    <string name="cd_show_map">اعرض الخريطة</string>
+    <string name="cd_show_list">اعرض القائمة</string>
+    <string name="cd_increase">زيادة</string>
+    <string name="cd_decrease">إنقاص</string>
+    <string name="cd_photo_counter">الصورة %1$s</string>
+    <string name="cd_rating">التقييم %1$s من 5</string>
+    <string name="cd_saved_heart">محفوظة</string>
+
+    <!-- Plurals: all six forms. The count placeholder is pre-formatted (Western digits, isolated). -->
+    <plurals name="nights">
+        <item quantity="zero">لا ليالٍ</item>
+        <item quantity="one">ليلة واحدة</item>
+        <item quantity="two">ليلتان</item>
+        <item quantity="few">%1$s ليالٍ</item>
+        <item quantity="many">%1$s ليلة</item>
+        <item quantity="other">%1$s ليلة</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="zero">لا أشهر</item>
+        <item quantity="one">شهر واحد</item>
+        <item quantity="two">شهران</item>
+        <item quantity="few">%1$s أشهر</item>
+        <item quantity="many">%1$s شهرًا</item>
+        <item quantity="other">%1$s شهر</item>
+    </plurals>
+    <plurals name="guests">
+        <item quantity="zero">لا ضيوف</item>
+        <item quantity="one">ضيف واحد</item>
+        <item quantity="two">ضيفان</item>
+        <item quantity="few">%1$s ضيوف</item>
+        <item quantity="many">%1$s ضيفًا</item>
+        <item quantity="other">%1$s ضيف</item>
+    </plurals>
+    <plurals name="adults">
+        <item quantity="zero">لا بالغين</item>
+        <item quantity="one">بالغ واحد</item>
+        <item quantity="two">بالغان</item>
+        <item quantity="few">%1$s بالغين</item>
+        <item quantity="many">%1$s بالغًا</item>
+        <item quantity="other">%1$s بالغ</item>
+    </plurals>
+    <plurals name="children">
+        <item quantity="zero">لا أطفال</item>
+        <item quantity="one">طفل واحد</item>
+        <item quantity="two">طفلان</item>
+        <item quantity="few">%1$s أطفال</item>
+        <item quantity="many">%1$s طفلًا</item>
+        <item quantity="other">%1$s طفل</item>
+    </plurals>
+    <plurals name="bedrooms">
+        <item quantity="zero">لا غرف نوم</item>
+        <item quantity="one">غرفة نوم واحدة</item>
+        <item quantity="two">غرفتا نوم</item>
+        <item quantity="few">%1$s غرف نوم</item>
+        <item quantity="many">%1$s غرفة نوم</item>
+        <item quantity="other">%1$s غرفة نوم</item>
+    </plurals>
+    <plurals name="beds">
+        <item quantity="zero">لا أسرّة</item>
+        <item quantity="one">سرير واحد</item>
+        <item quantity="two">سريران</item>
+        <item quantity="few">%1$s أسرّة</item>
+        <item quantity="many">%1$s سريرًا</item>
+        <item quantity="other">%1$s سرير</item>
+    </plurals>
+    <plurals name="bathrooms">
+        <item quantity="zero">لا حمّامات</item>
+        <item quantity="one">حمّام واحد</item>
+        <item quantity="two">حمّامان</item>
+        <item quantity="few">%1$s حمّامات</item>
+        <item quantity="many">%1$s حمّامًا</item>
+        <item quantity="other">%1$s حمّام</item>
+    </plurals>
+    <plurals name="stays">
+        <item quantity="zero">لا إقامات</item>
+        <item quantity="one">إقامة واحدة</item>
+        <item quantity="two">إقامتان</item>
+        <item quantity="few">%1$s إقامات</item>
+        <item quantity="many">%1$s إقامة</item>
+        <item quantity="other">%1$s إقامة</item>
+    </plurals>
+    <plurals name="reviews">
+        <item quantity="zero">لا تقييمات</item>
+        <item quantity="one">تقييم واحد</item>
+        <item quantity="two">تقييمان</item>
+        <item quantity="few">%1$s تقييمات</item>
+        <item quantity="many">%1$s تقييمًا</item>
+        <item quantity="other">%1$s تقييم</item>
+    </plurals>
+    <plurals name="photos">
+        <item quantity="zero">لا صور</item>
+        <item quantity="one">صورة واحدة</item>
+        <item quantity="two">صورتان</item>
+        <item quantity="few">%1$s صور</item>
+        <item quantity="many">%1$s صورة</item>
+        <item quantity="other">%1$s صورة</item>
+    </plurals>
+    <plurals name="minutes_walk">
+        <item quantity="zero">أقل من دقيقة سيرًا</item>
+        <item quantity="one">دقيقة واحدة سيرًا</item>
+        <item quantity="two">دقيقتان سيرًا</item>
+        <item quantity="few">%1$s دقائق سيرًا</item>
+        <item quantity="many">%1$s دقيقة سيرًا</item>
+        <item quantity="other">%1$s دقيقة سيرًا</item>
+    </plurals>
+</resources>

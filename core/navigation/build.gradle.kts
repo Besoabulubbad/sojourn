@@ -7,13 +7,13 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":core:model"))
-            implementation(project(":core:common"))
-            implementation(project(":core:designsystem"))
-            api(libs.navigation3.ui)
+            // NavKey, NavBackStack, SavedStateConfiguration and SerializersModule appear in the public API.
             api(libs.navigation3.runtime)
-            implementation(libs.androidx.lifecycle.viewmodelNavigation3)
-            implementation(libs.navigationevent.compose)
+            api(libs.androidx.savedstate)
+            api(libs.kotlinx.serialization.core)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlinx.serialization.core)
             implementation(libs.kotlinx.serialization.json)
         }
     }

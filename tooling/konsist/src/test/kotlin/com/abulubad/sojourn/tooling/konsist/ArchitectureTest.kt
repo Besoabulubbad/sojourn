@@ -14,7 +14,9 @@ import kotlin.test.Test
  */
 class ArchitectureTest {
 
+    /** Product code only: the build logic and this tooling are not shipped and may use the JDK freely. */
     private val scope = Konsist.scopeFromProject()
+        .slice { file -> PRODUCT_ROOTS.any { file.path.contains(it) } }
 
     private val featureFiles: List<KoFileDeclaration> = scope.files.filter { it.path.contains("/feature/") }
 
@@ -109,6 +111,7 @@ class ArchitectureTest {
 
     private companion object {
         const val FEATURE_PACKAGE = "com.abulubad.sojourn.feature"
+        val PRODUCT_ROOTS = listOf("/app/", "/core/", "/feature/")
         val DATA_INFRASTRUCTURE = listOf(
             "com.abulubad.sojourn.core.data.",
             "com.abulubad.sojourn.core.database.",

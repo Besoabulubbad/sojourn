@@ -12,8 +12,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.library("koin-core"))
         }
-        commonTest.dependencies {
-            implementation(libs.library("koin-test"))
-        }
+        // koin-test is declared by the modules whose tests verify a graph (checkModules in app:shared).
     }
 }

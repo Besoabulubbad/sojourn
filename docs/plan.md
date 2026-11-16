@@ -79,6 +79,8 @@ The parts every screen depends on.
 
 **Exit:** `SojournTheme` renders every token in 4 variants in screenshot tests; contrast test passes; `AppLocale` switching flips direction and formatting in unit tests; app icon visible on both launchers; `buildHealth` switched from warn to fail on unused dependencies now that modules carry code.
 
+**Status (2026-11-16): done.** Evidence: `TokenSheetScreenshotTest` renders every token family in the four variants; `ContrastTest` passes in both themes; `AppLocaleControllerTest` and `SojournFormatterTest` cover switching, direction and formatting; the generated adaptive icon (Android) and light/dark app icons (iOS) are in the shell projects; `buildHealth` fails on unused dependencies for every module with code. Deviations, each documented: navigation scene strategies and `SojournMotion` transitions move to Phase 5 with the first `NavDisplay`; `SojournScaffold` is in, the docked bars that own the other insets arrive with their components in Phase 3; the 16-cell screenshot matrix is defined (`SojournVariants.Matrix`) and first used by components in Phase 3; screenshots render on Robolectric's API 36 runtime (ADR 0010 notes).
+
 ### Phase 3 — Design system components
 
 All 26 components, each with KDoc, a preview per state, a README mirroring its design-system card, and a screenshot matrix (EN/AR × light/dark × 100%/200% font × 320/412 dp).

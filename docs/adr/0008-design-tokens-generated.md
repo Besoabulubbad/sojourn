@@ -58,6 +58,10 @@ The design system publishes `tokens.json` (colours in two themes, type styles, s
 - Good: browsable generated code; no sync step.
 - Bad: two sources that can disagree; needs a staleness check in CI; noisy diffs.
 
+## Implementation notes
+
+**2026-11-16 (Phase 2).** `sojourn.tokens` runs `GenerateDesignTokensTask` (build-logic, ~250 lines, parsed with kotlinx-serialization's `JsonElement` tree) into `core/designsystem/build/generated/tokens`. Shapes of the generated API: colours and elevation are classes with `lightSojourn*()` / `darkSojourn*()` factories; `SojournType` is built by `sojournType(display, text)` from the two font families; spacing, sizes and shapes are objects; `SojournMotion` holds `const` durations (`instant` … `slower`) and `CubicBezierEasing`s (`standard`, `emphasized`, `exit`), with springs and reduce-motion fallbacks as hand-written extensions. Each object exposes `all` (name → value). The generator has its own unit test against the real `tokens.json` in the build-logic test suite, and `ContrastTest` checks 28 usage pairs per theme. All pass on the current tokens.
+
 ## Links
 
 - Design system: `docs/design-system/engineering-standards.md` (Module shape; C-01, C-02, M-01)

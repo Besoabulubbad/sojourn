@@ -20,9 +20,9 @@ What we test, with which tool, where it lives and when it runs. The reasoning is
 ./gradlew allTests                    # unit tests for all available targets
 ./gradlew :feature:details:allTests   # one module
 ./gradlew :tooling:konsist:test
-./gradlew verifyRoborazziDebug        # compare with baselines
-./gradlew recordRoborazziDebug        # re-record baselines
-./gradlew compareRoborazziDebug       # produce diff images without failing
+./gradlew verifyRoborazziAndroidHostTest    # compare with baselines (check does this too)
+./gradlew recordRoborazziAndroidHostTest    # re-record baselines
+./gradlew compareRoborazziAndroidHostTest   # produce diff images without failing
 ./gradlew connectedAndroidTest        # Compose UI tests on a connected device/emulator
 maestro test .maestro/
 ```
@@ -60,7 +60,17 @@ The matrix for every component and every screen state:
 | Width | 320 dp, 412 dp |
 | State | each `ScreenState`, each component state |
 
-`SojournVariants` in `core:ui` enumerates the first four as a `Sequence<SojournVariant>`; tests are parameterised over it. Each module's baselines live in `<module>/src/androidHostTest/screenshots/` (configured by `sojourn.screenshot`) and are committed. Robolectric runs the API 37 runtime (`@Config(sdk = [37])`) with a fixed device qualifier so images are deterministic.
+`SojournVariants` in `core:designsystem` defines the four shipped variants (`Four`) and the 16-cell `Matrix`. A screenshot test extends `SojournScreenshotTest` from `core:testing`, which is parameterized over the variants, so each variant is its own test with one capture:
+
+```kotlin
+class TokenSheetScreenshotTest(variant: SojournVariant) : SojournScreenshotTest(variant) {
+    @Test fun colors() = snapshot("tokens_color") { SojournTokenSheet(TokenSection.Color) }
+}
+```
+
+`snapshot` renders the content through `SojournPreview` (theme, language, direction, font scale, width) with a compose test rule and captures the node with Roborazzi, writing `<name>_<variant>.png`. Each module's baselines live in `<module>/src/androidHostTest/screenshots/` (configured by `sojourn.screenshot`) and are committed. Plain test runs verify against them because `gradle.properties` sets `roborazzi.test.verify=true`, so `check` fails on any visual change.
+
+Robolectric renders on the **API 36** runtime (`@Config(sdk = [36])`) with native graphics and a fixed `w412dp-h915dp-xxhdpi` device. Robolectric 4.18's API 37 runtime intermittently dropped Compose frames before capture: blank `#FAFAFA` images, reproduced with a plain coloured box and no app code. Unit tests are unaffected. Revisit when Robolectric ships its next release.
 
 **Baseline policy.** A PR that changes any baseline must say so and why; the reviewer looks at the diff images (uploaded as a CI artefact on failure, or regenerate locally with `compareRoborazziDebug`). Recording new baselines to make CI pass without a reviewed visual change is not allowed (`CLAUDE.md`).
 

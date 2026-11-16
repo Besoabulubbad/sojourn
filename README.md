@@ -1,12 +1,14 @@
 <div align="center">
 
-# Sojourn
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/showcase/brand/sojourn-lockup-dark.svg">
+  <img src="docs/showcase/brand/sojourn-lockup.svg" height="72" alt="Sojourn">
+</picture>
 
 **Stay a night, a month, or a year.**
 
 A premium flexible-stay reservation app — one Kotlin Multiplatform codebase, shared Compose UI on Android and iOS, English and Arabic as equals, built AI-first and run like a product team's repository.
 
-<!-- Badges go live once the repository exists on GitHub (owner placeholder) -->
 [![PR checks](https://github.com/Besoabulubbad/sojourn/actions/workflows/pr.yml/badge.svg)](https://github.com/Besoabulubbad/sojourn/actions/workflows/pr.yml)
 [![Docs](https://img.shields.io/badge/docs-site-0f4c45)](https://besoabulubbad.github.io/sojourn/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
@@ -44,6 +46,12 @@ Ten screens, 26 design-system components, every one of them in **English/Arabic 
 | Details | ![](docs/showcase/screens/details-en-light.png) | ![](docs/showcase/screens/details-en-dark.png) | ![](docs/showcase/screens/details-ar-light.png) | ![](docs/showcase/screens/details-ar-dark.png) |
 | Map | ![](docs/showcase/screens/map-en-light.png) | ![](docs/showcase/screens/map-en-dark.png) | ![](docs/showcase/screens/map-ar-light.png) | ![](docs/showcase/screens/map-ar-dark.png) |
 | Checkout | ![](docs/showcase/screens/checkout-en-light.png) | ![](docs/showcase/screens/checkout-en-dark.png) | ![](docs/showcase/screens/checkout-ar-light.png) | ![](docs/showcase/screens/checkout-ar-dark.png) |
+
+The design tokens already render in every variant, straight from the screenshot tests that gate each pull request:
+
+| Colour · EN light | Type · AR dark | Icons · AR dark |
+|---|---|---|
+| <img src="docs/showcase/tokens/color-en-light.png" width="260"> | <img src="docs/showcase/tokens/type-ar-dark.png" width="260"> | <img src="docs/showcase/tokens/icons-ar-dark.png" width="260"> |
 
 More: the [showcase gallery](docs/showcase/index.md) has every component in every variant and a recording per feature.
 
@@ -86,9 +94,9 @@ How it was decided, and what was deliberately *not* automated: [ADR 0013](docs/a
 
 | Phase | | |
 |---|---|---|
-| 0 | Repository & documentation foundation | 🟡 in progress |
-| 1 | Build system & quality gates | ⚪ |
-| 2 | Core foundations (tokens, theme, localization, navigation) | ⚪ |
+| 0 | Repository & documentation foundation | ✅ |
+| 1 | Build system & quality gates | ✅ |
+| 2 | Core foundations (tokens, theme, localization, navigation) | ✅ |
 | 3 | Design system — 26 components × 4 variants | ⚪ |
 | 4 | Data — SQLDelight, repositories, pricing invariants | ⚪ |
 | 5 | Screens — 10 features | ⚪ |
@@ -116,7 +124,7 @@ core/           model · common · localization · designsystem · ui · navigat
                 database · network · data · domain · testing
 feature/        explore · search · results · filters · details · checkout · map · saved · bookings · profile
 build-logic/    Gradle convention plugins
-tooling/        konsist (architecture tests) · detekt-rules (design-system standards as lint)
+tooling/        konsist (architecture tests) · scripts (icon and brand generators) · detekt-rules (next)
 design/         tokens.json — source of the generated theme · brand/ (wordmark, icon)
 docs/           plan · architecture · ADRs · guides · design system · showcase
 .maestro/       end-to-end flows
