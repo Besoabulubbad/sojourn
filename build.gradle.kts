@@ -1,6 +1,7 @@
 // Root build: plugins are declared here (apply false) so every module resolves the same versions,
-// and repository-wide tooling (dependency analysis) is configured once.
+// and repository-wide tooling (dependency analysis, the build-logic test suite) is configured once.
 plugins {
+    base
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidMultiplatformLibrary) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
@@ -10,12 +11,23 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.sqldelight) apply false
+    alias(libs.plugins.roborazzi) apply false
     alias(libs.plugins.dependencyAnalysis)
 }
 
+// The token generator and the resource checks live in build-logic; their unit tests run with `check` too.
+tasks.check {
+    dependsOn(gradle.includedBuild("build-logic").task(":convention:test"))
+}
+
 // `./gradlew buildHealth` (ADR 0014). The plugin is applied per module by the convention plugins; the root
-// aggregates. Policy: everything fails except "unused", which warns while modules are skeletons and flips to
-// fail at the end of Phase 2 (docs/plan.md).
+// aggregates. Policy: every category fails. Modules that are still skeletons (their convention plugin declares
+// dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
+val skeletonModules = listOf(
+    ":app:android", ":app:shared", // wired in Phase 5
+    ":core:data", ":core:database", ":core:domain", ":core:network", // Phase 4
+) + listOf("explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile")
+    .map { ":feature:$it" } // Phase 5
 dependencyAnalysis {
     structure {
         // Compose Multiplatform: we declare org.jetbrains.compose.* coordinates, which resolve to
@@ -28,12 +40,20 @@ dependencyAnalysis {
                 includeGroup("androidx.compose.$it")
             }
         }
+        // Same pattern for the JetBrains multiplatform forks of AndroidX: on Android they resolve to Google's.
+        bundle("lifecycle") {
+            includeGroup("org.jetbrains.androidx.lifecycle")
+            includeGroup("androidx.lifecycle")
+        }
+        bundle("savedstate") {
+            includeGroup("org.jetbrains.androidx.savedstate")
+            includeGroup("androidx.savedstate")
+        }
     }
     issues {
         all {
-            // Default is warn (covers "unused" during the skeleton phase); each category that must never
-            // merge is set to fail explicitly.
             onAny { severity("warn") }
+            onUnusedDependencies { severity("fail") }
             onUsedTransitiveDependencies {
                 severity("fail")
                 // Reflection and the JUnit bridge are pulled in by the test runtime, not by our code.
@@ -44,6 +64,16 @@ dependencyAnalysis {
             onRuntimeOnly { severity("fail") }
             onUnusedAnnotationProcessors { severity("fail") }
             onRedundantPlugins { severity("fail") }
+        }
+        skeletonModules.forEach { path ->
+            project(path) {
+                onAny { severity("warn") }
+                onUnusedDependencies { severity("warn") }
+                onUsedTransitiveDependencies { severity("warn") }
+                onIncorrectConfiguration { severity("warn") }
+                onCompileOnly { severity("warn") }
+                onRuntimeOnly { severity("warn") }
+            }
         }
     }
 }

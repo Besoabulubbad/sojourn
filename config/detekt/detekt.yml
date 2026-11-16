@@ -33,6 +33,8 @@ style:
   MaxLineLength:
     maxLineLength: 120
   MagicNumber:
+    # Enum entries (StayLength.Week(7), Currency.GBP(100)) carry their values by design.
+    ignoreEnums: true
     ignoreAnnotated: ['Preview']
     ignorePropertyDeclaration: true
     excludes: ['**/test/**', '**/*Test/**', '**/*Test.kt', '**/*Previews.kt', '**/build/**']

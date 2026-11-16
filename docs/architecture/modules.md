@@ -35,25 +35,27 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 |---|---|---|---|
 | `:core:model` | Domain types: `Stay`, `City`, `Photo`, `Amenity`, `Policy`, `Quote`, `PriceBreakdown`, `PriceDisplay`, `Booking`, `SearchQuery`, `StayLength`, `Filters`, `Guests`. Pure Kotlin, immutable, no framework imports. | kotlinx-datetime | `sojourn.kmp.library` |
 | `:core:common` | `DispatcherProvider`, `Clock` abstraction, `AppResult`/`AppError`, Kermit `Logger` facade, DI qualifiers. | Kermit, coroutines | `sojourn.kmp.library` |
-| `:core:localization` | `AppLocale`, `LocalAppLocale`, `AppLocaleController`, `SojournFormatter` (money, dates, ranges, counts, bidi isolates), `strings.xml`/`plurals.xml` per locale (Compose Resources), plural-completeness Gradle check. The **only** module allowed to touch platform locale APIs. | core-base, Compose Resources | `sojourn.kmp.library` + `sojourn.compose` |
-| `:core:designsystem` | Generated tokens (`SojournColors`, `SojournType`, `SojournSpacing`, `SojournShapes`, `SojournMotion`, `SojournSizes`), `SojournTheme`, fonts, `SojournIcon`, all 26 `Sojourn*` components, component READMEs and previews. The **only** module allowed to import Material 3. | `:core:localization`, core-base, Compose, Material 3, Coil | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.tokens` + `sojourn.screenshot` |
-| `:core:ui` | `ScreenState<T>`, `UiState`/`UiIntent`/`UiEffect`, `SojournViewModel`, `SojournScaffold`, `HostText`, `collectEffects`, preview/screenshot parameter providers (`SojournVariants`), common empty/error/offline screen content. | `:core:designsystem`, `:core:localization`, core-base, lifecycle-viewmodel | `sojourn.kmp.library` + `sojourn.compose` |
-| `:core:navigation` | `SojournNavKey` sealed hierarchy, `Tab`, `Navigator` interface, `sojournNavSerializersModule`, `NavDisplay` scene strategies (sheet, dialog), transition specs from `SojournMotion`. | `:core:designsystem` (motion tokens), core-base, Navigation 3 | `sojourn.kmp.library` + `sojourn.compose` |
-| `:core:platform` | `expect`/`actual`: `Haptics`, `ShareSheet`, `MapsLauncher`, `PaymentSheet` (Google Pay / Apple Pay stubs), `AccessibilitySettings` (reduce motion, font scale). | core-base | `sojourn.kmp.library` |
+| `:core:localization` | `AppLocale`, `LocalAppLocale`, `ProvideAppLocale`, `AppLocaleController` + `PlatformLocaleSync`, `SojournFormatter` (money, dates, ranges, counts, bidi isolates), `strings.xml` per locale with plurals (Compose Resources, public `Res`), `localizationModule`. The **only** module allowed to touch platform locale APIs. | core-base, Compose Resources, multiplatform-settings | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.koin` + `sojourn.localization` |
+| `:core:designsystem` | Generated tokens (`SojournColors`, `SojournType`, `SojournSpacing`, `SojournShapes`, `SojournElevation`, `SojournSizes`, `SojournMotion`), `SojournTheme`, fonts, `SojournIcon`, `SojournVariant(s)` + `SojournPreview`, the token sheet, and from Phase 3 all 26 `Sojourn*` components. The **only** module allowed to import Material 3. | `:core:localization` (`api`), core-base, Compose, Material 3, Coil | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.tokens` + `sojourn.screenshot` |
+| `:core:ui` | `ScreenState<T>`, `UiState`/`UiIntent`/`UiEffect`, `SojournViewModel`, `CollectEffects`, `SojournScaffold`, `HostText`; common empty/error/offline screen content from Phase 3. | `:core:designsystem`, core-base, lifecycle-viewmodel | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.screenshot` |
+| `:core:navigation` | `SojournNavKey` sealed hierarchy, `SearchArgs`, `Tab`, `Navigator` + `TabbedNavigator` (per-tab back stacks), `sojournNavSerializersModule` / `sojournSavedStateConfiguration`; scene strategies and `SojournMotion` transitions from Phase 5. | Navigation 3 runtime, savedstate, kotlinx-serialization; `:core:designsystem` from Phase 5 | `sojourn.kmp.library` + `sojourn.compose` + serialization |
+| `:core:platform` | Interfaces `Haptics`, `ShareSheet`, `MapsLauncher`, `PaymentSheet` (`StubPaymentSheet` until Phase 6), `AccessibilitySettings` (reduce motion), with Android and iOS implementations registered by `platformModule` (expect/actual). | core-base | `sojourn.kmp.library` + `sojourn.koin` |
 | `:core:database` | SQLDelight `.sq` schema and migrations, `SojournDatabase`, `DatabaseDriverFactory` (`expect`/`actual`), `SeedLoader`, typed adapters. | core-base, SQLDelight | `sojourn.kmp.library` + `sojourn.sqldelight` |
 | `:core:network` | `SojournApi` interface, DTOs + mappers, `LocalSojournApi` (bundled JSON, `FakeNetworkConditions`), `KtorSojournApi` (configured, flag-gated), `HttpClient` factory. | core-base, Ktor, kotlinx-serialization | `sojourn.kmp.library` |
 | `:core:data` | Repository interfaces **and** implementations: `StayRepository`, `CityRepository`, `SearchRepository`, `PricingRepository`, `SavedRepository`, `BookingRepository`, `PreferencesRepository`. Offline-first sync policy. Koin `dataModule`. | `:core:database`, `:core:network`, core-base, multiplatform-settings | `sojourn.kmp.library` + `sojourn.koin` |
 | `:core:domain` | Use cases, one class each with `operator fun invoke`: `SearchStays`, `GetStayDetails`, `GetQuote`, `ToggleSaved`, `ObserveSaved`, `ListBookings`, `CreateBooking`, `ObserveFilters`, `UpdateFilters`, `GetCities`. Business rules and their tests. Koin `domainModule`. | `:core:data` (interfaces), core-base | `sojourn.kmp.library` + `sojourn.koin` |
-| `:core:testing` | Fixtures (`StayFixtures`, `QuoteFixtures`), fake repositories, `SojournScreenshotTest` base (Roborazzi + Robolectric, matrix runner), `MainDispatcherRule`, Turbine helpers, Koin test module. Test-scoped only. | everything in `core`, test libraries | `sojourn.kmp.library` |
+| `:core:testing` | Fixtures (`StayFixtures`, `QuoteFixtures`, `FixedAppClock`), `TestDispatcherProvider` + `runSojournTest`, `SojournScreenshotTest` (parameterized Roborazzi + Robolectric base); fake repositories and the Koin test module from Phase 4. Test-scoped only. | everything in `core`, test libraries | `sojourn.kmp.library` + `sojourn.compose` |
 
 ## Tooling and build
 
 | Path | Owns |
 |---|---|
-| `build-logic/` | Convention plugins (`sojourn.*`), the token generator task, shared detekt and Roborazzi configuration. Included build. |
+| `build-logic/` | Convention plugins (`sojourn.*`), the token generator (`GenerateDesignTokensTask`) and the resource check (`VerifyPluralsTask`) with their unit tests, shared detekt and Roborazzi configuration. Included build; its tests run in the root `check`. |
+| `tooling/scripts` | `lucide_to_vector.py` (icon set → vector drawables) and `make_brand.py` (mark, wordmark, Android and iOS app icons from the tokens). |
 | `tooling/konsist` | Architecture tests over the whole repository (module graph, naming, forbidden imports). Runs in `check`. |
 | `tooling/detekt-rules` | Custom detekt rule set encoding the design-system standards (tokens only, start/end only, no string literals into text, insets only in owners, motion tokens only), with tests. Applied via `detektPlugins`. |
-| `design/tokens.json` | Verbatim copy of the design system's token file. Input to `sojourn.tokens`. |
+| `design/tokens.json` | Verbatim copy of the design system's token file. Input to `sojourn.tokens` and `make_brand.py`. |
+| `design/brand/` | Generated mark, wordmark and lockup (light and dark). |
 | `config/detekt/` | `detekt.yml`, custom rule set wiring, baseline (ideally empty). |
 | `.maestro/` | End-to-end flows (`booking-golden-path.yaml`, `language-switch.yaml`). |
 | `.github/` | Workflows (`pr.yml`, `main.yml`, `release.yml`, `docs.yml`, `claude-review.yml`), PR/issue templates, `CODEOWNERS`, `renovate.json`. |
@@ -67,10 +69,11 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `sojourn.kmp.feature` | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.koin` + `sojourn.screenshot` + the standard feature dependency set |
 | `sojourn.compose` | Compose Multiplatform plugin and compiler; `runtime`/`foundation`/`ui` as `api` (they appear in every UI module's public signatures), resources and preview tooling as `implementation` |
 | `sojourn.android.application` | Android application, `compileSdk`/`targetSdk`/`minSdk` from the catalog, signing from env, R8 on release |
-| `sojourn.koin` | Koin core/compose/viewmodel deps |
+| `sojourn.koin` | `koin-core`; modules that test a graph add `koin-test` themselves |
 | `sojourn.sqldelight` | SQLDelight plugin, `SojournDatabase` config, drivers per target |
-| `sojourn.screenshot` | Roborazzi plugin, Robolectric `androidHostTest` setup, `recordRoborazziDebug`/`verifyRoborazziDebug`, baseline directory |
-| `sojourn.tokens` | `generateDesignTokens` task reading `design/tokens.json`, wired into `compileKotlin` |
+| `sojourn.screenshot` | Roborazzi plugin on the AGP KMP library's `androidHostTest` (`recordRoborazziAndroidHostTest` / `verifyRoborazziAndroidHostTest`), baselines in `src/androidHostTest/screenshots`, `core:testing` for the base class, an Espresso 3.7 constraint for the API 37 runtime |
+| `sojourn.tokens` | `generateDesignTokens` task reading `design/tokens.json` into `build/generated/tokens`, added to `commonMain` so every compile depends on it |
+| `sojourn.localization` | `verifyPlurals` in `check`: every locale declares the same string and plural keys; Arabic plurals carry all six forms |
 | `sojourn.detekt` | detekt with Compose rules and the project config |
 | `sojourn.dokka` | Dokka for `core:*` public API |
 

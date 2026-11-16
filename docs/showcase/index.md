@@ -9,6 +9,8 @@ The visual record of the app as it is built — every component and screen in En
 
 | Asset | Source | Command |
 |---|---|---|
+| Brand: lockup, mark, app icons | `design/tokens.json` + Alexandria | `python3 -I tooling/scripts/make_brand.py` |
+| Token sheet | Roborazzi baselines in `core/designsystem` | copied from `src/androidHostTest/screenshots` (automated by `exportShowcase` in Phase 3) |
 | Component contact sheet | Roborazzi baselines in `core/designsystem` | `./gradlew exportShowcase` |
 | Screen grids (412 dp, 4 variants) | Roborazzi baselines in each `feature:*` | `./gradlew exportShowcase` |
 | Flow recordings (GIF / WebP) | emulator screen recording while a Maestro flow drives the app, converted with ffmpeg | `scripts/record-flow.sh <flow>` |
@@ -19,10 +21,24 @@ Exports are committed under `docs/showcase/` so the README and this page work of
 
 ## Brand
 
-| | |
+The mark is a doorway arch with a lamp: a home base. It is drawn from the tokens alone (`brand`, `bg`, `accent`) by `tooling/scripts/make_brand.py`, which also writes the Android adaptive icon and the iOS light and dark app icons.
+
+| Light | Dark |
 |---|---|
-| Wordmark and app icon | *pending — Phase 2* |
-| Theme swatches, light and dark | *pending — Phase 2* |
+| ![Sojourn lockup, light](brand/sojourn-lockup.svg){ width="320" } | ![Sojourn lockup, dark](brand/sojourn-lockup-dark.svg){ width="320" } |
+| ![App icon, light](brand/sojourn-mark.svg){ width="96" } | ![App icon, dark](brand/sojourn-mark-dark.svg){ width="96" } |
+
+### Theme tokens
+
+Every token rendered by `SojournTheme`, exported from the `TokenSheetScreenshotTest` baselines in `core:designsystem` (English light and Arabic dark shown; all four variants are verified on every PR). The Arabic sheets show the whole layout mirrored, and the price in the type samples staying `£1,383` thanks to the formatter's bidi isolates.
+
+| Family | EN · light | AR · dark |
+|---|---|---|
+| Colour | ![](tokens/color-en-light.png){ width="300" } | ![](tokens/color-ar-dark.png){ width="300" } |
+| Type | ![](tokens/type-en-light.png){ width="300" } | ![](tokens/type-ar-dark.png){ width="300" } |
+| Spacing | ![](tokens/spacing-en-light.png){ width="300" } | ![](tokens/spacing-ar-dark.png){ width="300" } |
+| Radius · elevation | ![](tokens/shape-en-light.png){ width="300" } | ![](tokens/shape-ar-dark.png){ width="300" } |
+| Icons | ![](tokens/icons-en-light.png){ width="300" } | ![](tokens/icons-ar-dark.png){ width="300" } |
 
 ## Components
 

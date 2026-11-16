@@ -1,6 +1,6 @@
 # Tech stack
 
-Every library and tool, the version pinned in `gradle/libs.versions.toml`, and where it was verified. **Verified 2026-11-15** against Maven Central / Google Maven metadata and the vendors' documentation — not from memory. Renovate keeps this current; a bump that crosses a major version needs a note in the PR and, if it changes a pattern, an ADR update.
+Every library and tool, the version pinned in `gradle/libs.versions.toml`, and where it was verified. **Verified 2026-11-15, additions 2026-11-16** against Maven Central / Google Maven metadata and the vendors' documentation — not from memory. Renovate keeps this current; a bump that crosses a major version needs a note in the PR and, if it changes a pattern, an ADR update.
 
 Rules for this table: stable releases only (no alpha/beta/RC) unless marked; every entry has official documentation we follow during implementation.
 
@@ -23,19 +23,20 @@ Rules for this table: stable releases only (no alpha/beta/RC) unless marked; eve
 
 | Library | Version | Artifact(s) | Docs |
 |---|---|---|---|
-| Lifecycle ViewModel (JetBrains) | 2.11.0 | `org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose`, `lifecycle-runtime-compose`, `lifecycle-viewmodel-navigation3` | [Lifecycle CMP](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html) |
+| Lifecycle ViewModel (JetBrains) | 2.11.0 | `org.jetbrains.androidx.lifecycle:lifecycle-viewmodel` (base class in `core:ui`), `lifecycle-viewmodel-compose`, `lifecycle-runtime-compose`, `lifecycle-viewmodel-navigation3` | [Lifecycle CMP](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-lifecycle.html) |
 | **Navigation 3 UI** (JetBrains) | **1.2.0** | `org.jetbrains.androidx.navigation3:navigation3-ui` — declares `androidx.navigation3:navigation3-runtime:1.2.0` and `org.jetbrains.androidx.navigationevent:navigationevent-compose:1.1.0` as transitive deps | [Nav3 in CMP](https://kotlinlang.org/docs/multiplatform/compose-navigation-3.html) · [Android Nav3](https://developer.android.com/guide/navigation/navigation-3) · [CMP recipes](https://github.com/terrakok/nav3-recipes) |
 | Navigation 3 runtime (Google, KMP) | 1.2.1 | `androidx.navigation3:navigation3-runtime` (publishes iOS/desktop/wasm variants) | same |
+| SavedState (Google, KMP) | 1.4.0 | `androidx.savedstate:savedstate` — `SavedStateConfiguration` for the iOS-safe back stack | [Nav3 save state](https://developer.android.com/guide/navigation/navigation-3/save-state) |
 | Koin | 4.2.2 | `koin-core`, `koin-compose`, `koin-compose-viewmodel`, `koin-compose-navigation3`, `koin-test` | [insert-koin.io](https://insert-koin.io/docs/reference/koin-compose/compose) |
 | Koin Annotations (optional) | 4.2.2 + compiler 2.3.1 | `koin-annotations`, `koin-ksp-compiler` — only if we adopt compile-time graph checks | [Koin Annotations](https://insert-koin.io/docs/reference/koin-annotations/start) |
 | kotlinx.coroutines | 1.11.0 | `-core`, `-test` | [coroutines](https://kotlinlang.org/docs/coroutines-guide.html) |
-| kotlinx.serialization | 1.13.0 | `-json`; also serializes `NavKey`s | [serialization](https://github.com/Kotlin/kotlinx.serialization) |
+| kotlinx.serialization | 1.13.0 | `-core` (navigation keys), `-json` (tests, network); build-logic parses `tokens.json` with it | [serialization](https://github.com/Kotlin/kotlinx.serialization) |
 | kotlinx-datetime | 0.8.0 | `Instant`/`LocalDate`; note `kotlin.time.Instant` migration in 0.7+ | [datetime](https://github.com/Kotlin/kotlinx-datetime) |
 | SQLDelight | 2.4.1 | plugin `app.cash.sqldelight`; `android-driver`, `native-driver`, `coroutines-extensions`, `primitive-adapters`; `sqlite-driver` for JVM tests | [sqldelight](https://sqldelight.github.io/sqldelight/2.4.1/multiplatform_sqlite/) |
 | Ktor Client | 3.6.1 | `-core`, `-content-negotiation`, `-serialization-kotlinx-json`, `-logging`; engines `-okhttp` (Android), `-darwin` (iOS) | [ktor.io](https://ktor.io/docs/client-create-multiplatform-application.html) |
 | Coil | 3.6.3 | `coil-compose`, `coil-network-ktor3` | [coil-kt.github.io](https://coil-kt.github.io/coil/compose/) |
-| Kermit | 2.2.0 | logging | [Kermit](https://kermit.touchlab.co/) |
-| multiplatform-settings | 1.3.0 | preferences (language, theme) | [multiplatform-settings](https://github.com/russhwolf/multiplatform-settings) |
+| Kermit | 2.2.0 | `kermit`, `kermit-core` — logging facade in `core:common` | [Kermit](https://kermit.touchlab.co/) |
+| multiplatform-settings | 1.3.0 | preferences (language, theme); `-test` (`MapSettings`) in tests | [multiplatform-settings](https://github.com/russhwolf/multiplatform-settings) |
 
 ## Testing
 
@@ -44,11 +45,12 @@ Rules for this table: stable releases only (no alpha/beta/RC) unless marked; eve
 | kotlin-test | 2.4.21 | assertions, common tests | — |
 | Turbine | 1.2.1 | `Flow` assertions | [Turbine](https://github.com/cashapp/turbine) |
 | kotlinx-coroutines-test | 1.11.0 | `runTest`, dispatcher control | — |
-| Robolectric | 4.18 | JVM Android runtime for screenshot tests; `android-all-instrumented` 17 (API 37) available | [robolectric.org](https://robolectric.org/) |
-| Roborazzi | 1.79.0 | screenshot record/verify; `roborazzi-compose`, `roborazzi-compose-preview-scanner-support`; `roborazzi-compose-ios` available if iOS screenshots are added | [Roborazzi](https://takahirom.github.io/roborazzi/) |
+| Robolectric | 4.18 | JVM Android runtime for screenshot tests. Screenshots render on API 36: the API 37 runtime dropped Compose frames before capture (see the testing guide) | [robolectric.org](https://robolectric.org/) |
+| Roborazzi | 1.79.0 | screenshot record/verify. Its Gradle plugin supports the AGP KMP library plugin (`recordRoborazziAndroidHostTest`, verified in the plugin source and its integration sample); `roborazzi-compose-ios` available if iOS screenshots are added | [Roborazzi](https://takahirom.github.io/roborazzi/) |
 | ComposablePreviewScanner | 0.10.0 | drive screenshot tests from `@Preview`s | [CPS](https://github.com/sergio-sastre/ComposablePreviewScanner) |
 | Konsist | 0.18.1 | architecture tests (1.0.0-beta.1 exists; stay on stable) | [Konsist](https://docs.konsist.lemonappdev.com/) |
-| Compose UI Test | from CMP 1.12.2 | `ui-test`, `ui-test-junit4` on Android device tests | [CMP UI testing](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html) |
+| Compose UI Test | from CMP 1.12.2 | `ui-test-junit4` (screenshot base class, device tests); `androidx.compose.ui:ui-test-manifest` 1.12.1 registers the test activity (the androidx version CMP 1.12.2 resolves to) | [CMP UI testing](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html) |
+| Espresso | 3.7.0 | constraint only: Roborazzi's stack resolves 3.5.1, which cannot start on API 37 | — |
 | Maestro | CLI 2.12.1 | end-to-end flows | [maestro.dev](https://docs.maestro.dev/) |
 
 ## Quality and tooling
@@ -61,6 +63,13 @@ Rules for this table: stable releases only (no alpha/beta/RC) unless marked; eve
 | Dokka | 2.3.0 | API docs for `core:*` → `/api` on the site | [Dokka](https://kotlinlang.org/docs/dokka-introduction.html) |
 | MkDocs Material | 9.8.1 | docs site — EOL announced 2027-05-05; successor [Zensical](https://zensical.org) reads the same `mkdocs.yml` (see ADR 0012) | [squidfunk.github.io/mkdocs-material](https://squidfunk.github.io/mkdocs-material/) |
 | Renovate | GitHub App | dependency PRs, weekly, grouped | [Renovate](https://docs.renovatebot.com/) |
+
+## Assets
+
+| Asset | Version | Licence | Source |
+|---|---|---|---|
+| Alexandria, Readex Pro | google/fonts, fetched 2026-11-16 | SIL OFL 1.1 | static 400/500/600 instances cut with fontTools ([THIRD_PARTY](https://github.com/Besoabulubbad/sojourn/blob/main/core/designsystem/THIRD_PARTY.md)) |
+| Lucide icons (58) | lucide-static 1.73.0 | ISC | converted to vector drawables by `tooling/scripts/lucide_to_vector.py` |
 | release-please-action | v5.0.0 | versions + CHANGELOG from Conventional Commits | [release-please](https://github.com/googleapis/release-please-action) |
 
 ## GitHub Actions (pinned major tags, verified 2026-11-15)
