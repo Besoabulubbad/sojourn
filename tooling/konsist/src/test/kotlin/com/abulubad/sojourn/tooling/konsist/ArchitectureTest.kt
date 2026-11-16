@@ -111,10 +111,17 @@ class ArchitectureTest {
 
     @Test
     fun `every public design-system component has a screenshot case`() {
-        // Cases live in commonTest and run on Android and iOS (SnapshotCase, ADR 0010).
-        val screenshotTests = scope.files
+        // Cases live in commonTest and run on Android and iOS (SnapshotCase, ADR 0010). A case may render a
+        // `*Samples` object from commonMain (shared with previews); a component called there counts when commonTest
+        // uses that object.
+        val testText = scope.files
             .filter { it.path.contains("/core/designsystem/src/commonTest/") }
             .joinToString("\n") { it.text }
+        val usedSamples = scope.files
+            .filter { it.path.contains("/core/designsystem/src/commonMain/") && it.name.endsWith("Samples") }
+            .filter { "${it.name}." in testText }
+            .joinToString("\n") { it.text }
+        val screenshotTests = testText + "\n" + usedSamples
         val components = scope.files
             .filter { it.path.contains("/core/designsystem/src/commonMain/") && it.path.contains("/components/") }
             .flatMap { it.functions() }

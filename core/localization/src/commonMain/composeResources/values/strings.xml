@@ -35,6 +35,8 @@
     <string name="action_show_stays">Show %1$s</string>
     <string name="action_pay">Pay %1$s</string>
     <string name="action_open_in_maps">Open in maps</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_cancel_booking">Cancel booking</string>
 
     <!-- Screen states (I-05) -->
     <string name="state_loading">Loading</string>

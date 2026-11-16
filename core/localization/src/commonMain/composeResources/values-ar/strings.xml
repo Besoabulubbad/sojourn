@@ -35,6 +35,8 @@
     <string name="action_show_stays">اعرض %1$s</string>
     <string name="action_pay">ادفع %1$s</string>
     <string name="action_open_in_maps">افتح في الخرائط</string>
+    <string name="action_edit">تعديل</string>
+    <string name="action_cancel_booking">ألغِ الحجز</string>
 
     <!-- Screen states -->
     <string name="state_loading">جارٍ التحميل</string>

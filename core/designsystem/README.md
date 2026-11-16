@@ -10,7 +10,7 @@ The design system in code (ADR 0003, 0008): generated tokens, `SojournTheme`, fo
 | `SojournTheme(locale, darkTheme, reduceMotion) { }` | `theme/SojournTheme.kt` | Provides colours, type and elevation for the theme, the locale environment (via `ProvideAppLocale`), `LocalReduceMotion`, and a Material theme bridged from the same tokens. Read with `SojournTheme.colors.brand`, `SojournTheme.type.price`. |
 | `SojournFonts` | `theme/SojournFonts.kt` + `composeResources/font` | Alexandria (display, titles, price) and Readex Pro (text) at 400/500/600. Both cover Latin and Arabic. |
 | Motion helpers | `theme/SojournMotionExtensions.kt` | `settleSpring()`, `popSpring()`, `exitDuration()`, and `enter`/`exit`/`move` specs that fall back to a 150 ms fade when reduce motion is on (M-03). |
-| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke) plus filled variants where a card needs them (`StarFilled`). Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
+| `SojournIcon` | `icon/SojournIcon.kt` + `composeResources/drawable` | Sealed set of 58 Lucide icons (24 dp, 1.75 stroke) plus filled variants where a card needs them (`StarFilled`, `SavedFilled`). Only Back, Forward and the start/end chevrons mirror, inside the composable (L-05, N-02). |
 | `SojournVariant`, `SojournVariants`, `SojournPreview` | `preview/` | The 4-variant set and 16-cell matrix (language × theme × font scale × width) and the wrapper previews and screenshot tests share. |
 | `SojournTokenSheet` | `showcase/` | Every token on one sheet per family; the Phase 2 screenshot exit test and the showcase swatches. |
 
@@ -25,6 +25,18 @@ The only component allowed to print a price (P-01). A `PriceDisplay.Total` leads
 ### Rating — `SojournRating(rating: Rating?, modifier, showCount = true)`
 
 A filled star in `accentInk`, the score and the review count: ★ 4.8 (32). Renders **nothing** for a missing rating or fewer than three reviews (N-04); there is no empty, zero or "new" rating. Screen readers hear one phrase, "Rated 4.8 out of 5, 32 reviews", from a plural resource with all six Arabic forms. Score and count come from `SojournFormatter` (one decimal, Western digits, bidi isolates). The 14 dp star is `SojournRatingDefaults.StarSize`, smaller than the `icon-sm` token so it sits inside `body-sm` text. `SojournRatingBehaviourTest` checks the hidden states and the spoken label on the semantics tree.
+
+### Button — `SojournButton(text, onClick, modifier, variant, leadingIcon, loading, enabled)`
+
+The one way to trigger an action. `Primary` (`brand`), `Secondary` (`surface` + `borderControl`), `Ghost` (inline, no fill) and `Danger` (`dangerFill`). At least `touch-min` tall; labels wrap instead of truncating. Disabled uses `surfaceSunken` with `inkMuted` text (still 4.5:1), but a working button is preferred. `loading` keeps the label and width, shows a spinner, announces "Loading" and blocks a second tap. Pressing scales to 0.98 and darkens 8 % over `dur-instant` (no scale under reduce motion); keyboard focus draws the 2 dp `focus` ring 2 dp outside.
+
+### Chip — `SojournChip(label, selected, onClick, modifier, icon)` and `SojournFactChip(label, modifier, icon)`
+
+A compact choice. Selected is a filled `ink` chip with a semibold label, so state is never colour alone (C-04); it is a selectable element, so screen readers hear "selected". 40 dp visual height inside a 48 dp target. `SojournFactChip` is the read-only tinted chip (`brandTint`, `brandInk`).
+
+### IconButton — `SojournIconButton(icon, contentDescription, onClick, modifier, variant, tint, badge, enabled)`
+
+An icon-only action with a 48 dp target; `contentDescription` is a required parameter (C-05). `Plain`, `Outline` and `Floating` (its own `surface` disc with `shadow-2`, for photos and the map). `tint = Saved` draws the filled heart in `save`. `badge` shows a count at the top-end corner, formatted by `SojournFormatter` and announced after the description.
 
 ## Tests
 

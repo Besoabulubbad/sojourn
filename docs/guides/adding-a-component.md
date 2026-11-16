@@ -72,4 +72,4 @@ Logic the card specifies gets a unit test: `SojournRating` hides under 3 reviews
 
 ## Commit
 
-`feat(designsystem): add Sojourn<Comp>` — one component per PR where practical.
+`feat(designsystem): add the <Group> components` — one PR per design-system group (Actions, Feedback, Inputs, Navigation, Listing, Booking), decided 2026-11-16 to keep the pace up; a component that needs special review can still go alone.

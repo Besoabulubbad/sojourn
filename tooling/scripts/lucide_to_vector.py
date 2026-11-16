@@ -24,7 +24,7 @@ STROKE_WIDTH = "1.75"
 SVG_NS = "{http://www.w3.org/2000/svg}"
 
 # Icons that also ship a filled variant (`ic_<name>_filled`): the rating star, later the saved heart.
-FILLED = ["star"]
+FILLED = ["star", "heart"]
 
 # Lucide name → drawable name (ic_<name> with underscores). One icon per meaning.
 ICONS = [
