@@ -57,7 +57,7 @@ Every visual state is written **once**, as a `SnapshotCase` in the module's `com
 | Variants per state | the four shipped variants; the default state in the full 16-cell matrix | the four shipped variants |
 | Device | `w412dp-h915dp-xxhdpi`, Robolectric API 36 | 412 × 915 dp at 3× |
 | Baselines | `<module>/screenshots/androidHostTest/` | `<module>/screenshots/iosSimulatorArm64/` |
-| Runs | `check` on the Linux PR job | `iosSimulatorArm64Test` on the macOS PR job |
+| Runs | `check` on the Linux PR job (required) | `iosSimulatorArm64Test` on the macOS PR job (informational: visible, not blocking) |
 
 The matrix dimensions:
 

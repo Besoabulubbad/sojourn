@@ -57,11 +57,20 @@ jobs:
   ios:
     name: iOS tests and screenshots (macOS)
     # iOS can only be built and tested on macOS. Runs in parallel with the Linux job: every common and iOS unit
-    # test on the simulator, plus the iOS screenshot verify (ADR 0010, decided 2026-11-16).
+    # test on the simulator, plus the iOS screenshot verify (ADR 0010). Informational, not a required check: a red
+    # result is visible on the PR but does not block merging (decided 2026-11-16, ADR 0011 note).
     runs-on: macos-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v7
+
+      # The Kotlin/Native toolchain and its per-target caches (~1 GB) are most of a cold run; keep them between runs.
+      - name: Cache Kotlin/Native toolchain
+        uses: actions/cache@v6
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+          restore-keys: konan-${{ runner.os }}-
 
       - uses: actions/setup-java@v6
         with:
