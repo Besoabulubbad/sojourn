@@ -38,6 +38,9 @@
     <string name="action_edit">Edit</string>
     <string name="action_cancel_booking">Cancel booking</string>
     <string name="action_undo">Undo</string>
+    <string name="action_view_map">Map</string>
+    <string name="action_view_list">List</string>
+    <string name="action_search_area">Search this area</string>
 
     <!-- Feedback: snackbars, banners, empty states -->
     <string name="saved_removed">Removed from Saved</string>
@@ -182,6 +185,9 @@
     <string name="cd_unsave">Remove from saved</string>
     <string name="cd_show_map">Show map</string>
     <string name="cd_show_list">Show list</string>
+    <string name="cd_sheet_handle">Drag handle</string>
+    <string name="cd_sheet_expand">Expand</string>
+    <string name="cd_sheet_collapse">Collapse</string>
     <string name="cd_increase">Increase</string>
     <string name="cd_decrease">Decrease</string>
     <string name="cd_increase_label">Increase %1$s</string>

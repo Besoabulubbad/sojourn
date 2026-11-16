@@ -60,6 +60,10 @@ Components land one design-system group per pull request. Each row shows English
 | Stepper | ![](components/stepper-guests-en-light.png){ width="300" } | ![](components/stepper-guests-ar-dark.png){ width="300" } |
 | DateRangePicker | ![](components/date-range-march-en-light.png){ width="300" } | ![](components/date-range-march-ar-dark.png){ width="300" } |
 | RangeSlider (price) | ![](components/price-range-total-en-light.png){ width="300" } | ![](components/price-range-total-ar-dark.png){ width="300" } |
+| TopBar | ![](components/top-bar-states-en-light.png){ width="300" } | ![](components/top-bar-states-ar-dark.png){ width="300" } |
+| BottomNav | ![](components/bottom-nav-tabs-en-light.png){ width="300" } | ![](components/bottom-nav-tabs-ar-dark.png){ width="300" } |
+| Sheet | ![](components/sheet-filters-en-light.png){ width="300" } | ![](components/sheet-filters-ar-dark.png){ width="300" } |
+| ViewToggle | ![](components/view-toggle-pills-en-light.png){ width="300" } | ![](components/view-toggle-pills-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 

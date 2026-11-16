@@ -38,6 +38,9 @@
     <string name="action_edit">تعديل</string>
     <string name="action_cancel_booking">ألغِ الحجز</string>
     <string name="action_undo">تراجع</string>
+    <string name="action_view_map">الخريطة</string>
+    <string name="action_view_list">القائمة</string>
+    <string name="action_search_area">ابحث في هذه المنطقة</string>
 
     <!-- Feedback -->
     <string name="saved_removed">أُزيلت من المحفوظات</string>
@@ -179,6 +182,9 @@
     <string name="cd_unsave">أزل من المحفوظات</string>
     <string name="cd_show_map">اعرض الخريطة</string>
     <string name="cd_show_list">اعرض القائمة</string>
+    <string name="cd_sheet_handle">مقبض السحب</string>
+    <string name="cd_sheet_expand">توسيع</string>
+    <string name="cd_sheet_collapse">طي</string>
     <string name="cd_increase">زيادة</string>
     <string name="cd_decrease">إنقاص</string>
     <string name="cd_increase_label">زيادة %1$s</string>

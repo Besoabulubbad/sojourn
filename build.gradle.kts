@@ -57,6 +57,10 @@ dependencyAnalysis {
             includeGroup("org.jetbrains.androidx.savedstate")
             includeGroup("androidx.savedstate")
         }
+        bundle("navigationevent") {
+            includeGroup("org.jetbrains.androidx.navigationevent")
+            includeGroup("androidx.navigationevent")
+        }
     }
     issues {
         all {

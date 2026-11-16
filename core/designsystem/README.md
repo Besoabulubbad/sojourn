@@ -70,6 +70,22 @@ A month grid in the in-app language: the UK grid starts on Monday, the Arabic gr
 
 The price filter: a histogram, a two-thumb slider and two fields for exact amounts. `basis` is required and must match the cards (P-04); it sets the label. The slider is Material's (gestures, keyboard, RTL, semantics) with the card's thumbs and track. Entries are clamped to the bounds and to the other end.
 
+### TopBar — `SojournTopBar(title, modifier, onBack, overPhoto, solidFraction, actions)`
+
+The screen's top bar; it owns the status-bar inset. Solid by default (`bg`, hairline, title). Over a photo it starts clear with floating buttons and `scrimTop` behind the status bar, and fills in over 48 dp of scroll (`rememberTopBarSolidFraction(scrollState or listState)`); the title appears only once it is solid. `solidFraction` is read while drawing, so scrolling does not recompose the screen. Actions go through `Action(icon, contentDescription, onClick)`, which picks the floating or plain button for the bar's state.
+
+### BottomNav — `SojournBottomNav(tabs, selected, onSelect, modifier)`
+
+Two to four `SojournNavTab`s (Explore, Saved, Bookings, Profile in the app), first tab at the start. The active tab changes the pill, icon tint and label weight together and is announced as a selected tab. It owns the navigation-bar inset. Labels stay on one line and grow with the user's text size as far as the tab width allows.
+
+### Sheet — `SojournSheet(state, title, onDismiss, modifier, modal, footer, content)`
+
+Our own bottom sheet ([ADR 0015](../../docs/adr/0015-own-bottom-sheet.md)): it rests only at the state's detents (peek 96 dp, half, full), and content scrolling and sheet dragging work as one. Every sheet has a title and a close button; the handle offers expand and collapse to screen readers. A modal sheet enters over `scrim` and closes on close, scrim tap, a drag below its lowest stop, or system back, then calls `onDismiss`. The footer is pinned and owns the navigation and keyboard insets; its actions wrap rather than break a word. Place it last in a full-screen box.
+
+### ViewToggle — `SojournViewToggle(current, onToggle, modifier)` and `SojournSearchAreaPill(onClick, modifier)`
+
+The floating `ink` pill on Results and Map. Its label names where the tap goes ("Map" on the list, "List" on the map). The light pill is "Search this area" after the map moves.
+
 ## Tests
 
 - `TokenParityTest`: one property per token, both themes share the token set, dark is a full theme (only saffron is shared), motion ceiling is `dur-slower`, only directional icons mirror.
