@@ -122,6 +122,11 @@ class ArchitectureTest {
             .filter { "${it.name}." in testText }
             .joinToString("\n") { it.text }
         val screenshotTests = testText + "\n" + usedSamples
+        // A `*Host` only places another component on screen (SojournSnackbarHost shows SojournSnackbar), so its
+        // obligation is a behaviour test in androidHostTest instead of a screenshot.
+        val hostTests = scope.files
+            .filter { it.path.contains("/core/designsystem/src/androidHostTest/") }
+            .joinToString("\n") { it.text }
         val components = scope.files
             .filter { it.path.contains("/core/designsystem/src/commonMain/") && it.path.contains("/components/") }
             .flatMap { it.functions() }
@@ -131,7 +136,7 @@ class ArchitectureTest {
         components.assertTrue(
             additionalMessage = "Every Sojourn* component needs a SnapshotCase in commonTest (ADR 0010).",
         ) {
-            "${it.name}(" in screenshotTests
+            "${it.name}(" in screenshotTests || (it.name.endsWith("Host") && "${it.name}(" in hostTests)
         }
     }
 

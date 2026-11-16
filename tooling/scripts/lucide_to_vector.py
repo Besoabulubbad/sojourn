@@ -33,7 +33,7 @@ ICONS = [
     "wifi", "wifi-off", "washing-machine", "laptop", "arrow-up-down", "star", "share", "sliders-horizontal",
     "check", "info", "circle-alert", "rotate-cw", "plus", "minus", "languages", "sun", "moon", "monitor",
     "briefcase", "key-round", "clock", "shield-check", "gift", "settings", "footprints", "train-front",
-    "credit-card", "image-off", "sparkles", "bookmark", "building-2", "door-open", "trash-2", "circle-check",
+    "credit-card", "image-off", "search-x", "sparkles", "bookmark", "building-2", "door-open", "trash-2", "circle-check",
     "external-link", "phone", "message-circle", "copy", "house",
 ]
 

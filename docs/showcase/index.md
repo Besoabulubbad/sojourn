@@ -52,6 +52,9 @@ Components land one design-system group per pull request. Each row shows English
 | Button | ![](components/button-variants-en-light.png){ width="300" } | ![](components/button-variants-ar-dark.png){ width="300" } |
 | Chip | ![](components/chip-row-en-light.png){ width="300" } | ![](components/chip-row-ar-dark.png){ width="300" } |
 | IconButton | ![](components/icon-button-variants-en-light.png){ width="300" } | ![](components/icon-button-variants-ar-dark.png){ width="300" } |
+| Skeleton | ![](components/skeleton-stay-card-en-light.png){ width="300" } | ![](components/skeleton-stay-card-ar-dark.png){ width="300" } |
+| Snackbar and offline banner | ![](components/snackbar-and-banner-en-light.png){ width="300" } | ![](components/snackbar-and-banner-ar-dark.png){ width="300" } |
+| EmptyState | ![](components/empty-state-no-matches-en-light.png){ width="300" } | ![](components/empty-state-no-matches-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 

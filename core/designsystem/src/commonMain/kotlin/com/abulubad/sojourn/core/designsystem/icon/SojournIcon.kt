@@ -55,6 +55,7 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_plus
 import com.abulubad.sojourn.core.designsystem.resources.ic_rotate_cw
 import com.abulubad.sojourn.core.designsystem.resources.ic_ruler
 import com.abulubad.sojourn.core.designsystem.resources.ic_search
+import com.abulubad.sojourn.core.designsystem.resources.ic_search_x
 import com.abulubad.sojourn.core.designsystem.resources.ic_settings
 import com.abulubad.sojourn.core.designsystem.resources.ic_share
 import com.abulubad.sojourn.core.designsystem.resources.ic_shield_check
@@ -144,6 +145,9 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
     data object Offline : SojournIcon(Res.drawable.ic_wifi_off)
     data object Retry : SojournIcon(Res.drawable.ic_rotate_cw)
     data object ImageFailed : SojournIcon(Res.drawable.ic_image_off)
+
+    /** Nothing matches a search (EmptyState card). */
+    data object NoResults : SojournIcon(Res.drawable.ic_search_x)
     data object Plus : SojournIcon(Res.drawable.ic_plus)
     data object Minus : SojournIcon(Res.drawable.ic_minus)
     data object Share : SojournIcon(Res.drawable.ic_share)
@@ -171,7 +175,7 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
                 Search, Filters, Map, MapPin, List, Calendar, Guests, City,
                 Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Walk, Transit, Star, StarFilled, Sparkles,
                 Key, Clock, Deposit, DoorOpen, Payment, Rewards, Bookmark,
-                Check, CheckCircle, Info, Alert, Offline, Retry, ImageFailed,
+                Check, CheckCircle, Info, Alert, Offline, Retry, ImageFailed, NoResults,
                 Plus, Minus, Share, Copy, Delete, Phone, Message,
                 Language, ThemeLight, ThemeDark, ThemeSystem, Settings,
             )
