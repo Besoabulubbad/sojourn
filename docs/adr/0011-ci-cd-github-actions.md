@@ -74,7 +74,7 @@ Secrets (added when available): `ANTHROPIC_API_KEY`, `ANDROID_KEYSTORE_BASE64`, 
 
 ## Implementation notes
 
-**2026-11-16.** `pr.yml` has a second job, **iOS tests and screenshots (macOS)** on `macos-latest`, in parallel with the Linux job: `./gradlew iosSimulatorArm64Test` runs every common and iOS unit test on the simulator plus the iOS screenshot verify, with a JUnit report and diff images on failure. It is a required check, decided with the maintainer, so an iOS regression cannot merge. macOS minutes are free for public repositories.
+**2026-11-16.** `pr.yml` has a second job, **iOS tests and screenshots (macOS)** on `macos-latest`, in parallel with the Linux job: `./gradlew iosSimulatorArm64Test` runs every common and iOS unit test on the simulator plus the iOS screenshot verify, with a JUnit report and diff images on failure. It was first a required check. Later the same day, after a 17-minute first run, the maintainer decided to make it **informational**: it still runs on every PR and its result is visible, but it does not block merging. The job caches the Kotlin/Native toolchain (`~/.konan`, keyed by the version catalog), which is most of a cold run. macOS minutes are free for public repositories.
 
 ## Links
 
