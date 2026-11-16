@@ -29,6 +29,14 @@ val skeletonModules = listOf(
 ) + listOf("explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile")
     .map { ":feature:$it" } // Phase 5
 dependencyAnalysis {
+    abi {
+        // The Compose compiler hoists capture-free composable lambdas into public `ComposableSingletons$<File>`
+        // classes; a slot lambda's parameter type (e.g. Material's RangeSliderState) would otherwise count as
+        // public API. They are compiler internals, so they are not part of any module's ABI.
+        exclusions {
+            excludeClasses(".*\\.ComposableSingletons\\$.*")
+        }
+    }
     structure {
         // Compose Multiplatform: we declare org.jetbrains.compose.* coordinates, which resolve to
         // androidx.compose.* on Android. One bundle so the analyser does not ask for the androidx twins.

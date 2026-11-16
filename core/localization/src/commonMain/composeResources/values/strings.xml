@@ -139,6 +139,24 @@
     <string name="sort_price_high_to_low">Price, high to low</string>
     <string name="sort_rating">Rating</string>
     <string name="filters_title">Filters</string>
+    <string name="search_prompt_title">Where to?</string>
+    <string name="search_prompt_hint">City · Dates or stay length · Guests</string>
+    <!-- The search summary: %1$s dates, %2$s nights, %3$s guests (all pre-formatted). -->
+    <string name="search_summary_dated">%1$s · %2$s · %3$s</string>
+    <!-- Without dates: %1$s stay length or "Any dates", %2$s guests. -->
+    <string name="search_summary_undated">%1$s · %2$s</string>
+    <string name="search_mode_dates">Dates</string>
+    <string name="search_mode_flexible">Flexible</string>
+    <string name="filter_any">Any</string>
+    <string name="guests_adults">Adults</string>
+    <string name="guests_children">Children</string>
+    <string name="guests_children_hint">Ages 2 to 12</string>
+    <string name="price_range_total">Total price for %1$s</string>
+    <string name="price_range_month">Price per month</string>
+    <string name="price_range_night">Price per night</string>
+    <string name="price_range_min">Minimum</string>
+    <string name="price_range_max">Maximum</string>
+    <string name="day_unavailable">Unavailable</string>
 
     <!-- Ratings (N-04 hides ratings under three reviews; there is no "New" or empty rating) -->
     <string name="rating_count">(%1$s)</string>
@@ -166,6 +184,10 @@
     <string name="cd_show_list">Show list</string>
     <string name="cd_increase">Increase</string>
     <string name="cd_decrease">Decrease</string>
+    <string name="cd_increase_label">Increase %1$s</string>
+    <string name="cd_decrease_label">Decrease %1$s</string>
+    <string name="cd_previous_month">Previous month</string>
+    <string name="cd_next_month">Next month</string>
     <string name="cd_photo_counter">Photo %1$s</string>
     <string name="cd_saved_heart">Saved</string>
 

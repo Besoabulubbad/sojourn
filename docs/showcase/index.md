@@ -55,6 +55,11 @@ Components land one design-system group per pull request. Each row shows English
 | Skeleton | ![](components/skeleton-stay-card-en-light.png){ width="300" } | ![](components/skeleton-stay-card-ar-dark.png){ width="300" } |
 | Snackbar and offline banner | ![](components/snackbar-and-banner-en-light.png){ width="300" } | ![](components/snackbar-and-banner-ar-dark.png){ width="300" } |
 | EmptyState | ![](components/empty-state-no-matches-en-light.png){ width="300" } | ![](components/empty-state-no-matches-ar-dark.png){ width="300" } |
+| SearchBar | ![](components/search-bar-forms-en-light.png){ width="300" } | ![](components/search-bar-forms-ar-dark.png){ width="300" } |
+| SegmentedControl | ![](components/segmented-control-rows-en-light.png){ width="300" } | ![](components/segmented-control-rows-ar-dark.png){ width="300" } |
+| Stepper | ![](components/stepper-guests-en-light.png){ width="300" } | ![](components/stepper-guests-ar-dark.png){ width="300" } |
+| DateRangePicker | ![](components/date-range-march-en-light.png){ width="300" } | ![](components/date-range-march-ar-dark.png){ width="300" } |
+| RangeSlider (price) | ![](components/price-range-total-en-light.png){ width="300" } | ![](components/price-range-total-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 

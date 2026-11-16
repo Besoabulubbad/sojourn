@@ -50,6 +50,26 @@ A brief confirmation with an optional action ("Removed from Saved · Undo"): an 
 
 What a screen shows when there is nothing to list: a 64 dp `brandTint` icon disc, a heading that says what happened, a body that says what to do, and at most one `SojournEmptyStateAction` that changes the outcome (a secondary button).
 
+### SearchBar — `SojournSearchBar(query, onClick, modifier, onBack)`
+
+The single entry point to search, and a button rather than a text field. With no query it is the Explore prompt ("Where to?"); with a query it summarizes city, dates and nights, and guests from one localized template, and `onBack` gives the compact Results form. The filter button beside it is a `SojournIconButton` with a badge.
+
+### SegmentedControl — `SojournSegmentedControl(options, selected, onSelect, modifier)`
+
+Two to five mutually exclusive `SojournSegment`s on a sunken track; the selected one is a raised pill, announced as a radio button. Bedrooms say "Studio" for zero and "3+" comes from `SojournFormatter.plus`, so it never flips in Arabic. With large text each segment keeps its longest word and segments wrap rather than break a word (`ShareRow`, internal).
+
+### Stepper — `SojournStepper(value, onValueChange, range, label, modifier, hint)`
+
+A full row: the label (and an optional hint) at the start, minus, value and plus at the end. The label is never repeated visually; the buttons carry it in their descriptions ("Increase Adults"). At a bound the button is disabled; the value is announced on change.
+
+### DateRangePicker — `SojournDateRangePicker(month, onMonthChange, selection, onSelect, availability, modifier, minNights)`
+
+A month grid in the in-app language: the UK grid starts on Monday, the Arabic grid on Saturday, and it mirrors in RTL. Tapping sets check-in, then check-out; a range across a booked night starts again, one shorter than `minNights` is ignored (pure rules in `nextSelection`, unit-tested). Unavailable days are struck through and cannot be focused. The night count shows under the grid and is announced.
+
+### RangeSlider — `SojournPriceRange(range, bounds, histogram, basis, onChange, modifier, nights)`
+
+The price filter: a histogram, a two-thumb slider and two fields for exact amounts. `basis` is required and must match the cards (P-04); it sets the label. The slider is Material's (gestures, keyboard, RTL, semantics) with the card's thumbs and track. Entries are clamped to the bounds and to the other end.
+
 ## Tests
 
 - `TokenParityTest`: one property per token, both themes share the token set, dark is a full theme (only saffron is shared), motion ceiling is `dur-slower`, only directional icons mirror.

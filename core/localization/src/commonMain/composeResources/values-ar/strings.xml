@@ -138,6 +138,22 @@
     <string name="sort_price_high_to_low">السعر، من الأعلى إلى الأقل</string>
     <string name="sort_rating">التقييم</string>
     <string name="filters_title">التصفية</string>
+    <string name="search_prompt_title">إلى أين؟</string>
+    <string name="search_prompt_hint">المدينة · التواريخ أو مدة الإقامة · الضيوف</string>
+    <string name="search_summary_dated">%1$s · %2$s · %3$s</string>
+    <string name="search_summary_undated">%1$s · %2$s</string>
+    <string name="search_mode_dates">التواريخ</string>
+    <string name="search_mode_flexible">مرن</string>
+    <string name="filter_any">الكل</string>
+    <string name="guests_adults">البالغون</string>
+    <string name="guests_children">الأطفال</string>
+    <string name="guests_children_hint">من 2 إلى 12 سنة</string>
+    <string name="price_range_total">السعر الإجمالي لمدة %1$s</string>
+    <string name="price_range_month">السعر الشهري</string>
+    <string name="price_range_night">السعر لليلة</string>
+    <string name="price_range_min">الحد الأدنى</string>
+    <string name="price_range_max">الحد الأقصى</string>
+    <string name="day_unavailable">غير متاح</string>
 
     <!-- Ratings -->
     <string name="rating_count">(%1$s)</string>
@@ -165,6 +181,10 @@
     <string name="cd_show_list">اعرض القائمة</string>
     <string name="cd_increase">زيادة</string>
     <string name="cd_decrease">إنقاص</string>
+    <string name="cd_increase_label">زيادة %1$s</string>
+    <string name="cd_decrease_label">إنقاص %1$s</string>
+    <string name="cd_previous_month">الشهر السابق</string>
+    <string name="cd_next_month">الشهر التالي</string>
     <string name="cd_photo_counter">الصورة %1$s</string>
     <string name="cd_saved_heart">محفوظة</string>
 

@@ -15,6 +15,8 @@ kotlin {
             // Motion helpers return animation specs; SojournIcon carries a DrawableResource.
             api(libs.compose.animation)
             api(libs.compose.components.resources)
+            // SojournDateRangePicker takes YearMonth and LocalDate.
+            api(libs.kotlinx.datetime)
             implementation(libs.compose.material3)
             implementation(libs.kotlinx.coroutines.core)
         }
