@@ -23,9 +23,11 @@ Components live in `core:designsystem` and map one-to-one to the design system's
 
 ```
 core/designsystem/src/commonMain/kotlin/com/abulubad/sojourn/core/designsystem/components/<comp>/
-  Sojourn<Comp>.kt            public composable(s) + variant types, with KDoc
+  Sojourn<Comp>.kt            public composable(s), with KDoc — functions only
+  Sojourn<Comp>Size.kt …      each variant type in its own file (detekt MatchingDeclarationName)
+  Sojourn<Comp>Samples.kt     sample values in the design system's numbers, shared by previews and screenshot tests
   Sojourn<Comp>Defaults.kt    (optional) sizes/colours objects, like Material's *Defaults
-  Sojourn<Comp>Previews.kt    @Preview per state, using SojournVariants (EN/AR × light/dark)
+  Sojourn<Comp>Previews.kt    @Preview per state, using SojournPreview(SojournVariants.*)
 core/designsystem/src/androidHostTest/kotlin/.../components/<comp>/
   Sojourn<Comp>ScreenshotTest.kt
 core/designsystem/README.md   add the component section (summary from the card, API, rules)
@@ -44,7 +46,7 @@ Material 3 may be used **inside** the implementation; nothing Material appears i
 ## 4. Previews and screenshots
 
 - One `@Preview` per visual state; each preview wraps content in `SojournPreview(variant)` which applies theme + locale + direction.
-- The screenshot test iterates the matrix (2 languages × 2 themes × font 100/200 × width 320/412) over the same states. Record, inspect every image, commit baselines.
+- The screenshot test extends `SojournScreenshotTest` with one `@Test` per state: `snapshot("<comp>_<state>") { … }`. The default state passes `fullMatrix = true` (16 cells, including 200 % font and 320 dp); the others run in the four shipped variants (ADR 0010). Record, inspect every image (Arabic at 200 % and 320 dp especially), commit baselines.
 - Long-string previews for Arabic and 200% to prove the component grows rather than clips (S-08, I-04).
 
 ## 5. Tests beyond screenshots

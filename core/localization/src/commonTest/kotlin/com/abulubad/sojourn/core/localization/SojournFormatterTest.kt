@@ -24,6 +24,13 @@ class SojournFormatterTest {
     }
 
     @Test
+    fun `averages round half up to whole units`() {
+        assertEquals("$FSI£92$PDI", en.moneyAverage(Money.of(1383, Currency.GBP), 15))
+        assertEquals("${FSI}93 £$PDI", ar.moneyAverage(Money.of(1395, Currency.GBP), 15))
+        assertEquals("$FSI£93$PDI", en.moneyAverage(Money.of(185, Currency.GBP), 2))
+    }
+
+    @Test
     fun `money shows minor units only when present`() {
         assertEquals("$FSI£92.50$PDI", en.money(Money.of(92, Currency.GBP, minorRemainder = 50)))
         assertEquals("$FSI€2,100$PDI", en.money(Money.of(2100, Currency.EUR)))

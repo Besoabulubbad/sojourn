@@ -75,6 +75,10 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 - Screenshots render on the **API 36** Robolectric runtime. On Robolectric 4.18's API 37 runtime, Compose content was intermittently not drawn before capture (blank `#FAFAFA` images, reproduced with a plain coloured box). API 36 renders every probe. Unit tests keep the default runtime.
 - `SojournScreenshotTest` is a parameterized Robolectric test (one capture per variant per test) that renders through a compose test rule and captures the node, the pattern Roborazzi documents for Compose.
 
+**2026-11-16 (Phase 3 start), matrix size.** Decided with the maintainer: every state of every component and screen is captured in the four shipped variants (EN/AR × light/dark), and each component's and screen's **default state** additionally runs the full 16-cell matrix (200 % font, 320 dp width). That catches RTL, theme and overflow problems at about a third of the images a full matrix for every state would need. `SojournScreenshotTest` is parameterized over all 16 cells; `snapshot(name, fullMatrix = true)` opts a state into the extra 12, and the other cells are reported as skipped.
+
+**2026-11-16, language pairs.** `AppLanguagePairsTest` in `core:designsystem` runs the four device/app language pairs on Robolectric (L-03). It was added after the Price screenshots showed Arabic layout with English text. Compose Multiplatform resources read the platform default locale, so `ProvideAppLocale` now sets it, following JetBrains' resource-environment guide. With that line removed, the test fails the two mismatched pairs.
+
 ## Links
 
 - [Roborazzi](https://takahirom.github.io/roborazzi/) · [Robolectric](https://robolectric.org/)

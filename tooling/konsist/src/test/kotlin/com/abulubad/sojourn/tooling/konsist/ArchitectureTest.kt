@@ -77,6 +77,8 @@ class ArchitectureTest {
     fun `platform locale apis are touched only by core localization`() {
         scope.files
             .filter { !it.path.contains("/core/localization/") }
+            // Tests may set the device locale to simulate it (the device/app language pairs, L-03).
+            .filterNot { TEST_SOURCE_SETS.any { set -> it.path.contains("/src/$set/") } }
             .assertFalse(
                 additionalMessage = "AppLocale is the single source for language and formatting (ADR 0009).",
             ) { file ->
@@ -107,11 +109,28 @@ class ArchitectureTest {
             }
     }
 
+    @Test
+    fun `every public design-system component has a screenshot test`() {
+        val screenshotTests = scope.files
+            .filter { it.path.contains("/core/designsystem/src/androidHostTest/") }
+            .joinToString("\n") { it.text }
+        val components = scope.files
+            .filter { it.path.contains("/core/designsystem/src/commonMain/") && it.path.contains("/components/") }
+            .flatMap { it.functions() }
+            .filter { it.name.startsWith("Sojourn") && it.hasPublicOrDefaultModifier }
+            .filter { it.hasAnnotationWithName("Composable") }
+            .filterNot { it.name.endsWith("Preview") }
+        components.assertTrue(additionalMessage = "Every Sojourn* component needs a screenshot test (ADR 0010).") {
+            "${it.name}(" in screenshotTests
+        }
+    }
+
     private fun ownFeature(path: String): String = path.substringAfter("/feature/").substringBefore("/")
 
     private companion object {
         const val FEATURE_PACKAGE = "com.abulubad.sojourn.feature"
         val PRODUCT_ROOTS = listOf("/app/", "/core/", "/feature/")
+        val TEST_SOURCE_SETS = listOf("commonTest", "androidHostTest", "androidDeviceTest", "iosTest")
         val DATA_INFRASTRUCTURE = listOf(
             "com.abulubad.sojourn.core.data.",
             "com.abulubad.sojourn.core.database.",

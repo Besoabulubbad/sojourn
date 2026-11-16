@@ -10,6 +10,7 @@ import com.abulubad.sojourn.core.designsystem.preview.SojournPreview
 import com.abulubad.sojourn.core.designsystem.preview.SojournVariant
 import com.abulubad.sojourn.core.designsystem.preview.SojournVariants
 import com.github.takahirom.roborazzi.captureRoboImage
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -39,8 +40,14 @@ abstract class SojournScreenshotTest(private val variant: SojournVariant) {
     @get:Rule
     val composeRule = createComposeRule()
 
-    /** Renders [content] through [SojournPreview] in this test's variant and records or verifies its image. */
-    protected fun snapshot(name: String, content: @Composable () -> Unit) {
+    /**
+     * Renders [content] through [SojournPreview] in this test's variant and records or verifies its image.
+     *
+     * By default a state is captured in the four shipped variants; pass [fullMatrix] for a component's default state
+     * to add 200 % font and 320 dp width (16 cells, ADR 0010). Other cells are skipped, not failed.
+     */
+    protected fun snapshot(name: String, fullMatrix: Boolean = false, content: @Composable () -> Unit) {
+        assumeTrue(fullMatrix || variant in SojournVariants.Four)
         composeRule.setContent {
             Box(Modifier.testTag(SNAPSHOT_TAG)) {
                 SojournPreview(variant) { content() }
@@ -54,9 +61,9 @@ abstract class SojournScreenshotTest(private val variant: SojournVariant) {
         const val DEVICE = "w412dp-h915dp-xxhdpi"
         private const val SNAPSHOT_TAG = "sojourn-snapshot"
 
-        /** The four shipped variants (EN/AR × light/dark). The 16-cell matrix arrives with components (Phase 3). */
+        /** Every cell of the matrix; [snapshot] decides per state whether a cell beyond the four shipped ones runs. */
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "{0}")
-        fun variants(): List<Array<Any>> = SojournVariants.Four.map { arrayOf(it) }
+        fun variants(): List<Array<Any>> = SojournVariants.Matrix.map { arrayOf(it) }
     }
 }

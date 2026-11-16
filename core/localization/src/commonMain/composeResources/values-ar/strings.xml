@@ -52,12 +52,10 @@
 
     <!-- Prices -->
     <string name="price_total">الإجمالي %1$s</string>
-    <string name="price_per_night">%1$s لليلة</string>
-    <string name="price_per_month">%1$s للشهر</string>
     <string name="price_from_night">من %1$s لليلة</string>
-    <string name="price_from_month">من %1$s للشهر</string>
-    <string name="price_all_fees_included">شاملًا جميع الرسوم</string>
-    <string name="price_excludes">لا يشمل %1$s</string>
+    <string name="price_from_month">من %1$s شهريًا</string>
+    <string name="price_nightly_all_in">%1$s لليلة، شامل كل الرسوم</string>
+    <string name="price_before_fees">قبل %1$s. أضف التواريخ لمعرفة الإجمالي.</string>
     <string name="price_long_stay">سعر الإقامة الطويلة</string>
     <string name="price_long_stay_saving">%1$s على إقامات %2$s أو أكثر</string>
     <string name="exclusion_utilities">المرافق</string>
@@ -142,6 +140,10 @@
     <string name="booking_status_completed">منتهية</string>
     <string name="booking_status_cancelled">ملغاة</string>
     <string name="booking_reference">المرجع %1$s</string>
+
+    <!-- Lists of names -->
+    <string name="list_pair">%1$s و%2$s</string>
+    <string name="list_series">%1$s، %2$s</string>
 
     <!-- Content descriptions -->
     <string name="cd_back">رجوع</string>
