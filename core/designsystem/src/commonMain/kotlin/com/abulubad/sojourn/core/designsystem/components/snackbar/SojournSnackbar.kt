@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import com.abulubad.sojourn.core.designsystem.components.internal.MessageActionLayout
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
@@ -50,14 +51,17 @@ fun SojournSnackbar(
         horizontalArrangement = Arrangement.spacedBy(SojournSpacing.space3),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BasicText(
-            text = message,
+        MessageActionLayout(
+            gap = SojournSpacing.space3,
             modifier = Modifier.weight(1f),
-            style = SojournTheme.type.label.copy(color = c.bg, fontWeight = FontWeight.Normal),
+            message = {
+                BasicText(
+                    text = message,
+                    style = SojournTheme.type.label.copy(color = c.bg, fontWeight = FontWeight.Normal),
+                )
+            },
+            action = actionLabel?.let { { ActionText(it, onAction, SojournTheme.type.label.copy(color = c.bg)) } },
         )
-        if (actionLabel != null) {
-            ActionText(actionLabel, onAction, SojournTheme.type.label.copy(color = c.bg))
-        }
     }
 }
 
@@ -84,8 +88,12 @@ fun SojournOfflineBanner(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         SojournIcon(SojournIcon.Offline, contentDescription = null, tint = c.danger, size = SojournSizes.iconSm)
-        BasicText(message, modifier = Modifier.weight(1f), style = style)
-        if (actionLabel != null) ActionText(actionLabel, onAction, style)
+        MessageActionLayout(
+            gap = SojournSpacing.space2,
+            modifier = Modifier.weight(1f),
+            message = { BasicText(message, style = style) },
+            action = actionLabel?.let { { ActionText(it, onAction, style) } },
+        )
     }
 }
 

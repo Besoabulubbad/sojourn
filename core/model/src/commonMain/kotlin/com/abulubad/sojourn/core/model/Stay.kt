@@ -90,11 +90,12 @@ data class Stay(
     }
 }
 
-/** A city in the catalogue. Its name is localized by [id] (S-05). */
+/** A city in the catalogue. Its name is localized by [id] (S-05); [photo] heads its card on Explore. */
 data class City(
     val id: CityId,
     val countryCode: String,
     val location: GeoPoint,
     val stayCount: Int,
     val fromPrice: PriceDisplay.From,
+    val photo: Photo,
 )

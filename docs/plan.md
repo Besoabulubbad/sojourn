@@ -97,7 +97,7 @@ Order (dependencies first): `Price`, `Rating`, `Chip`, `Button`, `IconButton`, `
 - `core:network` — `SojournApi` interface, DTOs, `LocalSojournApi` (bundled JSON, simulated latency and failure modes for the offline/error states), Ktor client configured but unused by default (`KtorSojournApi` behind a flag).
 - `core:data` — repositories exposing `Flow`; DB as source of truth; refresh policy; pricing invariants (breakdown lines sum to total; same quote id across surfaces).
 - `core:domain` — use cases (`SearchStays`, `GetStayDetails`, `GetQuote`, `ToggleSaved`, `ListBookings`, `CreateBooking`, `UpdateFilters`).
-- Seed catalogue: ~40 stays across London, Paris, Lisbon, Algiers, Constantine, Oran with bundled sample photography (licensed/CC0), policies with numbers, quotes per stay length.
+- Seed catalogue: ~40 stays across London, Paris, Lisbon, Algiers, Constantine, Oran with sample photography (licensed/CC0, 5–8 per stay; whether bundled in the app or hosted beside the docs site is decided when Phase 4 starts), policies with numbers, quotes per stay length.
 - Unit tests on every repository and use case with fixtures; property-style tests on pricing.
 
 **Exit:** app-independent test suite proves P-01…P-06 of the engineering standards; `checkModules()` verifies the Koin graph.

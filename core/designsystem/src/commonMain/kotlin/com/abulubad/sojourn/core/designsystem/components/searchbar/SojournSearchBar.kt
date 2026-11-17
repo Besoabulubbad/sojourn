@@ -66,6 +66,8 @@ fun SojournSearchBar(
 ) {
     val c = SojournTheme.colors
     val compact = onBack != null
+    // `xl` (28 dp) is a pill at the bar's normal height; with large text the bar grows and becomes a rounded
+    // rectangle instead of a capsule whose round ends would cut into the text.
     val elevation = if (compact) SojournTheme.elevation.level1 else SojournTheme.elevation.level2
     val interactionSource = remember { MutableInteractionSource() }
     val title = query?.cityId?.let { localizedCityName(it) } ?: stringResource(Res.string.search_prompt_title)
@@ -73,19 +75,19 @@ fun SojournSearchBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .focusRing(interactionSource, cornerRadius = null)
+            .focusRing(interactionSource, cornerRadius = SojournShapes.all.getValue("radius-xl"))
             .defaultMinSize(
                 minHeight = if (compact) SojournSizes.touchMin else SojournSearchBarDefaults.PromptMinHeight,
             )
             .shadow(
                 elevation.elevation,
-                SojournShapes.full,
+                SojournShapes.xl,
                 ambientColor = elevation.color,
                 spotColor = elevation.color,
             )
-            .clip(SojournShapes.full)
+            .clip(SojournShapes.xl)
             .background(c.surface)
-            .border(1.dp, c.hairline, SojournShapes.full)
+            .border(1.dp, c.hairline, SojournShapes.xl)
             .clickable(
                 interactionSource = interactionSource,
                 indication = ripple(),
@@ -111,7 +113,8 @@ fun SojournSearchBar(
             BasicText(
                 detail,
                 style = SojournTheme.type.caption.copy(color = c.inkMuted),
-                maxLines = 1,
+                // Up to three lines keep dates, nights and guests visible with large text.
+                maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
             )
         }

@@ -1,4 +1,4 @@
-package com.abulubad.sojourn.core.ui
+package com.abulubad.sojourn.core.designsystem.components.hosttext
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable

@@ -86,6 +86,36 @@ Our own bottom sheet ([ADR 0015](../../docs/adr/0015-own-bottom-sheet.md)): it r
 
 The floating `ink` pill on Results and Map. Its label names where the tap goes ("Map" on the list, "List" on the map). The light pill is "Search this area" after the map moves.
 
+### HostText — `HostText(text, modifier, style, maxLines)`
+
+The only way to render text a host wrote (S-06): an Arabic title stays right-to-left in the English UI and an English description left-to-right in the Arabic UI. It moved here from `core:ui` so the cards can render host titles.
+
+### KeyFacts — `SojournKeyFacts(facts, modifier)`
+
+Type, beds, bathrooms and sleeps as four tiles, one icon per meaning. A studio says "Studio", never "0 bedrooms"; every count is a plural resource. With large text the tiles keep whole words and wrap.
+
+### PolicyRow — `SojournPolicyRow(policy, modifier, detail, divider)`
+
+One policy with its number (N-03): "Free cancellation until 26 Feb", "£250 refundable deposit", "Check-in from 15:00 · Self check-in". `Policy` cannot exist without the number, so a vague policy line cannot be rendered.
+
+### PricePin — `SojournPricePin(price, state, onClick, modifier)` and `SojournClusterPin(count, onClick, modifier)`
+
+Map markers with the card's price. Selected inverts to `ink` and grows to 1.12; seen pins drop to `surfaceSunken`. A 30 dp pill in a 48 dp target; the price never wraps.
+
+### CityCard — `SojournCityCard(city, onClick, modifier)`
+
+A city's photo, its localized name, and "214 stays · from £1,950 a month".
+
+### StayCard — `SojournStayCard(stay, price, saved, onClick, onToggleSave, modifier, layout)`
+
+One stay: area, rating, the host's title (`HostText`), facts from one template, and `SojournPrice`. The full layout swipes up to five photos with dots, shows the long-stay badge and the floating save heart; the compact layout is the map's card.
+
+### Gallery — `SojournGallery(photos, onOpen, modifier)`
+
+The Details header: a 3:2 pager that follows reading direction, preloads the next two photos, and shows "1 / 13" in a bidi isolate. Every slot has a placeholder, the photo, and "Photo did not load" with a retry tap.
+
+**Photos in samples.** Previews, screenshots and the showcase use twelve CC0 photos bundled under `composeResources/drawable/sample_*.jpg` (credits in `THIRD_PARTY.md`). A sample `Photo` carries a `sample://…` URL that `WithSamplePhotos` answers synchronously through Coil's preview handler, so screenshots never wait on the network. The app supplies its own network-backed `ImageLoader`.
+
 ## Tests
 
 - `TokenParityTest`: one property per token, both themes share the token set, dark is a full theme (only saffron is shared), motion ceiling is `dur-slower`, only directional icons mirror.

@@ -46,7 +46,7 @@ Material 3 may be used **inside** the implementation; nothing Material appears i
 ## 4. Previews and screenshots
 
 - One `@Preview` per visual state; each preview wraps content in `SojournPreview(variant)` which applies theme + locale + direction.
-- One `SnapshotCase` per state in `Sojourn<Comp>Snapshots.kt`, added to `designSystemSnapshots`: `SnapshotCase("<comp>_<state>") { … }`. The default state passes `fullMatrix = true` (16 cells on Android, including 200 % font and 320 dp); every case also renders on iOS in the four shipped variants (ADR 0010). Record both platforms (`recordRoborazziAndroidHostTest`, `recordRoborazziIosSimulatorArm64`), inspect every image (Arabic at 200 % and 320 dp especially, and iOS against Android), commit baselines.
+- One `SnapshotCase` per state in `Sojourn<Comp>Snapshots.kt`, added to `designSystemSnapshots`: `SnapshotCase("<comp>_<state>") { … }`. The default state passes `fullMatrix = true` (16 cells on Android, including 200 % font and 320 dp); every case also renders on iOS in the four shipped variants (ADR 0010). Record both platforms (`recordRoborazziAndroidHostTest`, `recordRoborazziIosSimulatorArm64`), inspect every image on the contact sheets (`tooling/scripts/screenshot_contact_sheets.py`, see the testing guide; Arabic at 200 % and 320 dp especially, and iOS against Android), commit baselines.
 - Long-string previews for Arabic and 200% to prove the component grows rather than clips (S-08, I-04).
 
 ## 5. Tests beyond screenshots

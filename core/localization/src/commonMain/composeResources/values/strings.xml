@@ -113,6 +113,9 @@
     <string name="check_in_self_check_in">Self check-in</string>
     <string name="check_in_host">Your host welcomes you</string>
     <string name="check_in_lockbox">Lockbox</string>
+    <string name="policy_cancellation_detail">After that, the first %1$s are not refunded.</string>
+    <string name="policy_deposit_detail">Held on your card, released within %1$s of check-out.</string>
+    <string name="check_in_self_check_in_detail">A key code arrives by message on the day.</string>
 
     <!-- Catalogue names, localized by id (S-05) -->
     <string name="city_london">London</string>
@@ -125,6 +128,12 @@
     <string name="country_fr">France</string>
     <string name="country_pt">Portugal</string>
     <string name="country_dz">Algeria</string>
+    <string name="area_in_city">%1$s, %2$s</string>
+    <string name="area_paddington">Paddington</string>
+    <string name="area_shoreditch">Shoreditch</string>
+    <string name="area_le_marais">Le Marais</string>
+    <string name="area_hydra">Hydra</string>
+    <string name="city_card_summary">%1$s · %2$s</string>
 
     <!-- Search -->
     <string name="search_where">Where</string>
@@ -195,6 +204,8 @@
     <string name="cd_previous_month">Previous month</string>
     <string name="cd_next_month">Next month</string>
     <string name="cd_photo_counter">Photo %1$s</string>
+    <string name="photo_failed">Photo did not load</string>
+    <string name="cd_photo_retry">Load the photo again</string>
     <string name="cd_saved_heart">Saved</string>
 
     <!-- Plurals: English has two forms; Arabic declares all six (S-03). -->
@@ -250,5 +261,9 @@
     <plurals name="minutes_walk">
         <item quantity="one">%1$s min walk</item>
         <item quantity="other">%1$s min walk</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">%1$s day</item>
+        <item quantity="other">%1$s days</item>
     </plurals>
 </resources>
