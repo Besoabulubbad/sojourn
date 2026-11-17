@@ -1,0 +1,250 @@
+[
+ {
+  "commons": "File:Living room (Unsplash).jpg",
+  "category": "living"
+ },
+ {
+  "commons": "File:Artchapiz1 artchapiz.es apartment rental granada 01.jpg",
+  "category": "living"
+ },
+ {
+  "commons": "File:Casual Meeting Room (Unsplash).jpg",
+  "category": "living"
+ },
+ {
+  "openverse": "37a06779-d903-4996-b15e-333489c539ae",
+  "category": "living"
+ },
+ {
+  "openverse": "987f193c-da8a-424d-a979-a49e0a9273ee",
+  "category": "living"
+ },
+ {
+  "openverse": "e04e3d17-64e2-4dd0-8e80-cd86d3adfd99",
+  "category": "living"
+ },
+ {
+  "openverse": "f4a984d4-ca6d-4690-bc32-cd169db8a1b0",
+  "category": "living"
+ },
+ {
+  "openverse": "d51029de-4191-4c41-9d36-1aa734a91b08",
+  "category": "living"
+ },
+ {
+  "openverse": "11a35d82-9872-449f-a23f-017eb68cf38e",
+  "category": "living"
+ },
+ {
+  "openverse": "38efb996-331a-4f04-b827-10e8335391f3",
+  "category": "living"
+ },
+ {
+  "openverse": "21a2b35a-5b9d-4b5d-b324-bec9cfb497e7",
+  "category": "living"
+ },
+ {
+  "openverse": "0a0db5a9-997f-434c-b557-d38a32e68e5d",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "ab7e5d21-7f97-4ad9-a1ac-720c888ebc3b",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "4732270b-7b71-43c7-b134-89aea9837d1d",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "9edea403-9f30-4a4a-97c4-0d797a000d74",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "fe6f49ed-bca1-4a5e-944b-d0f979f5ab99",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "bf6b8391-06aa-4ad1-b12d-d8c946dbfcb9",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "88c48c64-bef2-481d-94fb-d12143ab4577",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "7cc5a8b3-8dd6-4883-bea8-2086a348c9e4",
+  "category": "bedroom"
+ },
+ {
+  "openverse": "30e271d3-231a-4c75-ba73-dbbd5c50276d",
+  "category": "bedroom"
+ },
+ {
+  "commons": "File:Blue white kitchen interior (Unsplash).jpg",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "233a53e5-ff80-4d22-a330-778818c8e718",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "96299156-a2e8-4250-8d30-6915fd35bd7e",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "5f53669d-e8a0-4a30-bf0e-fe1c02019b11",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "c75104e5-28d0-4e7f-a69c-6e111532cc11",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "e2733fe4-d6e5-4a08-9521-b15a819ef88c",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "6a250f15-f065-4e16-bd8d-d6fb49e22b22",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "ac305e32-b869-45d7-b5f4-1b0393cc239c",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "ce77acb2-7724-4511-88a1-6fb6feb48d7b",
+  "category": "kitchen"
+ },
+ {
+  "openverse": "82f59a13-8105-45a3-8d95-5b3829af551b",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "4d77a76d-563a-4632-8886-b51301580a07",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "fc73b0af-5955-4be7-bf8c-881b6c27bd05",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "d7519250-f34c-4c09-9747-ffdad0cfcf2b",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "2ad7068a-ebad-4b0c-af32-04f79bb2f34d",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "00e483af-2a9e-4acc-8437-3fa42ee53e11",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "2a6f7783-f77e-4972-985b-31559a2e8830",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "d862026b-1f3f-4c04-9b85-ecf98cc6d6c9",
+  "category": "bathroom"
+ },
+ {
+  "openverse": "88505629-fcc0-4fc4-bcb7-8154271cb2c4",
+  "category": "dining"
+ },
+ {
+  "openverse": "c81108bb-4e10-4c0b-a860-39b0edc69805",
+  "category": "dining"
+ },
+ {
+  "openverse": "54235564-31d7-4abb-b360-b1c46045fe4e",
+  "category": "dining"
+ },
+ {
+  "openverse": "e3254594-b64d-4ec2-9f03-8caccf494c68",
+  "category": "dining"
+ },
+ {
+  "openverse": "abeaa833-73f4-458b-8336-cde77a847774",
+  "category": "dining"
+ },
+ {
+  "openverse": "ff86cff8-6a08-4b57-b5b9-dd8fd3a6dee9",
+  "category": "workspace"
+ },
+ {
+  "openverse": "1c2622b2-67c9-453d-8f04-182446c36d07",
+  "category": "workspace"
+ },
+ {
+  "openverse": "a22b3751-6733-42d3-9600-e7ba188e2e64",
+  "category": "workspace"
+ },
+ {
+  "commons": "File:Vacation in Greece (Unsplash).jpg",
+  "category": "balcony"
+ },
+ {
+  "openverse": "c7123686-d710-4d8f-a11f-0a951e8f0125",
+  "category": "balcony"
+ },
+ {
+  "openverse": "ac5eb716-7c90-49bd-a16f-9edbe582f456",
+  "category": "balcony"
+ },
+ {
+  "openverse": "74b7e4e4-d570-49ca-a970-1875fbbb9133",
+  "category": "balcony"
+ },
+ {
+  "openverse": "843d6cb6-5362-4805-8f38-1b3af3fbe00f",
+  "category": "balcony"
+ },
+ {
+  "openverse": "450667cc-97d5-459f-a87f-f5276ebab6b6",
+  "category": "balcony"
+ },
+ {
+  "commons": "File:Place Dauphine, Paris, Buildings no. 10-16 (Unsplash).jpg",
+  "category": "exterior"
+ },
+ {
+  "commons": "File:South Beach, Miami (Unsplash).jpg",
+  "category": "exterior"
+ },
+ {
+  "openverse": "8f683ad5-f7a0-4051-8573-dec7d2e51997",
+  "category": "exterior"
+ },
+ {
+  "openverse": "dbe84b31-18df-44b9-8050-181f0976d779",
+  "category": "exterior"
+ },
+ {
+  "openverse": "4a581ba1-a07d-4a31-8709-58fdef6fb4d3",
+  "category": "exterior"
+ },
+ {
+  "commons": "File:Cloudy London skyline (Unsplash).jpg",
+  "category": "city_london"
+ },
+ {
+  "openverse": "0383ed14-c864-420b-bc5e-7ebef426c313",
+  "category": "city_paris"
+ },
+ {
+  "openverse": "f30bc290-4d8e-4e8f-b8cd-a72d30e2c05e",
+  "category": "city_lisbon"
+ },
+ {
+  "commons": "File:Algiers center.jpg",
+  "category": "city_algiers"
+ },
+ {
+  "commons": "File:Sidi Mabrouk - Constantine \u0633\u064a\u062f\u064a \u0645\u0628\u0631\u0648\u0643 - \u0642\u0633\u0646\u0637\u064a\u0646\u0629.jpg",
+  "category": "city_constantine"
+ },
+ {
+  "openverse": "8244c8da-0704-47bb-a2e9-b4e368d1f1da",
+  "category": "city_oran"
+ }
+]

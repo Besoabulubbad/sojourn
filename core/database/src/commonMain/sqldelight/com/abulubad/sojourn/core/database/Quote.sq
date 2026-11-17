@@ -1,0 +1,37 @@
+-- Quotes the API issued, kept so every surface shows the same total for the same quote id (P-02).
+CREATE TABLE quote (
+    id TEXT NOT NULL PRIMARY KEY,
+    stay_id TEXT NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT NOT NULL,
+    adults INTEGER NOT NULL,
+    children INTEGER NOT NULL,
+    total_minor INTEGER NOT NULL,
+    currency TEXT NOT NULL
+);
+
+-- The lines sum to quote.total_minor; core:data rebuilds a PriceBreakdown, which checks it (P-05).
+CREATE TABLE quote_line (
+    quote_id TEXT NOT NULL REFERENCES quote(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    amount_minor INTEGER NOT NULL,
+    quantity INTEGER,
+    unit_minor INTEGER,
+    PRIMARY KEY (quote_id, position)
+);
+
+upsert:
+INSERT OR REPLACE INTO quote VALUES ?;
+
+insertLine:
+INSERT OR REPLACE INTO quote_line VALUES ?;
+
+clearLines:
+DELETE FROM quote_line WHERE quote_id = ?;
+
+byId:
+SELECT * FROM quote WHERE id = ?;
+
+linesFor:
+SELECT * FROM quote_line WHERE quote_id = ? ORDER BY position;

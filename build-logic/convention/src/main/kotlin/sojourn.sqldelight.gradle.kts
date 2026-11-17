@@ -23,11 +23,11 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.library("sqldelight-runtime"))
-            implementation(libs.library("sqldelight-coroutines"))
-            implementation(libs.library("sqldelight-primitiveAdapters"))
         }
         androidMain.dependencies {
             implementation(libs.library("sqldelight-androidDriver"))
+            // The driver's open callback takes SupportSQLiteDatabase (foreign keys on).
+            implementation(libs.library("androidx-sqlite"))
         }
         iosMain.dependencies {
             implementation(libs.library("sqldelight-nativeDriver"))
@@ -36,6 +36,13 @@ kotlin {
         matching { it.name == "androidHostTest" }.configureEach {
             dependencies {
                 implementation(libs.library("sqldelight-sqliteDriver"))
+            }
+        }
+        // Device tests share commonTest; their in-memory driver is the Android one on the instrumentation context.
+        matching { it.name == "androidDeviceTest" }.configureEach {
+            dependencies {
+                implementation(libs.library("sqldelight-androidDriver"))
+                implementation(libs.library("androidx-testMonitor"))
             }
         }
     }

@@ -79,6 +79,7 @@ data class Stay(
     val fromPrice: PriceDisplay.From,
     val walkMinutesToTransit: Int? = null,
     val longStayDiscountPercent: Int? = null,
+    val instantBook: Boolean = false,
 ) {
     init {
         require(photos.isNotEmpty()) { "A stay has at least one photo slot" }

@@ -1,0 +1,27 @@
+-- Cities in the catalogue. Names are localized by id in the app (S-05); the "from" price is a monthly figure.
+CREATE TABLE city (
+    id TEXT NOT NULL PRIMARY KEY,
+    country_code TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    stay_count INTEGER NOT NULL,
+    from_minor INTEGER NOT NULL,
+    from_currency TEXT NOT NULL,
+    from_basis TEXT NOT NULL,
+    -- Comma-separated PriceExclusion ids, never empty (P-03).
+    from_excludes TEXT NOT NULL,
+    photo_id TEXT NOT NULL,
+    photo_url TEXT NOT NULL
+);
+
+upsert:
+INSERT OR REPLACE INTO city VALUES ?;
+
+all:
+SELECT * FROM city ORDER BY stay_count DESC, id;
+
+byId:
+SELECT * FROM city WHERE id = ?;
+
+deleteAll:
+DELETE FROM city;

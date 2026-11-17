@@ -14,6 +14,8 @@ androidx-espresso = "3.7.0"
 androidx-lifecycle = "2.11.0"
 androidx-testExt = "1.3.0"
 androidx-testRunner = "1.7.0"
+androidx-testMonitor = "1.8.0"
+androidx-sqlite = "2.7.1"
 coil = "3.6.3"
 composablePreviewScanner = "0.10.0"
 composeMultiplatform = "1.12.2"
@@ -106,11 +108,13 @@ sqldelight-androidDriver = { module = "app.cash.sqldelight:android-driver", vers
 sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqldelight-sqliteDriver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-http = { module = "io.ktor:ktor-http", version.ref = "ktor" }
 ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinxJson = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-networkKtor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
@@ -144,6 +148,8 @@ konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 androidx-testExt-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-testExt" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso" }
 androidx-testRunner = { module = "androidx.test:runner", version.ref = "androidx-testRunner" }
+androidx-testMonitor = { module = "androidx.test:monitor", version.ref = "androidx-testMonitor" }
+androidx-sqlite = { module = "androidx.sqlite:sqlite", version.ref = "androidx-sqlite" }
 
 # --- Static analysis ---
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }

@@ -66,6 +66,7 @@ nav:
   - Plan: plan.md
   - Tech stack: tech-stack.md
   - Showcase: showcase/index.md
+  - Catalogue photos: catalog/CREDITS.md
   - Architecture:
       - Overview: architecture/overview.md
       - Modules: architecture/modules.md
@@ -99,5 +100,6 @@ nav:
       - "0013 AI agents in the dev loop": adr/0013-ai-agents-dev-loop.md
       - "0014 Static analysis and dependency hygiene": adr/0014-static-analysis-dependency-hygiene.md
       - "0015 Our own bottom sheet": adr/0015-own-bottom-sheet.md
+      - "0016 Seed catalogue hosting": adr/0016-seed-catalogue-hosting.md
   # Enabled in Phase 7 once Dokka output is published under docs/api:
   # - API reference (Dokka): api/index.html
