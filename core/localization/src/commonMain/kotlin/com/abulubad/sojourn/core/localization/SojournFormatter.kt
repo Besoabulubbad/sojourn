@@ -122,7 +122,8 @@ class SojournFormatter(private val locale: AppLocale) {
     }
 
     private fun moneyPlain(amount: Money): String {
-        val sign = if (amount.isNegative) "-" else ""
+        // A true minus sign (U+2212), not a hyphen: "−£147" (brand book, discounts).
+        val sign = if (amount.isNegative) "\u2212" else ""
         val major = group(if (amount.isNegative) -amount.major else amount.major)
         val minor = amount.minorRemainder
         val number = if (minor == 0L) major else "$major.${minor.toString().padStart(2, '0')}"

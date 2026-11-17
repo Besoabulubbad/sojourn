@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.abulubad.sojourn.core.designsystem.components.internal.focusRing
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
+import com.abulubad.sojourn.core.designsystem.theme.rememberSojournHaptics
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
@@ -54,6 +55,7 @@ fun SojournStepper(
     modifier: Modifier = Modifier,
     hint: String? = null,
 ) {
+    val haptics = rememberSojournHaptics()
     val c = SojournTheme.colors
     val formatter = rememberSojournFormatter()
     Row(
@@ -70,7 +72,10 @@ fun SojournStepper(
                 icon = SojournIcon.Minus,
                 description = stringResource(Res.string.cd_decrease_label, label),
                 enabled = value > range.first,
-                onClick = { onValueChange(value - 1) },
+                onClick = {
+                    haptics.tick()
+                    onValueChange(value - 1)
+                },
             )
             BasicText(
                 formatter.count(value),
@@ -87,7 +92,10 @@ fun SojournStepper(
                 icon = SojournIcon.Plus,
                 description = stringResource(Res.string.cd_increase_label, label),
                 enabled = value < range.last,
-                onClick = { onValueChange(value + 1) },
+                onClick = {
+                    haptics.tick()
+                    onValueChange(value + 1)
+                },
             )
         }
     }

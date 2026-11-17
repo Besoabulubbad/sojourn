@@ -116,6 +116,18 @@ The Details header: a 3:2 pager that follows reading direction, preloads the nex
 
 **Photos in samples.** Previews, screenshots and the showcase use twelve CC0 photos bundled under `composeResources/drawable/sample_*.jpg` (credits in `THIRD_PARTY.md`). A sample `Photo` carries a `sample://…` URL that `WithSamplePhotos` answers synchronously through Coil's preview handler, so screenshots never wait on the network. The app supplies its own network-backed `ImageLoader`.
 
+### BookingBar — `SojournBookingBar(price, onPrimary, onPriceDetails, modifier, dates)`
+
+The docked bar on Details: one price, one button. Opaque, full width, owns the navigation-bar inset. Never disabled: "Reserve" with dates, "Choose dates" without. "Price details" (with the dates) opens the breakdown. When the price changes it swaps with the price transition.
+
+### PriceBreakdown — `SojournPriceBreakdown(breakdown, modifier, deposit)`
+
+Every line of a quote: nights × rate, discounts (a true minus in `brandInk`), fees, then the total. `PriceBreakdown` cannot exist unless its lines sum to the total (P-05). The refundable deposit is not part of the total, so it is not a line: it shows as a note under the total.
+
+### Motion — `SojournTransitions`, `rememberSojournHaptics()`
+
+The signature transitions for `AnimatedContent`: `stepForward()` / `stepBack()` (a step slides from the end edge and fades, mirrored in Arabic) and `priceSwap()` (old value up and out, new from below). Each becomes a `fast` crossfade under reduce motion; `SojournTransitionsBehaviourTest` checks direction in both languages and the reduce-motion fade. `rememberSojournHaptics()` exposes only `tick()`, `success()` and `error()`; the tick fires on save, stepper changes, date taps and when a sheet settles at a stop. The save pop, pin select, sheet enter and range tint sweep live in their components; the container transform (search bar to search flow, card to Details) is a shared-element transition that arrives with navigation.
+
 ## Tests
 
 - `TokenParityTest`: one property per token, both themes share the token set, dark is a full theme (only saffron is shared), motion ceiling is `dur-slower`, only directional icons mirror.

@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.designsystem
 
 import com.abulubad.sojourn.core.designsystem.components.actions.actionsSnapshots
+import com.abulubad.sojourn.core.designsystem.components.booking.bookingSnapshots
 import com.abulubad.sojourn.core.designsystem.components.feedback.feedbackSnapshots
 import com.abulubad.sojourn.core.designsystem.components.inputs.inputsSnapshots
 import com.abulubad.sojourn.core.designsystem.components.listing.listingSnapshots
@@ -22,4 +23,5 @@ val designSystemSnapshots: List<SnapshotCase> =
         feedbackSnapshots +
         inputsSnapshots +
         navigationSnapshots +
-        listingSnapshots
+        listingSnapshots +
+        bookingSnapshots

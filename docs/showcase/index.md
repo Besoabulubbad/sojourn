@@ -70,6 +70,8 @@ Components land one design-system group per pull request. Each row shows English
 | CityCard | ![](components/city-cards-en-light.png){ width="300" } | ![](components/city-cards-ar-dark.png){ width="300" } |
 | StayCard | ![](components/stay-card-full-en-light.png){ width="300" } | ![](components/stay-card-full-ar-dark.png){ width="300" } |
 | Gallery | ![](components/gallery-states-en-light.png){ width="300" } | ![](components/gallery-states-ar-dark.png){ width="300" } |
+| BookingBar | ![](components/booking-bar-states-en-light.png){ width="300" } | ![](components/booking-bar-states-ar-dark.png){ width="300" } |
+| PriceBreakdown | ![](components/price-breakdown-quote-en-light.png){ width="300" } | ![](components/price-breakdown-quote-ar-dark.png){ width="300" } |
 
 The Arabic dated price at 200 % font and 320 dp, the hardest cell of the matrix: ![](components/price-dated-ar-dark-f200-w320.png){ width="240" }
 

@@ -1,24 +1,29 @@
 package com.abulubad.sojourn.core.designsystem.components.daterange
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -29,9 +34,13 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.LayoutDirection
 import com.abulubad.sojourn.core.designsystem.components.iconbutton.SojournIconButton
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
+import com.abulubad.sojourn.core.designsystem.theme.LocalReduceMotion
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
+import com.abulubad.sojourn.core.designsystem.theme.rememberSojournHaptics
+import com.abulubad.sojourn.core.designsystem.tokens.SojournMotion
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
@@ -43,6 +52,7 @@ import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.model.DateRange
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
+import kotlinx.datetime.daysUntil
 import kotlinx.datetime.minusMonth
 import kotlinx.datetime.plusMonth
 import org.jetbrains.compose.resources.pluralStringResource
@@ -72,6 +82,8 @@ fun SojournDateRangePicker(
     var checkIn by remember { mutableStateOf<LocalDate?>(null) }
     val isAvailable: (LocalDate) -> Boolean = { availability(it) == SojournDayState.Available }
     val weekDays = formatter.weekDays()
+    val haptics = rememberSojournHaptics()
+    val sweep = rememberRangeSweep(selection)
     Column(modifier.fillMaxWidth()) {
         Row(Modifier.padding(vertical = SojournSpacing.space2), verticalAlignment = Alignment.CenterVertically) {
             BasicText(
@@ -113,7 +125,10 @@ fun SojournDateRangePicker(
                             role = dayRole(date, selection, checkIn),
                             available = isAvailable(date),
                             modifier = cellModifier,
+                            sweepPosition = selection?.let { sweepPosition(date, it) },
+                            sweep = sweep,
                             onClick = {
+                                haptics.tick()
                                 when (val step = nextSelection(checkIn, date, minNights, isAvailable)) {
                                     is DateSelectionStep.CheckIn -> {
                                         checkIn = step.date
@@ -154,7 +169,15 @@ private fun dayRole(date: LocalDate, selection: DateRange?, checkIn: LocalDate?)
 }
 
 @Composable
-private fun DayCell(date: LocalDate, role: DayRole, available: Boolean, modifier: Modifier, onClick: () -> Unit) {
+private fun DayCell(
+    date: LocalDate,
+    role: DayRole,
+    available: Boolean,
+    modifier: Modifier,
+    sweepPosition: Float?,
+    sweep: () -> Float,
+    onClick: () -> Unit,
+) {
     val c = SojournTheme.colors
     val formatter = rememberSojournFormatter()
     val unavailable = stringResource(Res.string.day_unavailable)
@@ -170,7 +193,7 @@ private fun DayCell(date: LocalDate, role: DayRole, available: Boolean, modifier
             },
         contentAlignment = Alignment.Center,
     ) {
-        RangeTint(role)
+        RangeTint(role, sweepPosition, sweep)
         if (endpoint) {
             Box(Modifier.size(SojournDateRangePickerDefaults.DayHeight).background(c.brand, SojournShapes.full))
         }
@@ -199,24 +222,53 @@ private fun dayWeight(endpoint: Boolean, available: Boolean): FontWeight = when 
 
 /** The `brandTint` band: full cells between, and from the disc's centre inward at either end (mirrors in RTL). */
 @Composable
-private fun BoxScope.RangeTint(role: DayRole) {
+private fun BoxScope.RangeTint(role: DayRole, position: Float?, sweep: () -> Float) {
     val tint = SojournTheme.colors.brandTint
-    val half = when (role) {
-        DayRole.Between -> {
-            Box(Modifier.matchParentSize().background(tint))
-            return
+    if (role == DayRole.CheckIn || role == DayRole.None || position == null) return
+    Box(
+        Modifier
+            .matchParentSize()
+            .drawBehind {
+                // The sweep is read while drawing, so the animation redraws cells without recomposing them.
+                if (position > sweep()) return@drawBehind
+                val half = size.width * SojournDateRangePickerDefaults.HALF
+                val endHalf = if (layoutDirection == LayoutDirection.Ltr) half else 0f
+                val startHalf = if (layoutDirection == LayoutDirection.Ltr) 0f else half
+                when (role) {
+                    DayRole.Between -> drawRect(tint)
+                    DayRole.CheckInOfRange -> drawRect(tint, Offset(endHalf, 0f), Size(half, size.height))
+                    DayRole.CheckOut -> drawRect(tint, Offset(startHalf, 0f), Size(half, size.height))
+                    DayRole.CheckIn, DayRole.None -> Unit
+                }
+            },
+    )
+}
+
+/** Where [date] sits in [range], 0 at check-in and 1 at check-out; null outside it. */
+private fun sweepPosition(date: LocalDate, range: DateRange): Float? {
+    if (date < range.start || date > range.end) return null
+    return range.start.daysUntil(date).toFloat() / range.nights
+}
+
+/**
+ * The range tint sweep (motion.md): when a new range is chosen, the tint runs from check-in to check-out, `fast`
+ * per week row and never longer than `base`. The first range shown and reduce motion appear at once.
+ */
+@Composable
+private fun rememberRangeSweep(selection: DateRange?): () -> Float {
+    val progress = remember { Animatable(1f) }
+    var shown by remember { mutableStateOf(selection) }
+    val reduceMotion = LocalReduceMotion.current
+    LaunchedEffect(selection) {
+        if (selection != null && selection != shown && !reduceMotion) {
+            val rows = selection.nights / SojournDateRangePickerDefaults.DAYS_PER_WEEK + 1
+            progress.snapTo(0f)
+            progress.animateTo(
+                1f,
+                tween(minOf(rows * SojournMotion.fast, SojournMotion.base), easing = SojournMotion.standard),
+            )
         }
-        DayRole.CheckInOfRange -> Alignment.CenterEnd
-        DayRole.CheckOut -> Alignment.CenterStart
-        DayRole.CheckIn, DayRole.None -> return
+        shown = selection
     }
-    Box(Modifier.matchParentSize()) {
-        Box(
-            Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(SojournDateRangePickerDefaults.HALF)
-                .align(half)
-                .background(tint),
-        )
-    }
+    return { progress.value }
 }
