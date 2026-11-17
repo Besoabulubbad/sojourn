@@ -64,6 +64,7 @@ import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.designsystem.theme.enter
 import com.abulubad.sojourn.core.designsystem.theme.exit
+import com.abulubad.sojourn.core.designsystem.theme.rememberSojournHaptics
 import com.abulubad.sojourn.core.designsystem.theme.settleSpring
 import com.abulubad.sojourn.core.designsystem.tokens.SojournMotion
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
@@ -73,7 +74,9 @@ import com.abulubad.sojourn.core.localization.resources.cd_close
 import com.abulubad.sojourn.core.localization.resources.cd_sheet_collapse
 import com.abulubad.sojourn.core.localization.resources.cd_sheet_expand
 import com.abulubad.sojourn.core.localization.resources.cd_sheet_handle
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.dropWhile
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -135,6 +138,15 @@ fun SojournSheet(
         }
     }
     SheetBackHandler(state, modal, close)
+    val haptics = rememberSojournHaptics()
+    LaunchedEffect(state) {
+        // A light tick each time the sheet comes to rest at a new stop (not when it first appears or hides).
+        snapshotFlow { anchored.settledValue }
+            .dropWhile { it == SheetStop.Hidden }
+            .drop(1)
+            .filter { it != SheetStop.Hidden }
+            .collect { haptics.tick() }
+    }
 
     Box(modifier.fillMaxSize()) {
         if (modal) Scrim(state, onTap = close)

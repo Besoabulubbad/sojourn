@@ -42,14 +42,18 @@ sealed interface PriceDisplay {
     }
 }
 
-/** Kinds of lines a quote breaks down into. Labels are localized by id (S-05). */
+/**
+ * Kinds of lines a quote breaks down into. Labels are localized by id (S-05).
+ *
+ * The refundable deposit is not a line: it is not part of the total. It comes from `Policy.Deposit` and is
+ * shown under the total.
+ */
 enum class PriceLineKind(val id: String) {
     Nights("nights"),
     LongStayDiscount("long_stay_discount"),
     CleaningFee("cleaning_fee"),
     ServiceFee("service_fee"),
     CityTax("city_tax"),
-    Deposit("deposit"),
 }
 
 /**

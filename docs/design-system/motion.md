@@ -64,3 +64,18 @@ When the system setting is on: container transforms, slides and pops become a 15
 ## Performance
 
 Animations hold 60fps on a mid-range Android device, 120fps where the display supports it. Animate transforms and opacity; do not animate layout size inside lists. Images decode off the main thread and are sized to their slot.
+
+## In code
+
+| Spec | Where |
+|---|---|
+| Tokens, `enter`/`exit`/`move`, springs | `SojournMotion` and `theme/SojournMotionExtensions.kt` |
+| Step change, price update | `SojournTransitions.stepForward()`, `stepBack()`, `priceSwap()` |
+| Haptics | `rememberSojournHaptics()`: `tick()`, `success()`, `error()` |
+| Save | `SojournStayCard` heart (dip 0.8, pop 1.3, settle over `base`) + tick |
+| Pin select | `SojournPricePin` (scale 1.12 over `fast`) |
+| Sheet open and drag | `SojournSheet` (`slow` enter, settle spring, tick at each stop) |
+| Date range pick | `SojournDateRangePicker` (tint sweep `fast` per row, capped at `base`) + tick |
+| Top bar on Details | `SojournTopBar` with `rememberTopBarSolidFraction` (scroll-linked) |
+| Button press | `SojournButton` (scale 0.98, darken 8 % over `instant`) |
+| Container transform, card to Details, list to map | with navigation in `app:shared` (Phase 5) |

@@ -75,11 +75,14 @@
     <string name="exclusion_deposit">التأمين</string>
     <string name="exclusion_city_tax">ضريبة المدينة</string>
     <string name="line_nights">%1$s × %2$s</string>
+    <string name="line_nights_plain">الليالي</string>
     <string name="line_long_stay_discount">خصم الإقامة الطويلة</string>
     <string name="line_cleaning_fee">رسوم التنظيف</string>
     <string name="line_service_fee">رسوم الخدمة</string>
     <string name="line_city_tax">ضريبة المدينة</string>
-    <string name="line_deposit">تأمين مسترد</string>
+    <string name="breakdown_deposit_note">يُضاف تأمين مسترد بقيمة %1$s يُحجز منفصلًا.</string>
+    <string name="price_details">تفاصيل السعر</string>
+    <string name="booking_bar_detail">%1$s · %2$s</string>
     <string name="line_total">الإجمالي</string>
 
     <!-- Facts -->

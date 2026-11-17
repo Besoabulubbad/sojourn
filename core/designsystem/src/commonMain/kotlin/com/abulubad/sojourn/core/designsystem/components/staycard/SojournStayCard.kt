@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -30,12 +31,14 @@ import com.abulubad.sojourn.core.designsystem.components.iconbutton.SojournIconB
 import com.abulubad.sojourn.core.designsystem.components.internal.PageDots
 import com.abulubad.sojourn.core.designsystem.components.internal.PhotoPager
 import com.abulubad.sojourn.core.designsystem.components.internal.PhotoSlot
+import com.abulubad.sojourn.core.designsystem.components.internal.rememberSavePopScale
 import com.abulubad.sojourn.core.designsystem.components.keyfacts.factsSummary
 import com.abulubad.sojourn.core.designsystem.components.price.SojournPrice
 import com.abulubad.sojourn.core.designsystem.components.price.SojournPriceSize
 import com.abulubad.sojourn.core.designsystem.components.rating.SojournRating
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
+import com.abulubad.sojourn.core.designsystem.theme.rememberSojournHaptics
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
@@ -61,6 +64,7 @@ import org.jetbrains.compose.resources.stringResource
  * - [SojournStayCardLayout.Full]: up to five photos swipe inside the card with dots, the `accent` long-stay badge
  *   when the stay has a discount, and the floating save heart. No shadow in lists.
  * - [SojournStayCardLayout.Compact]: for the map; one photo at the start on a raised card.
+ * - Saving pops the heart (0.8 → 1.3 → 1 over `base`) with a light haptic tick (motion.md).
  */
 @Composable
 fun SojournStayCard(
@@ -220,11 +224,19 @@ private fun LongStayBadge(modifier: Modifier) {
 
 @Composable
 private fun SaveButton(saved: Boolean, onToggle: () -> Unit, modifier: Modifier, floating: Boolean = true) {
+    val haptics = rememberSojournHaptics()
+    val scale = rememberSavePopScale(saved)
     SojournIconButton(
         icon = if (saved) SojournIcon.SavedFilled else SojournIcon.Saved,
         contentDescription = stringResource(if (saved) Res.string.cd_unsave else Res.string.cd_save),
-        onClick = onToggle,
-        modifier = modifier,
+        onClick = {
+            haptics.tick()
+            onToggle()
+        },
+        modifier = modifier.graphicsLayer {
+            scaleX = scale()
+            scaleY = scale()
+        },
         variant = if (floating) SojournIconButtonVariant.Floating else SojournIconButtonVariant.Plain,
         tint = if (saved) SojournIconButtonTint.Saved else SojournIconButtonTint.Default,
     )

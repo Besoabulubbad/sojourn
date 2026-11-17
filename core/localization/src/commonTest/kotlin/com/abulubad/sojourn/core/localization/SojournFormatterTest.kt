@@ -62,9 +62,9 @@ class SojournFormatterTest {
     }
 
     @Test
-    fun `negative money keeps a leading minus sign`() {
-        assertEquals("$FSI-£276$PDI", en.money(-Money.of(276, Currency.GBP)))
-        assertEquals("$FSI-276 £$PDI", ar.money(-Money.of(276, Currency.GBP)))
+    fun `negative money leads with a true minus sign rather than a hyphen`() {
+        assertEquals("$FSI\u2212£276$PDI", en.money(-Money.of(276, Currency.GBP)))
+        assertEquals("$FSI\u2212276 £$PDI", ar.money(-Money.of(276, Currency.GBP)))
     }
 
     @Test

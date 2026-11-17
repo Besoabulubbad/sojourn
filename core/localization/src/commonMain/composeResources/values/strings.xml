@@ -76,11 +76,14 @@
     <string name="exclusion_deposit">deposit</string>
     <string name="exclusion_city_tax">city tax</string>
     <string name="line_nights">%1$s × %2$s</string>
+    <string name="line_nights_plain">Nights</string>
     <string name="line_long_stay_discount">Long-stay discount</string>
     <string name="line_cleaning_fee">Cleaning fee</string>
     <string name="line_service_fee">Service fee</string>
     <string name="line_city_tax">City tax</string>
-    <string name="line_deposit">Refundable deposit</string>
+    <string name="breakdown_deposit_note">Plus a refundable deposit of %1$s, held separately.</string>
+    <string name="price_details">Price details</string>
+    <string name="booking_bar_detail">%1$s · %2$s</string>
     <string name="line_total">Total</string>
 
     <!-- Facts (N-01: a studio is "Studio", never "0 bedrooms") -->
