@@ -17,9 +17,8 @@ dependencies {
 
     implementation(libs.androidx.activity) // enableEdgeToEdge
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core.splashscreen)
-    implementation(libs.koin.android)
-
-    implementation(libs.compose.uiToolingPreview)
-    debugImplementation(libs.compose.uiTooling)
+    implementation(libs.koin.android) // androidContext() for the database and settings
+    implementation(libs.koin.core) // initKoin's KoinAppDeclaration
+    implementation(libs.compose.runtime) // setContent { App() }
+    implementation(libs.compose.ui)
 }

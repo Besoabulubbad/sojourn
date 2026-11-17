@@ -14,44 +14,38 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":core:model"))
+            // The graph (SojournModules): every core module with a Koin module. Feature modules join as they land.
             implementation(project(":core:common"))
             implementation(project(":core:localization"))
-            implementation(project(":core:designsystem"))
-            implementation(project(":core:ui"))
-            implementation(project(":core:navigation"))
             implementation(project(":core:platform"))
             implementation(project(":core:database"))
             implementation(project(":core:network"))
             implementation(project(":core:data"))
             implementation(project(":core:domain"))
-
-            implementation(project(":feature:explore"))
-            implementation(project(":feature:search"))
-            implementation(project(":feature:results"))
-            implementation(project(":feature:filters"))
-            implementation(project(":feature:details"))
-            implementation(project(":feature:checkout"))
-            implementation(project(":feature:map"))
-            implementation(project(":feature:saved"))
-            implementation(project(":feature:bookings"))
-            implementation(project(":feature:profile"))
-
-            implementation(libs.compose.material3)
+            // The shell: theme, tab bar, navigation host, image loading.
+            implementation(project(":core:designsystem"))
+            implementation(project(":core:ui"))
+            implementation(project(":core:navigation"))
+            // initKoin returns Koin's KoinApplication and takes its KoinAppDeclaration.
+            api(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.koin.composeViewmodel)
-            implementation(libs.koin.composeNavigation3)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.androidx.savedstate)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.navigation3.ui)
+            implementation(libs.androidx.lifecycle.viewmodelNavigation3)
             implementation(libs.navigation3.runtime)
+            implementation(libs.navigation3.ui)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.networkKtor3)
         }
         named("androidHostTest").dependencies {
             // Koin's verify() (JVM): SojournModulesTest checks the whole graph.
             implementation(libs.koin.test)
-        }
-        getByName("androidDeviceTest").dependencies {
-            implementation(libs.androidx.testRunner)
+            // SojournNavHostTest composes the navigation host under Robolectric.
+            implementation(libs.compose.uiTestJunit4)
+            implementation(libs.compose.uiTestManifest)
+            implementation(libs.robolectric)
+            implementation(libs.robolectric.annotations)
         }
     }
 }

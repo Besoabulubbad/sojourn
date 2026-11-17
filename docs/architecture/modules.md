@@ -14,7 +14,7 @@ Legend for *may depend on*: **core-base** = `core:model`, `core:common`.
 
 ## Features
 
-All feature modules share one contract: *may depend on* `:core:ui`, `:core:designsystem`, `:core:localization`, `:core:navigation`, `:core:domain`, `:core:platform`, core-base; **never** `:core:data`, `:core:database`, `:core:network`, or another `:feature:*`. Plugin: `sojourn.kmp.feature` (which applies compose, koin, screenshot and detekt). Each exposes `fun EntryProviderBuilder<NavKey>.<name>Entries(navigator: Navigator)` and `val <name>Module: Module`.
+All feature modules share one contract: *may depend on* `:core:ui`, `:core:designsystem`, `:core:localization`, `:core:navigation`, `:core:domain`, `:core:platform`, core-base; **never** `:core:data`, `:core:database`, `:core:network`, or another `:feature:*`. Plugin: `sojourn.kmp.feature` (which applies compose, koin, screenshot and detekt). Each exposes `fun EntryProviderScope<NavKey>.<name>Entries(navigator: Navigator)` and `val <name>Module: Module`.
 
 | Module | Design-system screen(s) | Key(s) in `core:navigation` |
 |---|---|---|

@@ -73,10 +73,10 @@ Why MVI: the state is a value, so a test is "given state and intent, expect stat
 The back stack is plain state owned by the app, not hidden in a controller.
 
 - `core:navigation` defines `@Serializable sealed interface SojournNavKey : NavKey` and one key per destination (`ExploreKey`, `StayDetailsKey(stayId, quoteId?)`, `CheckoutKey(quoteId)`, …). It also assembles the `SerializersModule` with explicit `polymorphic(NavKey::class)` registration — required on iOS, where the reflection-based overload is unavailable.
-- Each feature contributes `fun EntryProviderBuilder<NavKey>.exploreEntries(navigator: Navigator)`; `app:shared` composes them into one `entryProvider` and the `NavDisplay`.
-- Four top-level tabs (Explore, Saved, Bookings, Profile) keep **separate back stacks**, persisted across configuration change and process death via `rememberNavBackStack` with the saved-state configuration.
+- Each feature contributes `fun EntryProviderScope<NavKey>.exploreEntries(navigator: Navigator)`; `app:shared` composes them into one `entryProvider` and the `NavDisplay`.
+- Four top-level tabs (Explore, Saved, Bookings, Profile) keep **separate back stacks**, persisted across configuration change and process death via `rememberNavBackStack` with the saved-state configuration. Each stack's entries are decorated on their own, after the official multiple-back-stacks recipe, so a tab keeps its state while another is shown. Explore's stack is always at the bottom ("exit through Explore"). The bottom nav is placed by each tab's root screen (`SojournTabBar()` from `core:ui`), so one scaffold owns the bottom inset.
 - Scenes: `SojournSheet` destinations (Filters, price breakdown) use a bottom-sheet scene strategy; dialogs use the dialog scene. Transitions use `SojournMotion` and mirror in RTL.
-- ViewModels are scoped to their `NavEntry` through `lifecycle-viewmodel-navigation3` and Koin's `koin-compose-navigation3` integration.
+- ViewModels are scoped to their `NavEntry` by `rememberViewModelStoreNavEntryDecorator` (`lifecycle-viewmodel-navigation3`). `koinViewModel()` inside an entry uses that entry's store.
 
 The `Navigator` interface (`goTo(key)`, `back()`, `switchTab(tab)`, `popTo(key)`) is what features call; its implementation in `app:shared` mutates the back stacks. See [ADR 0005](../adr/0005-navigation-3.md).
 

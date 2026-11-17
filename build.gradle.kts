@@ -24,9 +24,8 @@ tasks.check {
 // aggregates. Policy: every category fails. Modules that are still skeletons (their convention plugin declares
 // dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
 val skeletonModules = listOf(
-    ":app:android", ":app:shared", // wired in Phase 5
-) + listOf("explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile")
-    .map { ":feature:$it" } // Phase 5
+    "explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile",
+).map { ":feature:$it" } // Phase 5: each leaves this list in its own PR
 dependencyAnalysis {
     abi {
         // The Compose compiler hoists capture-free composable lambdas into public `ComposableSingletons$<File>`
@@ -61,6 +60,11 @@ dependencyAnalysis {
             includeGroup("androidx.navigationevent")
         }
         // coil-compose is the one artifact we declare; its core modules come with it.
+        // Navigation 3: the JetBrains artifacts resolve to androidx's on Android.
+        bundle("navigation3") {
+            includeGroup("org.jetbrains.androidx.navigation3")
+            includeGroup("androidx.navigation3")
+        }
         bundle("coil") {
             includeGroup("io.coil-kt.coil3")
         }
