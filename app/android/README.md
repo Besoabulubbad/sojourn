@@ -1,5 +1,14 @@
 # app:android
 
-The Android application shell: one `MainActivity` with `enableEdgeToEdge()`, the splash screen, predictive back, per-app language via `LocaleManager`, and the Google Pay adapter `actual`s. Hosts `App()` from `app:shared`.
+The Android application:
 
-**Status:** template Activity until Phase 5. Contract: [docs/architecture/modules.md](../../docs/architecture/modules.md).
+- `SojournApplication` starts Koin with the application `Context`.
+- `MainActivity` calls `enableEdgeToEdge()` before `setContent { App() }`. Status and navigation bar icons follow the system theme.
+- The manifest sets `adjustResize` for the keyboard.
+
+Still to come, as their features need them:
+- The splash screen (Phase 6).
+- Per-app language through `LocaleManager` (Profile).
+- The Google Pay adapter (Checkout).
+
+**May depend on:** app:shared, activity, koin-android.

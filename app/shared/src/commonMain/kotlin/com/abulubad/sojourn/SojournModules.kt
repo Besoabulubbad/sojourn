@@ -10,7 +10,10 @@ import com.abulubad.sojourn.core.domain.domainModule
 import com.abulubad.sojourn.core.localization.localizationModule
 import com.abulubad.sojourn.core.network.networkModule
 import com.abulubad.sojourn.core.platform.platformModule
+import org.koin.core.KoinApplication
+import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 /** What every layer shares: the device clock and the production dispatchers. */
@@ -32,3 +35,12 @@ val sojournModules: List<Module> = listOf(
     dataModule,
     domainModule,
 )
+
+/**
+ * Starts Koin with [sojournModules]. Called once at process start: by `SojournApplication` on Android (which adds
+ * `androidContext`) and by `iOSApp` through [startKoinIos] on iOS.
+ */
+fun initKoin(platform: KoinAppDeclaration = {}): KoinApplication = startKoin {
+    platform()
+    modules(sojournModules)
+}

@@ -76,6 +76,12 @@ Design in this codebase:
 - Good: battle-tested KMP, lifecycle-aware components, great multi-stack and iOS support.
 - Bad: another vendor abstraction to learn and explain; components model competes with ViewModel/MVI; less aligned with Compose-native direction.
 
+**2026-11-17 (Phase 5 start).** Notes from wiring the host, decision unchanged:
+- The scope type in Navigation 3 1.x is `EntryProviderScope`, not `EntryProviderBuilder`.
+- Each tab's stack is decorated on its own, following the official multiple-back-stacks recipe.
+- ViewModels are scoped per entry by `rememberViewModelStoreNavEntryDecorator`; `koinViewModel()` uses that entry's store, so `koin-compose-navigation3` is not needed.
+- The bottom nav is placed by each tab root (`SojournTabBar()` in `core:ui`), so a single scaffold owns the bottom inset.
+
 ## Links
 
 - [Navigation 3 in Compose Multiplatform — JetBrains docs](https://kotlinlang.org/docs/multiplatform/compose-navigation-3.html)

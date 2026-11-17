@@ -21,7 +21,7 @@ feature/<name>/
     <Name>ViewModel.kt        class <Name>ViewModel(...) : SojournViewModel<...>
     <Name>Route.kt            @Composable fun <Name>Route(navigator: Navigator)
     <Name>Screen.kt           @Composable fun <Name>Screen(state, onIntent, modifier)
-    <Name>Navigation.kt       fun EntryProviderBuilder<NavKey>.<name>Entries(navigator: Navigator)
+    <Name>Navigation.kt       fun EntryProviderScope<NavKey>.<name>Entries(navigator: Navigator)
     <Name>Module.kt           val <name>Module = module { viewModelOf(::<Name>ViewModel) }
   src/commonMain/composeResources/   only if the feature has feature-only drawables
   src/commonTest/kotlin/...          <Name>ViewModelTest.kt
@@ -63,7 +63,7 @@ Constructor-inject use cases from `core:domain` (never repositories). Collect fl
 
 - `XxxRoute`: `val vm = koinViewModel<XxxViewModel>()`, collect `state`, `collectEffects { … navigator.goTo(…) … }`, call `XxxScreen`.
 - `XxxNavigation.kt`: `entry<XxxKey> { key -> XxxRoute(navigator, key) }` (sheet or dialog metadata if the card says so).
-- `app:shared`: add `<name>Module` to `allModules` and `<name>Entries(navigator)` to the entry provider.
+- `app:shared`: add `<name>Module` to `sojournModules`, `<name>Entries(navigator)` to `sojournEntries`, the tab (for a tab root) to `availableTabs`, and the module dependency; a tab root places `SojournTabBar()` in its scaffold's `bottomBar`.
 
 ## 7. Tests
 
