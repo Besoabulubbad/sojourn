@@ -25,3 +25,6 @@ SELECT * FROM city WHERE id = ?;
 
 deleteAll:
 DELETE FROM city;
+
+deleteById:
+DELETE FROM city WHERE id = ?;

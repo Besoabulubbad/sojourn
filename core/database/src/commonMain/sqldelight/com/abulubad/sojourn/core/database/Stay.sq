@@ -115,3 +115,18 @@ SELECT * FROM blocked_range WHERE stay_id = ? ORDER BY start_date;
 
 count:
 SELECT count(*) FROM stay;
+
+idsInCity:
+SELECT id FROM stay WHERE city_id = ?;
+
+allIds:
+SELECT id FROM stay;
+
+deleteById:
+DELETE FROM stay WHERE id = ?;
+
+policiesIn:
+SELECT * FROM policy WHERE stay_id IN ? ORDER BY stay_id, position;
+
+clearBlocked:
+DELETE FROM blocked_range WHERE stay_id = ?;
