@@ -22,6 +22,8 @@ kotlin {
             implementation(project(":core:network"))
             implementation(project(":core:data"))
             implementation(project(":core:domain"))
+            // Features, as they land.
+            implementation(project(":feature:explore"))
             // The shell: theme, tab bar, navigation host, image loading.
             implementation(project(":core:designsystem"))
             implementation(project(":core:ui"))
@@ -41,11 +43,18 @@ kotlin {
         named("androidHostTest").dependencies {
             // Koin's verify() (JVM): SojournModulesTest checks the whole graph.
             implementation(libs.koin.test)
-            // SojournNavHostTest composes the navigation host under Robolectric.
+            // SojournNavHostTest composes the navigation host under Robolectric, with fakes behind the screens.
+            implementation(project(":core:testing"))
+            implementation(project(":core:model"))
+            implementation(libs.koin.coreViewmodel)
+            // SojournGraphResolvesTest starts the real graph with the Robolectric application Context.
+            implementation(libs.koin.android)
+            implementation(libs.kotlinx.datetime)
             implementation(libs.compose.uiTestJunit4)
             implementation(libs.compose.uiTestManifest)
             implementation(libs.robolectric)
             implementation(libs.robolectric.annotations)
+            implementation(libs.robolectric.shadowsFramework) // RuntimeEnvironment.getApplication()
         }
     }
 }

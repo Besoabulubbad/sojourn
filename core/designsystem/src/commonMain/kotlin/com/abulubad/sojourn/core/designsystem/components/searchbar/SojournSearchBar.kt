@@ -71,7 +71,7 @@ fun SojournSearchBar(
     val elevation = if (compact) SojournTheme.elevation.level1 else SojournTheme.elevation.level2
     val interactionSource = remember { MutableInteractionSource() }
     val title = query?.cityId?.let { localizedCityName(it) } ?: stringResource(Res.string.search_prompt_title)
-    val detail = if (query == null) stringResource(Res.string.search_prompt_hint) else searchSummary(query)
+    val detail = if (query == null) stringResource(Res.string.search_prompt_hint) else searchSummaryText(query)
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -121,9 +121,12 @@ fun SojournSearchBar(
     }
 }
 
-/** "12–27 Mar · 15 nights · 2 guests", or "A month · 2 guests" before dates are chosen. */
+/**
+ * The one summary template for a search (the bar's summary form, Explore's "Continue your search"):
+ * "12–27 Mar · 15 nights · 2 guests", or "A month · 2 guests" before dates are chosen.
+ */
 @Composable
-private fun searchSummary(query: SearchQuery): String {
+fun searchSummaryText(query: SearchQuery): String {
     val formatter = rememberSojournFormatter()
     val guestCount = query.guests.total
     val guests = pluralStringResource(Res.plurals.guests, guestCount, formatter.count(guestCount))

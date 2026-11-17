@@ -11,7 +11,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface SojournNavKey : NavKey
 
-/** The Where / When / Who of a search, flattened to primitives for the back stack. Dates are ISO `yyyy-MM-dd`. */
+/**
+ * The Where / When / Who of a search, flattened to primitives for the back stack. Dates are ISO `yyyy-MM-dd`;
+ * [length] is a `StayLength` name, set by Explore's stay-length shortcuts before any dates are chosen.
+ */
 @Serializable
 data class SearchArgs(
     val cityId: String? = null,
@@ -19,6 +22,7 @@ data class SearchArgs(
     val checkOut: String? = null,
     val adults: Int = 1,
     val children: Int = 0,
+    val length: String? = null,
 )
 
 /** Steps of the full-screen search flow. */

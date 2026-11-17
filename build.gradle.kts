@@ -24,7 +24,7 @@ tasks.check {
 // aggregates. Policy: every category fails. Modules that are still skeletons (their convention plugin declares
 // dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
 val skeletonModules = listOf(
-    "explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile",
+    "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile",
 ).map { ":feature:$it" } // Phase 5: each leaves this list in its own PR
 dependencyAnalysis {
     abi {
@@ -64,6 +64,11 @@ dependencyAnalysis {
         bundle("navigation3") {
             includeGroup("org.jetbrains.androidx.navigation3")
             includeGroup("androidx.navigation3")
+        }
+        // koinViewModel() (compose-viewmodel) is inline, so its bytecode points at koin-core-viewmodel.
+        bundle("koin-viewmodel") {
+            includeDependency("io.insert-koin:koin-compose-viewmodel")
+            includeDependency("io.insert-koin:koin-core-viewmodel")
         }
         bundle("coil") {
             includeGroup("io.coil-kt.coil3")

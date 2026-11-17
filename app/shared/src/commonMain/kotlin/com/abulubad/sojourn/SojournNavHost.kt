@@ -21,11 +21,12 @@ import com.abulubad.sojourn.core.localization.resources.tab_bookings
 import com.abulubad.sojourn.core.localization.resources.tab_explore
 import com.abulubad.sojourn.core.localization.resources.tab_profile
 import com.abulubad.sojourn.core.localization.resources.tab_saved
-import com.abulubad.sojourn.core.navigation.ExploreKey
+import com.abulubad.sojourn.core.navigation.Navigator
 import com.abulubad.sojourn.core.navigation.Tab
 import com.abulubad.sojourn.core.navigation.TabbedNavigator
 import com.abulubad.sojourn.core.navigation.sojournSavedStateConfiguration
 import com.abulubad.sojourn.core.ui.LocalTabBar
+import com.abulubad.sojourn.feature.explore.exploreEntries
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -47,7 +48,9 @@ internal val availableTabs: List<Tab> = listOf(Tab.Explore)
 internal fun SojournNavHost(modifier: Modifier = Modifier) {
     val stacks = Tab.entries.associateWith { tab -> rememberNavBackStack(sojournSavedStateConfiguration, tab.root) }
     val navigator = remember(stacks) { TabbedNavigator(stacks) }
-    val provider = entryProvider<NavKey> { sojournEntries() }
+    val provider = entryProvider<NavKey>(fallback = { key -> NavEntry(key) { NotBuiltYet() } }) {
+        sojournEntries(navigator)
+    }
     // Only tabs that exist are decorated: decorating resolves every key in a stack, and an unbuilt tab's root has no
     // entry yet. Their stacks still exist, as TabbedNavigator needs one per tab.
     val entries: Map<Tab, List<NavEntry<NavKey>>> = availableTabs.associateWith { tab ->
@@ -68,10 +71,9 @@ internal fun SojournNavHost(modifier: Modifier = Modifier) {
     }
 }
 
-/** Every feature's entries. Each feature PR adds its `<name>Entries(navigator)` here (and takes the navigator). */
-private fun EntryProviderScope<NavKey>.sojournEntries() {
-    // Until feature:explore lands, the Explore root shows the brand placeholder.
-    entry<ExploreKey> { ShellPlaceholder() }
+/** Every feature's entries. Each feature PR adds its `<name>Entries(navigator)` here. */
+private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
+    exploreEntries(navigator)
 }
 
 @Composable

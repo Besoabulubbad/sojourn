@@ -93,7 +93,8 @@ class ArchitectureTest {
         viewModels.assertTrue(
             additionalMessage = "Every screen follows MVI through SojournViewModel (ADR 0006).",
         ) {
-            it.hasParentWithName("SojournViewModel", indirectParents = true)
+            // The parent's name carries its type arguments (`SojournViewModel<ExploreUiState, …>`).
+            it.hasParent(indirectParents = true) { parent -> parent.name.substringBefore("<") == "SojournViewModel" }
         }
     }
 
