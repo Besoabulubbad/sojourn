@@ -82,11 +82,11 @@ The `Navigator` interface (`goTo(key)`, `back()`, `switchTab(tab)`, `popTo(key)`
 
 ### Dependency injection — Koin
 
-One Koin module per Gradle module, named after it (`exploreModule`, `dataModule`). `app:shared` starts Koin with all modules; `app:android` and `iosApp` call `initKoin()` from their entry points. ViewModels are declared with `viewModelOf(::ExploreViewModel)` and obtained in `Route` composables with `koinViewModel()`. A `checkModules()` test in `app:shared` fails the build if the graph has a hole. See [ADR 0004](../adr/0004-dependency-injection-koin.md).
+One Koin module per Gradle module, named after it (`exploreModule`, `dataModule`). `app:shared` starts Koin with all modules; `app:android` and `iosApp` call `initKoin()` from their entry points. ViewModels are declared with `viewModelOf(::ExploreViewModel)` and obtained in `Route` composables with `koinViewModel()`. `SojournModulesTest` in `app:shared` runs Koin's `verify()` over `sojournModules` and fails the build if the graph has a hole. See [ADR 0004](../adr/0004-dependency-injection-koin.md).
 
 ### Domain and data
 
-- `core:domain` holds **use cases**: small classes with one `operator fun invoke`, pure Kotlin, depending only on repository interfaces and `core:model`. Business rules that the engineering standards name — "ratings hidden under 3 reviews", "breakdown lines sum to the total", "no dates means a *from* price with exclusions" — live here, with tests.
+- `core:domain` holds **use cases**: small classes with one `operator fun invoke`, pure Kotlin, depending only on repository interfaces and `core:model`. Reads return `Flow<Loadable<T>>` (cache, refreshing, last error), which `ScreenState.from(loadable)` in `core:ui` turns into the screen state, the same way on every screen. Business rules that the engineering standards name — "ratings hidden under 3 reviews", "breakdown lines sum to the total", "no dates means a *from* price with exclusions" — live here, with tests.
 - `core:data` implements repositories. **SQLDelight is the source of truth**: reads are `Flow`s from the database; a refresh pulls from `SojournApi` and writes to the database; the UI never waits on the network to show cached content. This is what makes the offline state a real state rather than a spinner.
 - `core:network` owns the `SojournApi` seam. Today it is `LocalSojournApi` — bundled JSON behind simulated latency and injectable failure, so loading, error and offline states are reproducible in tests and demos. `KtorSojournApi` is configured and swappable without touching features. See [ADR 0007](../adr/0007-offline-first-sqldelight.md).
 
@@ -136,7 +136,7 @@ The design system's [engineering standards](../design-system/mapping.md#engineer
 | Naming (`XxxViewModel`, `XxxUiState`, `Sojourn*`) | Konsist | `tooling/konsist` |
 | Arabic plurals complete | Gradle verification task | `core:localization` |
 | Token contrast | unit test | `core:designsystem` |
-| Koin graph complete | `checkModules()` | `app:shared` |
+| Koin graph complete | Koin `verify()` (`SojournModulesTest`) | `app:shared` |
 | Pricing invariants | unit tests | `core:domain` |
 | Visual regressions, 4 variants × font scale × width | Roborazzi | each module's `androidHostTest` |
 | Dependency hygiene | dependency-analysis `buildHealth` | root |

@@ -100,7 +100,7 @@ Order (dependencies first): `Price`, `Rating`, `Chip`, `Button`, `IconButton`, `
 - Seed catalogue: ~40 stays across London, Paris, Lisbon, Algiers, Constantine, Oran with a hand-curated pool of luxury CC0 photography hosted beside the docs site (5–8 per stay; ADR 0016), policies with numbers, quotes per stay length.
 - Unit tests on every repository and use case with fixtures; property-style tests on pricing.
 
-**Exit:** app-independent test suite proves P-01…P-06 of the engineering standards; `checkModules()` verifies the Koin graph.
+**Exit:** app-independent test suite proves P-01…P-06 of the engineering standards; Koin's `verify()` checks the graph (`SojournModulesTest`; `checkModules()` is deprecated, ADR 0004 note).
 
 ### Phase 5 — Screens
 

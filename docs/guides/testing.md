@@ -32,7 +32,7 @@ maestro test .maestro/
 - Use cases and repositories: fixtures from `core:testing`; the pricing invariants (P-03, P-05) and content rules (N-01, N-04) live in `core:domain` tests.
 - Formatters: `SojournFormatter` tests for `en-GB` and `ar` assert exact strings including bidi isolate characters.
 - Navigation: every `SojournNavKey` round-trips through `sojournNavSerializersModule`.
-- DI: `checkModules()` in `app:shared`.
+- DI: `SojournModulesTest` in `app:shared` (`androidHostTest`) runs Koin's `verify()` over `sojournModules`.
 
 Name tests by behaviour: `` `offline with cached stays shows Offline state with content` ``.
 

@@ -46,6 +46,10 @@ kotlin {
             implementation(libs.navigation3.ui)
             implementation(libs.navigation3.runtime)
         }
+        named("androidHostTest").dependencies {
+            // Koin's verify() (JVM): SojournModulesTest checks the whole graph.
+            implementation(libs.koin.test)
+        }
         getByName("androidDeviceTest").dependencies {
             implementation(libs.androidx.testRunner)
         }

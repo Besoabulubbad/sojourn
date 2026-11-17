@@ -6,10 +6,18 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":core:model"))
-            implementation(project(":core:common"))
-            implementation(project(":core:data"))
-            implementation(libs.kotlinx.coroutines.core)
+            // Use cases speak model, AppResult and Loadable types, take repository interfaces in their constructors
+            // and return Flows; domainModule is a Koin Module.
+            api(project(":core:model"))
+            api(project(":core:common"))
+            api(project(":core:data"))
+            api(libs.kotlinx.coroutines.core)
+            api(libs.koin.core)
+            implementation(libs.kotlinx.datetime)
+        }
+        commonTest.dependencies {
+            implementation(project(":core:testing"))
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }

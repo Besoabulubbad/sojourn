@@ -47,7 +47,7 @@ detekt's `sojourn` rule set (`tooling/detekt-rules`) enforces the token, motion,
 
 - **Presentation:** one `SojournViewModel<State, Intent, Effect>` per screen; `XxxRoute` (stateful, Koin-injected) + `XxxScreen(state, onIntent)` (stateless, previewable). See `docs/guides/adding-a-feature.md`.
 - **Navigation:** keys are `@Serializable` and live in `core:navigation`; each feature exposes an `EntryProviderBuilder` extension; `app:shared` assembles the `NavDisplay`. Non-JVM targets need explicit polymorphic serializer registration — keep `sojournNavSerializersModule` complete.
-- **DI:** one Koin module per Gradle module, named `<module>Module`; ViewModels via `viewModelOf(::XxxViewModel)`; a `checkModules()` test in `app:shared` guards the graph.
+- **DI:** one Koin module per Gradle module, named `<module>Module`; ViewModels via `viewModelOf(::XxxViewModel)`; `SojournModulesTest` in `app:shared` runs Koin's `verify()` over `sojournModules` to guard the graph.
 - **Data:** repositories in `core:data` expose `Flow`; SQLDelight is the source of truth; `SojournApi` is the network seam (currently `LocalSojournApi` over bundled JSON).
 
 ## Conventions

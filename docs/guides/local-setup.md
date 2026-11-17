@@ -62,7 +62,7 @@ mkdocs build --strict
 | Kotlin/Native toolchain download fails | check network/proxy; retry — it resumes |
 | Configuration cache problems after changing `build-logic` | `./gradlew --no-configuration-cache <task>` once, then report it |
 | Screenshot test fails only on CI | fonts or Robolectric SDK mismatch; both are pinned — compare `@Config(sdk)` and the baseline's recorded SDK |
-| Koin `NoDefinitionFoundException` | run `:app:shared:test` — `checkModules()` names the missing binding |
+| Koin `NoDefinitionFoundException` | run `./gradlew :app:shared:testAndroidHostTest`: `SojournModulesTest` names the missing binding |
 
 ## AI tooling
 

@@ -25,7 +25,6 @@ tasks.check {
 // dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
 val skeletonModules = listOf(
     ":app:android", ":app:shared", // wired in Phase 5
-    ":core:domain", // Phase 4 (database, network and data have code)
 ) + listOf("explore", "search", "results", "filters", "details", "checkout", "map", "saved", "bookings", "profile")
     .map { ":feature:$it" } // Phase 5
 dependencyAnalysis {

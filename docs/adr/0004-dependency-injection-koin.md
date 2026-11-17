@@ -38,6 +38,8 @@ A modular multiplatform app needs a way to assemble repositories, use cases and 
 ### Confirmation
 
 - `app:shared` test: `koinApplication { modules(allModules) }.checkModules()`.
+
+**2026-11-17 (Phase 4).** `checkModules()` has been deprecated since Koin 4.0. Koin's verification docs point to `Module.verify()` (JVM only). The graph check is therefore `SojournModulesTest` in `app:shared`'s `androidHostTest`. It calls `module { includes(sojournModules) }.verify(extraTypes = listOf(Context::class))`, and a missing binding fails it with `MissingKoinDefinitionException` naming the type and the definition that needs it. The decision is unchanged; only the API used to confirm it changed.
 - Konsist: no class outside `app:shared` implements `KoinComponent`; every `feature:*` exposes exactly one `Module` named `<feature>Module`.
 
 ## Pros and cons of the options

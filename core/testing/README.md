@@ -12,6 +12,6 @@ Test support shared by every module. Test-scoped only: production code never dep
 | `TestDispatcherProvider`, `runSojournTest` | `commonMain` | Test dispatchers everywhere and `Dispatchers.Main` set for `viewModelScope`. |
 | exposed (`api`) | | coroutines-test, core:designsystem; Robolectric, JUnit 4 and the compose test rule on Android. |
 
-Fake repositories and the Koin test module arrive with the data layer (Phase 4).
+| `FakeCityRepository`, `FakeStayRepository`, `FakePricingRepository`, `FakeBookingRepository`, `FakeSavedRepository`, `FakeSearchRepository`, `FakePreferencesRepository` | `commonMain` (`testing.data`) | In-memory `core:data` repositories for use case and ViewModel tests. Each keeps the cache (`cache`) separate from what the network returns (`remote`); `refreshResult`, `offline` and `latency` drive the offline-first states. They live outside `core.data` so feature tests use them without importing data infrastructure (Konsist). |
 
 **May depend on:** every `core:*` module and the test libraries.
