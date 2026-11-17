@@ -93,7 +93,7 @@ Order (dependencies first): `Price`, `Rating`, `Chip`, `Button`, `IconButton`, `
 
 ### Phase 4 — Data
 
-- `core:database` — SQLDelight schema (`stay`, `city`, `photo`, `amenity`, `policy`, `quote`, `booking`, `saved`, `search_recent`), `SojournDatabase`, migrations from 1, seed loader.
+- `core:database` — SQLDelight schema (`stay`, `city`, `photo`, `amenity`, `policy`, `quote`, `booking`, `saved`, `search_recent`), `SojournDatabase`, migrations from 1 (the first refresh seeds it from the bundled catalogue; no separate seed loader).
 - `core:network` — `SojournApi` interface, DTOs, `LocalSojournApi` (bundled JSON, simulated latency and failure modes for the offline/error states), Ktor client configured but unused by default (`KtorSojournApi` behind a flag).
 - `core:data` — repositories exposing `Flow`; DB as source of truth; refresh policy; pricing invariants (breakdown lines sum to total; same quote id across surfaces).
 - `core:domain` — use cases (`SearchStays`, `GetStayDetails`, `GetQuote`, `ToggleSaved`, `ListBookings`, `CreateBooking`, `UpdateFilters`).

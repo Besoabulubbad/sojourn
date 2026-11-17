@@ -35,3 +35,9 @@ SELECT * FROM quote WHERE id = ?;
 
 linesFor:
 SELECT * FROM quote_line WHERE quote_id = ? ORDER BY position;
+
+-- A stored quote for the same request: what an offline surface shows instead of a price it cannot fetch.
+byRequest:
+SELECT * FROM quote
+WHERE stay_id = ? AND start_date = ? AND end_date = ? AND adults = ? AND children = ?
+LIMIT 1;

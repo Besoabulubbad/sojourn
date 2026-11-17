@@ -24,3 +24,6 @@ DELETE FROM search_recent WHERE id NOT IN (
 
 clear:
 DELETE FROM search_recent;
+
+deleteById:
+DELETE FROM search_recent WHERE id = ?;
