@@ -107,6 +107,7 @@
 
     <!-- Policies -->
     <string name="policy_free_cancellation">إلغاء مجاني حتى %1$s</string>
+    <string name="policy_free_cancellation_before">إلغاء مجاني حتى %1$s قبل الوصول</string>
     <string name="policy_deposit">تأمين مسترد %1$s</string>
     <string name="policy_deposit_non_refundable">تأمين %1$s غير مسترد</string>
     <string name="policy_check_in">تسجيل الوصول من %1$s · %2$s</string>
@@ -135,6 +136,28 @@
     <string name="area_shoreditch">شورديتش</string>
     <string name="area_le_marais">لو ماريه</string>
     <string name="area_hydra">حيدرة</string>
+    <string name="area_notting_hill">نوتنغ هيل</string>
+    <string name="area_camden">كامدن</string>
+    <string name="area_south_bank">ساوث بانك</string>
+    <string name="area_kings_cross">كينغز كروس</string>
+    <string name="area_montmartre">مونمارتر</string>
+    <string name="area_saint_germain">سان جيرمان</string>
+    <string name="area_canal_saint_martin">قناة سان مارتان</string>
+    <string name="area_bastille">الباستيل</string>
+    <string name="area_alfama">ألفاما</string>
+    <string name="area_chiado">شيادو</string>
+    <string name="area_principe_real">برينسيبي ريال</string>
+    <string name="area_belem">بيليم</string>
+    <string name="area_graca">غراسا</string>
+    <string name="area_el_biar">الأبيار</string>
+    <string name="area_bab_el_oued">باب الوادي</string>
+    <string name="area_sidi_yahia">سيدي يحيى</string>
+    <string name="area_sidi_mabrouk">سيدي مبروك</string>
+    <string name="area_constantine_centre">وسط المدينة</string>
+    <string name="area_el_kantara">القنطرة</string>
+    <string name="area_front_de_mer">الواجهة البحرية</string>
+    <string name="area_sidi_el_houari">سيدي الهواري</string>
+    <string name="area_les_falaises">الصخور</string>
     <string name="city_card_summary">%1$s · %2$s</string>
 
     <!-- Search -->

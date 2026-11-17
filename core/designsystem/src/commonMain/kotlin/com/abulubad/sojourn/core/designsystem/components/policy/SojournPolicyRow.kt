@@ -24,12 +24,14 @@ import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.check_in_host
 import com.abulubad.sojourn.core.localization.resources.check_in_lockbox
 import com.abulubad.sojourn.core.localization.resources.check_in_self_check_in
+import com.abulubad.sojourn.core.localization.resources.days
 import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.localization.resources.policy_check_in
 import com.abulubad.sojourn.core.localization.resources.policy_check_out
 import com.abulubad.sojourn.core.localization.resources.policy_deposit
 import com.abulubad.sojourn.core.localization.resources.policy_deposit_non_refundable
 import com.abulubad.sojourn.core.localization.resources.policy_free_cancellation
+import com.abulubad.sojourn.core.localization.resources.policy_free_cancellation_before
 import com.abulubad.sojourn.core.localization.resources.policy_minimum_stay
 import com.abulubad.sojourn.core.model.CheckInMethod
 import com.abulubad.sojourn.core.model.Policy
@@ -86,7 +88,7 @@ fun SojournPolicyRow(
 }
 
 private fun Policy.icon(): SojournIcon = when (this) {
-    is Policy.FreeCancellation -> SojournIcon.Calendar
+    is Policy.FreeCancellation, is Policy.FreeCancellationBefore -> SojournIcon.Calendar
     is Policy.Deposit -> SojournIcon.Deposit
     is Policy.CheckIn -> SojournIcon.Key
     is Policy.CheckOut -> SojournIcon.DoorOpen
@@ -98,6 +100,10 @@ private fun policyTitle(policy: Policy): String {
     val formatter = rememberSojournFormatter()
     return when (policy) {
         is Policy.FreeCancellation -> stringResource(Res.string.policy_free_cancellation, formatter.date(policy.until))
+        is Policy.FreeCancellationBefore -> stringResource(
+            Res.string.policy_free_cancellation_before,
+            pluralStringResource(Res.plurals.days, policy.daysBeforeCheckIn, formatter.count(policy.daysBeforeCheckIn)),
+        )
         is Policy.Deposit -> stringResource(
             if (policy.refundable) Res.string.policy_deposit else Res.string.policy_deposit_non_refundable,
             formatter.money(policy.amount),

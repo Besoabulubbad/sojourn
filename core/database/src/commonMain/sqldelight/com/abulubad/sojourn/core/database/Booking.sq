@@ -1,0 +1,27 @@
+-- The guest's bookings. created_at is epoch milliseconds (UTC).
+CREATE TABLE booking (
+    id TEXT NOT NULL PRIMARY KEY,
+    reference TEXT NOT NULL,
+    stay_id TEXT NOT NULL,
+    quote_id TEXT NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT NOT NULL,
+    adults INTEGER NOT NULL,
+    children INTEGER NOT NULL,
+    total_minor INTEGER NOT NULL,
+    currency TEXT NOT NULL,
+    status TEXT NOT NULL,
+    created_at INTEGER NOT NULL
+);
+
+upsert:
+INSERT OR REPLACE INTO booking VALUES ?;
+
+all:
+SELECT * FROM booking ORDER BY start_date DESC;
+
+byId:
+SELECT * FROM booking WHERE id = ?;
+
+updateStatus:
+UPDATE booking SET status = ? WHERE id = ?;

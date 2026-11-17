@@ -1,0 +1,3062 @@
+{
+ "version": 1,
+ "photoBase": "catalog/photos/",
+ "cities": [
+  {
+   "id": "london",
+   "countryCode": "GB",
+   "currency": "GBP",
+   "latitude": 51.5074,
+   "longitude": -0.1278,
+   "photo": "city-london-01.jpg"
+  },
+  {
+   "id": "paris",
+   "countryCode": "FR",
+   "currency": "EUR",
+   "latitude": 48.8566,
+   "longitude": 2.3522,
+   "photo": "city-paris-01.jpg"
+  },
+  {
+   "id": "lisbon",
+   "countryCode": "PT",
+   "currency": "EUR",
+   "latitude": 38.7223,
+   "longitude": -9.1393,
+   "photo": "city-lisbon-01.jpg"
+  },
+  {
+   "id": "algiers",
+   "countryCode": "DZ",
+   "currency": "DZD",
+   "latitude": 36.7538,
+   "longitude": 3.0588,
+   "photo": "city-algiers-01.jpg"
+  },
+  {
+   "id": "constantine",
+   "countryCode": "DZ",
+   "currency": "DZD",
+   "latitude": 36.365,
+   "longitude": 6.6147,
+   "photo": "city-constantine-01.jpg"
+  },
+  {
+   "id": "oran",
+   "countryCode": "DZ",
+   "currency": "DZD",
+   "latitude": 35.6971,
+   "longitude": -0.6308,
+   "photo": "city-oran-01.jpg"
+  }
+ ],
+ "stays": [
+  {
+   "id": "london-01",
+   "cityId": "london",
+   "areaKey": "area_paddington",
+   "title": {
+    "text": "Bright studio by the canal",
+    "lang": "en"
+   },
+   "description": {
+    "text": "A calm, light-filled studio two minutes from the canal, with a proper desk and fast Wi-Fi.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-01.jpg",
+    "bedroom-01.jpg",
+    "kitchen-06.jpg",
+    "bathroom-05.jpg",
+    "workspace-02.jpg",
+    "dining-05.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "lift",
+    "tv",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "host",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.5,
+    "count": 61
+   },
+   "area": {
+    "latitude": 51.51871,
+    "longitude": -0.17504,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 9200,
+    "cleaningFee": 7500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-11",
+     "end": "2026-12-18"
+    },
+    {
+     "start": "2027-01-08",
+     "end": "2027-01-16"
+    }
+   ]
+  },
+  {
+   "id": "london-02",
+   "cityId": "london",
+   "areaKey": "area_shoreditch",
+   "title": {
+    "text": "Warehouse loft off Redchurch Street",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Exposed brick, tall windows and a long oak table. Galleries and coffee on the doorstep.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-03.jpg",
+    "kitchen-06.jpg",
+    "bathroom-06.jpg",
+    "dining-03.jpg",
+    "exterior-04.jpg",
+    "exterior-05.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.5,
+    "count": 7
+   },
+   "area": {
+    "latitude": 51.52524,
+    "longitude": -0.07819,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 14800,
+    "cleaningFee": 6500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-31",
+     "end": "2027-01-03"
+    },
+    {
+     "start": "2027-01-15",
+     "end": "2027-01-27"
+    },
+    {
+     "start": "2027-02-09",
+     "end": "2027-02-17"
+    }
+   ]
+  },
+  {
+   "id": "london-03",
+   "cityId": "london",
+   "areaKey": "area_notting_hill",
+   "title": {
+    "text": "Garden flat near Portobello Road",
+    "lang": "en"
+   },
+   "description": {
+    "text": "A quiet ground-floor flat with its own small garden, a short walk from the market.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-06.jpg",
+    "bedroom-01.jpg",
+    "bedroom-04.jpg",
+    "kitchen-06.jpg",
+    "bathroom-08.jpg",
+    "workspace-02.jpg",
+    "living-01.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "10:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 7
+   },
+   "area": {
+    "latitude": 51.51261,
+    "longitude": -0.20263,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 18500,
+    "cleaningFee": 4000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2027-01-02",
+     "end": "2027-01-20"
+    },
+    {
+     "start": "2027-02-04",
+     "end": "2027-02-21"
+    }
+   ]
+  },
+  {
+   "id": "london-04",
+   "cityId": "london",
+   "areaKey": "area_camden",
+   "title": {
+    "text": "Top-floor one-bed with rooftop views",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Bright and simple, with views over Camden's rooftops and the canal path below.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-03.jpg",
+    "kitchen-01.jpg",
+    "bathroom-01.jpg",
+    "dining-03.jpg",
+    "exterior-03.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "lift",
+    "parking",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.8,
+    "count": 18
+   },
+   "area": {
+    "latitude": 51.54172,
+    "longitude": -0.14094,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 11800,
+    "cleaningFee": 7000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-15",
+     "end": "2026-12-19"
+    },
+    {
+     "start": "2027-01-03",
+     "end": "2027-01-24"
+    }
+   ]
+  },
+  {
+   "id": "london-05",
+   "cityId": "london",
+   "areaKey": "area_south_bank",
+   "title": {
+    "text": "Riverside two-bed for longer stays",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Two bedrooms, two baths and a washer-dryer, ten minutes' walk from the river.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 2,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-05.jpg",
+    "bedroom-07.jpg",
+    "bedroom-09.jpg",
+    "kitchen-02.jpg",
+    "bathroom-08.jpg",
+    "dining-05.jpg",
+    "workspace-02.jpg",
+    "dining-02.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.7,
+    "count": 2
+   },
+   "area": {
+    "latitude": 51.50919,
+    "longitude": -0.1128,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 21000,
+    "cleaningFee": 5500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-24",
+     "end": "2026-12-30"
+    },
+    {
+     "start": "2027-01-20",
+     "end": "2027-02-04"
+    }
+   ]
+  },
+  {
+   "id": "london-06",
+   "cityId": "london",
+   "areaKey": "area_kings_cross",
+   "title": {
+    "text": "Compact studio steps from King's Cross",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Everything you need in a well-planned space, with trains to Paris around the corner.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-07.jpg",
+    "bedroom-04.jpg",
+    "kitchen-07.jpg",
+    "bathroom-04.jpg",
+    "dining-04.jpg",
+    "balcony-03.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 5.0,
+    "count": 7
+   },
+   "area": {
+    "latitude": 51.53106,
+    "longitude": -0.12526,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 9800,
+    "cleaningFee": 5500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 5,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-28",
+     "end": "2027-01-10"
+    },
+    {
+     "start": "2027-01-16",
+     "end": "2027-01-31"
+    },
+    {
+     "start": "2027-02-19",
+     "end": "2027-03-04"
+    }
+   ]
+  },
+  {
+   "id": "london-07",
+   "cityId": "london",
+   "areaKey": "area_paddington",
+   "title": {
+    "text": "Family house with a sunny kitchen",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Three bedrooms over two floors and a big kitchen that gets the afternoon sun.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 4,
+    "bathrooms": 2,
+    "sleeps": 6
+   },
+   "photos": [
+    "living-01.jpg",
+    "bedroom-07.jpg",
+    "bedroom-08.jpg",
+    "kitchen-04.jpg",
+    "bathroom-02.jpg",
+    "balcony-01.jpg",
+    "workspace-03.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.8,
+    "count": 32
+   },
+   "area": {
+    "latitude": 51.51874,
+    "longitude": -0.17544,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 26500,
+    "cleaningFee": 6000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-30",
+     "end": "2027-01-10"
+    },
+    {
+     "start": "2027-01-31",
+     "end": "2027-02-06"
+    },
+    {
+     "start": "2027-02-11",
+     "end": "2027-02-22"
+    }
+   ]
+  },
+  {
+   "id": "london-08",
+   "cityId": "london",
+   "areaKey": "area_shoreditch",
+   "title": {
+    "text": "Quiet one-bed with a home office",
+    "lang": "en"
+   },
+   "description": {
+    "text": "A separate office with a door that closes, so work and evenings stay apart.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-03.jpg",
+    "bedroom-04.jpg",
+    "kitchen-09.jpg",
+    "bathroom-08.jpg",
+    "dining-03.jpg",
+    "living-09.jpg",
+    "balcony-03.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "lift",
+    "pet_friendly",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 1
+   },
+   "rating": null,
+   "area": {
+    "latitude": 51.52385,
+    "longitude": -0.07902,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "GBP",
+    "nightly": 13500,
+    "cleaningFee": 6500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-27",
+     "end": "2027-01-07"
+    },
+    {
+     "start": "2027-01-30",
+     "end": "2027-02-08"
+    }
+   ]
+  },
+  {
+   "id": "paris-01",
+   "cityId": "paris",
+   "areaKey": "area_le_marais",
+   "title": {
+    "text": "Studio lumineux au cœur du Marais",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un studio clair sous les toits, à deux pas de la place des Vosges.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-08.jpg",
+    "bedroom-04.jpg",
+    "kitchen-02.jpg",
+    "bathroom-05.jpg",
+    "balcony-01.jpg",
+    "exterior-05.jpg",
+    "dining-01.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "lift",
+    "pet_friendly",
+    "tv",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 46
+   },
+   "area": {
+    "latitude": 48.86026,
+    "longitude": 2.36343,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 11000,
+    "cleaningFee": 7500,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-19",
+     "end": "2027-01-07"
+    },
+    {
+     "start": "2027-01-26",
+     "end": "2027-02-14"
+    }
+   ]
+  },
+  {
+   "id": "paris-02",
+   "cityId": "paris",
+   "areaKey": "area_montmartre",
+   "title": {
+    "text": "Deux-pièces avec vue sur les toits",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un appartement calme sur la butte, avec un balcon qui regarde tout Paris.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 3
+   },
+   "photos": [
+    "living-03.jpg",
+    "bedroom-07.jpg",
+    "kitchen-05.jpg",
+    "bathroom-04.jpg",
+    "workspace-02.jpg",
+    "exterior-01.jpg",
+    "dining-01.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.3,
+    "count": 32
+   },
+   "area": {
+    "latitude": 48.88625,
+    "longitude": 2.34463,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 14500,
+    "cleaningFee": 6000,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 5,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2027-01-07"
+    },
+    {
+     "start": "2027-01-28",
+     "end": "2027-02-11"
+    }
+   ]
+  },
+  {
+   "id": "paris-03",
+   "cityId": "paris",
+   "areaKey": "area_saint_germain",
+   "title": {
+    "text": "Appartement de caractère à Saint-Germain",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Parquet, moulures et cheminée, entre les librairies et le jardin du Luxembourg.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-03.jpg",
+    "bedroom-05.jpg",
+    "kitchen-07.jpg",
+    "bathroom-05.jpg",
+    "dining-05.jpg",
+    "dining-01.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "washer",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.8,
+    "count": 27
+   },
+   "area": {
+    "latitude": 48.85306,
+    "longitude": 2.33496,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 23500,
+    "cleaningFee": 5500,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2027-01-01"
+    },
+    {
+     "start": "2027-01-23",
+     "end": "2027-02-07"
+    }
+   ]
+  },
+  {
+   "id": "paris-04",
+   "cityId": "paris",
+   "areaKey": "area_canal_saint_martin",
+   "title": {
+    "text": "Loft au bord du canal Saint-Martin",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un grand volume lumineux, idéal pour travailler, au calme d'une cour pavée.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 3
+   },
+   "photos": [
+    "living-07.jpg",
+    "bedroom-02.jpg",
+    "kitchen-06.jpg",
+    "bathroom-07.jpg",
+    "dining-03.jpg",
+    "exterior-01.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "parking",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 7
+   },
+   "area": {
+    "latitude": 48.86729,
+    "longitude": 2.36692,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 16000,
+    "cleaningFee": 6500,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2027-01-09",
+     "end": "2027-01-22"
+    },
+    {
+     "start": "2027-02-04",
+     "end": "2027-02-20"
+    },
+    {
+     "start": "2027-03-04",
+     "end": "2027-03-24"
+    }
+   ]
+  },
+  {
+   "id": "paris-05",
+   "cityId": "paris",
+   "areaKey": "area_bastille",
+   "title": {
+    "text": "Trois-pièces familial près de Bastille",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Deux chambres, une cuisine équipée et un marché le dimanche au bout de la rue.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 3,
+    "bathrooms": 1,
+    "sleeps": 5
+   },
+   "photos": [
+    "living-10.jpg",
+    "bedroom-05.jpg",
+    "bedroom-08.jpg",
+    "kitchen-09.jpg",
+    "bathroom-07.jpg",
+    "dining-02.jpg",
+    "workspace-02.jpg",
+    "exterior-02.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "parking",
+    "pet_friendly",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.6,
+    "count": 32
+   },
+   "area": {
+    "latitude": 48.84922,
+    "longitude": 2.36712,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 19000,
+    "cleaningFee": 4000,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 8,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-28",
+     "end": "2027-01-08"
+    },
+    {
+     "start": "2027-01-31",
+     "end": "2027-02-21"
+    },
+    {
+     "start": "2027-03-02",
+     "end": "2027-03-08"
+    }
+   ]
+  },
+  {
+   "id": "paris-06",
+   "cityId": "paris",
+   "areaKey": "area_le_marais",
+   "title": {
+    "text": "Petit nid calme pour un long séjour",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Pensé pour les séjours d'un mois : bureau, lave-linge et lumière du matin.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-07.jpg",
+    "kitchen-05.jpg",
+    "bathroom-05.jpg",
+    "balcony-02.jpg",
+    "workspace-02.jpg",
+    "dining-03.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "lift",
+    "pet_friendly",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 7
+   },
+   "area": {
+    "latitude": 48.86192,
+    "longitude": 2.35833,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 12500,
+    "cleaningFee": 8000,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-13",
+     "end": "2026-12-20"
+    },
+    {
+     "start": "2027-01-10",
+     "end": "2027-01-14"
+    },
+    {
+     "start": "2027-01-28",
+     "end": "2027-02-16"
+    }
+   ]
+  },
+  {
+   "id": "paris-07",
+   "cityId": "paris",
+   "areaKey": "area_montmartre",
+   "title": {
+    "text": "Atelier d'artiste avec verrière",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Une verrière plein nord, des murs blancs et un escalier en colimaçon.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-08.jpg",
+    "bedroom-03.jpg",
+    "kitchen-03.jpg",
+    "bathroom-07.jpg",
+    "balcony-03.jpg",
+    "living-07.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "parking",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.6,
+    "count": 7
+   },
+   "area": {
+    "latitude": 48.88332,
+    "longitude": 2.34123,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 17000,
+    "cleaningFee": 4500,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-16",
+     "end": "2026-12-21"
+    },
+    {
+     "start": "2026-12-27",
+     "end": "2027-01-15"
+    }
+   ]
+  },
+  {
+   "id": "paris-08",
+   "cityId": "paris",
+   "areaKey": "area_saint_germain",
+   "title": {
+    "text": "Studio élégant près du Bon Marché",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un studio soigné, bien rangé et silencieux, dans un immeuble haussmannien.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-04.jpg",
+    "bedroom-07.jpg",
+    "kitchen-01.jpg",
+    "bathroom-08.jpg",
+    "balcony-03.jpg",
+    "workspace-01.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "tv",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 124
+   },
+   "area": {
+    "latitude": 48.84934,
+    "longitude": 2.33118,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 13500,
+    "cleaningFee": 4500,
+    "cityTaxPerNight": 325,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-21",
+     "end": "2027-01-09"
+    },
+    {
+     "start": "2027-01-21",
+     "end": "2027-02-07"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-01",
+   "cityId": "lisbon",
+   "areaKey": "area_alfama",
+   "title": {
+    "text": "Apartamento com vista para o Tejo",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Janelas sobre o rio e os telhados de Alfama, a dois passos do elétrico 28.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-03.jpg",
+    "bedroom-01.jpg",
+    "kitchen-06.jpg",
+    "bathroom-05.jpg",
+    "dining-02.jpg",
+    "living-06.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 15000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.5,
+    "count": 46
+   },
+   "area": {
+    "latitude": 38.71426,
+    "longitude": -9.1336,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 9500,
+    "cleaningFee": 3000,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 5,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2027-01-08",
+     "end": "2027-01-24"
+    },
+    {
+     "start": "2027-01-30",
+     "end": "2027-02-02"
+    },
+    {
+     "start": "2027-02-27",
+     "end": "2027-03-18"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-02",
+   "cityId": "lisbon",
+   "areaKey": "area_chiado",
+   "title": {
+    "text": "Estúdio luminoso no Chiado",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Um estúdio claro e tranquilo, entre livrarias, cafés e o miradouro.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-07.jpg",
+    "kitchen-01.jpg",
+    "bathroom-08.jpg",
+    "workspace-03.jpg",
+    "exterior-01.jpg",
+    "exterior-02.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "lift",
+    "pet_friendly",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 7
+   },
+   "area": {
+    "latitude": 38.71397,
+    "longitude": -9.14109,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 8500,
+    "cleaningFee": 4000,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 8,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-20",
+     "end": "2026-12-29"
+    },
+    {
+     "start": "2027-01-13",
+     "end": "2027-01-30"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-03",
+   "cityId": "lisbon",
+   "areaKey": "area_principe_real",
+   "title": {
+    "text": "T2 com varanda no Príncipe Real",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Dois quartos, uma varanda com sol de tarde e o jardim ao fundo da rua.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-05.jpg",
+    "bedroom-03.jpg",
+    "bedroom-08.jpg",
+    "kitchen-04.jpg",
+    "bathroom-04.jpg",
+    "balcony-03.jpg",
+    "living-06.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "10:00",
+    "minimumNights": 3
+   },
+   "rating": null,
+   "area": {
+    "latitude": 38.71434,
+    "longitude": -9.14862,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 14000,
+    "cleaningFee": 6000,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-07",
+     "end": "2026-12-12"
+    },
+    {
+     "start": "2026-12-29",
+     "end": "2027-01-19"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-04",
+   "cityId": "lisbon",
+   "areaKey": "area_belem",
+   "title": {
+    "text": "Casa familiar perto dos Jerónimos",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Espaço para a família toda, cozinha grande e o rio a dez minutos a pé.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 3,
+    "bathrooms": 2,
+    "sleeps": 6
+   },
+   "photos": [
+    "living-11.jpg",
+    "bedroom-02.jpg",
+    "bedroom-06.jpg",
+    "kitchen-06.jpg",
+    "bathroom-05.jpg",
+    "dining-01.jpg",
+    "balcony-04.jpg",
+    "exterior-03.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": null,
+   "area": {
+    "latitude": 38.69906,
+    "longitude": -9.20359,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 15000,
+    "cleaningFee": 4500,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-31",
+     "end": "2027-01-14"
+    },
+    {
+     "start": "2027-01-31",
+     "end": "2027-02-04"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-05",
+   "cityId": "lisbon",
+   "areaKey": "area_graca",
+   "title": {
+    "text": "T1 sossegado na Graça",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Um apartamento calmo com secretária, ideal para trabalhar à distância.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-01.jpg",
+    "bedroom-02.jpg",
+    "kitchen-08.jpg",
+    "bathroom-07.jpg",
+    "dining-03.jpg",
+    "workspace-03.jpg",
+    "exterior-01.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 46
+   },
+   "area": {
+    "latitude": 38.71444,
+    "longitude": -9.13106,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 7800,
+    "cleaningFee": 3500,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2027-01-03",
+     "end": "2027-01-21"
+    },
+    {
+     "start": "2027-02-01",
+     "end": "2027-02-13"
+    },
+    {
+     "start": "2027-03-05",
+     "end": "2027-03-13"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-06",
+   "cityId": "lisbon",
+   "areaKey": "area_alfama",
+   "title": {
+    "text": "Casa antiga recuperada em Alfama",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Paredes de pedra, azulejos originais e um pátio pequeno e fresco.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-08.jpg",
+    "bedroom-07.jpg",
+    "bedroom-04.jpg",
+    "kitchen-06.jpg",
+    "bathroom-01.jpg",
+    "dining-03.jpg",
+    "exterior-01.jpg",
+    "balcony-03.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "balcony",
+    "heating",
+    "kitchen",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 40000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.7,
+    "count": 2
+   },
+   "area": {
+    "latitude": 38.71015,
+    "longitude": -9.133,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 12000,
+    "cleaningFee": 5500,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-27",
+     "end": "2027-01-09"
+    },
+    {
+     "start": "2027-01-30",
+     "end": "2027-02-10"
+    }
+   ]
+  },
+  {
+   "id": "lisbon-07",
+   "cityId": "lisbon",
+   "areaKey": "area_chiado",
+   "title": {
+    "text": "Loft moderno para estadias longas",
+    "lang": "pt"
+   },
+   "description": {
+    "text": "Pensado para meses: máquina de lavar, boa luz e internet rápida.",
+    "lang": "pt"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-07.jpg",
+    "bedroom-01.jpg",
+    "kitchen-05.jpg",
+    "bathroom-05.jpg",
+    "workspace-02.jpg",
+    "living-02.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "tv",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 25000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.8,
+    "count": 32
+   },
+   "area": {
+    "latitude": 38.70805,
+    "longitude": -9.14006,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "EUR",
+    "nightly": 11000,
+    "cleaningFee": 4000,
+    "cityTaxPerNight": 400,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-20",
+     "end": "2026-12-30"
+    },
+    {
+     "start": "2027-01-14",
+     "end": "2027-01-21"
+    }
+   ]
+  },
+  {
+   "id": "algiers-01",
+   "cityId": "algiers",
+   "areaKey": "area_hydra",
+   "title": {
+    "text": "شقة مشرقة في حيدرة",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "شقة هادئة مليئة بالضوء على بعد دقائق من الحديقة، مع مكتب وإنترنت سريع.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 3,
+    "bathrooms": 2,
+    "sleeps": 5
+   },
+   "photos": [
+    "living-07.jpg",
+    "bedroom-08.jpg",
+    "bedroom-09.jpg",
+    "kitchen-09.jpg",
+    "bathroom-01.jpg",
+    "dining-05.jpg",
+    "living-06.jpg",
+    "dining-01.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 61
+   },
+   "area": {
+    "latitude": 36.7381,
+    "longitude": 3.0294,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1200000,
+    "cleaningFee": 235000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 8,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2027-01-01"
+    },
+    {
+     "start": "2027-01-14",
+     "end": "2027-01-25"
+    }
+   ]
+  },
+  {
+   "id": "algiers-02",
+   "cityId": "algiers",
+   "areaKey": "area_el_biar",
+   "title": {
+    "text": "Appartement familial à El Biar",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Trois chambres, un grand salon et une terrasse avec vue sur la baie.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 4,
+    "bathrooms": 2,
+    "sleeps": 6
+   },
+   "photos": [
+    "living-05.jpg",
+    "bedroom-08.jpg",
+    "bedroom-03.jpg",
+    "kitchen-03.jpg",
+    "bathroom-03.jpg",
+    "dining-05.jpg",
+    "workspace-03.jpg",
+    "balcony-05.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "parking",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 32
+   },
+   "area": {
+    "latitude": 36.76888,
+    "longitude": 3.03045,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1550000,
+    "cleaningFee": 169000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2027-01-06"
+    },
+    {
+     "start": "2027-01-25",
+     "end": "2027-01-28"
+    },
+    {
+     "start": "2027-02-03",
+     "end": "2027-02-20"
+    }
+   ]
+  },
+  {
+   "id": "algiers-03",
+   "cityId": "algiers",
+   "areaKey": "area_bab_el_oued",
+   "title": {
+    "text": "استوديو قريب من البحر",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "استوديو صغير ومرتب، على بعد خطوات من الكورنيش.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-04.jpg",
+    "bedroom-05.jpg",
+    "kitchen-07.jpg",
+    "bathroom-05.jpg",
+    "balcony-01.jpg",
+    "balcony-03.jpg",
+    "balcony-04.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "lift",
+    "tv",
+    "washer",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 12
+   },
+   "area": {
+    "latitude": 36.78633,
+    "longitude": 3.04908,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 700000,
+    "cleaningFee": 287500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-19",
+     "end": "2027-01-05"
+    },
+    {
+     "start": "2027-01-15",
+     "end": "2027-01-20"
+    },
+    {
+     "start": "2027-02-11",
+     "end": "2027-02-19"
+    }
+   ]
+  },
+  {
+   "id": "algiers-04",
+   "cityId": "algiers",
+   "areaKey": "area_sidi_yahia",
+   "title": {
+    "text": "Studio moderne à Sidi Yahia",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un studio neuf et bien équipé, au calme, près des cafés et des commerces.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-06.jpg",
+    "bedroom-08.jpg",
+    "kitchen-04.jpg",
+    "bathroom-05.jpg",
+    "balcony-05.jpg",
+    "workspace-03.jpg",
+    "dining-01.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "balcony",
+    "heating",
+    "kitchen",
+    "lift",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.8,
+    "count": 124
+   },
+   "area": {
+    "latitude": 36.74041,
+    "longitude": 3.02213,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 850000,
+    "cleaningFee": 300000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 8,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-29",
+     "end": "2027-01-10"
+    },
+    {
+     "start": "2027-01-26",
+     "end": "2027-02-03"
+    },
+    {
+     "start": "2027-02-15",
+     "end": "2027-03-03"
+    }
+   ]
+  },
+  {
+   "id": "algiers-05",
+   "cityId": "algiers",
+   "areaKey": "area_hydra",
+   "title": {
+    "text": "Quiet flat for a long stay in Hydra",
+    "lang": "en"
+   },
+   "description": {
+    "text": "Two bedrooms, a washer and a proper desk, in a calm street close to the embassies.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-11.jpg",
+    "bedroom-09.jpg",
+    "bedroom-01.jpg",
+    "kitchen-07.jpg",
+    "bathroom-03.jpg",
+    "workspace-02.jpg",
+    "balcony-06.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "parking",
+    "tv",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.3,
+    "count": 124
+   },
+   "area": {
+    "latitude": 36.74214,
+    "longitude": 3.0341,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1300000,
+    "cleaningFee": 262500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-26",
+     "end": "2027-01-08"
+    },
+    {
+     "start": "2027-01-14",
+     "end": "2027-02-03"
+    }
+   ]
+  },
+  {
+   "id": "algiers-06",
+   "cityId": "algiers",
+   "areaKey": "area_el_biar",
+   "title": {
+    "text": "شقة واسعة مع شرفة",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "شقة واسعة بثلاث غرف وشرفة كبيرة تطل على المدينة.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 3,
+    "bathrooms": 2,
+    "sleeps": 6
+   },
+   "photos": [
+    "living-04.jpg",
+    "bedroom-08.jpg",
+    "bedroom-02.jpg",
+    "kitchen-01.jpg",
+    "bathroom-05.jpg",
+    "workspace-02.jpg",
+    "workspace-03.jpg",
+    "balcony-03.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "parking",
+    "tv",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "10:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 12
+   },
+   "area": {
+    "latitude": 36.76725,
+    "longitude": 3.03057,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1450000,
+    "cleaningFee": 280000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 20,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-24",
+     "end": "2027-01-03"
+    },
+    {
+     "start": "2027-01-17",
+     "end": "2027-01-22"
+    }
+   ]
+  },
+  {
+   "id": "algiers-07",
+   "cityId": "algiers",
+   "areaKey": "area_bab_el_oued",
+   "title": {
+    "text": "Deux-pièces lumineux près de la mer",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un appartement clair à deux pas de la mer, idéal pour un mois au soleil.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 3
+   },
+   "photos": [
+    "living-11.jpg",
+    "bedroom-01.jpg",
+    "kitchen-01.jpg",
+    "bathroom-01.jpg",
+    "workspace-02.jpg",
+    "workspace-01.jpg",
+    "balcony-04.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "tv",
+    "washer",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 7
+   },
+   "rating": null,
+   "area": {
+    "latitude": 36.78777,
+    "longitude": 3.05245,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 900000,
+    "cleaningFee": 265000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2027-01-11",
+     "end": "2027-01-19"
+    },
+    {
+     "start": "2027-01-29",
+     "end": "2027-02-10"
+    },
+    {
+     "start": "2027-02-16",
+     "end": "2027-03-07"
+    }
+   ]
+  },
+  {
+   "id": "constantine-01",
+   "cityId": "constantine",
+   "areaKey": "area_constantine_centre",
+   "title": {
+    "text": "Appartement près des ponts suspendus",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un appartement calme en plein centre, à quelques minutes du pont Sidi M'Cid.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-08.jpg",
+    "bedroom-02.jpg",
+    "bedroom-04.jpg",
+    "kitchen-09.jpg",
+    "bathroom-03.jpg",
+    "balcony-05.jpg",
+    "workspace-03.jpg",
+    "exterior-02.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "parking",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": null,
+   "area": {
+    "latitude": 36.36104,
+    "longitude": 6.61205,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 950000,
+    "cleaningFee": 152500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2027-01-08",
+     "end": "2027-01-11"
+    },
+    {
+     "start": "2027-01-23",
+     "end": "2027-02-02"
+    }
+   ]
+  },
+  {
+   "id": "constantine-02",
+   "cityId": "constantine",
+   "areaKey": "area_sidi_mabrouk",
+   "title": {
+    "text": "شقة عائلية في سيدي مبروك",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "شقة عائلية مريحة بثلاث غرف، قريبة من المحلات والمدارس.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 3,
+    "bathrooms": 1,
+    "sleeps": 6
+   },
+   "photos": [
+    "living-06.jpg",
+    "bedroom-05.jpg",
+    "bedroom-03.jpg",
+    "kitchen-08.jpg",
+    "bathroom-08.jpg",
+    "dining-05.jpg",
+    "living-11.jpg",
+    "dining-03.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "washer",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 2
+   },
+   "area": {
+    "latitude": 36.3619,
+    "longitude": 6.63032,
+    "radiusMetres": 400
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1050000,
+    "cleaningFee": 239500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 3,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2027-01-01",
+     "end": "2027-01-21"
+    },
+    {
+     "start": "2027-01-29",
+     "end": "2027-02-16"
+    }
+   ]
+  },
+  {
+   "id": "constantine-03",
+   "cityId": "constantine",
+   "areaKey": "area_el_kantara",
+   "title": {
+    "text": "استوديو بإطلالة على الوادي",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "استوديو هادئ يطل على وادي الرمال، مثالي للإقامات الطويلة.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-05.jpg",
+    "kitchen-09.jpg",
+    "bathroom-04.jpg",
+    "balcony-01.jpg",
+    "dining-01.jpg",
+    "balcony-02.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "lift",
+    "parking",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 7
+   },
+   "area": {
+    "latitude": 36.37298,
+    "longitude": 6.61676,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 550000,
+    "cleaningFee": 192500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 8,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2027-01-09"
+    },
+    {
+     "start": "2027-01-14",
+     "end": "2027-01-25"
+    }
+   ]
+  },
+  {
+   "id": "constantine-04",
+   "cityId": "constantine",
+   "areaKey": "area_constantine_centre",
+   "title": {
+    "text": "Studio pratique pour un long séjour",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Tout le nécessaire pour un mois de travail : bureau, lave-linge et fibre.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-09.jpg",
+    "bedroom-02.jpg",
+    "kitchen-04.jpg",
+    "bathroom-05.jpg",
+    "dining-01.jpg",
+    "living-04.jpg"
+   ],
+   "amenities": [
+    "air_conditioning",
+    "balcony",
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "washer",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": null,
+   "area": {
+    "latitude": 36.36814,
+    "longitude": 6.61169,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 600000,
+    "cleaningFee": 139500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-25",
+     "end": "2026-12-31"
+    },
+    {
+     "start": "2027-01-23",
+     "end": "2027-01-30"
+    },
+    {
+     "start": "2027-02-06",
+     "end": "2027-02-12"
+    }
+   ]
+  },
+  {
+   "id": "constantine-05",
+   "cityId": "constantine",
+   "areaKey": "area_sidi_mabrouk",
+   "title": {
+    "text": "Deux-pièces calme avec balcon",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Une chambre, un salon lumineux et un balcon au soleil du matin.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 3
+   },
+   "photos": [
+    "living-01.jpg",
+    "bedroom-05.jpg",
+    "kitchen-01.jpg",
+    "bathroom-02.jpg",
+    "balcony-04.jpg",
+    "living-03.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "lift",
+    "parking",
+    "pet_friendly",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "10:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.7,
+    "count": 32
+   },
+   "area": {
+    "latitude": 36.36485,
+    "longitude": 6.63237,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 750000,
+    "cleaningFee": 122000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-21",
+     "end": "2026-12-26"
+    },
+    {
+     "start": "2027-01-14",
+     "end": "2027-01-21"
+    },
+    {
+     "start": "2027-01-26",
+     "end": "2027-02-11"
+    }
+   ]
+  },
+  {
+   "id": "oran-01",
+   "cityId": "oran",
+   "areaKey": "area_front_de_mer",
+   "title": {
+    "text": "Appartement face à la mer",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "De grandes fenêtres sur la Méditerranée et le front de mer à vos pieds.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 2,
+    "bathrooms": 1,
+    "sleeps": 4
+   },
+   "photos": [
+    "living-02.jpg",
+    "bedroom-09.jpg",
+    "bedroom-08.jpg",
+    "kitchen-05.jpg",
+    "bathroom-03.jpg",
+    "balcony-03.jpg",
+    "exterior-04.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 30,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "14:00",
+    "checkInMethod": "lockbox",
+    "checkOutBy": "11:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 5.0,
+    "count": 124
+   },
+   "area": {
+    "latitude": 35.70002,
+    "longitude": -0.64373,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1150000,
+    "cleaningFee": 155000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": null,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 12,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-13",
+     "end": "2026-12-28"
+    },
+    {
+     "start": "2027-01-10",
+     "end": "2027-01-16"
+    }
+   ]
+  },
+  {
+   "id": "oran-02",
+   "cityId": "oran",
+   "areaKey": "area_sidi_el_houari",
+   "title": {
+    "text": "بيت قديم مرمم في سيدي الهواري",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "بيت تقليدي مرمم بعناية في قلب المدينة القديمة.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 2,
+    "beds": 3,
+    "bathrooms": 1,
+    "sleeps": 5
+   },
+   "photos": [
+    "living-08.jpg",
+    "bedroom-06.jpg",
+    "bedroom-04.jpg",
+    "kitchen-04.jpg",
+    "bathroom-01.jpg",
+    "dining-04.jpg",
+    "balcony-01.jpg"
+   ],
+   "amenities": [
+    "dishwasher",
+    "heating",
+    "kitchen",
+    "pet_friendly",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "16:00",
+    "checkInMethod": "self_check_in",
+    "checkOutBy": "11:00",
+    "minimumNights": 7
+   },
+   "rating": {
+    "score": 4.5,
+    "count": 46
+   },
+   "area": {
+    "latitude": 35.70871,
+    "longitude": -0.6598,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 900000,
+    "cleaningFee": 251500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-16",
+     "end": "2026-12-22"
+    },
+    {
+     "start": "2027-01-12",
+     "end": "2027-01-15"
+    }
+   ]
+  },
+  {
+   "id": "oran-03",
+   "cityId": "oran",
+   "areaKey": "area_les_falaises",
+   "title": {
+    "text": "Studio lumineux aux Falaises",
+    "lang": "fr"
+   },
+   "description": {
+    "text": "Un studio moderne avec vue dégagée, au calme, près de la corniche.",
+    "lang": "fr"
+   },
+   "facts": {
+    "bedrooms": 0,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-03.jpg",
+    "bedroom-04.jpg",
+    "kitchen-08.jpg",
+    "bathroom-05.jpg",
+    "workspace-01.jpg",
+    "workspace-03.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "tv",
+    "wifi"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 14,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 2
+   },
+   "rating": {
+    "score": 4.9,
+    "count": 61
+   },
+   "area": {
+    "latitude": 35.69828,
+    "longitude": -0.62965,
+    "radiusMetres": 250
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 650000,
+    "cleaningFee": 253500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 5,
+   "instantBook": false,
+   "blocked": [
+    {
+     "start": "2026-12-23",
+     "end": "2026-12-27"
+    },
+    {
+     "start": "2027-01-04",
+     "end": "2027-01-21"
+    }
+   ]
+  },
+  {
+   "id": "oran-04",
+   "cityId": "oran",
+   "areaKey": "area_front_de_mer",
+   "title": {
+    "text": "Sea-view one-bed for remote work",
+    "lang": "en"
+   },
+   "description": {
+    "text": "A desk by the window, fast internet and the sea in front of you all day.",
+    "lang": "en"
+   },
+   "facts": {
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": 1,
+    "sleeps": 2
+   },
+   "photos": [
+    "living-04.jpg",
+    "bedroom-07.jpg",
+    "kitchen-05.jpg",
+    "bathroom-04.jpg",
+    "balcony-01.jpg",
+    "balcony-06.jpg"
+   ],
+   "amenities": [
+    "heating",
+    "kitchen",
+    "parking",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 2000000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "10:00",
+    "minimumNights": 3
+   },
+   "rating": {
+    "score": 4.6,
+    "count": 88
+   },
+   "area": {
+    "latitude": 35.7015,
+    "longitude": -0.64112,
+    "radiusMetres": 300
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 850000,
+    "cleaningFee": 134000,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 15,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": 5,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-26",
+     "end": "2027-01-11"
+    },
+    {
+     "start": "2027-01-20",
+     "end": "2027-02-06"
+    }
+   ]
+  },
+  {
+   "id": "oran-05",
+   "cityId": "oran",
+   "areaKey": "area_les_falaises",
+   "title": {
+    "text": "شقة واسعة للعائلات",
+    "lang": "ar"
+   },
+   "description": {
+    "text": "شقة بثلاث غرف وصالون كبير، قريبة من البحر والحدائق.",
+    "lang": "ar"
+   },
+   "facts": {
+    "bedrooms": 3,
+    "beds": 4,
+    "bathrooms": 2,
+    "sleeps": 7
+   },
+   "photos": [
+    "living-05.jpg",
+    "bedroom-03.jpg",
+    "bedroom-01.jpg",
+    "kitchen-05.jpg",
+    "bathroom-08.jpg",
+    "dining-03.jpg",
+    "workspace-01.jpg"
+   ],
+   "amenities": [
+    "balcony",
+    "heating",
+    "kitchen",
+    "parking",
+    "tv",
+    "wifi",
+    "workspace"
+   ],
+   "policies": {
+    "freeCancellationDaysBefore": 7,
+    "deposit": 3000000,
+    "depositRefundable": true,
+    "checkInFrom": "15:00",
+    "checkInMethod": "host",
+    "checkOutBy": "11:00",
+    "minimumNights": 1
+   },
+   "rating": {
+    "score": 4.4,
+    "count": 7
+   },
+   "area": {
+    "latitude": 35.70323,
+    "longitude": -0.62326,
+    "radiusMetres": 350
+   },
+   "pricing": {
+    "currency": "DZD",
+    "nightly": 1250000,
+    "cleaningFee": 141500,
+    "cityTaxPerNight": 0,
+    "longStayDiscountPercent": 10,
+    "longStayMinNights": 28
+   },
+   "walkMinutesToTransit": null,
+   "instantBook": true,
+   "blocked": [
+    {
+     "start": "2026-12-19",
+     "end": "2026-12-24"
+    },
+    {
+     "start": "2027-01-13",
+     "end": "2027-01-19"
+    },
+    {
+     "start": "2027-02-10",
+     "end": "2027-02-25"
+    }
+   ]
+  }
+ ]
+}

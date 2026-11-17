@@ -1,0 +1,117 @@
+-- A listing and its children. The database is the source of truth (ADR 0007); a refresh replaces a stay's rows.
+CREATE TABLE stay (
+    id TEXT NOT NULL PRIMARY KEY,
+    city_id TEXT NOT NULL,
+    area_key TEXT NOT NULL,
+    title_text TEXT NOT NULL,
+    title_lang TEXT NOT NULL,
+    description_text TEXT NOT NULL,
+    description_lang TEXT NOT NULL,
+    bedrooms INTEGER NOT NULL,
+    beds INTEGER NOT NULL,
+    bathrooms INTEGER NOT NULL,
+    sleeps INTEGER NOT NULL,
+    rating_score REAL,
+    rating_count INTEGER,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    radius_metres INTEGER NOT NULL,
+    from_minor INTEGER NOT NULL,
+    from_currency TEXT NOT NULL,
+    from_basis TEXT NOT NULL,
+    from_excludes TEXT NOT NULL,
+    walk_minutes INTEGER,
+    long_stay_discount_percent INTEGER,
+    -- 0 or 1.
+    instant_book INTEGER NOT NULL
+);
+
+CREATE INDEX stay_city ON stay(city_id);
+
+CREATE TABLE photo (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    id TEXT NOT NULL,
+    url TEXT NOT NULL,
+    caption_text TEXT,
+    caption_lang TEXT,
+    PRIMARY KEY (stay_id, position)
+);
+
+CREATE TABLE stay_amenity (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    amenity_id TEXT NOT NULL,
+    PRIMARY KEY (stay_id, amenity_id)
+);
+
+-- One row per policy; the columns a kind needs are set, the rest are null. Every kind carries its number (N-03).
+CREATE TABLE policy (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    date TEXT,
+    days INTEGER,
+    amount_minor INTEGER,
+    currency TEXT,
+    refundable INTEGER, -- 0 or 1
+    time TEXT,
+    method TEXT,
+    nights INTEGER,
+    PRIMARY KEY (stay_id, position)
+);
+
+CREATE TABLE blocked_range (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    start_date TEXT NOT NULL,
+    end_date TEXT NOT NULL,
+    PRIMARY KEY (stay_id, start_date)
+);
+
+upsertStay:
+INSERT OR REPLACE INTO stay VALUES ?;
+
+insertPhoto:
+INSERT OR REPLACE INTO photo VALUES ?;
+
+insertAmenity:
+INSERT OR REPLACE INTO stay_amenity VALUES ?;
+
+insertPolicy:
+INSERT OR REPLACE INTO policy VALUES ?;
+
+insertBlocked:
+INSERT OR REPLACE INTO blocked_range VALUES ?;
+
+clearChildren {
+    DELETE FROM photo WHERE stay_id = :stayId;
+    DELETE FROM stay_amenity WHERE stay_id = :stayId;
+    DELETE FROM policy WHERE stay_id = :stayId;
+    DELETE FROM blocked_range WHERE stay_id = :stayId;
+}
+
+all:
+SELECT * FROM stay ORDER BY id;
+
+inCity:
+SELECT * FROM stay WHERE city_id = ? ORDER BY id;
+
+byId:
+SELECT * FROM stay WHERE id = ?;
+
+byIds:
+SELECT * FROM stay WHERE id IN ? ORDER BY id;
+
+photosFor:
+SELECT * FROM photo WHERE stay_id IN ? ORDER BY stay_id, position;
+
+amenitiesFor:
+SELECT * FROM stay_amenity WHERE stay_id IN ? ORDER BY stay_id, amenity_id;
+
+policiesFor:
+SELECT * FROM policy WHERE stay_id = ? ORDER BY position;
+
+blockedFor:
+SELECT * FROM blocked_range WHERE stay_id = ? ORDER BY start_date;
+
+count:
+SELECT count(*) FROM stay;

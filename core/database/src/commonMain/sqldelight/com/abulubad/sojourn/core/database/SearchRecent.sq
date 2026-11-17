@@ -1,0 +1,26 @@
+-- Recent searches for the search flow's "Recent" list; only the newest few are kept.
+CREATE TABLE search_recent (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    city_id TEXT,
+    start_date TEXT,
+    end_date TEXT,
+    adults INTEGER NOT NULL,
+    children INTEGER NOT NULL,
+    length TEXT,
+    searched_at INTEGER NOT NULL
+);
+
+insert:
+INSERT INTO search_recent(city_id, start_date, end_date, adults, children, length, searched_at)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+latest:
+SELECT * FROM search_recent ORDER BY searched_at DESC, id DESC LIMIT :limit;
+
+trimTo:
+DELETE FROM search_recent WHERE id NOT IN (
+    SELECT id FROM search_recent ORDER BY searched_at DESC, id DESC LIMIT :keep
+);
+
+clear:
+DELETE FROM search_recent;

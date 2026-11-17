@@ -30,6 +30,7 @@ Every significant decision about this codebase, in [MADR](https://adr.github.io/
 | [0013](0013-ai-agents-dev-loop.md) | AI agents in the development loop (not in the product) | accepted | 2026-11-15 |
 | [0014](0014-static-analysis-dependency-hygiene.md) | Static analysis and dependency hygiene: detekt, Konsist, dependency-analysis, Renovate | accepted | 2026-11-15 |
 | [0015](0015-own-bottom-sheet.md) | Our own bottom sheet on AnchoredDraggable, not Material's ModalBottomSheet | accepted | 2026-11-16 |
+| [0016](0016-seed-catalogue-hosting.md) | Seed catalogue: bundled JSON, photos hosted on the docs site | accepted | 2026-11-17 |
 
 ## How these were decided
 

@@ -16,6 +16,13 @@ enum class CheckInMethod(val id: String) {
  */
 sealed interface Policy {
     data class FreeCancellation(val until: LocalDate) : Policy
+
+    /** The same rule before dates are chosen: free cancellation up to [daysBeforeCheckIn] days before arrival. */
+    data class FreeCancellationBefore(val daysBeforeCheckIn: Int) : Policy {
+        init {
+            require(daysBeforeCheckIn >= 0) { "Days before check-in cannot be negative" }
+        }
+    }
     data class Deposit(val amount: Money, val refundable: Boolean = true) : Policy
     data class CheckIn(val from: LocalTime, val method: CheckInMethod) : Policy
     data class CheckOut(val by: LocalTime) : Policy
