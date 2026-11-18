@@ -65,6 +65,10 @@ Why SQLDelight over Room (which also supports KMP now): SQL-first schema and que
 - Quotes store when they were priced (`quote.priced_at`, schema version 3). Offline, Results labels a cached dated price older than an hour with its age, as the ScreenStates card requires.
 - Results does not page yet. The bundled catalogue answers a city in one call (under ten stays) and the list is lazy, so skeleton rows for data already on the device would be theatre. The card's "20 at a time with skeleton rows at the end" lands when `SojournApi` gains pages.
 
+**2026-11-18 (Details).** Notes, decision unchanged:
+- Schema version 4 adds what a stay's price includes (`stay_inclusion`), the server's translations of its description (`description_translation`) and its latest reviews (`review`). Reviews come with the stay's own refresh, like blocked dates; the catalogue carries all three (`make_catalog.py`, from a second seed so no existing value moved).
+- A stay row is written as insert-if-absent then update, never `INSERT OR REPLACE`. A replace deletes the row first, and the cascade dropped the children a list refresh does not carry: blocked dates and reviews disappeared whenever a city refreshed. `clearChildren` no longer clears blocked dates for the same reason; the stay's own refresh replaces them.
+
 ## Links
 
 - [SQLDelight 2.x — Multiplatform SQLite](https://sqldelight.github.io/sqldelight/2.4.1/multiplatform_sqlite/)

@@ -2,8 +2,12 @@ package com.abulubad.sojourn
 
 import android.content.Context
 import com.abulubad.sojourn.core.navigation.FiltersKey
+import com.abulubad.sojourn.core.navigation.GalleryKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchKey
+import com.abulubad.sojourn.core.navigation.StayDetailsKey
+import com.abulubad.sojourn.feature.details.DetailsViewModel
+import com.abulubad.sojourn.feature.details.GalleryViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
@@ -29,6 +33,8 @@ class SojournModulesTest {
                 definition<SearchViewModel>(SearchKey::class),
                 definition<ResultsViewModel>(ResultsKey::class),
                 definition<FiltersViewModel>(FiltersKey::class),
+                definition<DetailsViewModel>(StayDetailsKey::class),
+                definition<GalleryViewModel>(GalleryKey::class),
             ),
         )
     }

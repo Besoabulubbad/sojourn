@@ -14,10 +14,12 @@ import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Guests
+import com.abulubad.sojourn.core.model.HostText
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.data.FakeBookingRepository
@@ -27,6 +29,7 @@ import com.abulubad.sojourn.core.testing.data.FakeStayRepository
 import com.abulubad.sojourn.core.testing.runSojournTest
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -57,6 +60,16 @@ class StayAndBookingUseCasesTest {
             assertEquals(listOf(march), data.blocked)
             assertNull(data.rating, "two reviews: hidden (N-04)")
         }
+
+    @Test
+    fun `details carry the reviews only while the rating is shown`() = runSojournTest {
+        val review = Review("Tom", YearMonth(2026, 9), HostText("Quiet and clean.", "en"))
+        stays.reviews.value = mapOf(studio.id to listOf(review), family.id to listOf(review))
+        val shown = assertNotNull(GetStayDetails(stays, saved)(studio.id).first { !it.refreshing }.data)
+        assertEquals(listOf(review), shown.reviews)
+        val hidden = assertNotNull(GetStayDetails(stays, saved)(family.id).first { !it.refreshing }.data)
+        assertEquals(emptyList(), hidden.reviews)
+    }
 
     @Test
     fun `a stay gone from the catalogue ends as not found`() = runSojournTest {

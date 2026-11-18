@@ -412,4 +412,36 @@
     <string name="filters_clear_all">مسح الكل</string>
     <string name="filters_no_match">لا إقامات مطابقة</string>
     <string name="filters_show_stays_uncounted">اعرض الإقامات</string>
+    <!-- Details (ScreenDetails card). Host languages are named in the reader's language. -->
+    <string name="details_includes">ما يشمله السعر</string>
+    <string name="inclusion_utilities">الفواتير</string>
+    <string name="inclusion_linen">الأغطية والمناشف</string>
+    <string name="inclusion_weekly_cleaning">تنظيف أسبوعي</string>
+    <string name="details_where">موقع الإقامة</string>
+    <string name="transit_public">المواصلات العامة</string>
+    <string name="action_show_on_map">اعرض على الخريطة</string>
+    <string name="details_amenities">المرافق</string>
+    <string name="details_about">عن هذه الإقامة</string>
+    <string name="details_written_in">مكتوب ب%1$s</string>
+    <string name="details_translated_from">مترجم من %1$s</string>
+    <string name="action_translate_to">ترجمة إلى %1$s</string>
+    <string name="action_read_more">اقرأ المزيد</string>
+    <string name="action_read_less">عرض أقل</string>
+    <string name="details_good_to_know">معلومات مهمة</string>
+    <string name="details_reviews">التقييمات</string>
+    <string name="host_language_en">الإنجليزية</string>
+    <string name="host_language_fr">الفرنسية</string>
+    <string name="host_language_pt">البرتغالية</string>
+    <string name="host_language_ar">العربية</string>
+    <string name="details_gone_title">هذه الإقامة لم تعد متاحة</string>
+    <string name="details_gone_body">أزالها المضيف. الإقامات الأخرى في المنطقة ما زالت في نتائجك.</string>
+    <string name="details_share_text">%1$s · %2$s</string>
+    <string name="details_dates_apply">اعرض الإجمالي</string>
+    <string name="problem_minimum_nights">تتطلب هذه الإقامة %1$s على الأقل.</string>
+    <string name="problem_too_many_guests">الحد الأقصى لهذه الإقامة %1$s.</string>
+    <string name="problem_unavailable">بعض هذه الليالي محجوزة بالفعل.</string>
+    <string name="problem_dates_in_past">اختر تواريخ من اليوم فصاعدًا.</string>
+    <string name="details_from_price_note">اختر التواريخ لترى الإجمالي شاملًا كل الرسوم.</string>
+    <!-- A review's writer and month: "Hannah · September 2026". -->
+    <string name="review_byline">%1$s · %2$s</string>
 </resources>

@@ -22,7 +22,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `:feature:search` | ScreenSearchFlow (Where · When · Who) | `SearchKey(step)` |
 | `:feature:results` | ScreenResults, ScreenStates | `ResultsKey(query)` |
 | `:feature:filters` | ScreenFilters (sheet) | `FiltersKey(args)` |
-| `:feature:details` | ScreenDetails, full-screen Gallery | `StayDetailsKey(stayId, quoteId?)`, `GalleryKey(stayId, index)` |
+| `:feature:details` | ScreenDetails, full-screen Gallery | `StayDetailsKey(stayId, quoteId?, args)`, `GalleryKey(stayId, index)` |
 | `:feature:checkout` | ScreenCheckout, confirmation | `CheckoutKey(quoteId)`, `BookingConfirmedKey(bookingId)` |
 | `:feature:map` | ScreenMap | `MapKey(query)` |
 | `:feature:saved` | ScreenSaved | `SavedKey` |

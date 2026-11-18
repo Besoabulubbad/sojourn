@@ -64,6 +64,16 @@
     "text": "A calm, light-filled studio two minutes from the canal, with a proper desk and fast Wi-Fi.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "استوديو هادئ ومشرق على بعد دقيقتين من القناة، مع مكتب حقيقي وإنترنت سريع.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -123,6 +133,32 @@
      "start": "2027-01-08",
      "end": "2027-01-16"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Camille",
+     "month": "2026-09",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-07",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Hannah",
+     "month": "2026-06",
+     "text": {
+      "text": "Spotless and quiet. The desk by the window made a month of work easy.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -137,6 +173,17 @@
     "text": "Exposed brick, tall windows and a long oak table. Galleries and coffee on the doorstep.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "جدران من الطوب ونوافذ عالية وطاولة طويلة من خشب البلوط. المعارض والمقاهي عند الباب.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -200,6 +247,32 @@
      "start": "2027-02-09",
      "end": "2027-02-17"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Daniel",
+     "month": "2026-08",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-07",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-06",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -214,6 +287,18 @@
     "text": "A quiet ground-floor flat with its own small garden, a short walk from the market.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "شقة هادئة في الطابق الأرضي مع حديقة صغيرة خاصة، على بعد خطوات من السوق.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -274,6 +359,32 @@
      "start": "2027-02-04",
      "end": "2027-02-21"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Julien",
+     "month": "2026-10",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Camille",
+     "month": "2026-09",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-07",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -288,6 +399,18 @@
     "text": "Bright and simple, with views over Camden's rooftops and the canal path below.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "شقة مشرقة وبسيطة تطل على أسطح كامدن وممر القناة في الأسفل.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -348,6 +471,32 @@
      "start": "2027-01-03",
      "end": "2027-01-24"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Tom",
+     "month": "2026-10",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Miguel",
+     "month": "2026-07",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Inês",
+     "month": "2026-06",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    }
    ]
   },
   {
@@ -362,6 +511,17 @@
     "text": "Two bedrooms, two baths and a washer-dryer, ten minutes' walk from the river.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "غرفتا نوم وحمامان وغسالة ونشافة، على بعد عشر دقائق سيرًا من النهر.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -423,6 +583,24 @@
      "start": "2027-01-20",
      "end": "2027-02-04"
     }
+   ],
+   "reviews": [
+    {
+     "author": "سارة",
+     "month": "2026-10",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-07",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -437,6 +615,16 @@
     "text": "Everything you need in a well-planned space, with trains to Paris around the corner.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "كل ما تحتاجه في مساحة مدروسة، والقطارات إلى باريس عند الزاوية.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -499,6 +687,32 @@
      "start": "2027-02-19",
      "end": "2027-03-04"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Daniel",
+     "month": "2026-08",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Camille",
+     "month": "2026-07",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Hannah",
+     "month": "2026-06",
+     "text": {
+      "text": "Spotless and quiet. The desk by the window made a month of work easy.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -513,6 +727,17 @@
     "text": "Three bedrooms over two floors and a big kitchen that gets the afternoon sun.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "ثلاث غرف نوم على طابقين ومطبخ كبير تدخله شمس العصر.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 4,
@@ -577,6 +802,32 @@
      "start": "2027-02-11",
      "end": "2027-02-22"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Inês",
+     "month": "2026-10",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "ياسمين",
+     "month": "2026-09",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-08",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -591,6 +842,16 @@
     "text": "A separate office with a door that closes, so work and evenings stay apart.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "مكتب منفصل بباب يُغلق، فيبقى العمل بعيدًا عن المساء.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -648,7 +909,8 @@
      "start": "2027-01-30",
      "end": "2027-02-08"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "paris-01",
@@ -662,6 +924,21 @@
     "text": "Un studio clair sous les toits, à deux pas de la place des Vosges.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A bright studio under the eaves, a short walk from the Place des Vosges.",
+     "lang": "en"
+    },
+    {
+     "text": "استوديو مشرق تحت السقف، على بعد خطوات من ساحة فوج.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -723,6 +1000,32 @@
      "start": "2027-01-26",
      "end": "2027-02-14"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Léa",
+     "month": "2026-10",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "كريم",
+     "month": "2026-09",
+     "text": {
+      "text": "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-08",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -737,6 +1040,22 @@
     "text": "Un appartement calme sur la butte, avec un balcon qui regarde tout Paris.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A quiet flat on the hill, with a balcony that looks out over all of Paris.",
+     "lang": "en"
+    },
+    {
+     "text": "شقة هادئة على التلة، مع شرفة تطل على باريس كلها.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -798,6 +1117,32 @@
      "start": "2027-01-28",
      "end": "2027-02-11"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Daniel",
+     "month": "2026-10",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "كريم",
+     "month": "2026-09",
+     "text": {
+      "text": "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-07",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -812,6 +1157,22 @@
     "text": "Parquet, moulures et cheminée, entre les librairies et le jardin du Luxembourg.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Parquet floors, cornicing and a fireplace, between the bookshops and the Luxembourg Gardens.",
+     "lang": "en"
+    },
+    {
+     "text": "أرضيات خشبية وزخارف وموقد، بين المكتبات وحديقة لوكسمبورغ.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -871,6 +1232,32 @@
      "start": "2027-01-23",
      "end": "2027-02-07"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Inês",
+     "month": "2026-10",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-07",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-06",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -885,6 +1272,22 @@
     "text": "Un grand volume lumineux, idéal pour travailler, au calme d'une cour pavée.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A large, bright space made for working, in a quiet cobbled courtyard.",
+     "lang": "en"
+    },
+    {
+     "text": "مساحة واسعة ومشرقة مثالية للعمل، في فناء مرصوف هادئ.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 2,
@@ -948,6 +1351,32 @@
      "start": "2027-03-04",
      "end": "2027-03-24"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Julien",
+     "month": "2026-10",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "ياسمين",
+     "month": "2026-09",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-08",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -962,6 +1391,20 @@
     "text": "Deux chambres, une cuisine équipée et un marché le dimanche au bout de la rue.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Two bedrooms, a fitted kitchen and a Sunday market at the end of the street.",
+     "lang": "en"
+    },
+    {
+     "text": "غرفتا نوم ومطبخ مجهز وسوق يوم الأحد في آخر الشارع.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 3,
@@ -1028,6 +1471,32 @@
      "start": "2027-03-02",
      "end": "2027-03-08"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Tom",
+     "month": "2026-10",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Miguel",
+     "month": "2026-07",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-06",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -1042,6 +1511,22 @@
     "text": "Pensé pour les séjours d'un mois : bureau, lave-linge et lumière du matin.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Made for month-long stays: a desk, a washer and morning light.",
+     "lang": "en"
+    },
+    {
+     "text": "مصممة للإقامات الشهرية: مكتب وغسالة وضوء الصباح.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -1106,6 +1591,32 @@
      "start": "2027-01-28",
      "end": "2027-02-16"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Priya",
+     "month": "2026-09",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Miguel",
+     "month": "2026-08",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-07",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -1120,6 +1631,21 @@
     "text": "Une verrière plein nord, des murs blancs et un escalier en colimaçon.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A north-facing glass roof, white walls and a spiral staircase.",
+     "lang": "en"
+    },
+    {
+     "text": "سقف زجاجي نحو الشمال وجدران بيضاء ودرج حلزوني.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -1178,6 +1704,32 @@
      "start": "2026-12-27",
      "end": "2027-01-15"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Daniel",
+     "month": "2026-10",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-09",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-08",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -1192,6 +1744,21 @@
     "text": "Un studio soigné, bien rangé et silencieux, dans un immeuble haussmannien.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A neat, quiet, well-kept studio in a Haussmann building.",
+     "lang": "en"
+    },
+    {
+     "text": "استوديو أنيق ومرتب وهادئ في مبنى على طراز أوسمان.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -1251,6 +1818,32 @@
      "start": "2027-01-21",
      "end": "2027-02-07"
     }
+   ],
+   "reviews": [
+    {
+     "author": "كريم",
+     "month": "2026-09",
+     "text": {
+      "text": "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "ياسمين",
+     "month": "2026-08",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Daniel",
+     "month": "2026-07",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -1265,6 +1858,22 @@
     "text": "Janelas sobre o rio e os telhados de Alfama, a dois passos do elétrico 28.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Windows over the river and the rooftops of Alfama, steps from the number 28 tram.",
+     "lang": "en"
+    },
+    {
+     "text": "نوافذ تطل على النهر وأسطح ألفاما، على بعد خطوات من الترام 28.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -1330,6 +1939,32 @@
      "start": "2027-02-27",
      "end": "2027-03-18"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Priya",
+     "month": "2026-10",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Inês",
+     "month": "2026-09",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-08",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -1344,6 +1979,21 @@
     "text": "Um estúdio claro e tranquilo, entre livrarias, cafés e o miradouro.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A bright, quiet studio among bookshops, cafés and the viewpoint.",
+     "lang": "en"
+    },
+    {
+     "text": "استوديو مشرق وهادئ بين المكتبات والمقاهي والمطل.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -1405,6 +2055,32 @@
      "start": "2027-01-13",
      "end": "2027-01-30"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Priya",
+     "month": "2026-10",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Camille",
+     "month": "2026-09",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-07",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -1419,6 +2095,21 @@
     "text": "Dois quartos, uma varanda com sol de tarde e o jardim ao fundo da rua.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Two bedrooms, a balcony with afternoon sun and the garden at the end of the street.",
+     "lang": "en"
+    },
+    {
+     "text": "غرفتا نوم وشرفة تدخلها شمس العصر والحديقة في آخر الشارع.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -1476,7 +2167,8 @@
      "start": "2026-12-29",
      "end": "2027-01-19"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "lisbon-04",
@@ -1490,6 +2182,22 @@
     "text": "Espaço para a família toda, cozinha grande e o rio a dez minutos a pé.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Room for the whole family, a big kitchen and the river a ten-minute walk away.",
+     "lang": "en"
+    },
+    {
+     "text": "مساحة للعائلة كلها ومطبخ كبير والنهر على بعد عشر دقائق سيرًا.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 3,
@@ -1547,7 +2255,8 @@
      "start": "2027-01-31",
      "end": "2027-02-04"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "lisbon-05",
@@ -1561,6 +2270,21 @@
     "text": "Um apartamento calmo com secretária, ideal para trabalhar à distância.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A calm flat with a desk, made for working remotely.",
+     "lang": "en"
+    },
+    {
+     "text": "شقة هادئة مع مكتب، مثالية للعمل عن بُعد.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -1625,6 +2349,32 @@
      "start": "2027-03-05",
      "end": "2027-03-13"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Camille",
+     "month": "2026-09",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "ياسمين",
+     "month": "2026-08",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Hannah",
+     "month": "2026-06",
+     "text": {
+      "text": "Spotless and quiet. The desk by the window made a month of work easy.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -1639,6 +2389,21 @@
     "text": "Paredes de pedra, azulejos originais e um pátio pequeno e fresco.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Stone walls, original tiles and a small, cool courtyard.",
+     "lang": "en"
+    },
+    {
+     "text": "جدران حجرية وبلاط أصلي وفناء صغير منعش.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -1699,6 +2464,24 @@
      "start": "2027-01-30",
      "end": "2027-02-10"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Miguel",
+     "month": "2026-10",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-07",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -1713,6 +2496,22 @@
     "text": "Pensado para meses: máquina de lavar, boa luz e internet rápida.",
     "lang": "pt"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Made for months: a washer, good light and fast internet.",
+     "lang": "en"
+    },
+    {
+     "text": "مصممة لإقامة أشهر: غسالة وضوء جيد وإنترنت سريع.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -1773,6 +2572,32 @@
      "start": "2027-01-14",
      "end": "2027-01-21"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Inês",
+     "month": "2026-10",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "كريم",
+     "month": "2026-09",
+     "text": {
+      "text": "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-08",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -1787,6 +2612,17 @@
     "text": "شقة هادئة مليئة بالضوء على بعد دقائق من الحديقة، مع مكتب وإنترنت سريع.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A calm flat full of light, minutes from the park, with a desk and fast internet.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 3,
@@ -1848,6 +2684,32 @@
      "start": "2027-01-14",
      "end": "2027-01-25"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Miguel",
+     "month": "2026-10",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Daniel",
+     "month": "2026-07",
+     "text": {
+      "text": "Comfortable beds, fast Wi-Fi and a short walk to the station.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-06",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -1862,6 +2724,22 @@
     "text": "Trois chambres, un grand salon et une terrasse avec vue sur la baie.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Three bedrooms, a large living room and a terrace looking over the bay.",
+     "lang": "en"
+    },
+    {
+     "text": "ثلاث غرف نوم وصالون كبير وشرفة تطل على الخليج.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 4,
@@ -1926,6 +2804,32 @@
      "start": "2027-02-03",
      "end": "2027-02-20"
     }
+   ],
+   "reviews": [
+    {
+     "author": "سارة",
+     "month": "2026-10",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "كريم",
+     "month": "2026-08",
+     "text": {
+      "text": "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Camille",
+     "month": "2026-06",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -1940,6 +2844,18 @@
     "text": "استوديو صغير ومرتب، على بعد خطوات من الكورنيش.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A small, tidy studio, a few steps from the seafront promenade.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -2006,6 +2922,32 @@
      "start": "2027-02-11",
      "end": "2027-02-19"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Priya",
+     "month": "2026-09",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Inês",
+     "month": "2026-08",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-07",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2020,6 +2962,21 @@
     "text": "Un studio neuf et bien équipé, au calme, près des cafés et des commerces.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A new, well-equipped studio in a quiet spot, near cafés and shops.",
+     "lang": "en"
+    },
+    {
+     "text": "استوديو جديد ومجهز جيدًا في مكان هادئ، قرب المقاهي والمحلات.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -2084,6 +3041,32 @@
      "start": "2027-02-15",
      "end": "2027-03-03"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Camille",
+     "month": "2026-10",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Inês",
+     "month": "2026-07",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-06",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2098,6 +3081,17 @@
     "text": "Two bedrooms, a washer and a proper desk, in a calm street close to the embassies.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "غرفتا نوم وغسالة ومكتب حقيقي، في شارع هادئ قرب السفارات.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -2159,6 +3153,32 @@
      "start": "2027-01-14",
      "end": "2027-02-03"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Inês",
+     "month": "2026-10",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-08",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-06",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2173,6 +3193,17 @@
     "text": "شقة واسعة بثلاث غرف وشرفة كبيرة تطل على المدينة.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A spacious three-room flat with a large balcony overlooking the city.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 3,
@@ -2235,6 +3266,32 @@
      "start": "2027-01-17",
      "end": "2027-01-22"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Hannah",
+     "month": "2026-09",
+     "text": {
+      "text": "Spotless and quiet. The desk by the window made a month of work easy.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-08",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-06",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -2249,6 +3306,21 @@
     "text": "Un appartement clair à deux pas de la mer, idéal pour un mois au soleil.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A bright flat a short walk from the sea, ideal for a month in the sun.",
+     "lang": "en"
+    },
+    {
+     "text": "شقة مشرقة على بعد خطوات من البحر، مثالية لشهر تحت الشمس.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -2311,7 +3383,8 @@
      "start": "2027-02-16",
      "end": "2027-03-07"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "constantine-01",
@@ -2325,6 +3398,21 @@
     "text": "Un appartement calme en plein centre, à quelques minutes du pont Sidi M'Cid.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A calm flat right in the centre, minutes from the Sidi M'Cid bridge.",
+     "lang": "en"
+    },
+    {
+     "text": "شقة هادئة في قلب المدينة، على بعد دقائق من جسر سيدي مسيد.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -2384,7 +3472,8 @@
      "start": "2027-01-23",
      "end": "2027-02-02"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "constantine-02",
@@ -2398,6 +3487,17 @@
     "text": "شقة عائلية مريحة بثلاث غرف، قريبة من المحلات والمدارس.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A comfortable family flat with three rooms, close to shops and schools.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 3,
@@ -2458,6 +3558,24 @@
      "start": "2027-01-29",
      "end": "2027-02-16"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Julien",
+     "month": "2026-10",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-09",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2472,6 +3590,17 @@
     "text": "استوديو هادئ يطل على وادي الرمال، مثالي للإقامات الطويلة.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A quiet studio overlooking the Rhumel gorge, ideal for long stays.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -2533,6 +3662,32 @@
      "start": "2027-01-14",
      "end": "2027-01-25"
     }
+   ],
+   "reviews": [
+    {
+     "author": "سارة",
+     "month": "2026-10",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-08",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-07",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2547,6 +3702,20 @@
     "text": "Tout le nécessaire pour un mois de travail : bureau, lave-linge et fibre.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Everything you need for a month of work: a desk, a washer and fibre internet.",
+     "lang": "en"
+    },
+    {
+     "text": "كل ما تحتاجه لشهر من العمل: مكتب وغسالة وإنترنت بالألياف.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -2608,7 +3777,8 @@
      "start": "2027-02-06",
      "end": "2027-02-12"
     }
-   ]
+   ],
+   "reviews": []
   },
   {
    "id": "constantine-05",
@@ -2622,6 +3792,22 @@
     "text": "Une chambre, un salon lumineux et un balcon au soleil du matin.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "One bedroom, a bright living room and a balcony in the morning sun.",
+     "lang": "en"
+    },
+    {
+     "text": "غرفة نوم وصالون مشرق وشرفة تدخلها شمس الصباح.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -2686,6 +3872,32 @@
      "start": "2027-01-26",
      "end": "2027-02-11"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Camille",
+     "month": "2026-09",
+     "text": {
+      "text": "Un quartier vivant et un appartement silencieux. Parfait.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-07",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-06",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2700,6 +3912,22 @@
     "text": "De grandes fenêtres sur la Méditerranée et le front de mer à vos pieds.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "Large windows onto the Mediterranean, with the seafront at your feet.",
+     "lang": "en"
+    },
+    {
+     "text": "نوافذ واسعة على البحر المتوسط، والواجهة البحرية عند قدميك.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 2,
@@ -2759,6 +3987,32 @@
      "start": "2027-01-10",
      "end": "2027-01-16"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Léa",
+     "month": "2026-09",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-08",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-06",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2773,6 +4027,18 @@
     "text": "بيت تقليدي مرمم بعناية في قلب المدينة القديمة.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A traditional house, carefully restored, in the heart of the old town.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 2,
     "beds": 3,
@@ -2833,6 +4099,32 @@
      "start": "2027-01-12",
      "end": "2027-01-15"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Priya",
+     "month": "2026-10",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Miguel",
+     "month": "2026-09",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "ياسمين",
+     "month": "2026-07",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    }
    ]
   },
   {
@@ -2847,6 +4139,21 @@
     "text": "Un studio moderne avec vue dégagée, au calme, près de la corniche.",
     "lang": "fr"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A modern studio with an open view, in a quiet spot near the corniche.",
+     "lang": "en"
+    },
+    {
+     "text": "استوديو حديث بإطلالة مفتوحة، في مكان هادئ قرب الكورنيش.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "weekly_cleaning"
+   ],
    "facts": {
     "bedrooms": 0,
     "beds": 1,
@@ -2904,6 +4211,32 @@
      "start": "2027-01-04",
      "end": "2027-01-21"
     }
+   ],
+   "reviews": [
+    {
+     "author": "Hannah",
+     "month": "2026-09",
+     "text": {
+      "text": "Spotless and quiet. The desk by the window made a month of work easy.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Léa",
+     "month": "2026-07",
+     "text": {
+      "text": "Très propre, très calme, et la literie est excellente. Je recommande.",
+      "lang": "fr"
+     }
+    },
+    {
+     "author": "Julien",
+     "month": "2026-06",
+     "text": {
+      "text": "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge.",
+      "lang": "fr"
+     }
+    }
    ]
   },
   {
@@ -2918,6 +4251,17 @@
     "text": "A desk by the window, fast internet and the sea in front of you all day.",
     "lang": "en"
    },
+   "descriptionTranslations": [
+    {
+     "text": "مكتب بجانب النافذة وإنترنت سريع والبحر أمامك طوال اليوم.",
+     "lang": "ar"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities",
+    "linen"
+   ],
    "facts": {
     "bedrooms": 1,
     "beds": 1,
@@ -2977,6 +4321,32 @@
      "start": "2027-01-20",
      "end": "2027-02-06"
     }
+   ],
+   "reviews": [
+    {
+     "author": "ياسمين",
+     "month": "2026-10",
+     "text": {
+      "text": "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "سارة",
+     "month": "2026-09",
+     "text": {
+      "text": "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها.",
+      "lang": "ar"
+     }
+    },
+    {
+     "author": "Priya",
+     "month": "2026-08",
+     "text": {
+      "text": "Great light all day and a proper kitchen. We'd stay again for longer.",
+      "lang": "en"
+     }
+    }
    ]
   },
   {
@@ -2991,6 +4361,16 @@
     "text": "شقة بثلاث غرف وصالون كبير، قريبة من البحر والحدائق.",
     "lang": "ar"
    },
+   "descriptionTranslations": [
+    {
+     "text": "A three-room flat with a large living room, close to the sea and the gardens.",
+     "lang": "en"
+    }
+   ],
+   "inclusions": [
+    "wifi",
+    "utilities"
+   ],
    "facts": {
     "bedrooms": 3,
     "beds": 4,
@@ -3055,6 +4435,32 @@
     {
      "start": "2027-02-10",
      "end": "2027-02-25"
+    }
+   ],
+   "reviews": [
+    {
+     "author": "Miguel",
+     "month": "2026-10",
+     "text": {
+      "text": "Tudo funcionou bem e a internet é rápida. Recomendo.",
+      "lang": "pt"
+     }
+    },
+    {
+     "author": "Tom",
+     "month": "2026-08",
+     "text": {
+      "text": "Exactly as described. Check-in was simple and the host answered within minutes.",
+      "lang": "en"
+     }
+    },
+    {
+     "author": "Inês",
+     "month": "2026-07",
+     "text": {
+      "text": "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar.",
+      "lang": "pt"
+     }
     }
    ]
   }

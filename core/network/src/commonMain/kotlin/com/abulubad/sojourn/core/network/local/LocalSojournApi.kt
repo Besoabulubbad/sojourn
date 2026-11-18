@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.network.CatalogEngine
@@ -40,6 +41,8 @@ class LocalSojournApi(
     override suspend fun stay(id: StayId): AppResult<Stay> = call { engine.stay(id) }
 
     override suspend fun blockedDates(id: StayId): AppResult<List<DateRange>> = call { engine.blockedDates(id) }
+
+    override suspend fun reviews(id: StayId): AppResult<List<Review>> = call { engine.reviews(id) }
 
     override suspend fun quote(stayId: StayId, dates: DateRange, guests: Guests): AppResult<Quote> =
         call { engine.quote(stayId, dates, guests) }

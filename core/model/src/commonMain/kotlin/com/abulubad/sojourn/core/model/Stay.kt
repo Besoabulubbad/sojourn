@@ -1,5 +1,7 @@
 package com.abulubad.sojourn.core.model
 
+import kotlinx.datetime.YearMonth
+
 /**
  * Text written by a host (titles, descriptions) in its own language. Rendered only through `HostText`, in its own
  * direction, never forced to the UI direction or silently translated (S-06). [languageTag] is BCP 47.
@@ -63,6 +65,8 @@ data class GeoArea(val center: GeoPoint, val radiusMetres: Int) {
 /**
  * A listing. Names of cities, areas and amenities are keys, not strings: the app owns the words (S-05).
  * [fromPrice] is the no-dates price and must state its exclusions (P-03); dated totals come from a [Quote].
+ * [descriptionTranslations] are the server's translations of [description] into the app's languages, shown only
+ * when the guest asks (S-06: never silently translated).
  */
 data class Stay(
     val id: StayId,
@@ -80,6 +84,8 @@ data class Stay(
     val walkMinutesToTransit: Int? = null,
     val longStayDiscountPercent: Int? = null,
     val instantBook: Boolean = false,
+    val inclusions: Set<PriceInclusion> = emptySet(),
+    val descriptionTranslations: List<HostText> = emptyList(),
 ) {
     init {
         require(photos.isNotEmpty()) { "A stay has at least one photo slot" }
@@ -100,3 +106,13 @@ data class City(
     val fromPrice: PriceDisplay.From,
     val photo: Photo,
 )
+
+/**
+ * A guest's review, in its writer's language (rendered through `HostText`, S-06). Only the first name and the month
+ * are shown: a review never identifies a guest further.
+ */
+data class Review(val author: String, val month: YearMonth, val text: HostText) {
+    init {
+        require(author.isNotBlank()) { "A review names its writer" }
+    }
+}

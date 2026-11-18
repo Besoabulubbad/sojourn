@@ -6,6 +6,7 @@ import com.abulubad.sojourn.core.common.DispatcherProvider
 import com.abulubad.sojourn.core.data.local.StayStore
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.DateRange
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.network.SojournApi
@@ -31,13 +32,19 @@ interface StayRepository {
     /** Ranges the stay is already booked for, as of its last refresh; the date picker strikes them through. */
     fun observeBlockedDates(id: StayId): Flow<List<DateRange>>
 
+    /** A stay's latest reviews from the cache, newest first; filled by [refreshStay]. */
+    fun observeReviews(id: StayId): Flow<List<Review>>
+
     /** True when the database holds stays in this scope, so a failed refresh can still show content. */
     suspend fun hasCached(cityId: CityId? = null): Boolean
 
     /** Fetches the stays in scope and replaces them, unless fresh. */
     suspend fun refresh(cityId: CityId? = null, force: Boolean = false): AppResult<Unit>
 
-    /** Fetches one stay and its blocked dates, unless fresh. A stay the catalogue no longer has is removed. */
+    /**
+     * Fetches one stay, its blocked dates and its reviews, unless fresh. A stay the catalogue no longer has is
+     * removed.
+     */
     suspend fun refreshStay(id: StayId, force: Boolean = false): AppResult<Unit>
 }
 
@@ -55,6 +62,8 @@ internal class OfflineFirstStayRepository(
     override fun observeStay(id: StayId): Flow<Stay?> = store.observe(id)
 
     override fun observeBlockedDates(id: StayId): Flow<List<DateRange>> = store.observeBlocked(id)
+
+    override fun observeReviews(id: StayId): Flow<List<Review>> = store.observeReviews(id)
 
     override suspend fun hasCached(cityId: CityId?): Boolean = withContext(dispatchers.io) { store.hasAny(cityId) }
 
@@ -83,7 +92,9 @@ internal class OfflineFirstStayRepository(
                 is AppResult.Success -> result.value
                 is AppResult.Failure -> return@run result
             }
-            withContext(dispatchers.io) { store.write(stay, blocked) }
+            // Reviews are extra: a stay without them is still a stay, so their failure keeps the cached ones.
+            val reviews = (api.reviews(id) as? AppResult.Success)?.value
+            withContext(dispatchers.io) { store.write(stay, blocked, reviews) }
             AppResult.Success(Unit)
         }
 }

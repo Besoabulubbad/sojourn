@@ -8,6 +8,7 @@ import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 
@@ -31,6 +32,9 @@ interface SojournApi {
 
     /** Ranges a stay is already booked for; the date picker strikes them through. */
     suspend fun blockedDates(id: StayId): AppResult<List<DateRange>>
+
+    /** A stay's latest reviews, newest first; empty when it has none. */
+    suspend fun reviews(id: StayId): AppResult<List<Review>>
 
     /**
      * Prices [dates] for [guests]. The breakdown's lines sum to the total by construction (P-05), and the quote id

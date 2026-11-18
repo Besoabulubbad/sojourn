@@ -136,6 +136,95 @@ STAYS = [
      "شقة بثلاث غرف وصالون كبير، قريبة من البحر والحدائق.", 3, 4, 2, 7, 12500),
 ]
 
+# Each description in the app's languages, as the server's one-off translation (the Details "Translate" action).
+# Keyed by stay position in STAYS; the host's own language is never repeated.
+TRANSLATIONS = [
+    {"ar": "استوديو هادئ ومشرق على بعد دقيقتين من القناة، مع مكتب حقيقي وإنترنت سريع."},
+    {"ar": "جدران من الطوب ونوافذ عالية وطاولة طويلة من خشب البلوط. المعارض والمقاهي عند الباب."},
+    {"ar": "شقة هادئة في الطابق الأرضي مع حديقة صغيرة خاصة، على بعد خطوات من السوق."},
+    {"ar": "شقة مشرقة وبسيطة تطل على أسطح كامدن وممر القناة في الأسفل."},
+    {"ar": "غرفتا نوم وحمامان وغسالة ونشافة، على بعد عشر دقائق سيرًا من النهر."},
+    {"ar": "كل ما تحتاجه في مساحة مدروسة، والقطارات إلى باريس عند الزاوية."},
+    {"ar": "ثلاث غرف نوم على طابقين ومطبخ كبير تدخله شمس العصر."},
+    {"ar": "مكتب منفصل بباب يُغلق، فيبقى العمل بعيدًا عن المساء."},
+    {"en": "A bright studio under the eaves, a short walk from the Place des Vosges.",
+     "ar": "استوديو مشرق تحت السقف، على بعد خطوات من ساحة فوج."},
+    {"en": "A quiet flat on the hill, with a balcony that looks out over all of Paris.",
+     "ar": "شقة هادئة على التلة، مع شرفة تطل على باريس كلها."},
+    {"en": "Parquet floors, cornicing and a fireplace, between the bookshops and the Luxembourg Gardens.",
+     "ar": "أرضيات خشبية وزخارف وموقد، بين المكتبات وحديقة لوكسمبورغ."},
+    {"en": "A large, bright space made for working, in a quiet cobbled courtyard.",
+     "ar": "مساحة واسعة ومشرقة مثالية للعمل، في فناء مرصوف هادئ."},
+    {"en": "Two bedrooms, a fitted kitchen and a Sunday market at the end of the street.",
+     "ar": "غرفتا نوم ومطبخ مجهز وسوق يوم الأحد في آخر الشارع."},
+    {"en": "Made for month-long stays: a desk, a washer and morning light.",
+     "ar": "مصممة للإقامات الشهرية: مكتب وغسالة وضوء الصباح."},
+    {"en": "A north-facing glass roof, white walls and a spiral staircase.",
+     "ar": "سقف زجاجي نحو الشمال وجدران بيضاء ودرج حلزوني."},
+    {"en": "A neat, quiet, well-kept studio in a Haussmann building.",
+     "ar": "استوديو أنيق ومرتب وهادئ في مبنى على طراز أوسمان."},
+    {"en": "Windows over the river and the rooftops of Alfama, steps from the number 28 tram.",
+     "ar": "نوافذ تطل على النهر وأسطح ألفاما، على بعد خطوات من الترام 28."},
+    {"en": "A bright, quiet studio among bookshops, cafés and the viewpoint.",
+     "ar": "استوديو مشرق وهادئ بين المكتبات والمقاهي والمطل."},
+    {"en": "Two bedrooms, a balcony with afternoon sun and the garden at the end of the street.",
+     "ar": "غرفتا نوم وشرفة تدخلها شمس العصر والحديقة في آخر الشارع."},
+    {"en": "Room for the whole family, a big kitchen and the river a ten-minute walk away.",
+     "ar": "مساحة للعائلة كلها ومطبخ كبير والنهر على بعد عشر دقائق سيرًا."},
+    {"en": "A calm flat with a desk, made for working remotely.",
+     "ar": "شقة هادئة مع مكتب، مثالية للعمل عن بُعد."},
+    {"en": "Stone walls, original tiles and a small, cool courtyard.",
+     "ar": "جدران حجرية وبلاط أصلي وفناء صغير منعش."},
+    {"en": "Made for months: a washer, good light and fast internet.",
+     "ar": "مصممة لإقامة أشهر: غسالة وضوء جيد وإنترنت سريع."},
+    {"en": "A calm flat full of light, minutes from the park, with a desk and fast internet."},
+    {"en": "Three bedrooms, a large living room and a terrace looking over the bay.",
+     "ar": "ثلاث غرف نوم وصالون كبير وشرفة تطل على الخليج."},
+    {"en": "A small, tidy studio, a few steps from the seafront promenade."},
+    {"en": "A new, well-equipped studio in a quiet spot, near cafés and shops.",
+     "ar": "استوديو جديد ومجهز جيدًا في مكان هادئ، قرب المقاهي والمحلات."},
+    {"ar": "غرفتا نوم وغسالة ومكتب حقيقي، في شارع هادئ قرب السفارات."},
+    {"en": "A spacious three-room flat with a large balcony overlooking the city."},
+    {"en": "A bright flat a short walk from the sea, ideal for a month in the sun.",
+     "ar": "شقة مشرقة على بعد خطوات من البحر، مثالية لشهر تحت الشمس."},
+    {"en": "A calm flat right in the centre, minutes from the Sidi M'Cid bridge.",
+     "ar": "شقة هادئة في قلب المدينة، على بعد دقائق من جسر سيدي مسيد."},
+    {"en": "A comfortable family flat with three rooms, close to shops and schools."},
+    {"en": "A quiet studio overlooking the Rhumel gorge, ideal for long stays."},
+    {"en": "Everything you need for a month of work: a desk, a washer and fibre internet.",
+     "ar": "كل ما تحتاجه لشهر من العمل: مكتب وغسالة وإنترنت بالألياف."},
+    {"en": "One bedroom, a bright living room and a balcony in the morning sun.",
+     "ar": "غرفة نوم وصالون مشرق وشرفة تدخلها شمس الصباح."},
+    {"en": "Large windows onto the Mediterranean, with the seafront at your feet.",
+     "ar": "نوافذ واسعة على البحر المتوسط، والواجهة البحرية عند قدميك."},
+    {"en": "A traditional house, carefully restored, in the heart of the old town."},
+    {"en": "A modern studio with an open view, in a quiet spot near the corniche.",
+     "ar": "استوديو حديث بإطلالة مفتوحة، في مكان هادئ قرب الكورنيش."},
+    {"ar": "مكتب بجانب النافذة وإنترنت سريع والبحر أمامك طوال اليوم."},
+    {"en": "A three-room flat with a large living room, close to the sea and the gardens."},
+]
+
+# What a stay's price includes (Details: "What the price includes"). Wi-Fi and utilities always; the rest varies.
+INCLUSIONS = ["linen", "weekly_cleaning"]
+
+# Guest reviews, each in its writer's language, handed out to rated stays. Names are first names only.
+REVIEWS = [
+    ("Hannah", "en", "Spotless and quiet. The desk by the window made a month of work easy."),
+    ("Tom", "en", "Exactly as described. Check-in was simple and the host answered within minutes."),
+    ("Priya", "en", "Great light all day and a proper kitchen. We'd stay again for longer."),
+    ("Léa", "fr", "Très propre, très calme, et la literie est excellente. Je recommande."),
+    ("Julien", "fr", "Idéal pour un long séjour : tout est pensé, jusqu'au lave-linge."),
+    ("Camille", "fr", "Un quartier vivant et un appartement silencieux. Parfait."),
+    ("Inês", "pt", "Casa limpa e luminosa, numa rua sossegada. Voltaria sem hesitar."),
+    ("Miguel", "pt", "Tudo funcionou bem e a internet é rápida. Recomendo."),
+    ("سارة", "ar", "شقة نظيفة وهادئة، والمضيف متعاون جدًا. أنصح بها."),
+    ("كريم", "ar", "موقع ممتاز وكل ما يلزم لإقامة طويلة متوفر."),
+    ("ياسمين", "ar", "إضاءة جميلة طوال اليوم ومطبخ مجهز بالكامل."),
+    ("Daniel", "en", "Comfortable beds, fast Wi-Fi and a short walk to the station."),
+]
+REVIEW_MONTHS = ["2026-06", "2026-07", "2026-08", "2026-09", "2026-10"]
+
+
 AMENITIES = ["wifi", "washer", "workspace", "lift", "kitchen", "air_conditioning", "heating", "parking", "balcony",
              "dishwasher", "tv", "pet_friendly"]
 CHECK_IN = ["self_check_in", "host", "lockbox"]
@@ -179,6 +268,16 @@ def blocked_for(rng: random.Random) -> list[dict]:
     return ranges
 
 
+def reviews_for(rng: random.Random, rating: dict | None) -> list[dict]:
+    """Up to three reviews, newest first, for a stay with a rating; never more than its review count."""
+    if rating is None:
+        return []
+    picks = rng.sample(REVIEWS, min(3, rating["count"]))
+    months = sorted(rng.sample(REVIEW_MONTHS, len(picks)), reverse=True)
+    return [{"author": author, "month": month, "text": {"text": text, "lang": lang}}
+            for (author, lang, text), month in zip(picks, months)]
+
+
 def main() -> None:
     rng = random.Random(SEED)
     pool_entries = json.loads(POOL.read_text(encoding="utf-8"))["photos"]
@@ -192,8 +291,10 @@ def main() -> None:
         "photo": pool[f"city_{cid}"][0],
     } for cid, country, currency, (lat, lng), _, _ in CITIES]
 
+    # A second generator for fields added later, so adding them changes none of the values above.
+    extras = random.Random(SEED + 1)
     out_stays, counters = [], {}
-    for city, area, lang, title, description, bedrooms, beds, baths, sleeps, nightly in STAYS:
+    for index, (city, area, lang, title, description, bedrooms, beds, baths, sleeps, nightly) in enumerate(STAYS):
         _, _, currency, _, cleaning_range, city_tax = cities[city]
         counters[city] = counters.get(city, 0) + 1
         minor = nightly * 100
@@ -206,6 +307,8 @@ def main() -> None:
             "areaKey": area,
             "title": {"text": title, "lang": lang},
             "description": {"text": description, "lang": lang},
+            "descriptionTranslations": [{"text": text, "lang": code} for code, text in TRANSLATIONS[index].items()],
+            "inclusions": ["wifi", "utilities"] + [i for i in INCLUSIONS if extras.random() < 0.6],
             "facts": {"bedrooms": bedrooms, "beds": beds, "bathrooms": baths, "sleeps": sleeps},
             "photos": photos_for(rng, pool, bedrooms),
             "amenities": amenities,
@@ -231,6 +334,7 @@ def main() -> None:
             "walkMinutesToTransit": rng.choice([None, 3, 5, 8, 12]),
             "instantBook": rng.random() < 0.6,
             "blocked": blocked_for(rng),
+            "reviews": reviews_for(extras, rating),
         })
 
     catalog = {"version": 1, "photoBase": "catalog/photos/", "cities": out_cities, "stays": out_stays}

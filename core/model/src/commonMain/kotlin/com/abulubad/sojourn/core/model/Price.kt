@@ -15,6 +15,17 @@ enum class PriceExclusion(val id: String) {
 }
 
 /**
+ * What a stay's price already covers (Details: "What the price includes"). Localized by id (S-05). The other side
+ * of [PriceExclusion]: a cost is never in both.
+ */
+enum class PriceInclusion(val id: String) {
+    Wifi("wifi"),
+    Utilities("utilities"),
+    Linen("linen"),
+    WeeklyCleaning("weekly_cleaning"),
+}
+
+/**
  * The only thing a price component accepts (P-01). A `Double` or `Long` can never reach the UI as a price.
  *
  * - [Total] is the all-in amount for chosen dates. It carries the [QuoteId] so the card, pin, booking bar, checkout

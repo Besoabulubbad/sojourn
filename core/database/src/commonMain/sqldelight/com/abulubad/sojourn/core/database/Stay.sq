@@ -67,8 +67,62 @@ CREATE TABLE blocked_range (
     PRIMARY KEY (stay_id, start_date)
 );
 
-upsertStay:
-INSERT OR REPLACE INTO stay VALUES ?;
+-- What the price includes (Details), by PriceInclusion id.
+CREATE TABLE stay_inclusion (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    inclusion_id TEXT NOT NULL,
+    PRIMARY KEY (stay_id, inclusion_id)
+);
+
+-- The server's translations of a stay's description, one per language; shown only when the guest asks (S-06).
+CREATE TABLE description_translation (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    lang TEXT NOT NULL,
+    text TEXT NOT NULL,
+    PRIMARY KEY (stay_id, lang)
+);
+
+-- A stay's latest reviews, fetched with Details; position 0 is the newest. Month is ISO yyyy-MM.
+CREATE TABLE review (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    author TEXT NOT NULL,
+    month TEXT NOT NULL,
+    text TEXT NOT NULL,
+    lang TEXT NOT NULL,
+    PRIMARY KEY (stay_id, position)
+);
+
+-- A stay is written as insert-if-absent then update, never INSERT OR REPLACE: a replace deletes the row, and the
+-- cascade would drop the children a list refresh does not carry (blocked dates, reviews).
+insertStayIfAbsent:
+INSERT OR IGNORE INTO stay VALUES ?;
+
+updateStay:
+UPDATE stay SET
+    city_id = :city_id,
+    area_key = :area_key,
+    title_text = :title_text,
+    title_lang = :title_lang,
+    description_text = :description_text,
+    description_lang = :description_lang,
+    bedrooms = :bedrooms,
+    beds = :beds,
+    bathrooms = :bathrooms,
+    sleeps = :sleeps,
+    rating_score = :rating_score,
+    rating_count = :rating_count,
+    latitude = :latitude,
+    longitude = :longitude,
+    radius_metres = :radius_metres,
+    from_minor = :from_minor,
+    from_currency = :from_currency,
+    from_basis = :from_basis,
+    from_excludes = :from_excludes,
+    walk_minutes = :walk_minutes,
+    long_stay_discount_percent = :long_stay_discount_percent,
+    instant_book = :instant_book
+WHERE id = :id;
 
 insertPhoto:
 INSERT OR REPLACE INTO photo VALUES ?;
@@ -82,11 +136,23 @@ INSERT OR REPLACE INTO policy VALUES ?;
 insertBlocked:
 INSERT OR REPLACE INTO blocked_range VALUES ?;
 
+insertInclusion:
+INSERT OR REPLACE INTO stay_inclusion VALUES ?;
+
+insertTranslation:
+INSERT OR REPLACE INTO description_translation VALUES ?;
+
+insertReview:
+INSERT OR REPLACE INTO review VALUES ?;
+
+-- The children a stay carries in every response. Blocked dates and reviews come only with the stay's own refresh,
+-- which replaces them itself, so a list refresh never clears them.
 clearChildren {
     DELETE FROM photo WHERE stay_id = :stayId;
     DELETE FROM stay_amenity WHERE stay_id = :stayId;
     DELETE FROM policy WHERE stay_id = :stayId;
-    DELETE FROM blocked_range WHERE stay_id = :stayId;
+    DELETE FROM stay_inclusion WHERE stay_id = :stayId;
+    DELETE FROM description_translation WHERE stay_id = :stayId;
 }
 
 all:
@@ -130,3 +196,15 @@ SELECT * FROM policy WHERE stay_id IN ? ORDER BY stay_id, position;
 
 clearBlocked:
 DELETE FROM blocked_range WHERE stay_id = ?;
+
+inclusionsFor:
+SELECT * FROM stay_inclusion WHERE stay_id IN ? ORDER BY stay_id, inclusion_id;
+
+translationsFor:
+SELECT * FROM description_translation WHERE stay_id IN ? ORDER BY stay_id, lang;
+
+reviewsFor:
+SELECT * FROM review WHERE stay_id = ? ORDER BY position;
+
+clearReviews:
+DELETE FROM review WHERE stay_id = ?;

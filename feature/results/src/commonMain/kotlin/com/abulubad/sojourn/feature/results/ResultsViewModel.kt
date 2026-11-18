@@ -74,7 +74,7 @@ class ResultsViewModel(
             ResultsIntent.SortDismissed -> setState { copy(sortOpen = false) }
             is ResultsIntent.StayTapped -> {
                 val quoteId = (intent.result.price as? PriceDisplay.Total)?.quoteId?.value
-                navigate(StayDetailsKey(intent.result.stay.id.value, quoteId))
+                navigate(StayDetailsKey(intent.result.stay.id.value, quoteId, key.args))
             }
             is ResultsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(intent.id) }
             ResultsIntent.MapTapped -> navigate(MapKey(key.args))

@@ -16,7 +16,9 @@ import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.PriceExclusion
+import com.abulubad.sojourn.core.model.PriceInclusion
 import com.abulubad.sojourn.core.model.Rating
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayFacts
 import com.abulubad.sojourn.core.model.StayId
@@ -27,8 +29,13 @@ import com.abulubad.sojourn.core.network.dto.PricingDto
 import com.abulubad.sojourn.core.network.dto.StayDto
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.parseOrNull
 
-/** DTO → model. Amenity and check-in ids the app does not know are dropped rather than failing the catalogue. */
+/**
+ * DTO → model. Amenity, inclusion and check-in ids the app does not know are dropped rather than failing the
+ * catalogue.
+ */
 internal class CatalogMapping(private val photoBase: String) {
 
     fun stay(dto: StayDto): Stay = Stay(
@@ -47,7 +54,15 @@ internal class CatalogMapping(private val photoBase: String) {
         walkMinutesToTransit = dto.walkMinutesToTransit,
         longStayDiscountPercent = dto.pricing.longStayDiscountPercent,
         instantBook = dto.instantBook,
+        inclusions = dto.inclusions.mapNotNull { id -> PriceInclusion.entries.firstOrNull { it.id == id } }.toSet(),
+        // By language, as the database returns them, so a stay reads back equal to the one written.
+        descriptionTranslations = dto.descriptionTranslations.map(::hostText).sortedBy { it.languageTag },
     )
+
+    /** Reviews newest first; one the app cannot read (a bad month) is dropped rather than failing the stay. */
+    fun reviews(dto: StayDto): List<Review> = dto.reviews.mapNotNull { review ->
+        YearMonth.parseOrNull(review.month)?.let { Review(review.author, it, hostText(review.text)) }
+    }.sortedByDescending { it.month }
 
     fun city(dto: CityDto, stays: List<StayDto>): City {
         val cheapest = stays.minBy { monthlyEstimate(it.pricing) }

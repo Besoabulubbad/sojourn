@@ -141,7 +141,7 @@
     <string name="area_notting_hill">Notting Hill</string>
     <string name="area_camden">Camden</string>
     <string name="area_south_bank">South Bank</string>
-    <string name="area_kings_cross">King\'s Cross</string>
+    <string name="area_kings_cross">King’s Cross</string>
     <string name="area_montmartre">Montmartre</string>
     <string name="area_saint_germain">Saint-Germain</string>
     <string name="area_canal_saint_martin">Canal Saint-Martin</string>
@@ -349,4 +349,36 @@
     <string name="filters_clear_all">Clear all</string>
     <string name="filters_no_match">No stays match</string>
     <string name="filters_show_stays_uncounted">Show stays</string>
+    <!-- Details (ScreenDetails card). Host languages are named in the reader's language. -->
+    <string name="details_includes">What the price includes</string>
+    <string name="inclusion_utilities">Utilities</string>
+    <string name="inclusion_linen">Linen and towels</string>
+    <string name="inclusion_weekly_cleaning">Weekly cleaning</string>
+    <string name="details_where">Where you’ll stay</string>
+    <string name="transit_public">public transport</string>
+    <string name="action_show_on_map">Show on map</string>
+    <string name="details_amenities">Amenities</string>
+    <string name="details_about">About this stay</string>
+    <string name="details_written_in">Written in %1$s</string>
+    <string name="details_translated_from">Translated from %1$s</string>
+    <string name="action_translate_to">Translate to %1$s</string>
+    <string name="action_read_more">Read more</string>
+    <string name="action_read_less">Show less</string>
+    <string name="details_good_to_know">Good to know</string>
+    <string name="details_reviews">Reviews</string>
+    <string name="host_language_en">English</string>
+    <string name="host_language_fr">French</string>
+    <string name="host_language_pt">Portuguese</string>
+    <string name="host_language_ar">Arabic</string>
+    <string name="details_gone_title">This stay is no longer available</string>
+    <string name="details_gone_body">The host has taken it down. Other stays in the area are still in your results.</string>
+    <string name="details_share_text">%1$s · %2$s</string>
+    <string name="details_dates_apply">See the total</string>
+    <string name="problem_minimum_nights">This stay needs at least %1$s.</string>
+    <string name="problem_too_many_guests">This stay is for up to %1$s.</string>
+    <string name="problem_unavailable">Some of these nights are already booked.</string>
+    <string name="problem_dates_in_past">Choose dates from today on.</string>
+    <string name="details_from_price_note">Choose dates to see the total, with every fee included.</string>
+    <!-- A review's writer and month: "Hannah · September 2026". -->
+    <string name="review_byline">%1$s · %2$s</string>
 </resources>

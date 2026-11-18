@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.network.dto.HostTextDto
 import com.abulubad.sojourn.core.network.dto.PoliciesDto
 import com.abulubad.sojourn.core.network.dto.PricingDto
 import com.abulubad.sojourn.core.network.dto.RatingDto
+import com.abulubad.sojourn.core.network.dto.ReviewDto
 import com.abulubad.sojourn.core.network.dto.StayDto
 
 /** A two-stay catalogue with numbers chosen to make the pricing easy to check by hand. */
@@ -37,6 +38,13 @@ internal object TestCatalog {
         walkMinutesToTransit = 8,
         instantBook = true,
         blocked = listOf(DateRangeDto("2027-01-10", "2027-01-20")),
+        descriptionTranslations = listOf(HostTextDto("استوديو هادئ.", "ar")),
+        inclusions = listOf("wifi", "utilities", "jacuzzi"),
+        reviews = listOf(
+            ReviewDto("Tom", "2026-07", HostTextDto("Quiet and clean.", "en")),
+            ReviewDto("Léa", "2026-09", HostTextDto("Très calme.", "fr")),
+            ReviewDto("Ghost", "last summer", HostTextDto("Unreadable month.", "en")),
+        ),
     )
 
     val flat = studio.copy(

@@ -55,7 +55,8 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 | CityCard | Listing | `SojournCityCard(city: City, onClick, modifier)` ✅ | photo (`City.photo`), name from the localized catalogue (S-05), "214 stays · from £1,950 a month"; only the photo is rounded, so text is never clipped |
 | ContinueRow (from ScreenExplore) | Listing | `SojournContinueRow(photo: Photo?, title, subtitle, onClick, modifier)` ✅ | Explore's "Continue your search" / "Your next stay": a thumbnail (placeholder, loaded, failed-with-retry), title, subtitle, end chevron that follows reading direction (L-05); one button; wraps at 200 % rather than clipping. The subtitle of a search comes from `searchSummaryText(query)`, the template the search bar uses. The card shows this row without naming a component, so it was added here. |
 | CityRow (from ScreenSearchFlow) | Listing | `SojournCityRow(city: City, onClick, modifier)` ✅ | the Where list's row: square photo, localized name (S-05), the same "214 stays · from £1,950 a month" line as `SojournCityCard`, end chevron (L-05); one button |
-| Gallery | Listing | `SojournGallery(photos, onOpen: (index) -> Unit, modifier)` ✅ | 3:2 pager following reading direction; placeholder / loaded / failed-with-retry per slot; next two photos preload; counter in a bidi isolate (S-04) on `scrim`; the full-screen gallery comes with the Details screen |
+| Gallery | Listing | `SojournGallery(photos, onOpen: (index) -> Unit, modifier)` ✅ | 3:2 pager following reading direction; placeholder / loaded / failed-with-retry per slot; next two photos preload; counter in a bidi isolate (S-04) on `scrim` |
+| PhotoViewer (Gallery, full screen) | Listing | `SojournPhotoViewer(photos, modifier, initialIndex, onPageChange)` ✅ | the full-screen gallery's pager: every photo whole (`Fit`) on `bg`, never cropped; swipes with the reading direction; each photo announced "Photo 3 of 13" with its caption; failed photos retry; the screen's top bar carries the counter |
 | KeyFacts | Listing | `SojournKeyFacts(facts: StayFacts, modifier)` ✅ | four counts, one icon each; "Studio" never "0 bedrooms" (N-01); tiles keep whole words and wrap with large text |
 | PolicyRow | Listing | `SojournPolicyRow(policy: Policy, modifier, detail?, divider)` ✅ | the title states the policy's number (N-03), which `Policy` requires; optional detail line from resources |
 | Price | Listing | `SojournPrice(price: PriceDisplay, modifier, size: SojournPriceSize = Card \| Compact)` ✅ | **the only price renderer** (P-01); `Total` leads with the stay total over the all-in nightly average; `From` says "from … a month/night" over what it excludes (P-03) |
@@ -81,7 +82,7 @@ Shared type additions required by the cards live in `core:model`: `PriceDisplay`
 | ScreenSearchFlow | `feature:search` | `SearchFlowRoute` with `WhereStep`, `WhenStep`, `WhoStep` | `SearchFlowViewModel` |
 | ScreenResults, ScreenStates | `feature:results` | `ResultsRoute` / `ResultsScreen` (+ `ScreenState` variants) | `ResultsViewModel` |
 | ScreenFilters | `feature:filters` | `FiltersSheetRoute` | `FiltersViewModel` |
-| ScreenDetails | `feature:details` | `StayDetailsRoute`, `FullScreenGalleryRoute` | `StayDetailsViewModel` |
+| ScreenDetails | `feature:details` | `DetailsRoute`, `GalleryRoute` | `DetailsViewModel`, `GalleryViewModel` |
 | ScreenCheckout | `feature:checkout` | `CheckoutRoute`, `BookingConfirmedRoute` | `CheckoutViewModel` |
 | ScreenMap | `feature:map` | `MapRoute` / `MapScreen` | `MapViewModel` |
 | ScreenSaved | `feature:saved` | `SavedRoute` | `SavedViewModel` |
