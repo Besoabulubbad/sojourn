@@ -76,7 +76,7 @@ class ResultsViewModel(
                 val quoteId = (intent.result.price as? PriceDisplay.Total)?.quoteId?.value
                 navigate(StayDetailsKey(intent.result.stay.id.value, quoteId, key.args))
             }
-            is ResultsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(intent.id) }
+            is ResultsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(intent.id, currentState.query) }
             ResultsIntent.MapTapped -> navigate(MapKey(key.args))
             ResultsIntent.Pulled -> {
                 setState { copy(pulling = true) }

@@ -67,6 +67,7 @@ Why SQLDelight over Room (which also supports KMP now): SQL-first schema and que
 
 **2026-11-18 (Details).** Notes, decision unchanged:
 - Schema version 4 adds what a stay's price includes (`stay_inclusion`), the server's translations of its description (`description_translation`) and its latest reviews (`review`). Reviews come with the stay's own refresh, like blocked dates; the catalogue carries all three (`make_catalog.py`, from a second seed so no existing value moved).
+- Schema version 5 keeps the search a stay was saved from (`saved.check_in`, `check_out`, `adults`, `children`), so the Saved tab shows that search's total; saves from before it are undated, one adult.
 - A stay row is written as insert-if-absent then update, never `INSERT OR REPLACE`. A replace deletes the row first, and the cascade dropped the children a list refresh does not carry: blocked dates and reviews disappeared whenever a city refreshed. `clearChildren` no longer clears blocked dates for the same reason; the stay's own refresh replaces them.
 
 ## Links

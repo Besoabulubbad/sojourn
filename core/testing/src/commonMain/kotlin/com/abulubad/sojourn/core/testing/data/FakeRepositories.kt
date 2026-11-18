@@ -20,6 +20,7 @@ import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.Review
+import com.abulubad.sojourn.core.model.SavedEntry
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
@@ -154,14 +155,31 @@ class FakeBookingRepository(private val createdAt: Instant = Instant.parse("2026
     }
 }
 
-class FakeSavedRepository(saved: List<StayId> = emptyList()) : SavedRepository {
-    val ids = MutableStateFlow(saved)
+/** Saved stays in memory, newest first; [savedAt] stamps each new save. */
+class FakeSavedRepository(
+    saved: List<StayId> = emptyList(),
+    private val savedAt: Instant = Instant.parse("2026-03-01T09:00:00Z"),
+) : SavedRepository {
+    val entries = MutableStateFlow(saved.map { SavedEntry(it, dates = null, guests = Guests(), savedAt = savedAt) })
 
-    override fun observeSavedIds(): Flow<List<StayId>> = ids
+    override fun observeSavedIds(): Flow<List<StayId>> = entries.map { list -> list.map { it.stayId } }
+    override fun observeSaved(): Flow<List<SavedEntry>> = entries
     override suspend fun setSaved(id: StayId, saved: Boolean) {
-        ids.update { old -> if (saved) listOf(id) + (old - id) else old - id }
+        if (saved) restore(SavedEntry(id, dates = null, guests = Guests(), savedAt = savedAt)) else remove(id)
     }
-    override suspend fun toggle(id: StayId): Boolean = (id !in ids.value).also { setSaved(id, it) }
+    override suspend fun toggle(id: StayId, dates: DateRange?, guests: Guests): Boolean {
+        val nowSaved = entries.value.none { it.stayId == id }
+        if (nowSaved) restore(SavedEntry(id, dates, guests, savedAt)) else remove(id)
+        return nowSaved
+    }
+    override suspend fun remove(id: StayId): SavedEntry? {
+        val entry = entries.value.firstOrNull { it.stayId == id }
+        entries.update { list -> list.filterNot { it.stayId == id } }
+        return entry
+    }
+    override suspend fun restore(entry: SavedEntry) {
+        entries.update { list -> listOf(entry) + list.filterNot { it.stayId == entry.stayId } }
+    }
 }
 
 class FakeSearchRepository : SearchRepository {

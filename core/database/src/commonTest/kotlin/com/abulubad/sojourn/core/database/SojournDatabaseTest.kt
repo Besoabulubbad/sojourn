@@ -69,9 +69,12 @@ class SojournDatabaseTest {
     }
 
     @Test
-    fun `saving and unsaving a stay`() {
-        db.savedQueries.save("london-01", 1_000)
+    fun `saving and unsaving a stay with the search it was saved from`() {
+        db.savedQueries.save("london-01", 1_000, "2026-03-12", "2026-03-27", 2, 1)
         assertTrue(db.savedQueries.isSaved("london-01").executeAsOne())
+        val row = db.savedQueries.byId("london-01").executeAsOne()
+        assertEquals("2026-03-12" to "2026-03-27", row.check_in to row.check_out)
+        assertEquals(2L to 1L, row.adults to row.children)
         db.savedQueries.remove("london-01")
         assertEquals(false, db.savedQueries.isSaved("london-01").executeAsOne())
     }

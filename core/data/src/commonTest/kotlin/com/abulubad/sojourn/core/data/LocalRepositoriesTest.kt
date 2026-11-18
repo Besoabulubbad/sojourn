@@ -38,6 +38,20 @@ class LocalRepositoriesTest {
     }
 
     @Test
+    fun `a save keeps its search and comes back as it was after undo`() = runDataTest {
+        val march = DateRange(LocalDate(2026, 3, 12), LocalDate(2026, 3, 27))
+        saved.toggle(StayId("a"), march, Guests(adults = 2, children = 1))
+        saved.toggle(StayId("b"))
+        val entry = saved.observeSaved().first().first { it.stayId == StayId("a") }
+        assertEquals(march, entry.dates)
+        assertEquals(Guests(adults = 2, children = 1), entry.guests)
+        assertEquals(entry, saved.remove(StayId("a")))
+        assertEquals(listOf(StayId("b")), saved.observeSavedIds().first())
+        saved.restore(entry)
+        assertEquals(entry, saved.observeSaved().first().first { it.stayId == StayId("a") })
+    }
+
+    @Test
     fun `saved stays survive a catalogue refresh`() = runDataTest {
         val id = catalogueStays().first().id
         saved.setSaved(id, saved = true)

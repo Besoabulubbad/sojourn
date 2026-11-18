@@ -410,4 +410,9 @@
     <string name="map_area_empty_title">No stays in this area</string>
     <string name="map_area_empty_body">Move the map, or see every stay in your search.</string>
     <string name="action_show_all_stays">Show all stays</string>
+
+    <!-- Saved (ScreenSaved card) -->
+    <string name="saved_empty_title">No saved stays yet</string>
+    <string name="saved_empty_body">Tap the heart on any stay to save it here.</string>
+    <string name="action_explore_stays">Explore stays</string>
 </resources>

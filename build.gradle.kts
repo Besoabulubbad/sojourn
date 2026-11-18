@@ -24,7 +24,7 @@ tasks.check {
 // aggregates. Policy: every category fails. Modules that are still skeletons (their convention plugin declares
 // dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
 val skeletonModules = listOf(
-    "saved", "bookings", "profile",
+    "bookings", "profile",
 ).map { ":feature:$it" } // Phase 5: each leaves this list in its own PR
 dependencyAnalysis {
     abi {

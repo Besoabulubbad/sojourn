@@ -89,7 +89,7 @@ class MapViewModel(
                 val quoteId = (intent.result.price as? PriceDisplay.Total)?.quoteId?.value
                 navigate(StayDetailsKey(intent.result.stay.id.value, quoteId, key.args))
             }
-            is MapIntent.SaveTapped -> viewModelScope.launch { toggleSaved(intent.id) }
+            is MapIntent.SaveTapped -> viewModelScope.launch { toggleSaved(intent.id, currentState.query) }
             MapIntent.ClearFiltersTapped -> updateFilters(Filters(sort = currentState.filters.sort))
             MapIntent.RetryTapped -> refreshes.value++
             else -> Unit

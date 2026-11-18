@@ -11,6 +11,8 @@ import com.abulubad.sojourn.core.domain.ObserveQuote
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
 import com.abulubad.sojourn.core.domain.ObserveSaved
 import com.abulubad.sojourn.core.domain.RecordSearch
+import com.abulubad.sojourn.core.domain.RemoveSaved
+import com.abulubad.sojourn.core.domain.RestoreSaved
 import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
@@ -31,6 +33,7 @@ import com.abulubad.sojourn.feature.explore.ExploreViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.map.MapViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
+import com.abulubad.sojourn.feature.saved.SavedViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.junit.After
 import org.junit.Test
@@ -67,6 +70,8 @@ class SojournGraphResolvesTest {
         koin.get<GetBooking>()
         koin.get<ToggleSaved>()
         koin.get<ObserveSaved>()
+        koin.get<RemoveSaved>()
+        koin.get<RestoreSaved>()
         koin.get<ObserveFilters>()
         koin.get<UpdateFilters>()
         koin.get<ObserveRecentSearches>()
@@ -80,5 +85,6 @@ class SojournGraphResolvesTest {
         koin.get<CheckoutViewModel> { parametersOf(CheckoutKey("q-london-01")) }
         koin.get<ConfirmationViewModel> { parametersOf(BookingConfirmedKey("b-1-london-01")) }
         koin.get<MapViewModel> { parametersOf(MapKey(SearchArgs(cityId = "london"))) }
+        koin.get<SavedViewModel>()
     }
 }
