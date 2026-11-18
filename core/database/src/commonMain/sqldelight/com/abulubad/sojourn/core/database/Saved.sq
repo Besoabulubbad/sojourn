@@ -1,17 +1,26 @@
--- Stays the guest saved. Saved state is local: it survives offline and is never lost on a refresh.
+-- Stays the guest saved, each with the search it was saved from: its dates (null for an undated search) and guests,
+-- so the Saved tab can show that search's total (ScreenSaved card). Saved state is local: it survives offline and is
+-- never lost on a refresh.
 CREATE TABLE saved (
     stay_id TEXT NOT NULL PRIMARY KEY,
-    saved_at INTEGER NOT NULL
+    saved_at INTEGER NOT NULL,
+    check_in TEXT,
+    check_out TEXT,
+    adults INTEGER NOT NULL DEFAULT 1,
+    children INTEGER NOT NULL DEFAULT 0
 );
 
 save:
-INSERT OR REPLACE INTO saved VALUES (?, ?);
+INSERT OR REPLACE INTO saved(stay_id, saved_at, check_in, check_out, adults, children) VALUES (?, ?, ?, ?, ?, ?);
 
 remove:
 DELETE FROM saved WHERE stay_id = ?;
 
 all:
 SELECT * FROM saved ORDER BY saved_at DESC;
+
+byId:
+SELECT * FROM saved WHERE stay_id = ?;
 
 isSaved:
 SELECT count(*) > 0 FROM saved WHERE stay_id = ?;

@@ -22,6 +22,7 @@ import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.model.Review
+import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.data.FakeBookingRepository
@@ -190,10 +191,35 @@ class StayAndBookingUseCasesTest {
         assertTrue(toggle(studio.id))
         assertTrue(toggle(StayId("gone")))
         assertTrue(toggle(flat.id))
-        val cards = ObserveSaved(saved, stays)().first()
-        assertEquals(listOf(flat.id, studio.id), cards.map { it.stay.id })
-        assertTrue(cards.all { it.saved && (it.price as? PriceDisplay.From)?.per == PriceBasis.Month })
+        val cards = ObserveSaved(saved, stays, pricing, clock)().first()
+        assertEquals(listOf(flat.id, studio.id), cards.map { it.result.stay.id })
+        assertTrue(cards.all { it.result.saved && (it.result.price as? PriceDisplay.From)?.per == PriceBasis.Month })
         assertFalse(toggle(flat.id))
-        assertNotEquals(cards, ObserveSaved(saved, stays)().first())
+        assertNotEquals(cards, ObserveSaved(saved, stays, pricing, clock)().first())
+    }
+
+    @Test
+    fun `a stay saved from a dated search keeps that search's total and past dates fall back`() = runSojournTest {
+        ToggleSaved(saved)(flat.id, SearchQuery(dates = march, guests = Guests(2)))
+        val past = DateRange(LocalDate(2026, 2, 1), LocalDate(2026, 2, 8))
+        ToggleSaved(saved)(studio.id, SearchQuery(dates = past))
+        val cards = ObserveSaved(saved, stays, pricing, clock)().first { list ->
+            list.any { it.result.price is PriceDisplay.Total }
+        }
+        val dated = cards.first { it.result.stay.id == flat.id }
+        assertEquals(march, dated.entry.dates)
+        assertEquals(Guests(2), dated.entry.guests)
+        assertEquals(march.nights, assertIs<PriceDisplay.Total>(dated.result.price).nights)
+        assertIs<PriceDisplay.From>(cards.first { it.result.stay.id == studio.id }.result.price)
+    }
+
+    @Test
+    fun `undo puts a removed stay back with its search and place`() = runSojournTest {
+        ToggleSaved(saved)(studio.id, SearchQuery(dates = march))
+        ToggleSaved(saved)(flat.id)
+        val removed = assertNotNull(RemoveSaved(saved)(studio.id))
+        assertEquals(listOf(flat.id), saved.observeSavedIds().first())
+        RestoreSaved(saved)(removed)
+        assertEquals(removed, saved.observeSaved().first().first { it.stayId == studio.id })
     }
 }

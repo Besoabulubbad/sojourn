@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.domain.ObserveQuote
 import com.abulubad.sojourn.core.domain.StayRules
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
@@ -68,7 +69,7 @@ class DetailsViewModel(
         when (intent) {
             DetailsIntent.BackTapped -> sendEffect(DetailsEffect.Back)
             DetailsIntent.ShareTapped -> currentState.stay?.let { sendEffect(DetailsEffect.Share(it)) }
-            DetailsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(stayId) }
+            DetailsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(stayId, savedSearch()) }
             is DetailsIntent.PhotoTapped -> navigate(GalleryKey(key.stayId, intent.index))
             DetailsIntent.ShowOnMapTapped -> currentState.stay?.let { stay ->
                 navigate(MapKey(key.args.copy(cityId = stay.cityId.value), stayId = stay.id.value))
@@ -130,6 +131,13 @@ class DetailsViewModel(
     private fun editDates(change: DetailsSheet.Dates.() -> DetailsSheet.Dates) = setState {
         val dates = sheet as? DetailsSheet.Dates ?: return@setState this
         copy(sheet = dates.change())
+    }
+
+    /** The dates priced here, else the search's: the Saved tab shows that search's total. */
+    private fun savedSearch(): SearchQuery {
+        val state = currentState
+        val quote = state.quote ?: return state.query
+        return state.query.copy(dates = quote.dates, guests = quote.guests)
     }
 
     private fun navigate(key: SojournNavKey) = sendEffect(DetailsEffect.Navigate(key))
