@@ -6,6 +6,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.abulubad.sojourn.core.designsystem.components.sheet.rememberSojournSheetState
+import com.abulubad.sojourn.core.localization.localizedPlace
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.details_share_text
 import com.abulubad.sojourn.core.navigation.GalleryKey
@@ -31,7 +32,9 @@ fun DetailsRoute(key: StayDetailsKey, navigator: Navigator, modifier: Modifier =
     val priceSheet = rememberPriceSheetState()
     // Words are the screen's: the title and "Paddington, London", in the app's language.
     val shareText by rememberUpdatedState(
-        state.stay?.let { stringResource(Res.string.details_share_text, it.title.text, placeLine(it)) },
+        state.stay?.let {
+            stringResource(Res.string.details_share_text, it.title.text, localizedPlace(it.cityId, it.areaKey))
+        },
     )
     CollectEffects(viewModel.effects) { effect ->
         when (effect) {

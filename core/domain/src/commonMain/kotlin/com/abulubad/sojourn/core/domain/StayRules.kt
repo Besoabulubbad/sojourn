@@ -1,5 +1,6 @@
 package com.abulubad.sojourn.core.domain
 
+import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.GeoPoint
@@ -8,6 +9,7 @@ import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
+import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.model.Rating
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
@@ -150,5 +152,20 @@ object StayRules {
         const val UNAVAILABLE = "unavailable"
         const val DATES_IN_PAST = "dates_in_past"
         const val PRICE_CHANGED = "price_changed"
+    }
+
+    /**
+     * A failed quote in the guest's terms: a [Problem] the device or API found, with [stay]'s own numbers, else
+     * [QuoteProblem.Failed].
+     */
+    fun problemFor(error: AppError, stay: Stay?): QuoteProblem {
+        val reason = (error as? AppError.Validation)?.reason
+        return when {
+            reason == Problem.MINIMUM_NIGHTS && stay != null -> QuoteProblem.MinimumNights(minimumNights(stay))
+            reason == Problem.TOO_MANY_GUESTS && stay != null -> QuoteProblem.TooManyGuests(stay.facts.sleeps)
+            reason == Problem.UNAVAILABLE -> QuoteProblem.Unavailable
+            reason == Problem.DATES_IN_PAST -> QuoteProblem.InThePast
+            else -> QuoteProblem.Failed(offline = error == AppError.Offline)
+        }
     }
 }

@@ -12,3 +12,7 @@ fun SojournActionBarPreview() = SojournPreview(SojournVariants.EnLight) { Sojour
 @Preview
 @Composable
 fun SojournActionBarArabicPreview() = SojournPreview(SojournVariants.ArDark) { SojournActionBarSamples.Footers() }
+
+@Preview
+@Composable
+fun SojournActionBarPayPreview() = SojournPreview(SojournVariants.ArLight) { SojournActionBarSamples.Pay() }

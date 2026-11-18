@@ -7,6 +7,7 @@ import com.abulubad.sojourn.core.data.BookingRepository
 import com.abulubad.sojourn.core.data.PricingRepository
 import com.abulubad.sojourn.core.data.StayRepository
 import com.abulubad.sojourn.core.model.Booking
+import com.abulubad.sojourn.core.model.BookingId
 import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.Stay
@@ -14,6 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
 
@@ -40,6 +42,17 @@ class CreateBooking(private val pricing: PricingRepository, private val bookings
 
 /** A booking on the Bookings tab, with its stay when it is still in the catalogue. */
 data class BookingItem(val booking: Booking, val stay: Stay?)
+
+/**
+ * One booking with its stay, from the device: the confirmation after paying and the booking's own page. Null while
+ * the device has no such booking.
+ */
+class GetBooking(private val bookings: BookingRepository, private val stays: StayRepository) {
+    @OptIn(ExperimentalCoroutinesApi::class)
+    operator fun invoke(id: BookingId): Flow<BookingItem?> = bookings.observeBooking(id).flatMapLatest { booking ->
+        if (booking == null) flowOf(null) else stays.observeStay(booking.stayId).map { BookingItem(booking, it) }
+    }
+}
 
 /**
  * The guest's bookings, local and so available offline. Status follows the calendar: upcoming before check-in,

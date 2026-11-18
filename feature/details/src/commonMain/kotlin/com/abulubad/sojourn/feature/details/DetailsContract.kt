@@ -1,6 +1,5 @@
 package com.abulubad.sojourn.feature.details
 
-import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.domain.StayDetails
 import com.abulubad.sojourn.core.domain.StayRules
 import com.abulubad.sojourn.core.model.Amenity
@@ -8,6 +7,7 @@ import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.HostText
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.Quote
+import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.navigation.SojournNavKey
@@ -68,20 +68,11 @@ sealed interface DetailsSheet {
         val month: YearMonth,
         val selection: DateRange? = null,
         val quoting: Boolean = false,
-        val problem: DatesProblem? = null,
+        val problem: QuoteProblem? = null,
     ) : DetailsSheet
 
     /** "Price details": the quote's breakdown, or what a "from" price leaves out. */
     data object PriceDetails : DetailsSheet
-}
-
-/** Why chosen dates could not be priced, in the guest's terms. */
-sealed interface DatesProblem {
-    data class MinimumNights(val nights: Int) : DatesProblem
-    data class TooManyGuests(val sleeps: Int) : DatesProblem
-    data object Unavailable : DatesProblem
-    data object InThePast : DatesProblem
-    data class Failed(val error: AppError) : DatesProblem
 }
 
 /** What the guest did on Details. */

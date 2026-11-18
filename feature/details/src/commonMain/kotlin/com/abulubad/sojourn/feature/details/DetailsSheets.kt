@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.designsystem.components.breakdown.SojournPriceBreakdown
 import com.abulubad.sojourn.core.designsystem.components.button.SojournButton
 import com.abulubad.sojourn.core.designsystem.components.daterange.SojournDateRangePicker
@@ -15,23 +14,14 @@ import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetState
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.domain.StayRules
-import com.abulubad.sojourn.core.localization.rememberSojournFormatter
+import com.abulubad.sojourn.core.localization.quoteProblemText
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.action_choose_dates
 import com.abulubad.sojourn.core.localization.resources.details_dates_apply
 import com.abulubad.sojourn.core.localization.resources.details_from_price_note
-import com.abulubad.sojourn.core.localization.resources.guests
-import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.localization.resources.price_details
-import com.abulubad.sojourn.core.localization.resources.problem_dates_in_past
-import com.abulubad.sojourn.core.localization.resources.problem_minimum_nights
-import com.abulubad.sojourn.core.localization.resources.problem_too_many_guests
-import com.abulubad.sojourn.core.localization.resources.problem_unavailable
-import com.abulubad.sojourn.core.localization.resources.state_error_body
-import com.abulubad.sojourn.core.localization.resources.state_offline_title
 import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.ui.ScreenState
-import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
 /** The sheet the state has open, drawn over the page. */
@@ -93,31 +83,11 @@ private fun DatesSheet(
             )
             sheet.problem?.let { problem ->
                 BasicText(
-                    problemText(problem),
+                    quoteProblemText(problem),
                     style = SojournTheme.type.bodySm.copy(color = SojournTheme.colors.danger),
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun problemText(problem: DatesProblem): String {
-    val formatter = rememberSojournFormatter()
-    return when (problem) {
-        is DatesProblem.MinimumNights -> stringResource(
-            Res.string.problem_minimum_nights,
-            pluralStringResource(Res.plurals.nights, problem.nights, formatter.count(problem.nights)),
-        )
-        is DatesProblem.TooManyGuests -> stringResource(
-            Res.string.problem_too_many_guests,
-            pluralStringResource(Res.plurals.guests, problem.sleeps, formatter.count(problem.sleeps)),
-        )
-        DatesProblem.Unavailable -> stringResource(Res.string.problem_unavailable)
-        DatesProblem.InThePast -> stringResource(Res.string.problem_dates_in_past)
-        is DatesProblem.Failed -> stringResource(
-            if (problem.error == AppError.Offline) Res.string.state_offline_title else Res.string.state_error_body,
-        )
     }
 }
 

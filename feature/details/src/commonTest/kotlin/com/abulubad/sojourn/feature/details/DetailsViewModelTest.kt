@@ -13,6 +13,7 @@ import com.abulubad.sojourn.core.model.HostText
 import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
+import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
 import com.abulubad.sojourn.core.navigation.MapKey
@@ -94,7 +95,7 @@ class DetailsViewModelTest {
         vm.onIntent(DetailsIntent.DatesSelected(DateRange(LocalDate(2026, 3, 12), LocalDate(2026, 3, 14))))
         vm.onIntent(DetailsIntent.DatesConfirmed)
         val sheet = assertIs<DetailsSheet.Dates>(settled(vm).sheet)
-        assertEquals(DatesProblem.MinimumNights(5), sheet.problem)
+        assertEquals(QuoteProblem.MinimumNights(5), sheet.problem)
         assertEquals(0, pricing.quoteCalls)
         assertNull(vm.state.value.quote)
     }
@@ -123,7 +124,7 @@ class DetailsViewModelTest {
         vm.onIntent(DetailsIntent.DatesSelected(quote.dates))
         vm.onIntent(DetailsIntent.DatesConfirmed)
         val sheet = assertIs<DetailsSheet.Dates>(settled(vm).sheet)
-        assertEquals(DatesProblem.Failed(AppError.Offline), sheet.problem)
+        assertEquals(QuoteProblem.Failed(offline = true), sheet.problem)
     }
 
     @Test

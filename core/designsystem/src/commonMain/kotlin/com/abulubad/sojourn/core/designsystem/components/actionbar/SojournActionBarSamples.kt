@@ -9,13 +9,16 @@ import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.action_next
+import com.abulubad.sojourn.core.localization.resources.action_pay
 import com.abulubad.sojourn.core.localization.resources.action_search
 import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.localization.resources.search_any_time
+import com.abulubad.sojourn.core.model.Currency
+import com.abulubad.sojourn.core.model.Money
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
-/** The search flow's footers: When with a range chosen, When before one is, and Who. */
+/** The search flow's footers (When with a range chosen, When before one is, and Who) and checkout's. */
 object SojournActionBarSamples {
 
     @Composable
@@ -38,5 +41,20 @@ object SojournActionBarSamples {
         }
     }
 
+    /** Checkout's footer: "Pay £1,383" across the bar, then while paying. */
+    @Composable
+    fun Pay(modifier: Modifier = Modifier) {
+        val formatter = rememberSojournFormatter()
+        val pay = stringResource(Res.string.action_pay, formatter.money(Money.of(PAY_TOTAL, Currency.GBP)))
+        Column(
+            modifier.padding(vertical = SojournSpacing.space4),
+            verticalArrangement = Arrangement.spacedBy(SojournSpacing.space4),
+        ) {
+            SojournActionBar(primary = pay, onPrimary = {}, fillPrimary = true)
+            SojournActionBar(primary = pay, onPrimary = {}, fillPrimary = true, primaryLoading = true)
+        }
+    }
+
     private const val NIGHTS = 15
+    private const val PAY_TOTAL = 1_383L
 }

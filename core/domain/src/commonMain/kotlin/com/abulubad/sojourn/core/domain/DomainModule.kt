@@ -14,6 +14,7 @@ val domainModule: Module = module {
     factoryOf(::ObserveQuote)
     factoryOf(::CreateBooking)
     factoryOf(::ListBookings)
+    factoryOf(::GetBooking)
     factoryOf(::ToggleSaved)
     factoryOf(::ObserveSaved)
     factoryOf(::ObserveFilters)
