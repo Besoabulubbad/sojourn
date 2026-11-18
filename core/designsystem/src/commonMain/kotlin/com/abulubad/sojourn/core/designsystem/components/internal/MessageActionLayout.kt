@@ -11,6 +11,9 @@ import kotlin.math.max
  * A message with an optional trailing action. The action sits at the end of the message's row while the message
  * keeps at least [stackRatio] of the width; otherwise (large text, a narrow screen) it moves below the message,
  * aligned to the end, so the message never shrinks to a word per line.
+ *
+ * With [stackOnlyIfWrapped] the ratio is ignored: the action moves below only when the message would otherwise
+ * need a second line. For a short message, such as a link ("Any time"), that a ratio would push away needlessly.
  */
 @Composable
 internal fun MessageActionLayout(
@@ -19,13 +22,16 @@ internal fun MessageActionLayout(
     action: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     stackRatio: Float = STACK_RATIO,
+    stackOnlyIfWrapped: Boolean = false,
 ) {
     Layout(contents = listOf(message, action ?: {}), modifier = modifier) { (messages, actions), constraints ->
         val width = constraints.maxWidth
         val gapPx = gap.roundToPx()
         val actionPlaceable = actions.firstOrNull()?.measure(Constraints(maxWidth = width))
         val besideWidth = width - (actionPlaceable?.let { it.width + gapPx } ?: 0)
-        val stacked = actionPlaceable != null && besideWidth < width * stackRatio
+        val needed = if (stackOnlyIfWrapped) messages.first().maxIntrinsicWidth(constraints.maxHeight) else 0
+        val stacked = actionPlaceable != null &&
+            if (stackOnlyIfWrapped) besideWidth < needed else besideWidth < width * stackRatio
         val messageWidth = if (stacked || actionPlaceable == null) width else besideWidth
         val messagePlaceable = messages.first().measure(Constraints(minWidth = messageWidth, maxWidth = messageWidth))
         if (actionPlaceable == null) {

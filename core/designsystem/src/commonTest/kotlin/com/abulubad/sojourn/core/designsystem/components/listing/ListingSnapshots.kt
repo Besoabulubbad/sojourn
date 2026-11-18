@@ -18,6 +18,7 @@ val listingSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("policy_rows", fullMatrix = true) { SojournPolicyRowSamples.Policies() },
     SnapshotCase("price_pins", fullMatrix = true) { SojournPricePinSamples.States() },
     SnapshotCase("city_cards", fullMatrix = true) { SojournCityCardSamples.Cities() },
+    SnapshotCase("city_rows", fullMatrix = true) { SojournCityCardSamples.Rows() },
     SnapshotCase("continue_rows", fullMatrix = true) { SojournContinueRowSamples.Searches() },
     SnapshotCase("stay_card_full", fullMatrix = true) { SojournStayCardSamples.Full() },
     SnapshotCase("stay_card_compact") { SojournStayCardSamples.Compact() },

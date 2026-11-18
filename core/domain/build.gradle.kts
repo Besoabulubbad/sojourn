@@ -13,7 +13,8 @@ kotlin {
             api(project(":core:data"))
             api(libs.kotlinx.coroutines.core)
             api(libs.koin.core)
-            implementation(libs.kotlinx.datetime)
+            // StayRules.hasFreeRun takes a YearMonth and a LocalDate.
+            api(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(project(":core:testing"))

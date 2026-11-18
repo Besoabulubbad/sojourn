@@ -34,12 +34,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SojournCityCard(city: City, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val c = SojournTheme.colors
-    val formatter = rememberSojournFormatter()
-    val stays = pluralStringResource(Res.plurals.stays, city.stayCount, formatter.count(city.stayCount))
-    val from = stringResource(
-        if (city.fromPrice.per == PriceBasis.Month) Res.string.price_from_month else Res.string.price_from_night,
-        formatter.money(city.fromPrice.amount),
-    )
+    val summary = citySummary(city)
     Column(
         // Only the photo is rounded: clipping the whole card would cut the text at its corners.
         modifier.clickable(role = Role.Button, indication = ripple(), interactionSource = null, onClick = onClick),
@@ -52,8 +47,20 @@ fun SojournCityCard(city: City, onClick: () -> Unit, modifier: Modifier = Modifi
         )
         BasicText(localizedCityName(city.id), style = SojournTheme.type.titleSm.copy(color = c.ink))
         BasicText(
-            stringResource(Res.string.city_card_summary, stays, from),
+            summary,
             style = SojournTheme.type.bodySm.copy(color = c.inkMuted),
         )
     }
+}
+
+/** "214 stays · from £1,950 a month": the card's and the row's second line. */
+@Composable
+internal fun citySummary(city: City): String {
+    val formatter = rememberSojournFormatter()
+    val stays = pluralStringResource(Res.plurals.stays, city.stayCount, formatter.count(city.stayCount))
+    val from = stringResource(
+        if (city.fromPrice.per == PriceBasis.Month) Res.string.price_from_month else Res.string.price_from_night,
+        formatter.money(city.fromPrice.amount),
+    )
+    return stringResource(Res.string.city_card_summary, stays, from)
 }

@@ -41,7 +41,7 @@ detekt's `sojourn` rule set (`tooling/detekt-rules`) enforces the token, motion,
 - **Prices only through `SojournPrice` from a `PriceDisplay`.** No composable accepts a bare number as a price.
 - **Every data screen** models `ScreenState<T>` (Loading / Content / Empty / Error / Offline) exhaustively.
 - **Host-written text** renders only through `HostText` (S-06); **icons** only through `SojournIcon` (no raw painters, no call-site mirroring).
-- **Insets** are consumed only by `SojournScaffold`, `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournSheet`.
+- **Insets** are consumed only by `SojournScaffold`, `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournActionBar`, `SojournSheet`.
 
 ## Patterns
 

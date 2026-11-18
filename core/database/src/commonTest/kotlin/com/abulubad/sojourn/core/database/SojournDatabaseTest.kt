@@ -78,7 +78,7 @@ class SojournDatabaseTest {
 
     @Test
     fun `recent searches keep only the newest few`() {
-        repeat(RECENTS) { db.searchRecentQueries.insert("london", null, null, 1, 0, null, it.toLong()) }
+        repeat(RECENTS) { db.searchRecentQueries.insert("london", null, null, 1, 0, null, null, it.toLong()) }
         db.searchRecentQueries.trimTo(KEEP)
         val latest = db.searchRecentQueries.latest(RECENTS.toLong()).executeAsList()
         assertEquals(KEEP.toInt(), latest.size)

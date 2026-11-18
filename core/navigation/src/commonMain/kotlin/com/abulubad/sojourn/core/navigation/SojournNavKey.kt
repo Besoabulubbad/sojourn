@@ -13,7 +13,8 @@ sealed interface SojournNavKey : NavKey
 
 /**
  * The Where / When / Who of a search, flattened to primitives for the back stack. Dates are ISO `yyyy-MM-dd`;
- * [length] is a `StayLength` name, set by Explore's stay-length shortcuts before any dates are chosen.
+ * [length] is a `StayLength` name, set by Explore's stay-length shortcuts or the flexible tab; [startMonth] is the
+ * flexible tab's "Starting in", ISO `yyyy-MM`.
  */
 @Serializable
 data class SearchArgs(
@@ -23,6 +24,7 @@ data class SearchArgs(
     val adults: Int = 1,
     val children: Int = 0,
     val length: String? = null,
+    val startMonth: String? = null,
 )
 
 /** Steps of the full-screen search flow. */

@@ -10,6 +10,10 @@ import com.abulubad.sojourn.core.model.Rating
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayLength
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.plus
 
 /**
  * Business rules from the engineering standards that more than one use case applies. Pure functions: every rule
@@ -58,14 +62,37 @@ object StayRules {
      * same ids the API uses: `minimum_nights`, `too_many_guests`, `unavailable`.
      */
     fun bookingProblem(stay: Stay, dates: DateRange, guests: Guests, blocked: List<DateRange>): String? {
-        val minimum = stay.policies.filterIsInstance<Policy.MinimumStay>().maxOfOrNull { it.nights } ?: 1
         return when {
-            dates.nights < minimum -> Problem.MINIMUM_NIGHTS
+            dates.nights < minimumNights(stay) -> Problem.MINIMUM_NIGHTS
             guests.total > stay.facts.sleeps -> Problem.TOO_MANY_GUESTS
             blocked.any { it.start < dates.end && dates.start < it.end } -> Problem.UNAVAILABLE
             else -> null
         }
     }
+
+    /**
+     * Whether [stay] has a free run of [length] (or its own minimum stay, if longer) that starts in [month], on or
+     * after [today]: the flexible search's "1 month, starting in March". A run may end after the month.
+     */
+    fun hasFreeRun(
+        stay: Stay,
+        length: StayLength,
+        month: YearMonth,
+        blocked: List<DateRange>,
+        today: LocalDate,
+    ): Boolean {
+        val nights = maxOf(length.minNights, minimumNights(stay))
+        val first = maxOf(month.firstDay, today)
+        return generateSequence(first) { it.plus(DatePeriod(days = 1)) }
+            .takeWhile { it <= month.lastDay }
+            .any { start ->
+                val end = start.plus(DatePeriod(days = nights))
+                blocked.none { it.start < end && start < it.end }
+            }
+    }
+
+    private fun minimumNights(stay: Stay): Int =
+        stay.policies.filterIsInstance<Policy.MinimumStay>().maxOfOrNull { it.nights } ?: 1
 
     /** A month of nights; a month is long enough for the long-stay discount (30 ≥ [StayLength.Month] nights). */
     private fun monthly(nightly: Money, discountPercent: Int?): Money {

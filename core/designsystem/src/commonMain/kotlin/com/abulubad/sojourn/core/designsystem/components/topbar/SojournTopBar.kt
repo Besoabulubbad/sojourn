@@ -1,12 +1,18 @@
 package com.abulubad.sojourn.core.designsystem.components.topbar
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.BasicText
@@ -17,23 +23,33 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.abulubad.sojourn.core.designsystem.components.iconbutton.SojournIconButton
 import com.abulubad.sojourn.core.designsystem.components.iconbutton.SojournIconButtonTint
 import com.abulubad.sojourn.core.designsystem.components.iconbutton.SojournIconButtonVariant
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
+import com.abulubad.sojourn.core.designsystem.theme.LocalReduceMotion
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
+import com.abulubad.sojourn.core.designsystem.tokens.SojournMotion
+import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
+import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.cd_back
+import com.abulubad.sojourn.core.localization.resources.cd_close
+import com.abulubad.sojourn.core.localization.resources.cd_step_progress
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -117,6 +133,79 @@ fun SojournTopBar(
                 }
             }
             scope.actions()
+        }
+    }
+}
+
+/**
+ * The top bar of a full-screen flow taken one step at a time (ScreenSearchFlow card): no title, a progress bar of
+ * [steps] segments with the first [step] filled, and one button that leaves the step. It owns the status-bar inset,
+ * like [SojournTopBar].
+ *
+ * - On the first step the button is Close (it leaves the flow); after it, Back (one step back, mirrored in RTL).
+ *   Both call [onBack], the same action as the system back gesture.
+ * - A newly reached segment fills from the start edge over `base` (`ease-standard`), at once under reduce motion.
+ * - Screen readers hear "Step 2 of 3" for the bar; the segments themselves are not read.
+ */
+@Composable
+fun SojournStepTopBar(step: Int, steps: Int, onBack: () -> Unit, modifier: Modifier = Modifier) {
+    require(step in 1..steps) { "Step $step is not within 1..$steps" }
+    val c = SojournTheme.colors
+    val first = step == 1
+    Box(modifier.fillMaxWidth().background(c.bg).windowInsetsPadding(WindowInsets.statusBars)) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(SojournSizes.barTop)
+                .padding(horizontal = SojournSpacing.space1),
+            horizontalArrangement = Arrangement.spacedBy(SojournSpacing.space1),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            SojournIconButton(
+                icon = if (first) SojournIcon.Close else SojournIcon.Back,
+                contentDescription = stringResource(if (first) Res.string.cd_close else Res.string.cd_back),
+                onClick = onBack,
+            )
+            StepProgress(step, steps, Modifier.weight(1f).padding(horizontal = SojournSpacing.space2))
+            // Balances the button, so the progress bar sits in the middle of the screen.
+            Spacer(Modifier.size(SojournSizes.touchMin))
+        }
+    }
+}
+
+@Composable
+private fun StepProgress(step: Int, steps: Int, modifier: Modifier) {
+    val c = SojournTheme.colors
+    val formatter = rememberSojournFormatter()
+    val description = stringResource(Res.string.cd_step_progress, formatter.count(step), formatter.count(steps))
+    val fillSpec = if (LocalReduceMotion.current) {
+        snap()
+    } else {
+        tween<Float>(SojournMotion.base, easing = SojournMotion.standard)
+    }
+    Row(
+        modifier.clearAndSetSemantics { contentDescription = description },
+        horizontalArrangement = Arrangement.spacedBy(SojournSpacing.space1),
+    ) {
+        repeat(steps) { index ->
+            val fill by animateFloatAsState(
+                targetValue = if (index < step) 1f else 0f,
+                animationSpec = fillSpec,
+            )
+            Box(
+                Modifier
+                    .weight(1f)
+                    .height(SojournTopBarDefaults.StepHeight)
+                    .clip(SojournShapes.full)
+                    // `borderControl`, not a sunken fill: the steps still to come must be visible in dark mode too.
+                    .background(c.borderControl)
+                    .drawBehind {
+                        val width = size.width * fill
+                        // The fill grows from the start edge: the left in English, the right in Arabic.
+                        val x = if (layoutDirection == LayoutDirection.Ltr) 0f else size.width - width
+                        drawRect(c.brand, topLeft = Offset(x, 0f), size = Size(width, size.height))
+                    },
+            )
         }
     }
 }

@@ -7,12 +7,13 @@ CREATE TABLE search_recent (
     adults INTEGER NOT NULL,
     children INTEGER NOT NULL,
     length TEXT,
-    searched_at INTEGER NOT NULL
+    searched_at INTEGER NOT NULL,
+    start_month TEXT -- yyyy-MM, a flexible search's "Starting in" (added in version 2)
 );
 
 insert:
-INSERT INTO search_recent(city_id, start_date, end_date, adults, children, length, searched_at)
-VALUES (?, ?, ?, ?, ?, ?, ?);
+INSERT INTO search_recent(city_id, start_date, end_date, adults, children, length, start_month, searched_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 latest:
 SELECT * FROM search_recent ORDER BY searched_at DESC, id DESC LIMIT :limit;

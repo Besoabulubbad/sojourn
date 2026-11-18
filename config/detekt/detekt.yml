@@ -143,4 +143,5 @@ sojourn:
       - 'SojournTopBar.kt'
       - 'SojournBottomNav.kt'
       - 'SojournBookingBar.kt'
+      - 'SojournActionBar.kt'
       - 'SojournSheet.kt'

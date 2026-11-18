@@ -13,12 +13,15 @@ import com.abulubad.sojourn.core.domain.RecordSearch
 import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
+import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.feature.explore.ExploreViewModel
+import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.stopKoin
+import org.koin.core.parameter.parametersOf
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -52,5 +55,6 @@ class SojournGraphResolvesTest {
         koin.get<ObserveRecentSearches>()
         koin.get<RecordSearch>()
         koin.get<ExploreViewModel>()
+        koin.get<SearchViewModel> { parametersOf(SearchKey()) }
     }
 }

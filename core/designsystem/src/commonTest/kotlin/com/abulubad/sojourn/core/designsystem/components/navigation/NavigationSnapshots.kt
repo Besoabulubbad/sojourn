@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.testing.SnapshotCase
 /** The Navigation group: TopBar, BottomNav, Sheet, ViewToggle; each default in the full matrix, plus the peek sheet. */
 val navigationSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("top_bar_states", fullMatrix = true) { SojournTopBarSamples.States() },
+    SnapshotCase("step_top_bar", fullMatrix = true) { SojournTopBarSamples.Steps() },
     SnapshotCase("bottom_nav_tabs", fullMatrix = true) { SojournBottomNavSamples.Tabs() },
     SnapshotCase("sheet_filters", fullMatrix = true) { SojournSheetSamples.Filters() },
     SnapshotCase("sheet_peek") { SojournSheetSamples.Peek() },

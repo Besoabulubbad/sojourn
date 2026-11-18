@@ -27,6 +27,7 @@ import com.abulubad.sojourn.core.navigation.TabbedNavigator
 import com.abulubad.sojourn.core.navigation.sojournSavedStateConfiguration
 import com.abulubad.sojourn.core.ui.LocalTabBar
 import com.abulubad.sojourn.feature.explore.exploreEntries
+import com.abulubad.sojourn.feature.search.searchEntries
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -74,6 +75,7 @@ internal fun SojournNavHost(modifier: Modifier = Modifier) {
 /** Every feature's entries. Each feature PR adds its `<name>Entries(navigator)` here. */
 private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     exploreEntries(navigator)
+    searchEntries(navigator)
 }
 
 @Composable

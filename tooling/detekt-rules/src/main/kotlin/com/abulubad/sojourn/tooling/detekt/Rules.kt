@@ -218,6 +218,7 @@ class InsetsOnlyInOwners(config: Config) : SojournRule(
             "SojournTopBar.kt",
             "SojournBottomNav.kt",
             "SojournBookingBar.kt",
+            "SojournActionBar.kt",
             "SojournSheet.kt",
         )
         val INSET_APIS = setOf(

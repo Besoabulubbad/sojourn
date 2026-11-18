@@ -16,3 +16,15 @@ fun SojournCityCardPreview() = SojournPreview(SojournVariants.EnLight) {
 fun SojournCityCardArabicPreview() = SojournPreview(SojournVariants.ArDark) {
     SojournCityCardSamples.Cities()
 }
+
+@Preview
+@Composable
+fun SojournCityRowPreview() = SojournPreview(SojournVariants.EnLight) {
+    SojournCityCardSamples.Rows()
+}
+
+@Preview
+@Composable
+fun SojournCityRowArabicPreview() = SojournPreview(SojournVariants.ArDark) {
+    SojournCityCardSamples.Rows()
+}

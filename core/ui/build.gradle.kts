@@ -13,6 +13,8 @@ kotlin {
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.kotlinx.coroutines.core)
             implementation(project(":core:designsystem"))
+            // StepBackHandler takes system back for screens with their own steps (the search flow).
+            implementation(libs.navigationevent.compose)
         }
         commonTest.dependencies {
             implementation(project(":core:testing"))

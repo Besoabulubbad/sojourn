@@ -49,18 +49,18 @@ import com.abulubad.sojourn.core.localization.localizedCityName
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.action_retry
-import com.abulubad.sojourn.core.localization.resources.explore_cities_empty_body
-import com.abulubad.sojourn.core.localization.resources.explore_cities_offline_body
+import com.abulubad.sojourn.core.localization.resources.cities_empty_body
+import com.abulubad.sojourn.core.localization.resources.cities_offline_body
 import com.abulubad.sojourn.core.localization.resources.explore_cities_title
 import com.abulubad.sojourn.core.localization.resources.explore_continue_title
 import com.abulubad.sojourn.core.localization.resources.explore_greeting
-import com.abulubad.sojourn.core.localization.resources.explore_length_few_nights
-import com.abulubad.sojourn.core.localization.resources.explore_length_longer
-import com.abulubad.sojourn.core.localization.resources.explore_length_month
 import com.abulubad.sojourn.core.localization.resources.explore_length_title
-import com.abulubad.sojourn.core.localization.resources.explore_length_week
 import com.abulubad.sojourn.core.localization.resources.explore_next_stay_title
 import com.abulubad.sojourn.core.localization.resources.explore_see_all
+import com.abulubad.sojourn.core.localization.resources.length_choice_few_nights
+import com.abulubad.sojourn.core.localization.resources.length_choice_longer
+import com.abulubad.sojourn.core.localization.resources.length_choice_month
+import com.abulubad.sojourn.core.localization.resources.length_choice_week
 import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.localization.resources.offline_banner
 import com.abulubad.sojourn.core.localization.resources.search_anywhere
@@ -156,10 +156,10 @@ private fun StayLengths(onSelect: (StayLength) -> Unit) {
 
 /** The shortcuts, in the card's words; each opens the search flow with that length pre-set. */
 private val LENGTH_SHORTCUTS: List<Pair<StayLength, StringResource>> = listOf(
-    StayLength.Weekend to Res.string.explore_length_few_nights,
-    StayLength.Week to Res.string.explore_length_week,
-    StayLength.Month to Res.string.explore_length_month,
-    StayLength.Longer to Res.string.explore_length_longer,
+    StayLength.Weekend to Res.string.length_choice_few_nights,
+    StayLength.Week to Res.string.length_choice_week,
+    StayLength.Month to Res.string.length_choice_month,
+    StayLength.Longer to Res.string.length_choice_longer,
 )
 
 @Composable
@@ -213,13 +213,13 @@ private fun Cities(cities: ScreenState<List<City>>, onIntent: (ExploreIntent) ->
             is ScreenState.Offline -> cities.cached?.let { CityRow(it, onIntent) } ?: SojournEmptyState(
                 icon = SojournIcon.Offline,
                 title = stringResource(Res.string.state_offline_title),
-                body = stringResource(Res.string.explore_cities_offline_body),
+                body = stringResource(Res.string.cities_offline_body),
                 action = retry,
             )
             ScreenState.Empty -> SojournEmptyState(
                 icon = SojournIcon.City,
                 title = stringResource(Res.string.state_empty_title),
-                body = stringResource(Res.string.explore_cities_empty_body),
+                body = stringResource(Res.string.cities_empty_body),
             )
             is ScreenState.Error -> SojournEmptyState(
                 icon = SojournIcon.Alert,
