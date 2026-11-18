@@ -11,6 +11,7 @@ import com.abulubad.sojourn.core.localization.localizationModule
 import com.abulubad.sojourn.core.network.networkModule
 import com.abulubad.sojourn.core.platform.platformModule
 import com.abulubad.sojourn.feature.explore.exploreModule
+import com.abulubad.sojourn.feature.filters.filtersModule
 import com.abulubad.sojourn.feature.results.resultsModule
 import com.abulubad.sojourn.feature.search.searchModule
 import org.koin.core.KoinApplication
@@ -40,6 +41,7 @@ val sojournModules: List<Module> = listOf(
     exploreModule,
     searchModule,
     resultsModule,
+    filtersModule,
 )
 
 /**

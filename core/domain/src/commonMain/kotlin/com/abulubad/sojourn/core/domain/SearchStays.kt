@@ -69,7 +69,8 @@ data class SearchResults(val stays: List<StayResult>, val basis: PriceBasis)
  *   appear as they are checked; a stay that cannot be checked (offline, nothing cached) stays in, under the offline
  *   banner.
  * - A price range applies only when its basis matches the cards' (P-04), and only to prices in its currency.
- * - "Free cancellation" keeps stays whose free-cancellation window has not closed; "Studio" keeps studios.
+ * - "Free cancellation" keeps stays whose free-cancellation window has not closed; Bedrooms is an exact count
+ *   ("Studio", 1, 2) or three and more.
  * - Results are sorted last, by [Filters.sort]; distance is from the stay's city centre to its area's centre.
  */
 class SearchStays(
@@ -209,7 +210,7 @@ class SearchStays(
         val results = data?.mapNotNull { stay ->
             val price = priceOf(stay) ?: return@mapNotNull null
             StayResult(stay, price, StayRules.visibleRating(stay.rating), saved = false)
-        }?.filter { it.stay.matches(filters, clock.today()) && it.price.inRange(filters, basis) }
+        }?.filter { it.stay.matches(filters, clock.today()) && StayRules.inPriceRange(it.price, filters, basis) }
         return Loadable(results?.let { SearchResults(it, basis) }, refreshing, error)
     }
 
@@ -226,17 +227,11 @@ private fun Stay.fits(query: SearchQuery): Boolean =
 /** The filters that do not involve price. */
 private fun Stay.matches(filters: Filters, today: LocalDate): Boolean =
     amenities.containsAll(filters.amenities) &&
-        facts.bedrooms >= (filters.minBedrooms ?: 0) &&
+        (filters.bedrooms?.matches(facts.bedrooms) ?: true) &&
+        facts.beds >= (filters.minBeds ?: 0) &&
+        facts.bathrooms >= (filters.minBathrooms ?: 0) &&
         (!filters.instantBook || instantBook) &&
-        (!filters.studioOnly || facts.bedrooms == 0) &&
         (!filters.freeCancellation || StayRules.hasFreeCancellation(this, today))
-
-/** P-04: a range on another basis does not apply; one in another currency excludes what it cannot compare. */
-private fun PriceDisplay.inRange(filters: Filters, basis: PriceBasis): Boolean {
-    val range = filters.priceRange ?: return true
-    if (filters.basis != basis) return true
-    return amount.currency == range.min.currency && amount in range
-}
 
 private val SortOrder.comparator: Comparator<StayResult>
     get() = when (this) {

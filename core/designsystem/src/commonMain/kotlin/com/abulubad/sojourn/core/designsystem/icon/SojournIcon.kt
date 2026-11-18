@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import com.abulubad.sojourn.core.designsystem.resources.Res
+import com.abulubad.sojourn.core.designsystem.resources.ic_air_vent
 import com.abulubad.sojourn.core.designsystem.resources.ic_arrow_left
 import com.abulubad.sojourn.core.designsystem.resources.ic_arrow_right
 import com.abulubad.sojourn.core.designsystem.resources.ic_arrow_up_down
@@ -29,10 +30,12 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_circle_alert
 import com.abulubad.sojourn.core.designsystem.resources.ic_circle_check
 import com.abulubad.sojourn.core.designsystem.resources.ic_clock
 import com.abulubad.sojourn.core.designsystem.resources.ic_compass
+import com.abulubad.sojourn.core.designsystem.resources.ic_cooking_pot
 import com.abulubad.sojourn.core.designsystem.resources.ic_copy
 import com.abulubad.sojourn.core.designsystem.resources.ic_credit_card
 import com.abulubad.sojourn.core.designsystem.resources.ic_door_open
 import com.abulubad.sojourn.core.designsystem.resources.ic_external_link
+import com.abulubad.sojourn.core.designsystem.resources.ic_fence
 import com.abulubad.sojourn.core.designsystem.resources.ic_footprints
 import com.abulubad.sojourn.core.designsystem.resources.ic_gift
 import com.abulubad.sojourn.core.designsystem.resources.ic_heart
@@ -50,6 +53,7 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_message_circle
 import com.abulubad.sojourn.core.designsystem.resources.ic_minus
 import com.abulubad.sojourn.core.designsystem.resources.ic_monitor
 import com.abulubad.sojourn.core.designsystem.resources.ic_moon
+import com.abulubad.sojourn.core.designsystem.resources.ic_paw_print
 import com.abulubad.sojourn.core.designsystem.resources.ic_phone
 import com.abulubad.sojourn.core.designsystem.resources.ic_plus
 import com.abulubad.sojourn.core.designsystem.resources.ic_rotate_cw
@@ -61,13 +65,17 @@ import com.abulubad.sojourn.core.designsystem.resources.ic_share
 import com.abulubad.sojourn.core.designsystem.resources.ic_shield_check
 import com.abulubad.sojourn.core.designsystem.resources.ic_sliders_horizontal
 import com.abulubad.sojourn.core.designsystem.resources.ic_sparkles
+import com.abulubad.sojourn.core.designsystem.resources.ic_square_parking
 import com.abulubad.sojourn.core.designsystem.resources.ic_star
 import com.abulubad.sojourn.core.designsystem.resources.ic_star_filled
 import com.abulubad.sojourn.core.designsystem.resources.ic_sun
+import com.abulubad.sojourn.core.designsystem.resources.ic_thermometer
 import com.abulubad.sojourn.core.designsystem.resources.ic_train_front
 import com.abulubad.sojourn.core.designsystem.resources.ic_trash_2
+import com.abulubad.sojourn.core.designsystem.resources.ic_tv
 import com.abulubad.sojourn.core.designsystem.resources.ic_user
 import com.abulubad.sojourn.core.designsystem.resources.ic_users
+import com.abulubad.sojourn.core.designsystem.resources.ic_utensils
 import com.abulubad.sojourn.core.designsystem.resources.ic_washing_machine
 import com.abulubad.sojourn.core.designsystem.resources.ic_wifi
 import com.abulubad.sojourn.core.designsystem.resources.ic_wifi_off
@@ -120,6 +128,14 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
     data object Washer : SojournIcon(Res.drawable.ic_washing_machine)
     data object Workspace : SojournIcon(Res.drawable.ic_laptop)
     data object Lift : SojournIcon(Res.drawable.ic_arrow_up_down)
+    data object Kitchen : SojournIcon(Res.drawable.ic_cooking_pot)
+    data object AirConditioning : SojournIcon(Res.drawable.ic_air_vent)
+    data object Heating : SojournIcon(Res.drawable.ic_thermometer)
+    data object Parking : SojournIcon(Res.drawable.ic_square_parking)
+    data object Balcony : SojournIcon(Res.drawable.ic_fence)
+    data object Dishwasher : SojournIcon(Res.drawable.ic_utensils)
+    data object Tv : SojournIcon(Res.drawable.ic_tv)
+    data object PetFriendly : SojournIcon(Res.drawable.ic_paw_print)
     data object Walk : SojournIcon(Res.drawable.ic_footprints)
     data object Transit : SojournIcon(Res.drawable.ic_train_front)
     data object Star : SojournIcon(Res.drawable.ic_star)
@@ -173,7 +189,8 @@ sealed class SojournIcon(internal val resource: DrawableResource, val autoMirror
                 Back, Forward, ChevronStart, ChevronEnd, ChevronDown, ChevronUp, Close, ExternalLink,
                 Explore, Saved, SavedFilled, Bookings, Profile, Home,
                 Search, Filters, Map, MapPin, List, Calendar, Guests, City,
-                Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Walk, Transit, Star, StarFilled, Sparkles,
+                Bed, Bath, Size, Wifi, Washer, Workspace, Lift, Kitchen, AirConditioning, Heating, Parking,
+                Balcony, Dishwasher, Tv, PetFriendly, Walk, Transit, Star, StarFilled, Sparkles,
                 Key, Clock, Deposit, DoorOpen, Payment, Rewards, Bookmark,
                 Check, CheckCircle, Info, Alert, Offline, Retry, ImageFailed, NoResults,
                 Plus, Minus, Share, Copy, Delete, Phone, Message,

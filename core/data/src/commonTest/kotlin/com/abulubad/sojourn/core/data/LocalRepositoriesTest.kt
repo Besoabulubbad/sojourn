@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.data
 
 import com.abulubad.sojourn.core.model.Amenity
+import com.abulubad.sojourn.core.model.BedroomChoice
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
@@ -86,7 +87,9 @@ class LocalRepositoriesTest {
             priceRange = MoneyRange(Money.of(1_500, Currency.GBP), Money.of(3_000, Currency.GBP)),
             basis = PriceBasis.Month,
             amenities = setOf(Amenity.Wifi, Amenity.Workspace),
-            minBedrooms = 1,
+            bedrooms = BedroomChoice.ThreeOrMore,
+            minBeds = 3,
+            minBathrooms = 2,
             instantBook = true,
             sort = SortOrder.PriceLowToHigh,
         )

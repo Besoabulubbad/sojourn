@@ -13,10 +13,12 @@ import com.abulubad.sojourn.core.domain.RecordSearch
 import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
+import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchArgs
 import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.feature.explore.ExploreViewModel
+import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.junit.After
@@ -60,5 +62,6 @@ class SojournGraphResolvesTest {
         koin.get<ExploreViewModel>()
         koin.get<SearchViewModel> { parametersOf(SearchKey()) }
         koin.get<ResultsViewModel> { parametersOf(ResultsKey(SearchArgs())) }
+        koin.get<FiltersViewModel> { parametersOf(FiltersKey(SearchArgs())) }
     }
 }

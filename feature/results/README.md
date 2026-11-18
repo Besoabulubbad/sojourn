@@ -2,7 +2,7 @@
 
 Implements the design-system card **ScreenResults** (with its states from **ScreenStates**): the stays for a search, each with the price every later surface shows.
 
-- **Header:** the search summary (`SojournSearchBar` with back; tap it to change the search) beside the filter button with the active-filter count, then the quick-filter chips: Studio, Workspace, Washer, Free cancellation. Chips and sort write the persisted `Filters`, so the filter sheet and its badge agree.
+- **Header:** the search summary (`SojournSearchBar` with back; tap it to change the search) beside the filter button with the active-filter count, which opens the filter sheet (`FiltersKey`) over the list. Then the quick-filter chips: Studio (the sheet's Bedrooms "Studio"), Workspace, Washer, Free cancellation. Chips and sort write the persisted `Filters`, so the filter sheet and its badge agree.
 - **List:** the count ("3 stays in London") and Sort (Recommended, Price low to high, Rating, Distance to centre), then `SojournStayCard`s. With dates each card shows the all-in total and carries its quote id to Details (P-02); without, "from … a month" and what it excludes (P-03).
 - **Map:** the floating `SojournViewToggle` opens `MapKey` with the same search.
 - **Refresh:** pull to refresh (`SojournPullToRefresh`) runs the search again past the refresh policy; the list stays on screen.

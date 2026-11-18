@@ -8,6 +8,7 @@ import org.koin.dsl.module
 val domainModule: Module = module {
     factoryOf(::GetCities)
     factoryOf(::SearchStays)
+    factoryOf(::PreviewFilters)
     factoryOf(::GetStayDetails)
     factoryOf(::GetQuote)
     factoryOf(::ObserveQuote)

@@ -8,6 +8,7 @@ import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
 import com.abulubad.sojourn.core.model.Amenity
+import com.abulubad.sojourn.core.model.BedroomChoice
 import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.SortOrder
@@ -75,7 +76,8 @@ class ResultsViewModelTest {
         settled(vm)
         vm.onIntent(ResultsIntent.QuickFilterTapped(QuickFilter.Studio))
         vm.onIntent(ResultsIntent.QuickFilterTapped(QuickFilter.Washer))
-        assertEquals(Filters(studioOnly = true, amenities = setOf(Amenity.Washer)), preferences.filters.value)
+        val chosen = Filters(bedrooms = BedroomChoice.Studio, amenities = setOf(Amenity.Washer))
+        assertEquals(chosen, preferences.filters.value)
         vm.onIntent(ResultsIntent.SortTapped)
         assertTrue(vm.state.value.sortOpen)
         vm.onIntent(ResultsIntent.SortSelected(SortOrder.DistanceToCentre))
@@ -123,7 +125,7 @@ class ResultsViewModelTest {
             vm.onIntent(ResultsIntent.SearchTapped)
             assertEquals(ResultsEffect.Navigate(SearchKey(args = args)), awaitItem())
             vm.onIntent(ResultsIntent.FiltersTapped)
-            assertEquals(ResultsEffect.Navigate(FiltersKey), awaitItem())
+            assertEquals(ResultsEffect.Navigate(FiltersKey(args)), awaitItem())
             vm.onIntent(ResultsIntent.MapTapped)
             assertEquals(ResultsEffect.Navigate(MapKey(args)), awaitItem())
             vm.onIntent(ResultsIntent.BackTapped)

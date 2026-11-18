@@ -56,13 +56,13 @@ import com.abulubad.sojourn.core.localization.resources.amenity_washer
 import com.abulubad.sojourn.core.localization.resources.amenity_workspace
 import com.abulubad.sojourn.core.localization.resources.cd_filters
 import com.abulubad.sojourn.core.localization.resources.facts_studio
+import com.abulubad.sojourn.core.localization.resources.filter_free_cancellation
 import com.abulubad.sojourn.core.localization.resources.offline_banner
 import com.abulubad.sojourn.core.localization.resources.priced_days_ago
 import com.abulubad.sojourn.core.localization.resources.priced_hours_ago
 import com.abulubad.sojourn.core.localization.resources.results_empty_filters_body
 import com.abulubad.sojourn.core.localization.resources.results_empty_search_body
 import com.abulubad.sojourn.core.localization.resources.results_empty_title
-import com.abulubad.sojourn.core.localization.resources.results_free_cancellation
 import com.abulubad.sojourn.core.localization.resources.results_in_city
 import com.abulubad.sojourn.core.localization.resources.results_sort
 import com.abulubad.sojourn.core.localization.resources.results_sort_title
@@ -184,7 +184,7 @@ private val QuickFilter.label: StringResource
         QuickFilter.Studio -> Res.string.facts_studio
         QuickFilter.Workspace -> Res.string.amenity_workspace
         QuickFilter.Washer -> Res.string.amenity_washer
-        QuickFilter.FreeCancellation -> Res.string.results_free_cancellation
+        QuickFilter.FreeCancellation -> Res.string.filter_free_cancellation
     }
 
 private fun LazyListScope.list(state: ResultsUiState, onIntent: (ResultsIntent) -> Unit) {
