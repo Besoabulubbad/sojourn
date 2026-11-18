@@ -1,0 +1,2 @@
+-- Version 1 to 2: a flexible search remembers its "Starting in" month.
+ALTER TABLE search_recent ADD COLUMN start_month TEXT;

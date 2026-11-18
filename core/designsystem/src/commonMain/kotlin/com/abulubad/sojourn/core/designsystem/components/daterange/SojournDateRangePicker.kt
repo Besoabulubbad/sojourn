@@ -65,7 +65,8 @@ import org.jetbrains.compose.resources.stringResource
  *   Monday (UK), the Arabic grid on Saturday. The grid mirrors in RTL, so earlier days sit to the right.
  * - Unavailable days are struck through, not only dimmed, and cannot be focused or tapped.
  * - Tapping sets check-in, then check-out (rules in [nextSelection]); [onSelect] gets `null` while only check-in is
- *   chosen. The night count shows under the grid and is announced when a range completes: "15 nights".
+ *   chosen. The night count shows under the grid and is announced when a range completes: "15 nights". A screen
+ *   whose footer shows the count instead (the search flow's `SojournActionBar`) turns it off with [showNightCount].
  */
 @Composable
 fun SojournDateRangePicker(
@@ -76,6 +77,7 @@ fun SojournDateRangePicker(
     availability: (LocalDate) -> SojournDayState,
     modifier: Modifier = Modifier,
     minNights: Int = 1,
+    showNightCount: Boolean = true,
 ) {
     val c = SojournTheme.colors
     val formatter = rememberSojournFormatter()
@@ -146,7 +148,7 @@ fun SojournDateRangePicker(
                 repeat(SojournDateRangePickerDefaults.DAYS_PER_WEEK - week.size) { Box(Modifier.weight(1f)) }
             }
         }
-        if (selection != null) {
+        if (selection != null && showNightCount) {
             BasicText(
                 pluralStringResource(Res.plurals.nights, selection.nights, formatter.count(selection.nights)),
                 modifier = Modifier

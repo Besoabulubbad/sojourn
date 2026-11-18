@@ -7,4 +7,7 @@ object SojournCityCardDefaults {
     /** Explore's horizontal row. */
     val Width = 148.dp
     val PhotoHeight = 108.dp
+
+    /** [SojournCityRow]'s square thumbnail. */
+    val RowPhotoSize = 56.dp
 }

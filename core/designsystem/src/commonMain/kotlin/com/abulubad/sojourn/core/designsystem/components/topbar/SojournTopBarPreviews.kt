@@ -16,3 +16,15 @@ fun SojournTopBarPreview() = SojournPreview(SojournVariants.EnLight) {
 fun SojournTopBarArabicPreview() = SojournPreview(SojournVariants.ArDark) {
     SojournTopBarSamples.States()
 }
+
+@Preview
+@Composable
+fun SojournStepTopBarPreview() = SojournPreview(SojournVariants.EnLight) {
+    SojournTopBarSamples.Steps()
+}
+
+@Preview
+@Composable
+fun SojournStepTopBarArabicPreview() = SojournPreview(SojournVariants.ArDark) {
+    SojournTopBarSamples.Steps()
+}

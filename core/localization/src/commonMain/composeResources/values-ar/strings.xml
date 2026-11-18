@@ -347,14 +347,25 @@
     <!-- Explore (ScreenExplore card). -->
     <string name="explore_greeting">اعثر على مقرّك القادم</string>
     <string name="explore_length_title">كم ستطول إقامتك؟</string>
-    <string name="explore_length_few_nights">بضع ليالٍ</string>
-    <string name="explore_length_week">أسبوع</string>
-    <string name="explore_length_month">شهر</string>
-    <string name="explore_length_longer">3 أشهر أو أكثر</string>
+    <string name="length_choice_few_nights">بضع ليالٍ</string>
+    <string name="length_choice_week">أسبوع</string>
+    <string name="length_choice_month">شهر</string>
+    <string name="length_choice_longer">3 أشهر أو أكثر</string>
     <string name="explore_continue_title">تابع بحثك</string>
     <string name="explore_next_stay_title">إقامتك القادمة</string>
     <string name="explore_cities_title">المدن</string>
     <string name="explore_see_all">عرض الكل</string>
-    <string name="explore_cities_offline_body">اتصل بالإنترنت لعرض المدن.</string>
-    <string name="explore_cities_empty_body">مدن جديدة في الطريق.</string>
+    <string name="cities_offline_body">اتصل بالإنترنت لعرض المدن.</string>
+    <string name="cities_empty_body">مدن جديدة في الطريق.</string>
+    <!-- مسار البحث -->
+    <string name="search_when_title">متى؟</string>
+    <string name="search_who_title">من سيقيم؟</string>
+    <string name="search_cities_label">مدننا</string>
+    <string name="search_stay_for">مدة الإقامة</string>
+    <string name="search_starting_in">تبدأ في</string>
+    <string name="search_flexible_note">الأسعار الأسبوعية والشهرية أقل من سعر الليلة.</string>
+    <string name="search_any_time">أي وقت</string>
+    <string name="search_any_time_note">أي وقت: سترى الأسعار الشهرية «ابتداءً من»، وما لا تشمله.</string>
+    <string name="action_next">التالي</string>
+    <string name="cd_step_progress">الخطوة %1$s من %2$s</string>
 </resources>

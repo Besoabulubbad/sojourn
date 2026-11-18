@@ -9,4 +9,7 @@ object SojournTopBarDefaults {
 
     /** The fraction at which the floating buttons become plain and the title appears. */
     const val SOLID_SWITCH = 0.5f
+
+    /** One segment of [SojournStepTopBar]'s progress bar. */
+    val StepHeight = 4.dp
 }

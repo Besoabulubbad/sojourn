@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.designsystem.components.citycard
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -24,6 +25,15 @@ object SojournCityCardSamples {
             val width = Modifier.width(SojournCityCardDefaults.Width)
             SojournCityCard(SampleListings.london, onClick = {}, modifier = width)
             SojournCityCard(SampleListings.paris, onClick = {}, modifier = width)
+        }
+    }
+
+    /** The search flow's Where list: London and Paris as rows. */
+    @Composable
+    fun Rows(modifier: Modifier = Modifier) = WithSamplePhotos {
+        Column(modifier.padding(SojournSpacing.space4)) {
+            SojournCityRow(SampleListings.london, onClick = {})
+            SojournCityRow(SampleListings.paris, onClick = {})
         }
     }
 }

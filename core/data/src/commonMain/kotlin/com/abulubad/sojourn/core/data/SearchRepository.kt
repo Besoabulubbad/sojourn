@@ -51,6 +51,7 @@ internal class DatabaseSearchRepository(
                 adults = query.guests.adults.toLong(),
                 children = query.guests.children.toLong(),
                 length = query.length?.name,
+                start_month = query.startMonth?.toString(),
                 searched_at = clock.now().toEpochMilliseconds(),
             )
             queries.trimTo(SearchRepository.KEEP.toLong())

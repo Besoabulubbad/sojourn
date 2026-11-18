@@ -57,5 +57,14 @@ object SojournTopBarSamples {
         }
     }
 
+    /** The search flow's bar on its first step (Close) and its second (Back, two of three filled). */
+    @Composable
+    fun Steps(modifier: Modifier = Modifier) {
+        Column(modifier.padding(vertical = SojournSpacing.space4)) {
+            SojournStepTopBar(step = 1, steps = 3, onBack = {})
+            SojournStepTopBar(step = 2, steps = 3, onBack = {})
+        }
+    }
+
     private val PHOTO_HEIGHT = 150.dp
 }

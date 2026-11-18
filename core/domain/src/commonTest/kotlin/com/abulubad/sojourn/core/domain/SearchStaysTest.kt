@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.domain
 
 import com.abulubad.sojourn.core.common.AppError
+import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.domain.DomainFixtures.engine
 import com.abulubad.sojourn.core.domain.DomainFixtures.family
 import com.abulubad.sojourn.core.domain.DomainFixtures.flat
@@ -9,6 +10,7 @@ import com.abulubad.sojourn.core.domain.DomainFixtures.march
 import com.abulubad.sojourn.core.domain.DomainFixtures.studio
 import com.abulubad.sojourn.core.model.Amenity
 import com.abulubad.sojourn.core.model.Currency
+import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Money
@@ -18,12 +20,14 @@ import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.SortOrder
 import com.abulubad.sojourn.core.model.StayLength
+import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.data.FakePricingRepository
 import com.abulubad.sojourn.core.testing.data.FakeSavedRepository
 import com.abulubad.sojourn.core.testing.data.FakeStayRepository
 import com.abulubad.sojourn.core.testing.runSojournTest
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -36,7 +40,7 @@ class SearchStaysTest {
     private val stays = FakeStayRepository(remote = london)
     private val pricing = FakePricingRepository(engine())
     private val saved = FakeSavedRepository()
-    private val search = SearchStays(stays, pricing, saved)
+    private val search = SearchStays(stays, pricing, saved, FixedAppClock())
 
     private suspend fun results(query: SearchQuery = SearchQuery(), filters: Filters = Filters.None) =
         assertNotNull(search(query, filters).first { !it.refreshing }.data)
@@ -58,6 +62,33 @@ class SearchStaysTest {
         val results = results(SearchQuery(length = StayLength.Weekend))
         assertEquals(PriceBasis.Night, results.basis)
         assertEquals(studio.fromPrice, results.stays.first { it.stay.id == studio.id }.price)
+    }
+
+    @Test
+    fun `a flexible month keeps only stays with a free run starting in it`() = runSojournTest {
+        // The clock reads 1 March 2026. Family is booked all of March and April; studio only for a few days.
+        stays.blocked.value = mapOf(
+            family.id to listOf(DateRange(LocalDate(2026, 3, 1), LocalDate(2026, 5, 1))),
+            studio.id to listOf(DateRange(LocalDate(2026, 3, 5), LocalDate(2026, 3, 10))),
+        )
+        val query = SearchQuery(length = StayLength.Month, startMonth = YearMonth(2026, 3))
+        val results = results(query)
+        assertEquals(setOf(studio.id, flat.id), results.ids())
+        assertEquals(PriceBasis.Month, results.basis)
+        assertEquals(london.map { it.id }.toSet(), results(query.copy(startMonth = YearMonth(2026, 5))).ids())
+    }
+
+    @Test
+    fun `offline - a flexible month judges on the booked dates already cached`() = runSojournTest {
+        val offline = FakeStayRepository(remote = london, cached = london).apply {
+            refreshResult = AppResult.Failure(AppError.Offline)
+            blocked.value = mapOf(family.id to listOf(DateRange(LocalDate(2026, 3, 1), LocalDate(2026, 5, 1))))
+        }
+        val query = SearchQuery(length = StayLength.Month, startMonth = YearMonth(2026, 3))
+        val search = SearchStays(offline, pricing, saved, FixedAppClock())
+        val loadable = search(query, Filters.None).first { !it.refreshing }
+        assertEquals(setOf(studio.id, flat.id), assertNotNull(loadable.data).ids())
+        assertEquals(AppError.Offline, loadable.error)
     }
 
     @Test
@@ -100,7 +131,7 @@ class SearchStaysTest {
         results(query)
         pricing.offline = true
         val quotesBefore = pricing.quoteCalls
-        val offline = SearchStays(stays, pricing, saved)(query, Filters.None, force = true).first { !it.refreshing }
+        val offline = search(query, Filters.None, force = true).first { !it.refreshing }
         assertEquals(london.size, offline.data?.stays?.size)
         assertTrue(pricing.quoteCalls > quotesBefore)
         assertNull(offline.error, "every stay had a stored quote")

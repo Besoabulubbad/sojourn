@@ -1,5 +1,7 @@
 package com.abulubad.sojourn.core.model
 
+import kotlinx.datetime.YearMonth
+
 /** Who is staying. At least one adult; children count toward "sleeps". */
 data class Guests(val adults: Int = 1, val children: Int = 0) {
     init {
@@ -13,12 +15,16 @@ data class Guests(val adults: Int = 1, val children: Int = 0) {
 /**
  * The Where / When / Who of a search. Every field is optional until the guest chooses it; a query without dates
  * yields "from" prices (P-03), a query with dates yields all-in totals (P-02).
+ *
+ * A flexible search has a [length] and, optionally, a [startMonth]: "1 month, starting in March". With both, only
+ * stays with a free run of that length starting in that month match. Neither applies once there are [dates].
  */
 data class SearchQuery(
     val cityId: CityId? = null,
     val dates: DateRange? = null,
     val guests: Guests = Guests(),
     val length: StayLength? = null,
+    val startMonth: YearMonth? = null,
 ) {
     val hasDates: Boolean get() = dates != null
 }

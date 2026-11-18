@@ -1,8 +1,10 @@
 package com.abulubad.sojourn.core.domain
 
+import com.abulubad.sojourn.core.common.AppClock
 import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.common.Loadable
+import com.abulubad.sojourn.core.common.errorOrNull
 import com.abulubad.sojourn.core.data.PricingRepository
 import com.abulubad.sojourn.core.data.SavedRepository
 import com.abulubad.sojourn.core.data.StayRepository
@@ -17,6 +19,7 @@ import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.SortOrder
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
+import com.abulubad.sojourn.core.model.StayLength
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.channelFlow
@@ -24,9 +27,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.YearMonth
 
 /** One card in the results: the stay, the price it shows, its rating if shown (N-04), and the heart. */
 data class StayResult(val stay: Stay, val price: PriceDisplay, val rating: Rating?, val saved: Boolean)
@@ -44,17 +49,27 @@ data class SearchResults(val stays: List<StayResult>, val basis: PriceBasis)
  * - With dates each matching stay is quoted. A stay the dates do not work for (minimum stay, capacity, already
  *   booked) is left out; cards appear as their quotes arrive, and each carries its quote id so every later surface
  *   shows the same total (P-02).
+ * - A flexible search with a start month ("1 month, starting in March") keeps the stays with a free run of that
+ *   length starting in that month ([StayRules.hasFreeRun]). Each stay's booked dates are fetched first, so cards
+ *   appear as they are checked; a stay that cannot be checked (offline, nothing cached) stays in, under the offline
+ *   banner.
  * - A price range applies only when its basis matches the cards' (P-04), and only to prices in its currency.
  */
 class SearchStays(
     private val stays: StayRepository,
     private val pricing: PricingRepository,
     private val saved: SavedRepository,
+    private val clock: AppClock,
 ) {
     operator fun invoke(query: SearchQuery, filters: Filters, force: Boolean = false): Flow<Loadable<SearchResults>> {
         val basis = StayRules.basisFor(query)
         val cached = offlineFirst(stays.observeStays(query.cityId), { it.isNotEmpty() }) {
             stays.refresh(query.cityId, force)
+        }
+        val length = query.length
+        val month = query.startMonth
+        if (query.dates == null && length != null && month != null) {
+            return flexible(cached, query, filters, Flexible(length, month))
         }
         val dates = query.dates ?: return combine(cached, saved.observeSavedIds()) { loadable, savedIds ->
             loadable.toResults(basis, filters) { stay -> StayRules.fromPrice(stay, basis).takeIf { stay.fits(query) } }
@@ -94,6 +109,49 @@ class SearchStays(
             )
         }.collect { send(it) }
     }
+
+    private fun flexible(
+        cached: Flow<Loadable<List<Stay>>>,
+        query: SearchQuery,
+        filters: Filters,
+        flexible: Flexible,
+    ): Flow<Loadable<SearchResults>> = channelFlow {
+        val basis = StayRules.basisFor(query)
+        val checks = MutableStateFlow<Map<StayId, Check>>(emptyMap())
+        launch {
+            cached.map { loadable -> loadable.data?.filter { it.fits(query) && it.matches(filters) } }
+                .filterNotNull()
+                .distinctUntilChanged { old, new -> old.map { it.id } == new.map { it.id } }
+                .collectLatest { candidates ->
+                    candidates.filterNot { it.id in checks.value }.forEach { check(it, flexible, checks) }
+                }
+        }
+        combine(cached, checks, saved.observeSavedIds()) { loadable, checked, savedIds ->
+            val candidates = loadable.data?.filter { it.fits(query) && it.matches(filters) }.orEmpty()
+            val checking = candidates.any { it.id !in checked }
+            val offline = checked.values.any { it.error == AppError.Offline }
+            val results = loadable.toResults(basis, filters) { stay ->
+                StayRules.fromPrice(stay, basis).takeIf { stay.fits(query) && checked[stay.id]?.free == true }
+            }.withSaved(savedIds)
+            results.copy(
+                data = results.data?.takeUnless { it.stays.isEmpty() && checking },
+                refreshing = results.refreshing || checking,
+                error = results.error ?: AppError.Offline.takeIf { offline },
+            )
+        }.collect { send(it) }
+    }
+
+    /** Fetches [stay]'s booked dates, then judges the run on whatever is cached: none cached counts as free. */
+    private suspend fun check(stay: Stay, flexible: Flexible, into: MutableStateFlow<Map<StayId, Check>>) {
+        val refreshed = stays.refreshStay(stay.id)
+        val blocked = stays.observeBlockedDates(stay.id).first()
+        val free = StayRules.hasFreeRun(stay, flexible.length, flexible.month, blocked, clock.today())
+        into.update { it + (stay.id to Check(free, refreshed.errorOrNull())) }
+    }
+
+    private class Flexible(val length: StayLength, val month: YearMonth)
+
+    private data class Check(val free: Boolean, val error: AppError?)
 
     private suspend fun quote(
         id: StayId,

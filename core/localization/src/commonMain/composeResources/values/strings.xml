@@ -295,14 +295,25 @@
     <!-- Explore (ScreenExplore card). -->
     <string name="explore_greeting">Find your next home base</string>
     <string name="explore_length_title">How long are you staying?</string>
-    <string name="explore_length_few_nights">A few nights</string>
-    <string name="explore_length_week">1 week</string>
-    <string name="explore_length_month">1 month</string>
-    <string name="explore_length_longer">3 months or more</string>
+    <string name="length_choice_few_nights">A few nights</string>
+    <string name="length_choice_week">1 week</string>
+    <string name="length_choice_month">1 month</string>
+    <string name="length_choice_longer">3 months or more</string>
     <string name="explore_continue_title">Continue your search</string>
     <string name="explore_next_stay_title">Your next stay</string>
     <string name="explore_cities_title">Cities</string>
     <string name="explore_see_all">See all</string>
-    <string name="explore_cities_offline_body">Connect to the internet to see cities.</string>
-    <string name="explore_cities_empty_body">New cities are on their way.</string>
+    <string name="cities_offline_body">Connect to the internet to see cities.</string>
+    <string name="cities_empty_body">New cities are on their way.</string>
+    <!-- Search flow (ScreenSearchFlow card). The stay-length chips and city states above are shared with Explore. -->
+    <string name="search_when_title">When?</string>
+    <string name="search_who_title">Who’s coming?</string>
+    <string name="search_cities_label">Our cities</string>
+    <string name="search_stay_for">Stay for</string>
+    <string name="search_starting_in">Starting in</string>
+    <string name="search_flexible_note">Weekly and monthly rates are lower than the nightly rate.</string>
+    <string name="search_any_time">Any time</string>
+    <string name="search_any_time_note">Any time: you’ll see monthly “from” prices, and what they leave out.</string>
+    <string name="action_next">Next</string>
+    <string name="cd_step_progress">Step %1$s of %2$s</string>
 </resources>

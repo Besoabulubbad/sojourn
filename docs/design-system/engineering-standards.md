@@ -61,7 +61,7 @@ iosApp/              safe-area hosting, per-app language, Apple Pay
 
 | # | Rule | Enforced by |
 |---|---|---|
-| I-01 | The app is edge to edge. System insets are consumed only by `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournSheet` and `SojournScaffold`. | Lint: forbid inset modifiers in feature code. |
+| I-01 | The app is edge to edge. System insets are consumed only by `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournActionBar`, `SojournSheet` and `SojournScaffold`. | Lint: forbid inset modifiers in feature code. |
 | I-02 | No text under a transparent status bar or top bar. Over photos, the status bar gets `scrim-top` and actions are floating buttons. | Screenshot tests of scrolled states on Details and Explore. |
 | I-03 | Docked bars are opaque and full width. Scroll content gets bottom padding equal to the bar plus the inset. | `SojournScaffold` computes it; screens do not. |
 | I-04 | Floating controls never cover text or map attribution. | Screenshot tests at the smallest supported width (320dp) and 200% font scale. |

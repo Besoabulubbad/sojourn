@@ -13,6 +13,7 @@ import coil3.compose.AsyncImagePreviewHandler
 import coil3.compose.LocalAsyncImagePreviewHandler
 import coil3.request.ImageRequest
 import com.abulubad.sojourn.core.designsystem.resources.Res
+import com.abulubad.sojourn.core.designsystem.resources.sample_algiers
 import com.abulubad.sojourn.core.designsystem.resources.sample_apartment
 import com.abulubad.sojourn.core.designsystem.resources.sample_bedroom
 import com.abulubad.sojourn.core.designsystem.resources.sample_breakfast_table
@@ -44,6 +45,7 @@ internal object SamplePhotos {
     const val DINING_VIEW = "sample://dining_view"
     const val DINING_ROOM = "sample://dining_room"
     const val LONDON = "sample://london"
+    const val ALGIERS = "sample://algiers"
     const val PARIS = "sample://paris"
     const val FAILED = "sample://failed"
 }
@@ -63,6 +65,7 @@ internal fun WithSamplePhotos(content: @Composable () -> Unit) {
         SamplePhotos.DINING_VIEW to imageResource(Res.drawable.sample_dining_view),
         SamplePhotos.DINING_ROOM to imageResource(Res.drawable.sample_dining_room),
         SamplePhotos.LONDON to imageResource(Res.drawable.sample_london),
+        SamplePhotos.ALGIERS to imageResource(Res.drawable.sample_algiers),
         SamplePhotos.PARIS to imageResource(Res.drawable.sample_paris),
     )
     val handler = remember(bitmaps) {

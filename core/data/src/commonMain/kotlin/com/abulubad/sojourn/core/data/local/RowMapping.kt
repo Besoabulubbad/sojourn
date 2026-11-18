@@ -33,6 +33,8 @@ import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.model.StayLength
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.parseOrNull
 import kotlin.time.Instant
 import com.abulubad.sojourn.core.database.Blocked_range as BlockedRow
 import com.abulubad.sojourn.core.database.Booking as BookingRow
@@ -309,6 +311,7 @@ internal fun SearchRow.toModel(): SearchQuery {
         dates = if (start != null && end != null && end > start) DateRange(start, end) else null,
         guests = Guests(adults.toInt().coerceAtLeast(1), children.toInt().coerceAtLeast(0)),
         length = StayLength.entries.find { it.name == length },
+        startMonth = start_month?.let(YearMonth::parseOrNull),
     )
 }
 

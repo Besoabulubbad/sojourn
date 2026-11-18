@@ -13,6 +13,7 @@ import com.abulubad.sojourn.core.navigation.SearchArgs
 import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.core.navigation.SearchStep
 import com.abulubad.sojourn.core.navigation.SojournNavKey
+import com.abulubad.sojourn.core.navigation.toArgs
 import com.abulubad.sojourn.core.ui.ScreenState
 import com.abulubad.sojourn.core.ui.SojournViewModel
 import com.abulubad.sojourn.core.ui.dataOrNull
@@ -80,13 +81,3 @@ class ExploreViewModel(
 }
 
 private fun List<City>.photoOf(query: SearchQuery) = query.cityId?.let { id -> find { it.id == id }?.photo }
-
-/** A search as navigation arguments: ids and ISO dates only (ADR 0005). */
-internal fun SearchQuery.toArgs(): SearchArgs = SearchArgs(
-    cityId = cityId?.value,
-    checkIn = dates?.start?.toString(),
-    checkOut = dates?.end?.toString(),
-    adults = guests.adults,
-    children = guests.children,
-    length = length?.name,
-)

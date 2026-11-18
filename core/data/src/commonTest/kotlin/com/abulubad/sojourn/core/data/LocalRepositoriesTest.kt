@@ -16,6 +16,7 @@ import com.abulubad.sojourn.core.model.StayLength
 import com.russhwolf.settings.MapSettings
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -52,12 +53,15 @@ class LocalRepositoriesTest {
             length = StayLength.Month,
         )
         val anywhere = SearchQuery()
+        val flexible = SearchQuery(length = StayLength.Month, startMonth = YearMonth(2027, 3))
         searches.record(paris)
         clock.advance(1.minutes)
         searches.record(anywhere)
         clock.advance(1.minutes)
+        searches.record(flexible)
+        clock.advance(1.minutes)
         searches.record(paris)
-        assertEquals(listOf(paris, anywhere), searches.observeRecent().first())
+        assertEquals(listOf(paris, flexible, anywhere), searches.observeRecent().first())
     }
 
     @Test

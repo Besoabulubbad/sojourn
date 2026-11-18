@@ -12,6 +12,7 @@ import com.abulubad.sojourn.core.designsystem.components.internal.WithSamplePhot
 object SojournSamplePhotos {
     const val LONDON = SamplePhotos.LONDON
     const val PARIS = SamplePhotos.PARIS
+    const val ALGIERS = SamplePhotos.ALGIERS
     const val LIVING = SamplePhotos.LIVING
     const val APARTMENT = SamplePhotos.APARTMENT
     const val KITCHEN = SamplePhotos.KITCHEN

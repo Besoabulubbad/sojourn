@@ -12,10 +12,13 @@ import com.abulubad.sojourn.core.model.Rating
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.StayLength
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 class StayRulesTest {
 
@@ -57,6 +60,29 @@ class StayRulesTest {
         assertEquals("unavailable", StayRules.bookingProblem(studio, week, Guests(1), booked))
         // A stay that ends on the check-in day does not overlap it.
         assertNull(StayRules.bookingProblem(studio, week, Guests(2), before))
+    }
+
+    @Test
+    fun `a flexible month needs a free run of the length starting in that month - from today`() {
+        val march = YearMonth(2026, 3)
+        val today = LocalDate(2026, 3, 1)
+        fun month(blocked: List<DateRange>) = StayRules.hasFreeRun(studio, StayLength.Month, march, blocked, today)
+        assertTrue(month(emptyList()))
+        // Booked from 3 March to 1 May: no 28-night run can start in March.
+        assertFalse(month(listOf(DateRange(LocalDate(2026, 3, 3), LocalDate(2026, 5, 1)))))
+        // Free from 31 March: a run may start on the last day and end in April.
+        assertTrue(month(listOf(DateRange(LocalDate(2026, 3, 1), LocalDate(2026, 3, 31)))))
+        assertFalse(
+            StayRules.hasFreeRun(studio, StayLength.Weekend, march, emptyList(), LocalDate(2026, 4, 1)),
+            "a month already over has no start day",
+        )
+        // The stay's own minimum (5 nights) beats a weekend: 1 to 5 March is too short a gap.
+        val gap = listOf(
+            DateRange(LocalDate(2026, 2, 1), LocalDate(2026, 3, 2)),
+            DateRange(LocalDate(2026, 3, 6), LocalDate(2026, 6, 1)),
+        )
+        assertTrue(StayRules.hasFreeRun(studio, StayLength.Weekend, march, gap, today))
+        assertFalse(StayRules.hasFreeRun(family, StayLength.Weekend, march, gap, today))
     }
 
     private fun DateRange.copyNights(nights: Int) =

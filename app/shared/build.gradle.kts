@@ -24,6 +24,7 @@ kotlin {
             implementation(project(":core:domain"))
             // Features, as they land.
             implementation(project(":feature:explore"))
+            implementation(project(":feature:search"))
             // The shell: theme, tab bar, navigation host, image loading.
             implementation(project(":core:designsystem"))
             implementation(project(":core:ui"))

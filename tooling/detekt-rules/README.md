@@ -8,7 +8,7 @@ The design system's engineering standards as detekt rules (ADR 0014): a rule wit
 | `MotionTokensOnly` | M-01 | a number literal as `durationMillis` / `delayMillis`, or as `tween(…)`'s first argument | `feature/*`, `core/ui` |
 | `StartEndOnly` | L-02, L-05 | `AbsoluteAlignment`, `absoluteOffset`, `absolutePadding`, absolute corner shapes, `TextAlign`/`Arrangement`/`Alignment` `.Left` / `.Right` / `.Absolute`, `scaleX = -1f` | `feature/*`, `core/ui` |
 | `NoTextLiterals` | S-01, S-02 | a string literal, template or `+` concatenation passed as the text of `Text`, `BasicText` or any `Sojourn*Text` | `feature/*`, `core/ui` |
-| `InsetsOnlyInOwners` | I-01, I-03 | `WindowInsets` and every inset modifier (`statusBarsPadding`, `imePadding`, `windowInsetsPadding`, …) outside `SojournScaffold`, `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournSheet` | `app/*`, `core/*`, `feature/*` |
+| `InsetsOnlyInOwners` | I-01, I-03 | `WindowInsets` and every inset modifier (`statusBarsPadding`, `imePadding`, `windowInsetsPadding`, …) outside `SojournScaffold`, `SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`, `SojournActionBar`, `SojournSheet` | `app/*`, `core/*`, `feature/*` |
 
 `core:designsystem` is exempt from the token, motion and direction rules: it is where tokens become components and where `SojournIcon` does the one sanctioned mirroring. Test source sets are exempt everywhere.
 

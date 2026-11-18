@@ -11,6 +11,9 @@ kotlin {
             api(libs.navigation3.runtime)
             api(libs.androidx.savedstate)
             api(libs.kotlinx.serialization.core)
+            // SearchArgs.toQuery() and SearchQuery.toArgs() convert between the key's primitives and the model.
+            api(project(":core:model"))
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.serialization.core)
