@@ -1,11 +1,17 @@
 # feature:bookings
 
-Implements the design-system card **ScreenBookings** — upcoming and past stays.
+Implements the design-system card **ScreenBookings** (with its states from **ScreenStates**): upcoming and past stays, the upcoming card leading with what the guest needs on arrival day.
 
-**Navigation keys** (declared in `core:navigation`): `BookingsKey`, `BookingDetailsKey(id)`
+- **Tab:** "Bookings", then Upcoming or Past (`SojournSegmentedControl`). Upcoming: each stay as a `SojournBookingCard` with its countdown ("Check-in in 12 days", "Check-in tomorrow", "Staying now"), "Directions" (the platform maps app at the stay's area) and "Check-in guide"; the first has its terms under it: free cancellation and what happens after it, the deposit and when it is released, check-in. Past: completed and cancelled stays, as a record. Empty: what will appear, and "Explore stays" on Upcoming.
+- **Check-in guide** (sheet, half height): check-in time and method, check-out time, and the key code. The code shows from arrival day until check-out, never before (ScreenBookings card), large and left to right, with "Copy" (the platform clipboard, then "Key code copied"). Before then the sheet says when it appears; a host check-in says the host meets you; a booking made before key codes existed gets its code by message.
+- **Booking page** (`BookingDetailsKey`, from the tab, Explore's next stay or the confirmation's "View booking"; not designed on the card, built from its parts): the booking card, the total paid, the terms while the stay is to come, and "Cancel booking" before check-in. The cancel sheet says what comes back under the stay's policy: everything until the free-cancellation deadline; after it, all but the first 7 nights (pro rata of the total), or nothing for a stay of 7 nights or fewer. "Cancel booking" is the danger button; "Keep booking" closes the sheet. Offline, the sheet stays open and says so. A cancelled booking says so and frees its nights.
+- **Explore:** from two days before arrival until check-out, the stay leads Explore (`ObserveArrivingStay`); otherwise Explore resumes the last search.
+- **States:** bookings are on the device, so both screens work offline; cancelling needs the network.
 
-**Shape:** `BookingsUiState` · `BookingsIntent` · `BookingsEffect` · `BookingsViewModel : SojournViewModel` · `BookingsRoute` (stateful) · `BookingsScreen` (stateless) · `bookingsModule` · `EntryProviderBuilder<NavKey>.bookingsEntries(navigator)`. See [adding a feature](../../docs/guides/adding-a-feature.md).
+**Navigation keys** (declared in `core:navigation`): `BookingsKey` (the tab's root), `BookingDetailsKey(bookingId)`.
 
-**May depend on:** `core:ui`, `core:designsystem`, `core:localization`, `core:navigation`, `core:domain`, `core:platform`, `core:model`, `core:common` — never `core:data`, `core:database`, `core:network` or another feature (Konsist).
+**Shape:** `BookingsUiState` · `BookingsTab` · `BookingsIntent` · `BookingsEffect` · `BookingsViewModel` · `BookingsRoute` · `BookingsScreen`; `BookingDetailsUiState` · `BookingSheet` · `BookingDetailsIntent` · `BookingDetailsEffect` · `BookingDetailsViewModel(key, …)` · `BookingDetailsRoute` · `BookingDetailsScreen` · `bookingsModule` · `EntryProviderScope<NavKey>.bookingsEntries(navigator)`. See [adding a feature](../../docs/guides/adding-a-feature.md).
 
-**Status:** skeleton (Phase 1); built in Phase 5. Definition of Done applies before merge.
+**May depend on:** `core:ui`, `core:designsystem`, `core:localization`, `core:navigation`, `core:domain`, `core:platform`, `core:model`, `core:common`; never `core:data`, `core:database`, `core:network` or another feature (Konsist).
+
+**Tests:** `BookingsViewModelTest` (empty and "Explore stays", Upcoming with its guide, page and copy, cancelling with its refund then Past, cancelling offline) and `bookingsSnapshots`: Upcoming in the full matrix, Past, empty, the guide before arrival and on arrival day, the booking page in the full matrix, cancelling, and a cancelled booking, on Android and iOS. `BookingRulesTest` (core:domain) covers status, the key code, arriving, refunds and cancelling; the repository and engine tests cover key codes, cancelling and blocked nights.

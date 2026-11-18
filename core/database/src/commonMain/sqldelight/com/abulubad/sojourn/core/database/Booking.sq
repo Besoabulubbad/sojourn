@@ -11,7 +11,8 @@ CREATE TABLE booking (
     total_minor INTEGER NOT NULL,
     currency TEXT NOT NULL,
     status TEXT NOT NULL,
-    created_at INTEGER NOT NULL
+    created_at INTEGER NOT NULL,
+    key_code TEXT
 );
 
 upsert:
@@ -25,3 +26,7 @@ SELECT * FROM booking WHERE id = ?;
 
 updateStatus:
 UPDATE booking SET status = ? WHERE id = ?;
+
+-- The nights the guest has booked at a stay; a cancelled booking frees its nights.
+takenFor:
+SELECT start_date, end_date FROM booking WHERE stay_id = ? AND status != 'cancelled' ORDER BY start_date;

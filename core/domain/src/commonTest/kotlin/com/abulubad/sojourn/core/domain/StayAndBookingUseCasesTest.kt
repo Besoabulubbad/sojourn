@@ -167,10 +167,10 @@ class StayAndBookingUseCasesTest {
         val quote = DomainFixtures.quote(flat, march, Guests(1))
         bookings.issued[quote.id] = quote
         val booking = assertNotNull(bookings.book(quote.id).getOrNull())
-        val item = assertNotNull(GetBooking(bookings, stays)(booking.id).first())
+        val item = assertNotNull(GetBooking(bookings, stays, clock)(booking.id).first())
         assertEquals(booking, item.booking)
         assertEquals(flat, item.stay)
-        assertNull(GetBooking(bookings, stays)(BookingId("b-unknown")).first())
+        assertNull(GetBooking(bookings, stays, clock)(BookingId("b-unknown")).first())
     }
 
     @Test

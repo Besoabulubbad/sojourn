@@ -10,6 +10,7 @@ import com.abulubad.sojourn.core.domain.domainModule
 import com.abulubad.sojourn.core.localization.localizationModule
 import com.abulubad.sojourn.core.network.networkModule
 import com.abulubad.sojourn.core.platform.platformModule
+import com.abulubad.sojourn.feature.bookings.bookingsModule
 import com.abulubad.sojourn.feature.checkout.checkoutModule
 import com.abulubad.sojourn.feature.details.detailsModule
 import com.abulubad.sojourn.feature.explore.exploreModule
@@ -50,6 +51,7 @@ val sojournModules: List<Module> = listOf(
     checkoutModule,
     mapModule,
     savedModule,
+    bookingsModule,
 )
 
 /**

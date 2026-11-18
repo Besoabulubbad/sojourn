@@ -477,4 +477,30 @@
     <string name="saved_empty_title">لا توجد محفوظات بعد</string>
     <string name="saved_empty_body">اضغط على القلب في أي إقامة لحفظها هنا.</string>
     <string name="action_explore_stays">استكشف الإقامات</string>
+
+    <!-- Bookings -->
+    <string name="bookings_past">السابقة</string>
+    <string name="bookings_check_in_in">الدخول بعد %1$s</string>
+    <string name="bookings_check_in_tomorrow">الدخول غدًا</string>
+    <string name="bookings_details">%1$s · %2$s · %3$s</string>
+    <string name="action_directions">الاتجاهات</string>
+    <string name="action_check_in_guide">دليل الدخول</string>
+    <string name="bookings_cancellation_after">بعد ذلك لا تُسترد قيمة أول %1$s.</string>
+    <string name="bookings_deposit_detail">يُحجز على بطاقتك ويُفرج عنه خلال 7 أيام من المغادرة.</string>
+    <string name="bookings_empty_upcoming_title">لا إقامات قادمة</string>
+    <string name="bookings_empty_upcoming_body">تظهر هنا الإقامات التي تحجزها، جاهزة ليوم الوصول.</string>
+    <string name="bookings_empty_past_title">لا إقامات سابقة بعد</string>
+    <string name="bookings_empty_past_body">تظهر الإقامات هنا بعد المغادرة.</string>
+    <string name="guide_key_code">رمز المفتاح</string>
+    <string name="guide_key_code_later">يظهر رمز المفتاح هنا في يوم الوصول، %1$s.</string>
+    <string name="guide_key_code_host">سيستقبلك مضيفك بالمفاتيح.</string>
+    <string name="action_copy">نسخ</string>
+    <string name="key_code_copied">نُسخ رمز المفتاح</string>
+    <string name="cancel_title">إلغاء هذا الحجز؟</string>
+    <string name="cancel_refund_full">سيُعاد إليك %1$s كاملًا.</string>
+    <string name="cancel_refund_partial">سيُعاد إليك %1$s. لا تُسترد قيمة أول %2$s.</string>
+    <string name="cancel_refund_none">لا يُسترد أي مبلغ: انتهت فترة الإلغاء المجاني.</string>
+    <string name="action_keep_booking">الإبقاء على الحجز</string>
+    <string name="booking_cancelled_note">هذا الحجز ملغى، وأصبحت لياليه متاحة من جديد.</string>
+    <string name="guide_key_code_value">⁦%1$s⁩</string>
 </resources>

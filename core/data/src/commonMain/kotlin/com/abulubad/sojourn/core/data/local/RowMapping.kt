@@ -315,6 +315,7 @@ internal fun Booking.toRow(): BookingRow = BookingRow(
     currency = total.currency.code,
     status = status.id,
     created_at = createdAt.toEpochMilliseconds(),
+    key_code = keyCode,
 )
 
 internal fun BookingRow.toModel(): Booking? {
@@ -330,6 +331,7 @@ internal fun BookingRow.toModel(): Booking? {
         total = total,
         status = status,
         createdAt = Instant.fromEpochMilliseconds(created_at),
+        keyCode = key_code,
     )
 }
 

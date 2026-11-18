@@ -4,6 +4,7 @@ import com.abulubad.sojourn.core.common.AppClock
 import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.model.Booking
+import com.abulubad.sojourn.core.model.BookingId
 import com.abulubad.sojourn.core.model.City
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.DateRange
@@ -54,6 +55,8 @@ class KtorSojournApi(
         call { it.quote(stayId, dates, guests) }
 
     override suspend fun book(quoteId: QuoteId): AppResult<Booking> = call { it.book(quoteId) }
+
+    override suspend fun cancel(id: BookingId): AppResult<Unit> = call { it.cancel(id) }
 
     private suspend fun <T> call(block: (CatalogEngine) -> AppResult<T>): AppResult<T> = lock.withLock {
         val loaded = engine ?: when (val fetched = fetch()) {

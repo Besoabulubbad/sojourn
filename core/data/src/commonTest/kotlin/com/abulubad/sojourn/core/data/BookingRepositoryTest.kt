@@ -1,9 +1,11 @@
 package com.abulubad.sojourn.core.data
 
 import com.abulubad.sojourn.core.common.AppError
+import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.common.errorOrNull
 import com.abulubad.sojourn.core.common.getOrNull
 import com.abulubad.sojourn.core.data.DataTestEnv.Companion.quarter
+import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.network.local.FakeNetworkConditions.Mode
@@ -51,5 +53,26 @@ class BookingRepositoryTest {
         conditions.mode = Mode.Offline
         assertEquals(AppError.Offline, bookings.book(second.id).errorOrNull())
         assertEquals(listOf(first.id), bookings.observeBookings().first().map { it.quoteId })
+    }
+
+    @Test
+    fun `a booking's nights are blocked for that stay until it is cancelled`() = runDataTest {
+        val stay = catalogueStays().first().id
+        val quote = assertNotNull(pricing.quote(stay, quarter(), Guests(1)).getOrNull())
+        val booking = assertNotNull(bookings.book(quote.id).getOrNull())
+        assertNotNull(booking.keyCode)
+        assertTrue(quarter() in stays.observeBlockedDates(stay).first())
+        assertTrue(bookings.cancel(booking.id) is AppResult.Success)
+        assertEquals(BookingStatus.Cancelled, bookings.observeBooking(booking.id).first()?.status)
+        assertTrue(quarter() !in stays.observeBlockedDates(stay).first())
+    }
+
+    @Test
+    fun `cancelling offline changes nothing`() = runDataTest {
+        val quote = assertNotNull(pricing.quote(catalogueStays().first().id, quarter(), Guests(1)).getOrNull())
+        val booking = assertNotNull(bookings.book(quote.id).getOrNull())
+        conditions.mode = Mode.Offline
+        assertEquals(AppError.Offline, bookings.cancel(booking.id).errorOrNull())
+        assertEquals(BookingStatus.Upcoming, bookings.observeBooking(booking.id).first()?.status)
     }
 }

@@ -27,6 +27,7 @@ import com.abulubad.sojourn.core.navigation.Tab
 import com.abulubad.sojourn.core.navigation.TabbedNavigator
 import com.abulubad.sojourn.core.navigation.sojournSavedStateConfiguration
 import com.abulubad.sojourn.core.ui.LocalTabBar
+import com.abulubad.sojourn.feature.bookings.bookingsEntries
 import com.abulubad.sojourn.feature.checkout.checkoutEntries
 import com.abulubad.sojourn.feature.details.detailsEntries
 import com.abulubad.sojourn.feature.explore.exploreEntries
@@ -41,7 +42,7 @@ import org.jetbrains.compose.resources.stringResource
  * The tabs whose feature exists. A tab joins in its feature's PR; the bottom nav appears once there are two, the
  * fewest it shows (`SojournBottomNav`).
  */
-internal val availableTabs: List<Tab> = listOf(Tab.Explore, Tab.Saved)
+internal val availableTabs: List<Tab> = listOf(Tab.Explore, Tab.Saved, Tab.Bookings)
 
 /**
  * Navigation 3 with one back stack per tab (ADR 0005), after the official multiple-back-stacks recipe:
@@ -96,6 +97,7 @@ private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     checkoutEntries(navigator)
     mapEntries(navigator)
     savedEntries(navigator)
+    bookingsEntries(navigator)
 }
 
 @Composable

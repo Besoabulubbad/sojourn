@@ -2,6 +2,7 @@ package com.abulubad.sojourn
 
 import android.content.Context
 import com.abulubad.sojourn.core.navigation.BookingConfirmedKey
+import com.abulubad.sojourn.core.navigation.BookingDetailsKey
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
@@ -9,6 +10,7 @@ import com.abulubad.sojourn.core.navigation.MapKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.core.navigation.StayDetailsKey
+import com.abulubad.sojourn.feature.bookings.BookingDetailsViewModel
 import com.abulubad.sojourn.feature.checkout.CheckoutViewModel
 import com.abulubad.sojourn.feature.checkout.ConfirmationViewModel
 import com.abulubad.sojourn.feature.details.DetailsViewModel
@@ -44,6 +46,7 @@ class SojournModulesTest {
                 definition<CheckoutViewModel>(CheckoutKey::class),
                 definition<ConfirmationViewModel>(BookingConfirmedKey::class),
                 definition<MapViewModel>(MapKey::class),
+                definition<BookingDetailsViewModel>(BookingDetailsKey::class),
             ),
         )
     }

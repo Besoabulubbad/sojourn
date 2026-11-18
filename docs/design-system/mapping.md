@@ -58,6 +58,7 @@ All in `core:designsystem`, package `com.abulubad.sojourn.core.designsystem.comp
 | Gallery | Listing | `SojournGallery(photos, onOpen: (index) -> Unit, modifier)` ✅ | 3:2 pager following reading direction; placeholder / loaded / failed-with-retry per slot; next two photos preload; counter in a bidi isolate (S-04) on `scrim` |
 | PhotoViewer (Gallery, full screen) | Listing | `SojournPhotoViewer(photos, modifier, initialIndex, onPageChange)` ✅ | the full-screen gallery's pager: every photo whole (`Fit`) on `bg`, never cropped; swipes with the reading direction; each photo announced "Photo 3 of 13" with its caption; failed photos retry; the screen's top bar carries the counter |
 | StaySummary (from ScreenCheckout) | Listing | `SojournStaySummary(photo: Photo?, title: HostText, place, modifier, rating?)` ✅ | which stay a step is about: a 64 dp thumbnail, the host's title in its own language and direction (S-06, two lines), the place, the rating when shown (N-04); not a button, read once as title, place, rating. Checkout's header and the booking confirmation |
+| BookingCard (from ScreenBookings) | Listing | `SojournBookingCard(photo, title: HostText, place, details, reference, modifier, badge?, onClick?, actions: List<SojournBookingCardAction>)` ✅ | a booking for arrival day: photo with the countdown badge, place, the host's title, dates · nights · guests, the reference isolated left to right (never reordered in Arabic); the body opens the booking; two actions sit side by side while both labels fit, else stack full width |
 | KeyFacts | Listing | `SojournKeyFacts(facts: StayFacts, modifier)` ✅ | four counts, one icon each; "Studio" never "0 bedrooms" (N-01); tiles keep whole words and wrap with large text |
 | PolicyRow | Listing | `SojournPolicyRow(policy: Policy, modifier, detail?, divider)` ✅ | the title states the policy's number (N-03), which `Policy` requires; optional detail line from resources |
 | Price | Listing | `SojournPrice(price: PriceDisplay, modifier, size: SojournPriceSize = Card \| Compact)` ✅ | **the only price renderer** (P-01); `Total` leads with the stay total over the all-in nightly average; `From` says "from … a month/night" over what it excludes (P-03) |
@@ -88,7 +89,7 @@ Shared type additions required by the cards live in `core:model`: `PriceDisplay`
 | ScreenCheckout | `feature:checkout` | `CheckoutRoute`, `ConfirmationRoute` | `CheckoutViewModel`, `ConfirmationViewModel` |
 | ScreenMap | `feature:map` | `MapRoute` / `MapScreen` | `MapViewModel` |
 | ScreenSaved | `feature:saved` | `SavedRoute` | `SavedViewModel` |
-| ScreenBookings | `feature:bookings` | `BookingsRoute`, `BookingDetailsRoute` | `BookingsViewModel` |
+| ScreenBookings | `feature:bookings` | `BookingsRoute`, `BookingDetailsRoute` | `BookingsViewModel`, `BookingDetailsViewModel` |
 | ScreenProfile | `feature:profile` | `ProfileRoute`, `LanguageRoute`, `AppearanceRoute` | `ProfileViewModel` |
 
 ## Brand book rules we encode

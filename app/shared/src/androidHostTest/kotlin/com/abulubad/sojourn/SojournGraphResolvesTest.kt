@@ -1,11 +1,13 @@
 package com.abulubad.sojourn
 
+import com.abulubad.sojourn.core.domain.CancelBooking
 import com.abulubad.sojourn.core.domain.CreateBooking
 import com.abulubad.sojourn.core.domain.GetBooking
 import com.abulubad.sojourn.core.domain.GetCities
 import com.abulubad.sojourn.core.domain.GetQuote
 import com.abulubad.sojourn.core.domain.GetStayDetails
 import com.abulubad.sojourn.core.domain.ListBookings
+import com.abulubad.sojourn.core.domain.ObserveArrivingStay
 import com.abulubad.sojourn.core.domain.ObserveFilters
 import com.abulubad.sojourn.core.domain.ObserveQuote
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
@@ -17,6 +19,7 @@ import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
 import com.abulubad.sojourn.core.navigation.BookingConfirmedKey
+import com.abulubad.sojourn.core.navigation.BookingDetailsKey
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
@@ -25,6 +28,8 @@ import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchArgs
 import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.core.navigation.StayDetailsKey
+import com.abulubad.sojourn.feature.bookings.BookingDetailsViewModel
+import com.abulubad.sojourn.feature.bookings.BookingsViewModel
 import com.abulubad.sojourn.feature.checkout.CheckoutViewModel
 import com.abulubad.sojourn.feature.checkout.ConfirmationViewModel
 import com.abulubad.sojourn.feature.details.DetailsViewModel
@@ -86,5 +91,9 @@ class SojournGraphResolvesTest {
         koin.get<ConfirmationViewModel> { parametersOf(BookingConfirmedKey("b-1-london-01")) }
         koin.get<MapViewModel> { parametersOf(MapKey(SearchArgs(cityId = "london"))) }
         koin.get<SavedViewModel>()
+        koin.get<BookingsViewModel>()
+        koin.get<BookingDetailsViewModel> { parametersOf(BookingDetailsKey("b-1-london-01")) }
+        koin.get<CancelBooking>()
+        koin.get<ObserveArrivingStay>()
     }
 }

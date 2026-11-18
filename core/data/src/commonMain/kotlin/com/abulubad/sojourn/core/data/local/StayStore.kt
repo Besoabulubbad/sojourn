@@ -11,7 +11,9 @@ import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.LocalDate
 import com.abulubad.sojourn.core.database.Stay as StayRow
 
 /**
@@ -39,8 +41,20 @@ internal class StayStore(private val db: SojournDatabase, private val dispatcher
     fun observeReviews(id: StayId): Flow<List<Review>> =
         queries.reviewsFor(id.value).asFlow().mapToList(dispatchers.io).map { rows -> rows.mapNotNull { it.toModel() } }
 
-    fun observeBlocked(id: StayId): Flow<List<DateRange>> =
-        queries.blockedFor(id.value).asFlow().mapToList(dispatchers.io).map { rows -> rows.map { it.toModel() } }
+    /**
+     * The nights a stay is taken: the ranges the catalogue says are booked, and the guest's own bookings there that
+     * are not cancelled. The demo API forgets its bookings between launches; the device does not, so the guest's
+     * nights stay blocked in the picker, in quotes and in search.
+     */
+    fun observeBlocked(id: StayId): Flow<List<DateRange>> = combine(
+        queries.blockedFor(id.value).asFlow().mapToList(dispatchers.io),
+        db.bookingQueries.takenFor(id.value).asFlow().mapToList(dispatchers.io),
+    ) { blocked, booked ->
+        val own = booked.mapNotNull { row ->
+            runCatching { DateRange(LocalDate.parse(row.start_date), LocalDate.parse(row.end_date)) }.getOrNull()
+        }
+        (blocked.map { it.toModel() } + own).sortedBy { it.start }
+    }
 
     fun hasAny(cityId: CityId?): Boolean = idsIn(cityId).isNotEmpty()
 

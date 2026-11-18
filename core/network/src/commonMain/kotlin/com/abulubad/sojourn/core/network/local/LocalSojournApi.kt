@@ -3,6 +3,7 @@ package com.abulubad.sojourn.core.network.local
 import com.abulubad.sojourn.core.common.AppClock
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.model.Booking
+import com.abulubad.sojourn.core.model.BookingId
 import com.abulubad.sojourn.core.model.City
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.DateRange
@@ -48,6 +49,8 @@ class LocalSojournApi(
         call { engine.quote(stayId, dates, guests) }
 
     override suspend fun book(quoteId: QuoteId): AppResult<Booking> = call { engine.book(quoteId) }
+
+    override suspend fun cancel(id: BookingId): AppResult<Unit> = call { engine.cancel(id) }
 
     private suspend fun <T> call(block: () -> AppResult<T>): AppResult<T> {
         delay(conditions.latency)

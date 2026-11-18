@@ -2,6 +2,7 @@ package com.abulubad.sojourn.core.network
 
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.model.Booking
+import com.abulubad.sojourn.core.model.BookingId
 import com.abulubad.sojourn.core.model.City
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.DateRange
@@ -44,4 +45,7 @@ interface SojournApi {
 
     /** Books a quote this API issued. */
     suspend fun book(quoteId: QuoteId): AppResult<Booking>
+
+    /** Cancels a booking; its nights are free again. */
+    suspend fun cancel(id: BookingId): AppResult<Unit>
 }

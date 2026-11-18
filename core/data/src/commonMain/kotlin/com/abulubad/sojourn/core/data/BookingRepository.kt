@@ -10,6 +10,7 @@ import com.abulubad.sojourn.core.data.local.toRow
 import com.abulubad.sojourn.core.database.SojournDatabase
 import com.abulubad.sojourn.core.model.Booking
 import com.abulubad.sojourn.core.model.BookingId
+import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.network.SojournApi
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +33,9 @@ interface BookingRepository {
      * no longer knows the quote (it expired); the caller re-quotes and asks the guest to confirm a changed total.
      */
     suspend fun book(quoteId: QuoteId): AppResult<Booking>
+
+    /** Cancels [id] with the API, then marks it cancelled here; its nights are free again. Needs the network. */
+    suspend fun cancel(id: BookingId): AppResult<Unit>
 }
 
 internal class OfflineFirstBookingRepository(
@@ -51,6 +55,14 @@ internal class OfflineFirstBookingRepository(
     override suspend fun book(quoteId: QuoteId): AppResult<Booking> {
         val result = api.book(quoteId)
         if (result is AppResult.Success) withContext(dispatchers.io) { queries.upsert(result.value.toRow()) }
+        return result
+    }
+
+    override suspend fun cancel(id: BookingId): AppResult<Unit> {
+        val result = api.cancel(id)
+        if (result is AppResult.Success) {
+            withContext(dispatchers.io) { queries.updateStatus(BookingStatus.Cancelled.id, id.value) }
+        }
         return result
     }
 }

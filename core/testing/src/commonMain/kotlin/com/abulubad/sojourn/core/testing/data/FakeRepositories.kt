@@ -153,6 +153,12 @@ class FakeBookingRepository(private val createdAt: Instant = Instant.parse("2026
         bookings.update { it + booking }
         return AppResult.Success(booking)
     }
+
+    override suspend fun cancel(id: BookingId): AppResult<Unit> {
+        if (offline) return AppResult.Failure(AppError.Offline)
+        bookings.update { list -> list.map { if (it.id == id) it.copy(status = BookingStatus.Cancelled) else it } }
+        return AppResult.Success(Unit)
+    }
 }
 
 /** Saved stays in memory, newest first; [savedAt] stamps each new save. */

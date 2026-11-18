@@ -6,6 +6,7 @@ import com.abulubad.sojourn.core.common.getOrNull
 import com.abulubad.sojourn.core.domain.BookingItem
 import com.abulubad.sojourn.core.domain.GetBooking
 import com.abulubad.sojourn.core.navigation.BookingConfirmedKey
+import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.QuoteFixtures
 import com.abulubad.sojourn.core.testing.StayFixtures
 import com.abulubad.sojourn.core.testing.data.FakeBookingRepository
@@ -28,7 +29,10 @@ class ConfirmationViewModelTest {
         val quote = QuoteFixtures.canalStudioFortnight
         bookings.issued[quote.id] = quote
         val booking = assertNotNull(bookings.book(quote.id).getOrNull())
-        val vm = ConfirmationViewModel(BookingConfirmedKey(booking.id.value), GetBooking(bookings, stays))
+        val vm = ConfirmationViewModel(
+            BookingConfirmedKey(booking.id.value),
+            GetBooking(bookings, stays, FixedAppClock()),
+        )
         advanceUntilIdle()
         val item = assertIs<ScreenState.Content<BookingItem>>(vm.state.value.booking).data
         assertEquals(booking, item.booking)
@@ -43,7 +47,7 @@ class ConfirmationViewModelTest {
 
     @Test
     fun `a booking the device does not have is an error`() = runSojournTest {
-        val vm = ConfirmationViewModel(BookingConfirmedKey("b-unknown"), GetBooking(bookings, stays))
+        val vm = ConfirmationViewModel(BookingConfirmedKey("b-unknown"), GetBooking(bookings, stays, FixedAppClock()))
         advanceUntilIdle()
         assertIs<AppError.NotFound>(assertIs<ScreenState.Error>(vm.state.value.booking).error)
     }

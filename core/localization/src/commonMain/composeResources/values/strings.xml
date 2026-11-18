@@ -415,4 +415,32 @@
     <string name="saved_empty_title">No saved stays yet</string>
     <string name="saved_empty_body">Tap the heart on any stay to save it here.</string>
     <string name="action_explore_stays">Explore stays</string>
+
+    <!-- Bookings (ScreenBookings card), the booking page, the check-in guide and cancelling -->
+    <string name="bookings_past">Past</string>
+    <string name="bookings_check_in_in">Check-in in %1$s</string>
+    <string name="bookings_check_in_tomorrow">Check-in tomorrow</string>
+    <!-- A booking's line: %1$s dates, %2$s nights, %3$s guests. -->
+    <string name="bookings_details">%1$s · %2$s · %3$s</string>
+    <string name="action_directions">Directions</string>
+    <string name="action_check_in_guide">Check-in guide</string>
+    <string name="bookings_cancellation_after">After that, the first %1$s aren’t refunded.</string>
+    <string name="bookings_deposit_detail">Held on your card, released within 7 days of check-out.</string>
+    <string name="bookings_empty_upcoming_title">No upcoming stays</string>
+    <string name="bookings_empty_upcoming_body">Stays you book appear here, ready for arrival day.</string>
+    <string name="bookings_empty_past_title">No past stays yet</string>
+    <string name="bookings_empty_past_body">Stays appear here after check-out.</string>
+    <string name="guide_key_code">Key code</string>
+    <string name="guide_key_code_later">Your key code appears here on arrival day, %1$s.</string>
+    <string name="guide_key_code_host">Your host will meet you with the keys.</string>
+    <string name="action_copy">Copy</string>
+    <string name="key_code_copied">Key code copied</string>
+    <string name="cancel_title">Cancel this booking?</string>
+    <string name="cancel_refund_full">You’ll get %1$s back in full.</string>
+    <string name="cancel_refund_partial">You’ll get %1$s back. The first %2$s aren’t refunded.</string>
+    <string name="cancel_refund_none">Nothing is refunded: the free-cancellation period has ended.</string>
+    <string name="action_keep_booking">Keep booking</string>
+    <string name="booking_cancelled_note">This booking is cancelled. Its nights are free again.</string>
+    <!-- The key code, isolated left to right (U+2066 … U+2069) so its digits keep their order in Arabic. -->
+    <string name="guide_key_code_value">⁦%1$s⁩</string>
 </resources>
