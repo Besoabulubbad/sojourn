@@ -23,6 +23,12 @@ kotlin {
             implementation(libs.coil.compose)
             // SojournSheet closes on system back (Android back, iOS edge swipe).
             implementation(libs.navigationevent.compose)
+            // SojournMap draws MapLibre with a style built from the map tokens (ADR 0017).
+            implementation(libs.maplibre.compose)
+            // MapLibre positions (spatialk Position) for overlays and the camera.
+            implementation(libs.maplibre.spatialk.geojson)
+            // The map style is built as JSON from the tokens.
+            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.coroutines.test)

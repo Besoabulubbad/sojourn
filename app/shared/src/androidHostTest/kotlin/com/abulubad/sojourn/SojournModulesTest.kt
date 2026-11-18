@@ -5,6 +5,7 @@ import com.abulubad.sojourn.core.navigation.BookingConfirmedKey
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
+import com.abulubad.sojourn.core.navigation.MapKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchKey
 import com.abulubad.sojourn.core.navigation.StayDetailsKey
@@ -13,6 +14,7 @@ import com.abulubad.sojourn.feature.checkout.ConfirmationViewModel
 import com.abulubad.sojourn.feature.details.DetailsViewModel
 import com.abulubad.sojourn.feature.details.GalleryViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
+import com.abulubad.sojourn.feature.map.MapViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.koin.dsl.module
@@ -41,6 +43,7 @@ class SojournModulesTest {
                 definition<GalleryViewModel>(GalleryKey::class),
                 definition<CheckoutViewModel>(CheckoutKey::class),
                 definition<ConfirmationViewModel>(BookingConfirmedKey::class),
+                definition<MapViewModel>(MapKey::class),
             ),
         )
     }

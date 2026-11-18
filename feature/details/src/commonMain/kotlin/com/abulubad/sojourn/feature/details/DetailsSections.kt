@@ -1,17 +1,23 @@
 package com.abulubad.sojourn.feature.details
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import com.abulubad.sojourn.core.designsystem.amenity.icon
@@ -22,10 +28,15 @@ import com.abulubad.sojourn.core.designsystem.components.chip.SojournFactChip
 import com.abulubad.sojourn.core.designsystem.components.divider.SojournDivider
 import com.abulubad.sojourn.core.designsystem.components.hosttext.HostText
 import com.abulubad.sojourn.core.designsystem.components.keyfacts.SojournKeyFacts
+import com.abulubad.sojourn.core.designsystem.components.map.SojournMap
+import com.abulubad.sojourn.core.designsystem.components.map.SojournMapArea
+import com.abulubad.sojourn.core.designsystem.components.map.SojournMapDefaults
+import com.abulubad.sojourn.core.designsystem.components.map.rememberSojournMapState
 import com.abulubad.sojourn.core.designsystem.components.policy.SojournPolicyRow
 import com.abulubad.sojourn.core.designsystem.components.rating.SojournRating
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
+import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.domain.StayDetails
@@ -129,6 +140,7 @@ private fun Includes(stay: Stay) {
 private fun Where(stay: Stay, onIntent: (DetailsIntent) -> Unit) {
     val formatter = rememberSojournFormatter()
     Section(Res.string.details_where) {
+        AreaMap(stay, onIntent)
         IconLine(SojournIcon.MapPin, localizedPlace(stay.cityId, stay.areaKey))
         stay.walkMinutesToTransit?.let { minutes ->
             val walk = pluralStringResource(Res.plurals.minutes_walk, minutes, formatter.count(minutes))
@@ -140,6 +152,28 @@ private fun Where(stay: Stay, onIntent: (DetailsIntent) -> Unit) {
             onClick = { onIntent(DetailsIntent.ShowOnMapTapped) },
             variant = SojournButtonVariant.Secondary,
             leadingIcon = SojournIcon.Map,
+        )
+    }
+}
+
+/**
+ * The stay's area on a small map (ScreenDetails card, "Where you'll stay"): an area, not a pin, before booking. The
+ * map does not pan; the whole of it is one button that opens the full map with this stay selected.
+ */
+@Composable
+private fun AreaMap(stay: Stay, onIntent: (DetailsIntent) -> Unit) {
+    val area = stay.location
+    val map = rememberSojournMapState(area.center, SojournMapDefaults.AREA_ZOOM)
+    val label = stringResource(Res.string.action_show_on_map)
+    Box(Modifier.fillMaxWidth().aspectRatio(AREA_MAP_RATIO).clip(SojournShapes.lg)) {
+        SojournMap(map, interactive = false) {
+            SojournMapArea(area, map.camera.zoom, Modifier.at(area.center))
+        }
+        Box(
+            Modifier
+                .matchParentSize()
+                .clickable(role = Role.Button, onClickLabel = label) { onIntent(DetailsIntent.ShowOnMapTapped) }
+                .semantics { contentDescription = label },
         )
     }
 }
@@ -293,3 +327,6 @@ private fun hostLanguageName(language: String): StringResource? = when (language
 
 /** Descriptions longer than this show their first sentences and "Read more". */
 private const val DESCRIPTION_EXCERPT = 240
+
+/** The area map's shape: wide, as the card shows it. */
+private const val AREA_MAP_RATIO = 16f / 9f

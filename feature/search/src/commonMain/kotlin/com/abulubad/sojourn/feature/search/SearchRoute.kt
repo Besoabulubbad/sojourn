@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.abulubad.sojourn.core.navigation.MapKey
 import com.abulubad.sojourn.core.navigation.Navigator
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchKey
@@ -24,7 +25,7 @@ fun SearchRoute(key: SearchKey, navigator: Navigator, modifier: Modifier = Modif
         when (effect) {
             SearchEffect.Close -> navigator.back()
             is SearchEffect.ShowResults ->
-                navigator.goToReplacing(effect.key) { it is SearchKey || it is ResultsKey }
+                navigator.goToReplacing(effect.key) { it is SearchKey || it is ResultsKey || it is MapKey }
         }
     }
     SearchScreen(state = state, onIntent = viewModel::onIntent, modifier = modifier)

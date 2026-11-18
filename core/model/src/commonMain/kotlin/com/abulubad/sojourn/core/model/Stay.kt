@@ -55,6 +55,33 @@ data class Rating(val score: Double, val count: Int) {
 /** A point on the map. */
 data class GeoPoint(val latitude: Double, val longitude: Double)
 
+/**
+ * A north-aligned box on the map: the area the guest has panned or zoomed to ("Search this area"). Never crosses the
+ * antimeridian: the catalogue's cities are far from it.
+ */
+data class GeoBounds(val south: Double, val west: Double, val north: Double, val east: Double) {
+    init {
+        require(south <= north) { "south ($south) is north of north ($north)" }
+        require(west <= east) { "west ($west) is east of east ($east)" }
+    }
+
+    operator fun contains(point: GeoPoint): Boolean =
+        point.latitude in south..north && point.longitude in west..east
+
+    companion object {
+        /** The smallest box around [points]; null when there are none. */
+        fun around(points: Collection<GeoPoint>): GeoBounds? {
+            if (points.isEmpty()) return null
+            return GeoBounds(
+                south = points.minOf { it.latitude },
+                west = points.minOf { it.longitude },
+                north = points.maxOf { it.latitude },
+                east = points.maxOf { it.longitude },
+            )
+        }
+    }
+}
+
 /** Before booking, a stay's position is shown as an area, not a pin (brand book). */
 data class GeoArea(val center: GeoPoint, val radiusMetres: Int) {
     init {

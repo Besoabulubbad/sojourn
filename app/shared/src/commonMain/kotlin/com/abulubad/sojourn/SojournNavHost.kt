@@ -31,6 +31,7 @@ import com.abulubad.sojourn.feature.checkout.checkoutEntries
 import com.abulubad.sojourn.feature.details.detailsEntries
 import com.abulubad.sojourn.feature.explore.exploreEntries
 import com.abulubad.sojourn.feature.filters.filtersEntries
+import com.abulubad.sojourn.feature.map.mapEntries
 import com.abulubad.sojourn.feature.results.resultsEntries
 import com.abulubad.sojourn.feature.search.searchEntries
 import org.jetbrains.compose.resources.stringResource
@@ -92,6 +93,7 @@ private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     filtersEntries(navigator)
     detailsEntries(navigator)
     checkoutEntries(navigator)
+    mapEntries(navigator)
 }
 
 @Composable

@@ -404,4 +404,10 @@
     <string name="confirmed_total_paid">Total paid</string>
     <string name="action_view_booking">View booking</string>
     <string name="action_done">Done</string>
+
+    <!-- Map. The attribution the tiles' licence requires; it stays visible on every map. -->
+    <string name="map_attribution">© OpenStreetMap contributors · OpenFreeMap</string>
+    <string name="map_area_empty_title">No stays in this area</string>
+    <string name="map_area_empty_body">Move the map, or see every stay in your search.</string>
+    <string name="action_show_all_stays">Show all stays</string>
 </resources>
