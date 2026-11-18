@@ -82,7 +82,7 @@ Design in this codebase:
 - ViewModels are scoped per entry by `rememberViewModelStoreNavEntryDecorator`; `koinViewModel()` uses that entry's store, so `koin-compose-navigation3` is not needed.
 - The bottom nav is placed by each tab root (`SojournTabBar()` in `core:ui`), so a single scaffold owns the bottom inset.
 
-**2026-11-18 (search flow).** A multi-step flow is one entry, decision unchanged: `SearchKey(step, args)` opens the flow on `step`, and the steps change inside the screen (`AnimatedContent` with `SojournTransitions.stepForward/stepBack`), so the progress bar stays put and fills as motion.md asks. System back goes one step back through `StepBackHandler` (`core:ui`, navigationevent) and falls through to the navigator on the first step. Finishing pops the flow and pushes the result in the same frame (`back()` then `goTo()`), so back from the results skips the flow.
+**2026-11-18 (search flow).** A multi-step flow is one entry, decision unchanged: `SearchKey(step, args)` opens the flow on `step`, and the steps change inside the screen (`AnimatedContent` with `SojournTransitions.stepForward/stepBack`), so the progress bar stays put and fills as motion.md asks. System back goes one step back through `StepBackHandler` (`core:ui`, navigationevent) and falls through to the navigator on the first step. Finishing replaces the flow with its result in one step (`Navigator.goToReplacing`, added with Results), so back from the results skips the flow, and a search edited from Results replaces those results instead of stacking a second list.
 
 ## Links
 

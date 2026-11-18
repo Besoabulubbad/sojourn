@@ -93,5 +93,18 @@ class NavigationTest {
         assertEquals(listOf<NavKey>(ExploreKey), navigator.currentStack.toList())
     }
 
+    @Test
+    fun `a finished flow replaces itself and the results it came from but never the root`() {
+        val navigator = navigator()
+        val first = ResultsKey(SearchArgs(cityId = "london"))
+        val second = ResultsKey(SearchArgs(cityId = "paris"))
+        navigator.goTo(first)
+        navigator.goTo(SearchKey())
+        navigator.goToReplacing(second) { it is SearchKey || it is ResultsKey }
+        assertEquals(listOf<NavKey>(ExploreKey, second), navigator.currentStack.toList())
+        navigator.goToReplacing(first) { true }
+        assertEquals(listOf<NavKey>(ExploreKey, first), navigator.currentStack.toList())
+    }
+
     private fun navigator() = TabbedNavigator(Tab.entries.associateWith { NavBackStack<NavKey>(it.root) })
 }

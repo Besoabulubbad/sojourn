@@ -174,8 +174,8 @@
     <string name="stay_length_longer">Longer</string>
     <string name="sort_recommended">Recommended</string>
     <string name="sort_price_low_to_high">Price, low to high</string>
-    <string name="sort_price_high_to_low">Price, high to low</string>
     <string name="sort_rating">Rating</string>
+    <string name="sort_distance">Distance to centre</string>
     <string name="filters_title">Filters</string>
     <string name="search_prompt_title">Where to?</string>
     <string name="search_prompt_hint">City · Dates or stay length · Guests</string>
@@ -316,4 +316,25 @@
     <string name="search_any_time_note">Any time: you’ll see monthly “from” prices, and what they leave out.</string>
     <string name="action_next">Next</string>
     <string name="cd_step_progress">Step %1$s of %2$s</string>
+    <string name="search_length_from_month">%1$s from %2$s</string>
+    <!-- Results (ScreenResults card). -->
+    <string name="results_sort">Sort</string>
+    <string name="results_sort_title">Sort by</string>
+    <string name="results_free_cancellation">Free cancellation</string>
+    <string name="results_empty_title">No stays match</string>
+    <string name="results_empty_filters_body">Clear a filter or two to see more stays.</string>
+    <string name="results_empty_search_body">Try other dates or another city.</string>
+    <string name="action_change_search">Change search</string>
+    <plurals name="results_in_city">
+        <item quantity="one">%1$s stay in %2$s</item>
+        <item quantity="other">%1$s stays in %2$s</item>
+    </plurals>
+    <plurals name="priced_hours_ago">
+        <item quantity="one">Priced %1$s hour ago</item>
+        <item quantity="other">Priced %1$s hours ago</item>
+    </plurals>
+    <plurals name="priced_days_ago">
+        <item quantity="one">Priced %1$s day ago</item>
+        <item quantity="other">Priced %1$s days ago</item>
+    </plurals>
 </resources>

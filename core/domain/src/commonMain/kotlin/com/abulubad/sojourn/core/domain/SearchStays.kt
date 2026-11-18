@@ -5,6 +5,8 @@ import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.common.Loadable
 import com.abulubad.sojourn.core.common.errorOrNull
+import com.abulubad.sojourn.core.common.map
+import com.abulubad.sojourn.core.data.CityRepository
 import com.abulubad.sojourn.core.data.PricingRepository
 import com.abulubad.sojourn.core.data.SavedRepository
 import com.abulubad.sojourn.core.data.StayRepository
@@ -31,10 +33,23 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
+import kotlin.time.Instant
 
-/** One card in the results: the stay, the price it shows, its rating if shown (N-04), and the heart. */
-data class StayResult(val stay: Stay, val price: PriceDisplay, val rating: Rating?, val saved: Boolean)
+/**
+ * One card in the results: the stay, the price it shows, its rating if shown (N-04), and the heart.
+ * [distanceMetres] is from the city's centre (the distance sort); [pricedAt] is when a dated price was quoted, so an
+ * offline card can say how old it is.
+ */
+data class StayResult(
+    val stay: Stay,
+    val price: PriceDisplay,
+    val rating: Rating?,
+    val saved: Boolean,
+    val distanceMetres: Int? = null,
+    val pricedAt: Instant? = null,
+)
 
 /**
  * The results for a query. Every card's price is on [basis] (P-04): `Stay` (all-in totals from quotes) with dates,
@@ -54,14 +69,29 @@ data class SearchResults(val stays: List<StayResult>, val basis: PriceBasis)
  *   appear as they are checked; a stay that cannot be checked (offline, nothing cached) stays in, under the offline
  *   banner.
  * - A price range applies only when its basis matches the cards' (P-04), and only to prices in its currency.
+ * - "Free cancellation" keeps stays whose free-cancellation window has not closed; "Studio" keeps studios.
+ * - Results are sorted last, by [Filters.sort]; distance is from the stay's city centre to its area's centre.
  */
 class SearchStays(
     private val stays: StayRepository,
     private val pricing: PricingRepository,
     private val saved: SavedRepository,
+    private val cities: CityRepository,
     private val clock: AppClock,
 ) {
-    operator fun invoke(query: SearchQuery, filters: Filters, force: Boolean = false): Flow<Loadable<SearchResults>> {
+    operator fun invoke(query: SearchQuery, filters: Filters, force: Boolean = false): Flow<Loadable<SearchResults>> =
+        combine(unsorted(query, filters, force), cities.observeCities()) { loadable, known ->
+            val centres = known.associate { it.id to it.location }
+            loadable.map { results ->
+                val placed = results.stays.map { result ->
+                    val centre = centres[result.stay.cityId] ?: return@map result
+                    result.copy(distanceMetres = StayRules.distanceMetres(centre, result.stay.location.center))
+                }
+                results.copy(stays = placed.sortedWith(filters.sort.comparator))
+            }
+        }
+
+    private fun unsorted(query: SearchQuery, filters: Filters, force: Boolean): Flow<Loadable<SearchResults>> {
         val basis = StayRules.basisFor(query)
         val cached = offlineFirst(stays.observeStays(query.cityId), { it.isNotEmpty() }) {
             stays.refresh(query.cityId, force)
@@ -87,7 +117,9 @@ class SearchStays(
         val quotes = MutableStateFlow<Map<StayId, AppResult<Quote>>>(emptyMap())
         launch {
             // Quote the candidates once per distinct set; a refresh that returns the same stays costs nothing.
-            cached.map { loadable -> loadable.data?.filter { it.fits(query) && it.matches(filters) }?.map { it.id } }
+            cached.map { loadable ->
+                loadable.data?.filter { it.fits(query) && it.matches(filters, clock.today()) }?.map { it.id }
+            }
                 .filterNotNull()
                 .distinctUntilChanged()
                 .collectLatest { ids ->
@@ -95,12 +127,18 @@ class SearchStays(
                 }
         }
         combine(cached, quotes, saved.observeSavedIds()) { loadable, quoted, savedIds ->
-            val candidates = loadable.data?.filter { it.fits(query) && it.matches(filters) }.orEmpty()
+            val candidates = loadable.data?.filter { it.fits(query) && it.matches(filters, clock.today()) }.orEmpty()
             val quoting = candidates.any { it.id !in quoted }
             val offline = quoted.values.any { (it as? AppResult.Failure)?.error == AppError.Offline }
             val results = loadable.toResults(PriceBasis.Stay, filters) { stay ->
                 (quoted[stay.id] as? AppResult.Success)?.value?.display
-            }.withSaved(savedIds)
+            }.withSaved(savedIds).map { found ->
+                found.copy(
+                    stays = found.stays.map { result ->
+                        result.copy(pricedAt = (quoted[result.stay.id] as? AppResult.Success)?.value?.pricedAt)
+                    },
+                )
+            }
             results.copy(
                 // Still loading while a candidate has no quote yet: an empty list now is not an answer.
                 data = results.data?.takeUnless { it.stays.isEmpty() && quoting },
@@ -119,7 +157,7 @@ class SearchStays(
         val basis = StayRules.basisFor(query)
         val checks = MutableStateFlow<Map<StayId, Check>>(emptyMap())
         launch {
-            cached.map { loadable -> loadable.data?.filter { it.fits(query) && it.matches(filters) } }
+            cached.map { loadable -> loadable.data?.filter { it.fits(query) && it.matches(filters, clock.today()) } }
                 .filterNotNull()
                 .distinctUntilChanged { old, new -> old.map { it.id } == new.map { it.id } }
                 .collectLatest { candidates ->
@@ -127,7 +165,7 @@ class SearchStays(
                 }
         }
         combine(cached, checks, saved.observeSavedIds()) { loadable, checked, savedIds ->
-            val candidates = loadable.data?.filter { it.fits(query) && it.matches(filters) }.orEmpty()
+            val candidates = loadable.data?.filter { it.fits(query) && it.matches(filters, clock.today()) }.orEmpty()
             val checking = candidates.any { it.id !in checked }
             val offline = checked.values.any { it.error == AppError.Offline }
             val results = loadable.toResults(basis, filters) { stay ->
@@ -171,7 +209,7 @@ class SearchStays(
         val results = data?.mapNotNull { stay ->
             val price = priceOf(stay) ?: return@mapNotNull null
             StayResult(stay, price, StayRules.visibleRating(stay.rating), saved = false)
-        }?.filter { it.stay.matches(filters) && it.price.inRange(filters, basis) }?.sortedWith(filters.sort.comparator)
+        }?.filter { it.stay.matches(filters, clock.today()) && it.price.inRange(filters, basis) }
         return Loadable(results?.let { SearchResults(it, basis) }, refreshing, error)
     }
 
@@ -186,10 +224,12 @@ private fun Stay.fits(query: SearchQuery): Boolean =
     query.guests.total <= facts.sleeps && (query.cityId == null || cityId == query.cityId)
 
 /** The filters that do not involve price. */
-private fun Stay.matches(filters: Filters): Boolean =
+private fun Stay.matches(filters: Filters, today: LocalDate): Boolean =
     amenities.containsAll(filters.amenities) &&
         facts.bedrooms >= (filters.minBedrooms ?: 0) &&
-        (!filters.instantBook || instantBook)
+        (!filters.instantBook || instantBook) &&
+        (!filters.studioOnly || facts.bedrooms == 0) &&
+        (!filters.freeCancellation || StayRules.hasFreeCancellation(this, today))
 
 /** P-04: a range on another basis does not apply; one in another currency excludes what it cannot compare. */
 private fun PriceDisplay.inRange(filters: Filters, basis: PriceBasis): Boolean {
@@ -202,9 +242,10 @@ private val SortOrder.comparator: Comparator<StayResult>
     get() = when (this) {
         SortOrder.Recommended -> compareBy { it.stay.id.value }
         SortOrder.PriceLowToHigh -> compareBy<StayResult> { it.price.amount.currency }.thenBy { it.price.amount.minor }
-        SortOrder.PriceHighToLow ->
-            compareBy<StayResult> { it.price.amount.currency }.thenByDescending { it.price.amount.minor }
         // Hidden ratings (N-04) rank after every shown one.
         SortOrder.Rating -> compareByDescending<StayResult> { it.rating?.score ?: -1.0 }
             .thenByDescending { it.rating?.count ?: 0 }
+        // A stay whose city is not known yet ranks last.
+        SortOrder.DistanceToCentre -> compareBy<StayResult> { it.distanceMetres ?: Int.MAX_VALUE }
+            .thenBy { it.stay.id.value }
     }

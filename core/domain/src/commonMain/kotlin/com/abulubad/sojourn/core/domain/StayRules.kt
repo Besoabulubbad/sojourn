@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.domain
 
 import com.abulubad.sojourn.core.model.DateRange
+import com.abulubad.sojourn.core.model.GeoPoint
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.Policy
@@ -14,6 +15,13 @@ import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 import kotlinx.datetime.plus
+import kotlin.math.PI
+import kotlin.math.asin
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.roundToInt
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 /**
  * Business rules from the engineering standards that more than one use case applies. Pure functions: every rule
@@ -90,6 +98,28 @@ object StayRules {
                 blocked.none { it.start < end && start < it.end }
             }
     }
+
+    /** Whether [stay] can still be cancelled for free: a window that closes on a date counts until that date. */
+    fun hasFreeCancellation(stay: Stay, today: LocalDate): Boolean = stay.policies.any { policy ->
+        when (policy) {
+            is Policy.FreeCancellation -> policy.until >= today
+            is Policy.FreeCancellationBefore -> true
+            else -> false
+        }
+    }
+
+    /** The great-circle distance between two points, in whole metres (haversine, mean Earth radius). */
+    fun distanceMetres(from: GeoPoint, to: GeoPoint): Int {
+        val lat1 = from.latitude * RADIANS
+        val lat2 = to.latitude * RADIANS
+        val dLat = lat2 - lat1
+        val dLon = (to.longitude - from.longitude) * RADIANS
+        val h = sin(dLat / 2).pow(2) + cos(lat1) * cos(lat2) * sin(dLon / 2).pow(2)
+        return (2 * EARTH_RADIUS_METRES * asin(sqrt(h))).roundToInt()
+    }
+
+    private const val RADIANS = PI / 180
+    private const val EARTH_RADIUS_METRES = 6_371_000.0
 
     private fun minimumNights(stay: Stay): Int =
         stay.policies.filterIsInstance<Policy.MinimumStay>().maxOfOrNull { it.nights } ?: 1

@@ -39,7 +39,7 @@ class ModelInvariantsTest {
     }
 
     @Test
-    fun `filters count what is active`() {
+    fun `filters count each active filter - every amenity on its own and sort not at all`() {
         assertEquals(0, Filters.None.activeCount)
         val filters = Filters(
             priceRange = MoneyRange(Money.of(500, Currency.GBP), Money.of(3000, Currency.GBP)),
@@ -47,6 +47,8 @@ class ModelInvariantsTest {
             sort = SortOrder.Rating,
         )
         assertEquals(3, filters.activeCount)
+        assertEquals(5, filters.copy(studioOnly = true, freeCancellation = true).activeCount)
+        assertEquals(0, Filters(sort = SortOrder.DistanceToCentre).activeCount)
     }
 
     @Test

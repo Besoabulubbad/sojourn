@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.designsystem.components.navigation
 
 import com.abulubad.sojourn.core.designsystem.components.bottomnav.SojournBottomNavSamples
+import com.abulubad.sojourn.core.designsystem.components.refresh.SojournPullToRefreshSamples
 import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetSamples
 import com.abulubad.sojourn.core.designsystem.components.topbar.SojournTopBarSamples
 import com.abulubad.sojourn.core.designsystem.components.viewtoggle.SojournViewToggleSamples
@@ -14,4 +15,5 @@ val navigationSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("sheet_filters", fullMatrix = true) { SojournSheetSamples.Filters() },
     SnapshotCase("sheet_peek") { SojournSheetSamples.Peek() },
     SnapshotCase("view_toggle_pills", fullMatrix = true) { SojournViewToggleSamples.Pills() },
+    SnapshotCase("pull_to_refresh") { SojournPullToRefreshSamples.Refreshing() },
 )

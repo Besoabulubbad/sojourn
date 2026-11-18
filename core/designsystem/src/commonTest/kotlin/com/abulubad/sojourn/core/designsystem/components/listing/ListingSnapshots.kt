@@ -22,5 +22,6 @@ val listingSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("continue_rows", fullMatrix = true) { SojournContinueRowSamples.Searches() },
     SnapshotCase("stay_card_full", fullMatrix = true) { SojournStayCardSamples.Full() },
     SnapshotCase("stay_card_compact") { SojournStayCardSamples.Compact() },
+    SnapshotCase("stay_card_stale") { SojournStayCardSamples.Stale() },
     SnapshotCase("gallery_states", fullMatrix = true) { SojournGallerySamples.States() },
 )

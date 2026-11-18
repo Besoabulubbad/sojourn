@@ -60,7 +60,8 @@ import org.jetbrains.compose.resources.stringResource
  * - The host's title keeps its own language and direction through [HostText] (S-06); it is the only unlocalized
  *   text on the card.
  * - Facts come from one plural-aware template: "Studio · 1 bed · 1 bath · Sleeps 2" (N-01).
- * - [price] is a `PriceDisplay`: a card cannot be built from a bare number (P-01).
+ * - [price] is a `PriceDisplay`: a card cannot be built from a bare number (P-01). [priceNote] is a muted line
+ *   under it, for what the screen knows about the price: offline, how old it is ("Priced 3 hours ago").
  * - [SojournStayCardLayout.Full]: up to five photos swipe inside the card with dots, the `accent` long-stay badge
  *   when the stay has a discount, and the floating save heart. No shadow in lists.
  * - [SojournStayCardLayout.Compact]: for the map; one photo at the start on a raised card.
@@ -75,10 +76,11 @@ fun SojournStayCard(
     onToggleSave: () -> Unit,
     modifier: Modifier = Modifier,
     layout: SojournStayCardLayout = SojournStayCardLayout.Full,
+    priceNote: String? = null,
 ) {
     when (layout) {
-        SojournStayCardLayout.Full -> FullCard(stay, price, saved, onClick, onToggleSave, modifier)
-        SojournStayCardLayout.Compact -> CompactCard(stay, price, saved, onClick, onToggleSave, modifier)
+        SojournStayCardLayout.Full -> FullCard(stay, price, priceNote, saved, onClick, onToggleSave, modifier)
+        SojournStayCardLayout.Compact -> CompactCard(stay, price, priceNote, saved, onClick, onToggleSave, modifier)
     }
 }
 
@@ -86,6 +88,7 @@ fun SojournStayCard(
 private fun FullCard(
     stay: Stay,
     price: PriceDisplay,
+    priceNote: String?,
     saved: Boolean,
     onClick: () -> Unit,
     onToggleSave: () -> Unit,
@@ -122,7 +125,7 @@ private fun FullCard(
                 Modifier.align(Alignment.BottomCenter).padding(bottom = SojournSpacing.space2),
             )
         }
-        Details(stay, price, compact = false)
+        Details(stay, price, priceNote, compact = false)
     }
 }
 
@@ -130,6 +133,7 @@ private fun FullCard(
 private fun CompactCard(
     stay: Stay,
     price: PriceDisplay,
+    priceNote: String?,
     saved: Boolean,
     onClick: () -> Unit,
     onToggleSave: () -> Unit,
@@ -160,6 +164,7 @@ private fun CompactCard(
         Details(
             stay,
             price,
+            priceNote,
             compact = true,
             modifier = Modifier.weight(1f),
             trailing = { SaveButton(saved, onToggleSave, Modifier, floating = false) },
@@ -171,6 +176,7 @@ private fun CompactCard(
 private fun Details(
     stay: Stay,
     price: PriceDisplay,
+    priceNote: String?,
     compact: Boolean,
     modifier: Modifier = Modifier,
     trailing: (@Composable () -> Unit)? = null,
@@ -200,6 +206,7 @@ private fun Details(
         )
         BasicText(factsSummary(stay.facts), style = type.bodySm.copy(color = c.inkMuted))
         SojournPrice(price, size = if (compact) SojournPriceSize.Compact else SojournPriceSize.Card)
+        priceNote?.let { BasicText(it, style = type.bodySm.copy(color = c.inkMuted)) }
     }
 }
 

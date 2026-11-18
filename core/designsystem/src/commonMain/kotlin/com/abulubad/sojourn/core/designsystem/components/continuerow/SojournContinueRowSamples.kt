@@ -15,9 +15,12 @@ import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.StayLength
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 
-/** The last search in London (dated) and an undated month in Paris, as Explore shows them. */
+/** The last search in London (dated) and a flexible month from April in Paris, as Explore shows them. */
 object SojournContinueRowSamples {
+
+    private const val APRIL = "2026-04"
 
     @Composable
     fun Searches(modifier: Modifier = Modifier) = WithSamplePhotos {
@@ -26,7 +29,11 @@ object SojournContinueRowSamples {
             dates = DateRange(LocalDate.parse("2026-03-12"), LocalDate.parse("2026-03-27")),
             guests = Guests(adults = 2),
         )
-        val paris = SearchQuery(cityId = SampleListings.paris.id, length = StayLength.Month)
+        val paris = SearchQuery(
+            cityId = SampleListings.paris.id,
+            length = StayLength.Month,
+            startMonth = YearMonth.parse(APRIL),
+        )
         Column(
             modifier.padding(SojournSpacing.space4),
             verticalArrangement = Arrangement.spacedBy(SojournSpacing.space3),

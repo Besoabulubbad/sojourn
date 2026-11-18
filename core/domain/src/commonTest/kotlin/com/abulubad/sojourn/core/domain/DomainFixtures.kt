@@ -5,6 +5,8 @@ import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.model.Amenity
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
+import com.abulubad.sojourn.core.model.GeoArea
+import com.abulubad.sojourn.core.model.GeoPoint
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.Policy
@@ -32,7 +34,10 @@ object DomainFixtures {
     /** £92 a night, 10 % long-stay discount, sleeps 2, rating 4.8 from 27 reviews. */
     val studio: Stay = StayFixtures.canalStudio
 
-    /** £150 a night, no discount, sleeps 5, two bedrooms, instant book, 5-night minimum, rating hidden (2 reviews). */
+    /**
+     * £150 a night, no discount, sleeps 5, two bedrooms, instant book, 5-night minimum, rating hidden (2 reviews),
+     * a few hundred metres from the city centre. Its free cancellation closed with the studio's, before 1 March.
+     */
     val family: Stay = studio.copy(
         id = StayId("stay-family"),
         facts = StayFacts(bedrooms = 2, beds = 3, bathrooms = 2, sleeps = 5),
@@ -42,9 +47,10 @@ object DomainFixtures {
         longStayDiscountPercent = null,
         instantBook = true,
         policies = studio.policies + Policy.MinimumStay(5),
+        location = GeoArea(GeoPoint(51.5080, -0.1290), radiusMetres = 300),
     )
 
-    /** £120 a night, sleeps 3, one bedroom, rating 4.2 from 40 reviews. */
+    /** £120 a night, sleeps 3, one bedroom, rating 4.2 from 40 reviews, free cancellation up to a week out, far out. */
     val flat: Stay = studio.copy(
         id = StayId("stay-flat"),
         facts = StayFacts(bedrooms = 1, beds = 1, bathrooms = 1, sleeps = 3),
@@ -52,6 +58,8 @@ object DomainFixtures {
         rating = Rating(4.2, 40),
         fromPrice = nightly(120),
         longStayDiscountPercent = null,
+        policies = listOf(Policy.FreeCancellationBefore(daysBeforeCheckIn = 7)),
+        location = GeoArea(GeoPoint(51.5500, -0.2000), radiusMetres = 400),
     )
 
     val london: List<Stay> = listOf(studio, family, flat)

@@ -66,6 +66,8 @@ class FakeStayRepository(var remote: List<Stay> = emptyList(), cached: List<Stay
 
     /** How long a refresh takes (virtual time under `runTest`). */
     var latency: Duration = Duration.ZERO
+    var refreshCalls = 0
+        private set
 
     override fun observeStays(cityId: CityId?): Flow<List<Stay>> =
         cache.map { list -> list.filter { cityId == null || it.cityId == cityId } }
@@ -75,6 +77,7 @@ class FakeStayRepository(var remote: List<Stay> = emptyList(), cached: List<Stay
     override suspend fun hasCached(cityId: CityId?): Boolean = cache.value.any { cityId == null || it.cityId == cityId }
 
     override suspend fun refresh(cityId: CityId?, force: Boolean): AppResult<Unit> {
+        refreshCalls++
         delay(latency)
         if (refreshResult.isSuccess) {
             cache.update { old -> old.filterNot { cityId == null || it.cityId == cityId } + remote.inScope(cityId) }

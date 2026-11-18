@@ -61,6 +61,10 @@ Why SQLDelight over Room (which also supports KMP now): SQL-first schema and que
 - Good: most "real".
 - Bad: no real backend; a hosted mock adds infrastructure and live-demo risk.
 
+**2026-11-18 (Results).** Notes, decision unchanged:
+- Quotes store when they were priced (`quote.priced_at`, schema version 3). Offline, Results labels a cached dated price older than an hour with its age, as the ScreenStates card requires.
+- Results does not page yet. The bundled catalogue answers a city in one call (under ten stays) and the list is lazy, so skeleton rows for data already on the device would be theatre. The card's "20 at a time with skeleton rows at the end" lands when `SojournApi` gains pages.
+
 ## Links
 
 - [SQLDelight 2.x — Multiplatform SQLite](https://sqldelight.github.io/sqldelight/2.4.1/multiplatform_sqlite/)

@@ -225,6 +225,7 @@ internal fun Quote.toRow(): QuoteRow = QuoteRow(
     children = guests.children.toLong(),
     total_minor = total.minor,
     currency = total.currency.code,
+    priced_at = pricedAt?.toEpochMilliseconds(),
 )
 
 internal fun Quote.lineRows(): List<QuoteLineRow> = breakdown.lines.mapIndexed { position, line ->
@@ -250,6 +251,7 @@ internal fun QuoteRow.toModel(lines: List<QuoteLineRow>): Quote? {
         dates = DateRange(LocalDate.parse(start_date), LocalDate.parse(end_date)),
         guests = Guests(adults.toInt(), children.toInt()),
         breakdown = breakdown,
+        pricedAt = priced_at?.let(Instant::fromEpochMilliseconds),
     )
 }
 
