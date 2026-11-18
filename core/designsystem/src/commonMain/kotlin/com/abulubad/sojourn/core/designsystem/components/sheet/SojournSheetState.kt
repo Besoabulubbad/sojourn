@@ -1,5 +1,6 @@
 package com.abulubad.sojourn.core.designsystem.components.sheet
 
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.runtime.Composable
@@ -32,6 +33,17 @@ class SojournSheetState internal constructor(
         require(detent in detents) { "$detent is not one of this sheet's detents." }
         anchored.animateTo(SheetStop.of(detent), SojournMotion.settleSpring())
     }
+
+    /**
+     * Animates a modal sheet out; its `onDismiss` then runs, as for every other way out. For an action that closes
+     * the sheet, such as "Show 14 stays".
+     */
+    suspend fun hide() {
+        anchored.animateTo(SheetStop.Hidden, exitSpec)
+    }
+
+    /** The exit motion, set by the sheet from the theme (reduced motion shortens it). */
+    internal var exitSpec: AnimationSpec<Float> = SojournMotion.settleSpring()
 
     internal val lowest: SojournSheetDetent get() = SojournSheetDetent.entries.first { it in detents }
     internal val highest: SojournSheetDetent get() = SojournSheetDetent.entries.last { it in detents }

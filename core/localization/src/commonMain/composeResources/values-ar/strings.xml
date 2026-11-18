@@ -372,7 +372,7 @@
     <!-- النتائج -->
     <string name="results_sort">الترتيب</string>
     <string name="results_sort_title">رتّب حسب</string>
-    <string name="results_free_cancellation">إلغاء مجاني</string>
+    <string name="filter_free_cancellation">إلغاء مجاني</string>
     <string name="results_empty_title">لا إقامات مطابقة</string>
     <string name="results_empty_filters_body">أزل تصفية أو اثنتين لترى إقامات أكثر.</string>
     <string name="results_empty_search_body">جرّب تواريخ أخرى أو مدينة أخرى.</string>
@@ -401,4 +401,15 @@
         <item quantity="many">سُعّرت قبل %1$s يومًا</item>
         <item quantity="other">سُعّرت قبل %1$s يوم</item>
     </plurals>
+    <!-- Filters (ScreenFilters card). "3+" is isolated left to right, so it reads 3+ in both languages. -->
+    <string name="filters_bedrooms">غرف النوم</string>
+    <string name="filters_bedrooms_or_more">⁦%1$s+⁩</string>
+    <string name="filters_beds">الأسرّة</string>
+    <string name="filters_bathrooms">الحمامات</string>
+    <string name="filters_amenities">المرافق</string>
+    <string name="filters_booking">الحجز</string>
+    <string name="filters_instant_book">حجز فوري</string>
+    <string name="filters_clear_all">مسح الكل</string>
+    <string name="filters_no_match">لا إقامات مطابقة</string>
+    <string name="filters_show_stays_uncounted">اعرض الإقامات</string>
 </resources>

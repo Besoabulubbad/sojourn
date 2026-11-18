@@ -93,7 +93,8 @@
     <string name="transit_walk">%1$s to %2$s</string>
 
     <!-- Amenities (glossary) -->
-    <string name="amenity_wifi">Wi‑Fi</string>
+    <!-- Word joiners keep "Wi-Fi" on one line; U+2011 is missing from the bundled fonts. -->
+    <string name="amenity_wifi">Wi⁠-⁠Fi</string>
     <string name="amenity_washer">Washer</string>
     <string name="amenity_workspace">Workspace</string>
     <string name="amenity_lift">Lift</string>
@@ -320,7 +321,7 @@
     <!-- Results (ScreenResults card). -->
     <string name="results_sort">Sort</string>
     <string name="results_sort_title">Sort by</string>
-    <string name="results_free_cancellation">Free cancellation</string>
+    <string name="filter_free_cancellation">Free cancellation</string>
     <string name="results_empty_title">No stays match</string>
     <string name="results_empty_filters_body">Clear a filter or two to see more stays.</string>
     <string name="results_empty_search_body">Try other dates or another city.</string>
@@ -337,4 +338,15 @@
         <item quantity="one">Priced %1$s day ago</item>
         <item quantity="other">Priced %1$s days ago</item>
     </plurals>
+    <!-- Filters (ScreenFilters card). "3+" is isolated left to right, so it reads 3+ in both languages. -->
+    <string name="filters_bedrooms">Bedrooms</string>
+    <string name="filters_bedrooms_or_more">⁦%1$s+⁩</string>
+    <string name="filters_beds">Beds</string>
+    <string name="filters_bathrooms">Bathrooms</string>
+    <string name="filters_amenities">Amenities</string>
+    <string name="filters_booking">Booking</string>
+    <string name="filters_instant_book">Instant book</string>
+    <string name="filters_clear_all">Clear all</string>
+    <string name="filters_no_match">No stays match</string>
+    <string name="filters_show_stays_uncounted">Show stays</string>
 </resources>

@@ -63,7 +63,7 @@ class ResultsViewModel(
         when (intent) {
             ResultsIntent.BackTapped -> sendEffect(ResultsEffect.Back)
             ResultsIntent.SearchTapped -> navigate(SearchKey(args = key.args))
-            ResultsIntent.FiltersTapped -> navigate(FiltersKey)
+            ResultsIntent.FiltersTapped -> navigate(FiltersKey(key.args))
             is ResultsIntent.QuickFilterTapped -> updateFilters(intent.filter.toggle(filters.value))
             ResultsIntent.ClearFiltersTapped -> updateFilters(Filters(sort = filters.value.sort))
             ResultsIntent.SortTapped -> setState { copy(sortOpen = true) }

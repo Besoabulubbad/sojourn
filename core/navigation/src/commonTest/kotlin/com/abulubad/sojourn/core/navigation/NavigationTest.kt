@@ -21,7 +21,7 @@ class NavigationTest {
         ),
         ResultsKey(SearchArgs(cityId = "london")),
         MapKey(SearchArgs(cityId = "paris")),
-        FiltersKey,
+        FiltersKey(SearchArgs(cityId = "london", checkIn = "2026-03-12", checkOut = "2026-03-27")),
         StayDetailsKey("stay-1", quoteId = "quote-1"),
         GalleryKey("stay-1", index = 3),
         CheckoutKey("quote-1"),

@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.domain.DomainFixtures.london
 import com.abulubad.sojourn.core.domain.DomainFixtures.march
 import com.abulubad.sojourn.core.domain.DomainFixtures.studio
 import com.abulubad.sojourn.core.model.Amenity
+import com.abulubad.sojourn.core.model.BedroomChoice
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Filters
@@ -19,6 +20,7 @@ import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.SortOrder
+import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.model.StayLength
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.StayFixtures
@@ -99,7 +101,10 @@ class SearchStaysTest {
         assertEquals(setOf(family.id, flat.id), results(SearchQuery(guests = Guests(3))).ids())
         assertEquals(setOf(family.id), results(filters = Filters(instantBook = true)).ids())
         assertEquals(setOf(studio.id, flat.id), results(filters = Filters(amenities = setOf(Amenity.Workspace))).ids())
-        assertEquals(setOf(family.id, flat.id), results(filters = Filters(minBedrooms = 1)).ids())
+        // Bedrooms is exact: the one-bedroom flat, not the two-bedroom family flat.
+        assertEquals(setOf(flat.id), results(filters = Filters(bedrooms = BedroomChoice.One)).ids())
+        assertEquals(setOf(family.id), results(filters = Filters(minBeds = 3, minBathrooms = 2)).ids())
+        assertEquals(emptySet<StayId>(), results(filters = Filters(bedrooms = BedroomChoice.ThreeOrMore)).ids())
     }
 
     @Test
@@ -167,7 +172,7 @@ class SearchStaysTest {
 
     @Test
     fun `studio and free cancellation filter the stays - a closed window does not count`() = runSojournTest {
-        assertEquals(setOf(studio.id), results(filters = Filters(studioOnly = true)).ids())
+        assertEquals(setOf(studio.id), results(filters = Filters(bedrooms = BedroomChoice.Studio)).ids())
         // The clock reads 1 March; the studio's and the family flat's free cancellation closed on 26 February.
         assertEquals(setOf(flat.id), results(filters = Filters(freeCancellation = true)).ids())
     }

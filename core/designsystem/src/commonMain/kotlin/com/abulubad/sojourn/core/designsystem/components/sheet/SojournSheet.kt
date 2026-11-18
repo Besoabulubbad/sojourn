@@ -29,6 +29,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -91,7 +92,8 @@ import kotlin.math.roundToInt
  * - Every sheet has a [title] and a close button: dragging is an extra, never the only way out. The handle offers
  *   expand and collapse to screen readers.
  * - A [modal] sheet enters over `scrim` (`slow`), and closes on the close button, a tap on the scrim, a drag below
- *   its lowest stop, or system back — each animates out and then calls [onDismiss]. A non-modal sheet (the map's
+ *   its lowest stop, system back or [SojournSheetState.hide] — each animates out and then calls [onDismiss].
+ *   A non-modal sheet (the map's
  *   results) has no scrim; back first returns it to its lowest stop.
  * - [content] sits in a scrolling column with the sheet's side padding. The [footer] is pinned to the bottom at
  *   every stop above peek and owns the navigation-bar and keyboard insets (I-01); without a footer the content
@@ -121,6 +123,7 @@ fun SojournSheet(
     val currentOnDismiss by rememberUpdatedState(onDismiss)
     val enterSpec = SojournMotion.enter<Float>(SojournMotion.slow)
     val exitSpec = SojournMotion.exit<Float>(SojournMotion.slow)
+    SideEffect { state.exitSpec = exitSpec }
     val close: () -> Unit = if (modal) {
         { scope.launch { anchored.animateTo(SheetStop.Hidden, exitSpec) } }
     } else {

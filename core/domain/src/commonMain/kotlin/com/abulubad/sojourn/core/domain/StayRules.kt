@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.core.domain
 
 import com.abulubad.sojourn.core.model.DateRange
+import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.GeoPoint
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Money
@@ -28,6 +29,16 @@ import kotlin.math.sqrt
  * here has a test in `StayRulesTest`.
  */
 object StayRules {
+
+    /**
+     * Whether [price] passes the price range in [filters] for cards on [basis]. P-04: a range on another basis does
+     * not apply; one in another currency excludes what it cannot compare.
+     */
+    fun inPriceRange(price: PriceDisplay, filters: Filters, basis: PriceBasis): Boolean {
+        val range = filters.priceRange ?: return true
+        if (filters.basis != basis) return true
+        return price.amount.currency == range.min.currency && price.amount in range
+    }
 
     /** A month, for "from … a month" prices. The same 30 nights the catalogue's city prices use. */
     const val NIGHTS_PER_MONTH = 30

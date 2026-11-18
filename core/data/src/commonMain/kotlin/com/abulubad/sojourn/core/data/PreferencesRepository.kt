@@ -2,6 +2,7 @@ package com.abulubad.sojourn.core.data
 
 import com.abulubad.sojourn.core.data.local.id
 import com.abulubad.sojourn.core.model.Amenity
+import com.abulubad.sojourn.core.model.BedroomChoice
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.Money
@@ -41,9 +42,10 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
             ?: Filters.None.basis,
         amenities = settings.getString(AMENITIES, "").split(SEPARATOR)
             .mapNotNullTo(LinkedHashSet()) { id -> Amenity.entries.find { it.id == id } },
-        minBedrooms = settings.getIntOrNull(MIN_BEDROOMS),
+        bedrooms = settings.getStringOrNull(BEDROOMS)?.let { id -> BedroomChoice.entries.find { it.id == id } },
+        minBeds = settings.getIntOrNull(MIN_BEDS)?.takeIf { it > 1 },
+        minBathrooms = settings.getIntOrNull(MIN_BATHROOMS)?.takeIf { it > 1 },
         instantBook = settings.getBoolean(INSTANT_BOOK, false),
-        studioOnly = settings.getBoolean(STUDIO_ONLY, false),
         freeCancellation = settings.getBoolean(FREE_CANCELLATION, false),
         sort = settings.getStringOrNull(SORT)?.let { id -> SortOrder.entries.find { it.id == id } }
             ?: Filters.None.sort,
@@ -69,9 +71,10 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
         }
         settings.putString(BASIS, filters.basis.id)
         settings.putString(AMENITIES, filters.amenities.joinToString(SEPARATOR) { it.id })
-        filters.minBedrooms?.let { settings.putInt(MIN_BEDROOMS, it) } ?: settings.remove(MIN_BEDROOMS)
+        filters.bedrooms?.let { settings.putString(BEDROOMS, it.id) } ?: settings.remove(BEDROOMS)
+        filters.minBeds?.let { settings.putInt(MIN_BEDS, it) } ?: settings.remove(MIN_BEDS)
+        filters.minBathrooms?.let { settings.putInt(MIN_BATHROOMS, it) } ?: settings.remove(MIN_BATHROOMS)
         settings.putBoolean(INSTANT_BOOK, filters.instantBook)
-        settings.putBoolean(STUDIO_ONLY, filters.studioOnly)
         settings.putBoolean(FREE_CANCELLATION, filters.freeCancellation)
         settings.putString(SORT, filters.sort.id)
     }
@@ -83,9 +86,10 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
         const val PRICE_CURRENCY = "filters.price_currency"
         const val BASIS = "filters.basis"
         const val AMENITIES = "filters.amenities"
-        const val MIN_BEDROOMS = "filters.min_bedrooms"
+        const val BEDROOMS = "filters.bedrooms"
+        const val MIN_BEDS = "filters.min_beds"
+        const val MIN_BATHROOMS = "filters.min_bathrooms"
         const val INSTANT_BOOK = "filters.instant_book"
-        const val STUDIO_ONLY = "filters.studio_only"
         const val FREE_CANCELLATION = "filters.free_cancellation"
         const val SORT = "filters.sort"
     }

@@ -7,6 +7,7 @@ import com.abulubad.sojourn.core.designsystem.preview.WithSojournSamplePhotos
 import com.abulubad.sojourn.core.domain.SearchResults
 import com.abulubad.sojourn.core.domain.StayResult
 import com.abulubad.sojourn.core.model.Amenity
+import com.abulubad.sojourn.core.model.BedroomChoice
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
@@ -134,7 +135,7 @@ object ResultsSamples {
 
     /** Nothing matches the filters: clear them. */
     val emptyFiltered = content.copy(
-        filters = Filters(studioOnly = true, freeCancellation = true),
+        filters = Filters(bedrooms = BedroomChoice.Studio, freeCancellation = true),
         results = ScreenState.Empty,
     )
 

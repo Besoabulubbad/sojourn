@@ -1,8 +1,10 @@
 package com.abulubad.sojourn
 
 import android.content.Context
+import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchKey
+import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.koin.dsl.module
@@ -26,6 +28,7 @@ class SojournModulesTest {
             injections = injectedParameters(
                 definition<SearchViewModel>(SearchKey::class),
                 definition<ResultsViewModel>(ResultsKey::class),
+                definition<FiltersViewModel>(FiltersKey::class),
             ),
         )
     }

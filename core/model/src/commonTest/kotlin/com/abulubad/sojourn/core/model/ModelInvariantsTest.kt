@@ -47,7 +47,10 @@ class ModelInvariantsTest {
             sort = SortOrder.Rating,
         )
         assertEquals(3, filters.activeCount)
-        assertEquals(5, filters.copy(studioOnly = true, freeCancellation = true).activeCount)
+        assertEquals(5, filters.copy(bedrooms = BedroomChoice.Studio, freeCancellation = true).activeCount)
+        val rooms = filters.copy(minBeds = 2, minBathrooms = 2, instantBook = true, freeCancellation = true)
+        assertEquals(7, rooms.activeCount)
+        assertFailsWith<IllegalArgumentException> { Filters(minBeds = 1) }
         assertEquals(0, Filters(sort = SortOrder.DistanceToCentre).activeCount)
     }
 

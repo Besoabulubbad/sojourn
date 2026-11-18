@@ -12,6 +12,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberDecoratedNavEntries
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import com.abulubad.sojourn.core.designsystem.components.bottomnav.SojournBottomNav
 import com.abulubad.sojourn.core.designsystem.components.bottomnav.SojournNavTab
@@ -27,6 +28,7 @@ import com.abulubad.sojourn.core.navigation.TabbedNavigator
 import com.abulubad.sojourn.core.navigation.sojournSavedStateConfiguration
 import com.abulubad.sojourn.core.ui.LocalTabBar
 import com.abulubad.sojourn.feature.explore.exploreEntries
+import com.abulubad.sojourn.feature.filters.filtersEntries
 import com.abulubad.sojourn.feature.results.resultsEntries
 import com.abulubad.sojourn.feature.search.searchEntries
 import org.jetbrains.compose.resources.stringResource
@@ -43,6 +45,7 @@ internal val availableTabs: List<Tab> = listOf(Tab.Explore)
  * - Each tab's stack is a `rememberNavBackStack`, so it survives configuration changes and process death.
  * - Each stack's entries are decorated on their own (saved state, and a `ViewModelStore` per entry), so a tab keeps
  *   its screens' state while another tab is shown.
+ * - An entry marked `SojournScenes.overlay()` draws over the one beneath it ([SojournOverlaySceneStrategy]).
  * - The display shows Explore's stack, plus the current tab's on top of it: back from another tab's root returns to
  *   Explore, and back from Explore's root leaves the app ([TabbedNavigator.back]).
  */
@@ -68,8 +71,14 @@ internal fun SojournNavHost(modifier: Modifier = Modifier) {
     val shown = entries.getValue(Tab.Explore) +
         if (navigator.currentTab == Tab.Explore) emptyList() else entries[navigator.currentTab].orEmpty()
 
+    val overlays = remember { SojournOverlaySceneStrategy<NavKey>() }
     CompositionLocalProvider(LocalTabBar provides { TabBar(navigator) }) {
-        NavDisplay(entries = shown, onBack = { navigator.back() }, modifier = modifier)
+        NavDisplay(
+            entries = shown,
+            onBack = { navigator.back() },
+            modifier = modifier,
+            sceneStrategies = listOf(overlays, SinglePaneSceneStrategy()),
+        )
     }
 }
 
@@ -78,6 +87,7 @@ private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     exploreEntries(navigator)
     searchEntries(navigator)
     resultsEntries(navigator)
+    filtersEntries(navigator)
 }
 
 @Composable

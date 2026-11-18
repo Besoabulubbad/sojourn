@@ -41,7 +41,8 @@ data class SearchKey(val step: SearchStep = SearchStep.Where, val args: SearchAr
 
 @Serializable data class MapKey(val args: SearchArgs) : SojournNavKey
 
-@Serializable data object FiltersKey : SojournNavKey
+/** The filter sheet over the results for [args]: it counts and prices against the same search. */
+@Serializable data class FiltersKey(val args: SearchArgs) : SojournNavKey
 
 @Serializable data class StayDetailsKey(val stayId: String, val quoteId: String? = null) : SojournNavKey
 

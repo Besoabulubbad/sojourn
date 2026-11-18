@@ -35,6 +35,7 @@ ICONS = [
     "briefcase", "key-round", "clock", "shield-check", "gift", "settings", "footprints", "train-front",
     "credit-card", "image-off", "search-x", "sparkles", "bookmark", "building-2", "door-open", "trash-2", "circle-check",
     "external-link", "phone", "message-circle", "copy", "house",
+    "cooking-pot", "air-vent", "thermometer", "square-parking", "fence", "utensils", "tv", "paw-print",
 ]
 
 

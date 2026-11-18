@@ -84,10 +84,13 @@ Design in this codebase:
 
 **2026-11-18 (search flow).** A multi-step flow is one entry, decision unchanged: `SearchKey(step, args)` opens the flow on `step`, and the steps change inside the screen (`AnimatedContent` with `SojournTransitions.stepForward/stepBack`), so the progress bar stays put and fills as motion.md asks. System back goes one step back through `StepBackHandler` (`core:ui`, navigationevent) and falls through to the navigator on the first step. Finishing replaces the flow with its result in one step (`Navigator.goToReplacing`, added with Results), so back from the results skips the flow, and a search edited from Results replaces those results instead of stacking a second list.
 
+**2026-11-18 (filter sheet).** A sheet destination is an overlay scene, decision unchanged: a feature marks its entry with `SojournScenes.overlay()` (`core:navigation`), and `app:shared`'s `SojournOverlaySceneStrategy` shows it as an `OverlayScene` above the entries beneath it, which stay composed. It follows the official bottom-sheet recipe (nav3-recipes) without Material's `ModalBottomSheet`: the entry draws its own `SojournSheet` (ADR 0015), so the sheet's scrim, motion and back handling are the design system's. Every way out animates the sheet closed first (`SojournSheetState.hide()` for "Show 14 stays"), then pops once.
+
 ## Links
 
 - [Navigation 3 in Compose Multiplatform — JetBrains docs](https://kotlinlang.org/docs/multiplatform/compose-navigation-3.html)
 - [Jetpack Navigation 3 — Android docs](https://developer.android.com/guide/navigation/navigation-3)
+- [Navigation 3 bottom-sheet recipe](https://github.com/android/nav3-recipes/tree/main/app/src/main/java/com/example/nav3recipes/bottomsheet)
 - [Navigation 3 is stable (Nov 2025)](https://android-developers.googleblog.com/2025/11/jetpack-navigation-3-is-stable.html)
 - Recipes: [android/nav3-recipes](https://github.com/android/nav3-recipes), [terrakok/nav3-recipes (CMP)](https://github.com/terrakok/nav3-recipes)
 - Related: ADR 0004, ADR 0006
