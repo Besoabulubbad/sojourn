@@ -21,11 +21,13 @@ import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceBreakdown
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.PriceExclusion
+import com.abulubad.sojourn.core.model.PriceInclusion
 import com.abulubad.sojourn.core.model.PriceLine
 import com.abulubad.sojourn.core.model.PriceLineKind
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.Rating
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayFacts
@@ -39,13 +41,16 @@ import kotlin.time.Instant
 import com.abulubad.sojourn.core.database.Blocked_range as BlockedRow
 import com.abulubad.sojourn.core.database.Booking as BookingRow
 import com.abulubad.sojourn.core.database.City as CityRow
+import com.abulubad.sojourn.core.database.Description_translation as TranslationRow
 import com.abulubad.sojourn.core.database.Photo as PhotoRow
 import com.abulubad.sojourn.core.database.Policy as PolicyRow
 import com.abulubad.sojourn.core.database.Quote as QuoteRow
 import com.abulubad.sojourn.core.database.Quote_line as QuoteLineRow
+import com.abulubad.sojourn.core.database.Review as ReviewRow
 import com.abulubad.sojourn.core.database.Search_recent as SearchRow
 import com.abulubad.sojourn.core.database.Stay as StayRow
 import com.abulubad.sojourn.core.database.Stay_amenity as AmenityRow
+import com.abulubad.sojourn.core.database.Stay_inclusion as InclusionRow
 
 /*
  * Model ↔ row conversion, in one place. Enums are stored by their stable ids (never ordinals or Kotlin names), dates
@@ -121,6 +126,25 @@ internal fun Stay.photoRows(): List<PhotoRow> = photos.mapIndexed { position, ph
 
 internal fun Stay.amenityRows(): List<AmenityRow> = amenities.map { AmenityRow(stay_id = id.value, amenity_id = it.id) }
 
+internal fun Stay.inclusionRows(): List<InclusionRow> =
+    inclusions.map { InclusionRow(stay_id = id.value, inclusion_id = it.id) }
+
+internal fun Stay.translationRows(): List<TranslationRow> =
+    descriptionTranslations.map { TranslationRow(stay_id = id.value, lang = it.languageTag, text = it.text) }
+
+internal fun Review.toRow(stayId: StayId, position: Int) = ReviewRow(
+    stay_id = stayId.value,
+    position = position.toLong(),
+    author = author,
+    month = month.toString(),
+    text = text.text,
+    lang = text.languageTag,
+)
+
+/** A review row back to the model; null when its month cannot be read. */
+internal fun ReviewRow.toModel(): Review? =
+    YearMonth.parseOrNull(month)?.let { Review(author, it, HostText(text, lang)) }
+
 internal fun Stay.policyRows(): List<PolicyRow> = policies.mapIndexed { position, policy ->
     policy.toRow(id.value, position.toLong())
 }
@@ -130,6 +154,8 @@ internal fun StayRow.toModel(
     photos: List<PhotoRow>,
     amenities: List<AmenityRow>,
     policies: List<PolicyRow>,
+    inclusions: List<InclusionRow> = emptyList(),
+    translations: List<TranslationRow> = emptyList(),
 ): Stay? {
     if (photos.isEmpty()) return null
     val fromPrice = fromPrice(from_minor, from_currency, from_basis, from_excludes) ?: return null
@@ -152,6 +178,10 @@ internal fun StayRow.toModel(
         walkMinutesToTransit = walk_minutes?.toInt(),
         longStayDiscountPercent = long_stay_discount_percent?.toInt(),
         instantBook = instant_book != 0L,
+        inclusions = inclusions.mapNotNullTo(LinkedHashSet()) { row ->
+            PriceInclusion.entries.find { it.id == row.inclusion_id }
+        },
+        descriptionTranslations = translations.map { HostText(it.text, it.lang) },
     )
 }
 

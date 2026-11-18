@@ -14,9 +14,13 @@ import com.abulubad.sojourn.core.domain.SearchStays
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.domain.UpdateFilters
 import com.abulubad.sojourn.core.navigation.FiltersKey
+import com.abulubad.sojourn.core.navigation.GalleryKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchArgs
 import com.abulubad.sojourn.core.navigation.SearchKey
+import com.abulubad.sojourn.core.navigation.StayDetailsKey
+import com.abulubad.sojourn.feature.details.DetailsViewModel
+import com.abulubad.sojourn.feature.details.GalleryViewModel
 import com.abulubad.sojourn.feature.explore.ExploreViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
@@ -63,5 +67,7 @@ class SojournGraphResolvesTest {
         koin.get<SearchViewModel> { parametersOf(SearchKey()) }
         koin.get<ResultsViewModel> { parametersOf(ResultsKey(SearchArgs())) }
         koin.get<FiltersViewModel> { parametersOf(FiltersKey(SearchArgs())) }
+        koin.get<DetailsViewModel> { parametersOf(StayDetailsKey("london-01")) }
+        koin.get<GalleryViewModel> { parametersOf(GalleryKey("london-01")) }
     }
 }

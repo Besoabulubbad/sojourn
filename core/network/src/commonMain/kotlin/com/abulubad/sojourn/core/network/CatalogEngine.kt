@@ -16,6 +16,7 @@ import com.abulubad.sojourn.core.model.PriceLine
 import com.abulubad.sojourn.core.model.PriceLineKind
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.network.dto.CatalogDto
@@ -45,6 +46,10 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
 
     fun blockedDates(id: StayId): AppResult<List<DateRange>> =
         find(id)?.let { dto -> AppResult.Success(dto.blocked.map(mapping::range)) }
+            ?: AppResult.Failure(AppError.NotFound(id.value))
+
+    fun reviews(id: StayId): AppResult<List<Review>> =
+        find(id)?.let { dto -> AppResult.Success(mapping.reviews(dto)) }
             ?: AppResult.Failure(AppError.NotFound(id.value))
 
     fun quote(stayId: StayId, dates: DateRange, guests: Guests): AppResult<Quote> {

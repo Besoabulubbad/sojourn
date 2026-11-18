@@ -27,6 +27,7 @@ import com.abulubad.sojourn.core.navigation.Tab
 import com.abulubad.sojourn.core.navigation.TabbedNavigator
 import com.abulubad.sojourn.core.navigation.sojournSavedStateConfiguration
 import com.abulubad.sojourn.core.ui.LocalTabBar
+import com.abulubad.sojourn.feature.details.detailsEntries
 import com.abulubad.sojourn.feature.explore.exploreEntries
 import com.abulubad.sojourn.feature.filters.filtersEntries
 import com.abulubad.sojourn.feature.results.resultsEntries
@@ -88,6 +89,7 @@ private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     searchEntries(navigator)
     resultsEntries(navigator)
     filtersEntries(navigator)
+    detailsEntries(navigator)
 }
 
 @Composable

@@ -121,7 +121,7 @@ class ResultsViewModelTest {
         vm.effects.test {
             vm.onIntent(ResultsIntent.StayTapped(result))
             val quoteId = QuoteFixtures.canalStudioFortnight.id.value
-            assertEquals(ResultsEffect.Navigate(StayDetailsKey(studio.id.value, quoteId)), awaitItem())
+            assertEquals(ResultsEffect.Navigate(StayDetailsKey(studio.id.value, quoteId, args)), awaitItem())
             vm.onIntent(ResultsIntent.SearchTapped)
             assertEquals(ResultsEffect.Navigate(SearchKey(args = args)), awaitItem())
             vm.onIntent(ResultsIntent.FiltersTapped)

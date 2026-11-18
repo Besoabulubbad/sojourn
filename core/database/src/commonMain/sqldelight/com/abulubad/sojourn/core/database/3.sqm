@@ -1,0 +1,23 @@
+-- Version 3 to 4: Details shows what the price includes, the description's translations and the latest reviews.
+CREATE TABLE stay_inclusion (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    inclusion_id TEXT NOT NULL,
+    PRIMARY KEY (stay_id, inclusion_id)
+);
+
+CREATE TABLE description_translation (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    lang TEXT NOT NULL,
+    text TEXT NOT NULL,
+    PRIMARY KEY (stay_id, lang)
+);
+
+CREATE TABLE review (
+    stay_id TEXT NOT NULL REFERENCES stay(id) ON DELETE CASCADE,
+    position INTEGER NOT NULL,
+    author TEXT NOT NULL,
+    month TEXT NOT NULL,
+    text TEXT NOT NULL,
+    lang TEXT NOT NULL,
+    PRIMARY KEY (stay_id, position)
+);

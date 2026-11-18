@@ -9,15 +9,18 @@ import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.Guests
+import com.abulubad.sojourn.core.model.HostText
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceExclusion
+import com.abulubad.sojourn.core.model.PriceInclusion
 import com.abulubad.sojourn.core.model.PriceLineKind
 import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.YearMonth
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -41,6 +44,16 @@ class CatalogEngineTest {
         assertEquals(PriceBasis.Night, stay.fromPrice.per)
         assertEquals(listOf(PriceExclusion.CleaningFee), stay.fromPrice.excludes)
         assertTrue(stay.instantBook)
+        assertEquals(setOf(PriceInclusion.Wifi, PriceInclusion.Utilities), stay.inclusions)
+        assertEquals(listOf(HostText("استوديو هادئ.", "ar")), stay.descriptionTranslations)
+    }
+
+    @Test
+    fun `reviews come newest first and an unreadable one is dropped`() {
+        val reviews = assertNotNull(engine.reviews(studio).getOrNull())
+        assertEquals(listOf("Léa", "Tom"), reviews.map { it.author })
+        assertEquals(YearMonth(2026, 9), reviews.first().month)
+        assertIs<AppError.NotFound>(engine.reviews(StayId("missing")).errorOrNull())
     }
 
     @Test

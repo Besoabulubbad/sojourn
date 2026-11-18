@@ -4,14 +4,15 @@ import com.abulubad.sojourn.core.designsystem.components.citycard.SojournCityCar
 import com.abulubad.sojourn.core.designsystem.components.continuerow.SojournContinueRowSamples
 import com.abulubad.sojourn.core.designsystem.components.gallery.SojournGallerySamples
 import com.abulubad.sojourn.core.designsystem.components.keyfacts.SojournKeyFactsSamples
+import com.abulubad.sojourn.core.designsystem.components.photoviewer.SojournPhotoViewerSamples
 import com.abulubad.sojourn.core.designsystem.components.policy.SojournPolicyRowSamples
 import com.abulubad.sojourn.core.designsystem.components.pricepin.SojournPricePinSamples
 import com.abulubad.sojourn.core.designsystem.components.staycard.SojournStayCardSamples
 import com.abulubad.sojourn.core.testing.SnapshotCase
 
 /**
- * The Listing group: KeyFacts, PolicyRow, PricePin, CityCard, ContinueRow, StayCard, Gallery; each default in the full
- * matrix.
+ * The Listing group: KeyFacts, PolicyRow, PricePin, CityCard, ContinueRow, StayCard, Gallery and its full-screen
+ * viewer; each default in the full matrix.
  */
 val listingSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("key_facts", fullMatrix = true) { SojournKeyFactsSamples.StudioAndFlat() },
@@ -24,4 +25,5 @@ val listingSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("stay_card_compact") { SojournStayCardSamples.Compact() },
     SnapshotCase("stay_card_stale") { SojournStayCardSamples.Stale() },
     SnapshotCase("gallery_states", fullMatrix = true) { SojournGallerySamples.States() },
+    SnapshotCase("photo_viewer") { SojournPhotoViewerSamples.SecondPhoto() },
 )

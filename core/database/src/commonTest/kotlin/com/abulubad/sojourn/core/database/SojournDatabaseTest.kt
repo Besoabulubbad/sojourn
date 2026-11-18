@@ -27,7 +27,7 @@ class SojournDatabaseTest {
 
     @Test
     fun `a stay round-trips with its photos and amenities and policies`() {
-        db.stayQueries.upsertStay(stay("london-01"))
+        db.stayQueries.insertStayIfAbsent(stay("london-01"))
         db.stayQueries.insertPhoto(Photo("london-01", 0, "p0", "https://x/a.jpg", null, null))
         db.stayQueries.insertPhoto(Photo("london-01", 1, "p1", "https://x/b.jpg", "Kitchen", "en"))
         db.stayQueries.insertAmenity(Stay_amenity("london-01", "wifi"))
@@ -41,7 +41,7 @@ class SojournDatabaseTest {
 
     @Test
     fun `refreshing a stay replaces its children`() {
-        db.stayQueries.upsertStay(stay("london-01"))
+        db.stayQueries.insertStayIfAbsent(stay("london-01"))
         db.stayQueries.insertAmenity(Stay_amenity("london-01", "wifi"))
         db.stayQueries.clearChildren("london-01")
         db.stayQueries.insertAmenity(Stay_amenity("london-01", "washer"))
@@ -51,8 +51,8 @@ class SojournDatabaseTest {
 
     @Test
     fun `stays filter by city`() {
-        db.stayQueries.upsertStay(stay("london-01"))
-        db.stayQueries.upsertStay(stay("paris-01", city = "paris"))
+        db.stayQueries.insertStayIfAbsent(stay("london-01"))
+        db.stayQueries.insertStayIfAbsent(stay("paris-01", city = "paris"))
         assertEquals(listOf("paris-01"), db.stayQueries.inCity("paris").executeAsList().map { it.id })
         assertEquals(2L, db.stayQueries.count().executeAsOne())
     }

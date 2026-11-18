@@ -19,6 +19,7 @@ import com.abulubad.sojourn.core.model.Filters
 import com.abulubad.sojourn.core.model.Guests
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
@@ -62,6 +63,7 @@ class FakeCityRepository(var remote: List<City> = emptyList(), cached: List<City
 class FakeStayRepository(var remote: List<Stay> = emptyList(), cached: List<Stay> = emptyList()) : StayRepository {
     val cache = MutableStateFlow(cached)
     val blocked = MutableStateFlow<Map<StayId, List<DateRange>>>(emptyMap())
+    val reviews = MutableStateFlow<Map<StayId, List<Review>>>(emptyMap())
     var refreshResult: AppResult<Unit> = OK
 
     /** How long a refresh takes (virtual time under `runTest`). */
@@ -74,6 +76,7 @@ class FakeStayRepository(var remote: List<Stay> = emptyList(), cached: List<Stay
     override fun observeStays(ids: Set<StayId>): Flow<List<Stay>> = cache.map { list -> list.filter { it.id in ids } }
     override fun observeStay(id: StayId): Flow<Stay?> = cache.map { list -> list.find { it.id == id } }
     override fun observeBlockedDates(id: StayId): Flow<List<DateRange>> = blocked.map { it[id].orEmpty() }
+    override fun observeReviews(id: StayId): Flow<List<Review>> = reviews.map { it[id].orEmpty() }
     override suspend fun hasCached(cityId: CityId?): Boolean = cache.value.any { cityId == null || it.cityId == cityId }
 
     override suspend fun refresh(cityId: CityId?, force: Boolean): AppResult<Unit> {

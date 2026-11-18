@@ -84,4 +84,11 @@ data class StayDto(
     val walkMinutesToTransit: Int? = null,
     val instantBook: Boolean = false,
     val blocked: List<DateRangeDto> = emptyList(),
+    val descriptionTranslations: List<HostTextDto> = emptyList(),
+    val inclusions: List<String> = emptyList(),
+    val reviews: List<ReviewDto> = emptyList(),
 )
+
+/** A guest review; [month] is ISO `yyyy-MM`. */
+@Serializable
+data class ReviewDto(val author: String, val month: String, val text: HostTextDto)

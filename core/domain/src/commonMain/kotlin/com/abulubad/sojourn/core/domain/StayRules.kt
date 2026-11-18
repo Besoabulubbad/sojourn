@@ -132,7 +132,8 @@ object StayRules {
     private const val RADIANS = PI / 180
     private const val EARTH_RADIUS_METRES = 6_371_000.0
 
-    private fun minimumNights(stay: Stay): Int =
+    /** The longest minimum stay among [stay]'s policies; 1 when it has none. */
+    fun minimumNights(stay: Stay): Int =
         stay.policies.filterIsInstance<Policy.MinimumStay>().maxOfOrNull { it.nights } ?: 1
 
     /** A month of nights; a month is long enough for the long-stay discount (30 ≥ [StayLength.Month] nights). */

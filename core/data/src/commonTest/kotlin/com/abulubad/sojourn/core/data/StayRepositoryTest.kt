@@ -84,12 +84,31 @@ class StayRepositoryTest {
     }
 
     @Test
-    fun `refreshing one stay stores it with its blocked dates`() = runDataTest {
+    fun `refreshing one stay stores it with its blocked dates and reviews`() = runDataTest {
         val id = catalogueStays().first().id
         assertNull(stays.observeStay(id).first())
         assertTrue(stays.refreshStay(id).isSuccess)
-        assertEquals(api.stay(id).getOrNull(), stays.observeStay(id).first())
+        val stay = assertNotNull(stays.observeStay(id).first())
+        assertEquals(api.stay(id).getOrNull(), stay)
+        assertTrue(stay.inclusions.isNotEmpty() && stay.descriptionTranslations.isNotEmpty())
         assertEquals(api.blockedDates(id).getOrNull(), stays.observeBlockedDates(id).first())
+        val reviews = stays.observeReviews(id).first()
+        assertEquals(api.reviews(id).getOrNull(), reviews)
+        assertTrue(reviews.isNotEmpty())
+        assertEquals(reviews.sortedByDescending { it.month }, reviews)
+    }
+
+    @Test
+    fun `a list refresh keeps what Details fetched - blocked dates and reviews`() = runDataTest {
+        // A stay row is updated in place: replacing it would cascade-delete the children a list does not carry.
+        val id = catalogueStays().first().id
+        stays.refreshStay(id)
+        val blocked = stays.observeBlockedDates(id).first()
+        val reviews = stays.observeReviews(id).first()
+        assertTrue(blocked.isNotEmpty())
+        stays.refresh(force = true)
+        assertEquals(blocked, stays.observeBlockedDates(id).first())
+        assertEquals(reviews, stays.observeReviews(id).first())
     }
 
     @Test
