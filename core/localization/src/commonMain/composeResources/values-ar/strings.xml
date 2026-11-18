@@ -344,4 +344,17 @@
         <item quantity="many">%1$s يومًا</item>
         <item quantity="other">%1$s يوم</item>
     </plurals>
+    <!-- Explore (ScreenExplore card). -->
+    <string name="explore_greeting">اعثر على مقرّك القادم</string>
+    <string name="explore_length_title">كم ستطول إقامتك؟</string>
+    <string name="explore_length_few_nights">بضع ليالٍ</string>
+    <string name="explore_length_week">أسبوع</string>
+    <string name="explore_length_month">شهر</string>
+    <string name="explore_length_longer">3 أشهر أو أكثر</string>
+    <string name="explore_continue_title">تابع بحثك</string>
+    <string name="explore_next_stay_title">إقامتك القادمة</string>
+    <string name="explore_cities_title">المدن</string>
+    <string name="explore_see_all">عرض الكل</string>
+    <string name="explore_cities_offline_body">اتصل بالإنترنت لعرض المدن.</string>
+    <string name="explore_cities_empty_body">مدن جديدة في الطريق.</string>
 </resources>

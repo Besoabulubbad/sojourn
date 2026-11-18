@@ -9,9 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 
-/** The Explore tab's root until `feature:explore` replaces it: the brand name, centred on the screen colour. */
+/**
+ * What a destination shows until its feature lands (Phase 5 builds them one PR at a time): the brand name on the
+ * screen colour. System back returns from it. Removed when the last feature is merged.
+ */
 @Composable
-internal fun ShellPlaceholder(modifier: Modifier = Modifier) {
+internal fun NotBuiltYet(modifier: Modifier = Modifier) {
     Box(modifier.fillMaxSize().background(SojournTheme.colors.bg), contentAlignment = Alignment.Center) {
         BasicText(text = BRAND, style = SojournTheme.type.display.copy(color = SojournTheme.colors.ink))
     }

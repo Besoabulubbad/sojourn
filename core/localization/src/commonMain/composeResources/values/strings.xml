@@ -292,4 +292,17 @@
         <item quantity="one">%1$s day</item>
         <item quantity="other">%1$s days</item>
     </plurals>
+    <!-- Explore (ScreenExplore card). -->
+    <string name="explore_greeting">Find your next home base</string>
+    <string name="explore_length_title">How long are you staying?</string>
+    <string name="explore_length_few_nights">A few nights</string>
+    <string name="explore_length_week">1 week</string>
+    <string name="explore_length_month">1 month</string>
+    <string name="explore_length_longer">3 months or more</string>
+    <string name="explore_continue_title">Continue your search</string>
+    <string name="explore_next_stay_title">Your next stay</string>
+    <string name="explore_cities_title">Cities</string>
+    <string name="explore_see_all">See all</string>
+    <string name="explore_cities_offline_body">Connect to the internet to see cities.</string>
+    <string name="explore_cities_empty_body">New cities are on their way.</string>
 </resources>

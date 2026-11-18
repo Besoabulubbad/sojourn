@@ -19,7 +19,8 @@ internal expect val platformDataModule: Module
  */
 val dataModule: Module = module {
     includes(platformDataModule)
-    singleOf(::RefreshPolicy)
+    // Not singleOf: the constructor reference would make Koin resolve maxAge's Duration instead of its default.
+    single { RefreshPolicy(clock = get()) }
     singleOf(::StayStore)
     singleOf(::OfflineFirstCityRepository) bind CityRepository::class
     singleOf(::OfflineFirstStayRepository) bind StayRepository::class
