@@ -5,6 +5,7 @@ import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.domain.GetCities
 import com.abulubad.sojourn.core.domain.ListBookings
+import com.abulubad.sojourn.core.domain.ObserveArrivingStay
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
 import com.abulubad.sojourn.core.model.CityId
 import com.abulubad.sojourn.core.model.Guests
@@ -30,6 +31,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertNull
+import kotlin.time.Instant
 
 class ExploreViewModelTest {
 
@@ -38,10 +40,13 @@ class ExploreViewModelTest {
     private val bookings = FakeBookingRepository()
     private val stays = FakeStayRepository(cached = listOf(StayFixtures.canalStudio))
 
-    private fun viewModel() = ExploreViewModel(
+    /** Two days before the March fortnight (12 March): the stay leads Explore from now. */
+    private val arriving = FixedAppClock(Instant.parse("2026-03-10T09:00:00Z"))
+
+    private fun viewModel(clock: FixedAppClock = arriving) = ExploreViewModel(
         GetCities(cities),
         ObserveRecentSearches(searches),
-        ListBookings(bookings, stays, FixedAppClock()),
+        ObserveArrivingStay(ListBookings(bookings, stays, clock), clock),
     )
 
     private suspend fun TestScope.settled(vm: ExploreViewModel): ExploreUiState {
@@ -78,7 +83,15 @@ class ExploreViewModelTest {
     }
 
     @Test
-    fun `an upcoming stay replaces the last search`() = runSojournTest {
+    fun `a stay more than two days away leaves the last search in place`() = runSojournTest {
+        searches.record(SearchQuery(cityId = CityId("london")))
+        bookings.issued[QuoteFixtures.canalStudioFortnight.id] = QuoteFixtures.canalStudioFortnight
+        bookings.book(QuoteFixtures.canalStudioFortnight.id)
+        assertIs<ExploreResume.LastSearch>(settled(viewModel(clock = FixedAppClock())).resume)
+    }
+
+    @Test
+    fun `a stay two days away replaces the last search`() = runSojournTest {
         searches.record(SearchQuery(cityId = CityId("london")))
         bookings.issued[QuoteFixtures.canalStudioFortnight.id] = QuoteFixtures.canalStudioFortnight
         bookings.book(QuoteFixtures.canalStudioFortnight.id)

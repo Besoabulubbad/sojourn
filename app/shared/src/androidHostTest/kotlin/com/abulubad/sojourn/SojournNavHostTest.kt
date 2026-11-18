@@ -6,6 +6,7 @@ import com.abulubad.sojourn.core.designsystem.preview.SojournPreview
 import com.abulubad.sojourn.core.designsystem.preview.SojournVariants
 import com.abulubad.sojourn.core.domain.GetCities
 import com.abulubad.sojourn.core.domain.ListBookings
+import com.abulubad.sojourn.core.domain.ObserveArrivingStay
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.StayFixtures
@@ -39,7 +40,10 @@ class SojournNavHostTest {
             ExploreViewModel(
                 GetCities(FakeCityRepository(remote = listOf(StayFixtures.london))),
                 ObserveRecentSearches(FakeSearchRepository()),
-                ListBookings(FakeBookingRepository(), FakeStayRepository(), FixedAppClock()),
+                ObserveArrivingStay(
+                    ListBookings(FakeBookingRepository(), FakeStayRepository(), FixedAppClock()),
+                    FixedAppClock(),
+                ),
             )
         }
     }

@@ -123,4 +123,17 @@ class CatalogEngineTest {
         assertEquals(quote.total, booking.total)
         assertTrue(Regex("SJ-[A-Z2-9]{6}").matches(booking.reference))
     }
+
+    @Test
+    fun `booked nights cannot be quoted or booked again until the booking is cancelled`() {
+        val march = range("2027-03-12", "2027-03-27")
+        val quote = assertNotNull(engine.quote(studio, march, Guests(2)).getOrNull())
+        val booking = assertNotNull(engine.book(quote.id).getOrNull())
+        assertTrue(Regex("[0-9]{6}").matches(assertNotNull(booking.keyCode)))
+        val overlapping = range("2027-03-20", "2027-03-30")
+        assertEquals(AppError.Validation("unavailable"), engine.quote(studio, overlapping, Guests(1)).errorOrNull())
+        assertEquals(AppError.Validation("unavailable"), engine.book(quote.id).errorOrNull())
+        engine.cancel(booking.id)
+        assertNotNull(engine.quote(studio, overlapping, Guests(1)).getOrNull())
+    }
 }

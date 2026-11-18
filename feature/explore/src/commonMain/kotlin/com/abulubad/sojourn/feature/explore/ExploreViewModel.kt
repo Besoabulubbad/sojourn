@@ -2,9 +2,8 @@ package com.abulubad.sojourn.feature.explore
 
 import androidx.lifecycle.viewModelScope
 import com.abulubad.sojourn.core.domain.GetCities
-import com.abulubad.sojourn.core.domain.ListBookings
+import com.abulubad.sojourn.core.domain.ObserveArrivingStay
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
-import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.City
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.navigation.BookingDetailsKey
@@ -24,13 +23,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
- * Explore (ScreenExplore card): cities offline-first, and the "Continue" row from the next upcoming stay or the
- * last search. Every tap is a navigation effect; the search bar and the shortcuts open the guided search flow.
+ * Explore (ScreenExplore card): cities offline-first, and the "Continue" row: the next stay from two days before
+ * arrival until check-out (ScreenBookings card), otherwise the last search. Every tap is a navigation effect; the
+ * search bar and the shortcuts open the guided search flow.
  */
 class ExploreViewModel(
     private val getCities: GetCities,
     observeRecentSearches: ObserveRecentSearches,
-    listBookings: ListBookings,
+    observeArrivingStay: ObserveArrivingStay,
 ) : SojournViewModel<ExploreUiState, ExploreIntent, ExploreEffect>(ExploreUiState()) {
 
     private var citiesJob: Job? = null
@@ -39,10 +39,7 @@ class ExploreViewModel(
         loadCities(force = false)
         viewModelScope.launch {
             val cities = state.map { it.cities.dataOrNull.orEmpty() }.distinctUntilChanged()
-            combine(observeRecentSearches(limit = 1), listBookings(), cities) { recent, bookings, known ->
-                val next = bookings.firstOrNull {
-                    it.booking.status == BookingStatus.Upcoming || it.booking.status == BookingStatus.Active
-                }
+            combine(observeRecentSearches(limit = 1), observeArrivingStay(), cities) { recent, next, known ->
                 when {
                     next != null -> ExploreResume.NextStay(next.booking, next.stay?.cityId, next.stay?.photos?.first())
                     recent.isNotEmpty() -> recent.first().let { ExploreResume.LastSearch(it, known.photoOf(it)) }

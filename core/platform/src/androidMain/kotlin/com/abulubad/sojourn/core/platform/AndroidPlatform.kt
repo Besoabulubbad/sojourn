@@ -1,5 +1,7 @@
 package com.abulubad.sojourn.core.platform
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -31,6 +33,13 @@ class AndroidHaptics(context: Context) : Haptics {
     }
 }
 
+class AndroidClipboard(private val context: Context) : Clipboard {
+    override fun copy(text: String) {
+        val clipboard = context.getSystemService(ClipboardManager::class.java) ?: return
+        clipboard.setPrimaryClip(ClipData.newPlainText(null, text))
+    }
+}
+
 class AndroidShareSheet(private val context: Context) : ShareSheet {
     override fun share(text: String) {
         val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text)
@@ -56,6 +65,7 @@ actual val platformModule: Module = module {
     single<Haptics> { AndroidHaptics(androidContext()) }
     single<ShareSheet> { AndroidShareSheet(androidContext()) }
     single<MapsLauncher> { AndroidMapsLauncher(androidContext()) }
+    single<Clipboard> { AndroidClipboard(androidContext()) }
     single<AccessibilitySettings> { AndroidAccessibilitySettings(androidContext()) }
     single<PaymentSheet> { StubPaymentSheet() }
 }

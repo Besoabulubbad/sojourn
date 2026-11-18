@@ -1,0 +1,2 @@
+-- Version 5 to 6: a booking keeps its self check-in key code, shown on arrival day. Earlier bookings have none.
+ALTER TABLE booking ADD COLUMN key_code TEXT;

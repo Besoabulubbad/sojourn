@@ -19,6 +19,11 @@ fun interface ShareSheet {
     fun share(text: String)
 }
 
+/** The system clipboard: copies [text] (a key code) so the guest can paste it. */
+fun interface Clipboard {
+    fun copy(text: String)
+}
+
 /** Opens the platform maps app at an area. A stay's position stays approximate before booking (brand book). */
 fun interface MapsLauncher {
     fun open(point: GeoPoint, label: String)

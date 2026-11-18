@@ -31,6 +31,7 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
 
     private val mapping = CatalogMapping(catalog.photoBase)
     private val issued = mutableMapOf<QuoteId, Quote>()
+    private val booked = mutableMapOf<BookingId, Booking>()
     private var bookingCount = 0
 
     fun cities(): AppResult<List<City>> = AppResult.Success(
@@ -58,6 +59,7 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
             dates.nights < dto.policies.minimumNights -> "minimum_nights"
             guests.total > dto.facts.sleeps -> "too_many_guests"
             dto.blocked.map(mapping::range).any { it.overlaps(dates) } -> "unavailable"
+            isBooked(stayId, dates) -> "unavailable"
             else -> null
         }
         if (problem != null) return AppResult.Failure(AppError.Validation(problem))
@@ -74,21 +76,42 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
 
     fun book(quoteId: QuoteId): AppResult<Booking> {
         val quote = issued[quoteId] ?: return AppResult.Failure(AppError.NotFound(quoteId.value))
+        if (isBooked(quote.stayId, quote.dates)) return AppResult.Failure(AppError.Validation("unavailable"))
         bookingCount++
-        return AppResult.Success(
-            Booking(
-                id = BookingId("b-$bookingCount-${quote.stayId.value}"),
-                reference = reference(quote),
-                stayId = quote.stayId,
-                quoteId = quote.id,
-                dates = quote.dates,
-                guests = quote.guests,
-                total = quote.total,
-                status = BookingStatus.Upcoming,
-                createdAt = clock.now(),
-            ),
+        val reference = reference(quote)
+        val booking = Booking(
+            id = BookingId("b-$bookingCount-${quote.stayId.value}"),
+            reference = reference,
+            stayId = quote.stayId,
+            quoteId = quote.id,
+            dates = quote.dates,
+            guests = quote.guests,
+            total = quote.total,
+            status = BookingStatus.Upcoming,
+            createdAt = clock.now(),
+            keyCode = keyCode(reference),
         )
+        booked[booking.id] = booking
+        return AppResult.Success(booking)
     }
+
+    /**
+     * Cancels a booking. The demo engine is rebuilt at each launch and forgets earlier bookings, so a booking it does
+     * not hold is taken as cancelled too; a real API keeps them and answers `NotFound`.
+     */
+    fun cancel(id: BookingId): AppResult<Unit> {
+        booked[id]?.let { booked[id] = it.copy(status = BookingStatus.Cancelled) }
+        return AppResult.Success(Unit)
+    }
+
+    /** True when a booking this engine made, not cancelled, holds any of [dates] at [stayId]. */
+    private fun isBooked(stayId: StayId, dates: DateRange): Boolean = booked.values.any {
+        it.stayId == stayId && it.status != BookingStatus.Cancelled && it.dates.overlaps(dates)
+    }
+
+    /** Six digits for the door, stable for a reference. */
+    private fun keyCode(reference: String): String =
+        ((reference.hashCode().toLong() and HASH_MASK) % KEY_CODE_RANGE).toString().padStart(KEY_CODE_DIGITS, '0')
 
     /** Nights × rate, the long-stay discount when it applies, then cleaning and city tax. Integer minor units. */
     private fun lines(dto: StayDto, nights: Int): List<PriceLine> {
@@ -128,6 +151,8 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
 
     private companion object {
         const val PERCENT = 100
+        const val KEY_CODE_RANGE = 1_000_000L
+        const val KEY_CODE_DIGITS = 6
         const val REFERENCE_LENGTH = 6
         const val HASH_MASK = 0x7FFFFFFFL
         const val REFERENCE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"

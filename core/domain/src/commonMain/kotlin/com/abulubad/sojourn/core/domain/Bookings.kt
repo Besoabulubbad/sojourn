@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.datetime.LocalDate
 
 /**
  * Books the quote the guest saw. The booking's total is that quote's (P-02): if the API has forgotten the quote
@@ -44,13 +43,38 @@ class CreateBooking(private val pricing: PricingRepository, private val bookings
 data class BookingItem(val booking: Booking, val stay: Stay?)
 
 /**
- * One booking with its stay, from the device: the confirmation after paying and the booking's own page. Null while
- * the device has no such booking.
+ * One booking with its stay, from the device: the confirmation after paying and the booking's own page. Its status
+ * follows the calendar ([BookingRules.statusOn]). Null while the device has no such booking.
  */
-class GetBooking(private val bookings: BookingRepository, private val stays: StayRepository) {
+class GetBooking(
+    private val bookings: BookingRepository,
+    private val stays: StayRepository,
+    private val clock: AppClock,
+) {
     @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(id: BookingId): Flow<BookingItem?> = bookings.observeBooking(id).flatMapLatest { booking ->
-        if (booking == null) flowOf(null) else stays.observeStay(booking.stayId).map { BookingItem(booking, it) }
+        if (booking == null) {
+            flowOf(null)
+        } else {
+            val shown = booking.copy(status = BookingRules.statusOn(booking, clock.today()))
+            stays.observeStay(booking.stayId).map { BookingItem(shown, it) }
+        }
+    }
+}
+
+/** Cancels a booking: the API first, then the device; the stay's nights are free again. Needs the network. */
+class CancelBooking(private val bookings: BookingRepository) {
+    suspend operator fun invoke(id: BookingId): AppResult<Unit> = bookings.cancel(id)
+}
+
+/**
+ * The stay that leads Explore: one under way, or one starting within [BookingRules.ARRIVING_DAYS] days
+ * (ScreenBookings card); null otherwise.
+ */
+class ObserveArrivingStay(private val listBookings: ListBookings, private val clock: AppClock) {
+    operator fun invoke(): Flow<BookingItem?> = listBookings().map { items ->
+        val today = clock.today()
+        items.firstOrNull { BookingRules.isArriving(it.booking, today) }
     }
 }
 
@@ -69,20 +93,13 @@ class ListBookings(
         stays.observeStays(list.mapTo(HashSet()) { it.stayId }).map { cached ->
             val today = clock.today()
             val byId = cached.associateBy { it.id }
-            list.map { it.copy(status = statusOn(it, today)) }
+            list.map { it.copy(status = BookingRules.statusOn(it, today)) }
                 .sortedWith(order)
                 .map { BookingItem(it, byId[it.stayId]) }
         }
     }
 
     private companion object {
-        fun statusOn(booking: Booking, today: LocalDate): BookingStatus = when {
-            booking.status == BookingStatus.Cancelled -> BookingStatus.Cancelled
-            today < booking.dates.start -> BookingStatus.Upcoming
-            today < booking.dates.end -> BookingStatus.Active
-            else -> BookingStatus.Completed
-        }
-
         val order: Comparator<Booking> = compareBy<Booking> {
             when (it.status) {
                 BookingStatus.Active -> 0

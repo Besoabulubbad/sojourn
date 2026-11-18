@@ -31,6 +31,7 @@ kotlin {
             implementation(project(":feature:checkout"))
             implementation(project(":feature:map"))
             implementation(project(":feature:saved"))
+            implementation(project(":feature:bookings"))
             // The shell: theme, tab bar, navigation host, image loading.
             implementation(project(":core:designsystem"))
             implementation(project(":core:ui"))

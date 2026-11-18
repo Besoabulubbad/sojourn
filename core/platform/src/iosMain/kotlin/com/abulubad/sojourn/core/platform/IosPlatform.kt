@@ -13,6 +13,7 @@ import platform.UIKit.UIImpactFeedbackGenerator
 import platform.UIKit.UIImpactFeedbackStyle
 import platform.UIKit.UINotificationFeedbackGenerator
 import platform.UIKit.UINotificationFeedbackType
+import platform.UIKit.UIPasteboard
 
 /** Light impact for ticks; the notification generator for payment success and failure. */
 class IosHaptics : Haptics {
@@ -37,6 +38,12 @@ class IosShareSheet : ShareSheet {
     }
 }
 
+class IosClipboard : Clipboard {
+    override fun copy(text: String) {
+        UIPasteboard.generalPasteboard.string = text
+    }
+}
+
 /** Apple Maps at the area centre. */
 class IosMapsLauncher : MapsLauncher {
     override fun open(point: GeoPoint, label: String) {
@@ -58,6 +65,7 @@ actual val platformModule: Module = module {
     single<Haptics> { IosHaptics() }
     single<ShareSheet> { IosShareSheet() }
     single<MapsLauncher> { IosMapsLauncher() }
+    single<Clipboard> { IosClipboard() }
     single<AccessibilitySettings> { IosAccessibilitySettings() }
     single<PaymentSheet> { StubPaymentSheet() }
 }
