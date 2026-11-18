@@ -36,6 +36,7 @@ import com.abulubad.sojourn.core.localization.resources.cd_back
 import com.abulubad.sojourn.core.localization.resources.guests
 import com.abulubad.sojourn.core.localization.resources.nights
 import com.abulubad.sojourn.core.localization.resources.search_any_dates
+import com.abulubad.sojourn.core.localization.resources.search_length_from_month
 import com.abulubad.sojourn.core.localization.resources.search_prompt_hint
 import com.abulubad.sojourn.core.localization.resources.search_prompt_title
 import com.abulubad.sojourn.core.localization.resources.search_summary_dated
@@ -123,7 +124,8 @@ fun SojournSearchBar(
 
 /**
  * The one summary template for a search (the bar's summary form, Explore's "Continue your search"):
- * "12–27 Mar · 15 nights · 2 guests", or "A month · 2 guests" before dates are chosen.
+ * "12–27 Mar · 15 nights · 2 guests", or "A month · 2 guests" before dates are chosen, and "A month from March ·
+ * 2 guests" for a flexible search with a start month.
  */
 @Composable
 fun searchSummaryText(query: SearchQuery): String {
@@ -135,7 +137,11 @@ fun searchSummaryText(query: SearchQuery): String {
         val nights = pluralStringResource(Res.plurals.nights, dates.nights, formatter.count(dates.nights))
         stringResource(Res.string.search_summary_dated, formatter.dateRange(dates), nights, guests)
     } else {
-        val length = query.length?.let { stayLengthLabel(it) } ?: stringResource(Res.string.search_any_dates)
+        val length = query.length?.let { length ->
+            val label = stayLengthLabel(length)
+            val month = query.startMonth?.let { formatter.monthLong(it.month) }
+            month?.let { stringResource(Res.string.search_length_from_month, label, it) } ?: label
+        } ?: stringResource(Res.string.search_any_dates)
         stringResource(Res.string.search_summary_undated, length, guests)
     }
 }

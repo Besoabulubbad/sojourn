@@ -59,7 +59,7 @@ class SojournDatabaseTest {
 
     @Test
     fun `quote lines cascade with their quote`() {
-        db.quoteQueries.upsert(Quote("q1", "london-01", "2027-03-12", "2027-03-27", 2, 0, 144_000, "GBP"))
+        db.quoteQueries.upsert(Quote("q1", "london-01", "2027-03-12", "2027-03-27", 2, 0, 144_000, "GBP", null))
         db.quoteQueries.insertLine(Quote_line("q1", 0, "nights", 138_000, 15, 9_200))
         db.quoteQueries.insertLine(Quote_line("q1", 1, "cleaning_fee", 6_000, null, null))
         val lines = db.quoteQueries.linesFor("q1").executeAsList()

@@ -173,8 +173,8 @@
     <string name="stay_length_longer">أطول</string>
     <string name="sort_recommended">الموصى بها</string>
     <string name="sort_price_low_to_high">السعر، من الأقل إلى الأعلى</string>
-    <string name="sort_price_high_to_low">السعر، من الأعلى إلى الأقل</string>
     <string name="sort_rating">التقييم</string>
+    <string name="sort_distance">المسافة من المركز</string>
     <string name="filters_title">التصفية</string>
     <string name="search_prompt_title">إلى أين؟</string>
     <string name="search_prompt_hint">المدينة · التواريخ أو مدة الإقامة · الضيوف</string>
@@ -368,4 +368,37 @@
     <string name="search_any_time_note">أي وقت: سترى الأسعار الشهرية «ابتداءً من»، وما لا تشمله.</string>
     <string name="action_next">التالي</string>
     <string name="cd_step_progress">الخطوة %1$s من %2$s</string>
+    <string name="search_length_from_month">%1$s ابتداءً من %2$s</string>
+    <!-- النتائج -->
+    <string name="results_sort">الترتيب</string>
+    <string name="results_sort_title">رتّب حسب</string>
+    <string name="results_free_cancellation">إلغاء مجاني</string>
+    <string name="results_empty_title">لا إقامات مطابقة</string>
+    <string name="results_empty_filters_body">أزل تصفية أو اثنتين لترى إقامات أكثر.</string>
+    <string name="results_empty_search_body">جرّب تواريخ أخرى أو مدينة أخرى.</string>
+    <string name="action_change_search">غيّر البحث</string>
+    <plurals name="results_in_city">
+        <item quantity="zero">لا إقامات في %2$s</item>
+        <item quantity="one">إقامة واحدة في %2$s</item>
+        <item quantity="two">إقامتان في %2$s</item>
+        <item quantity="few">%1$s إقامات في %2$s</item>
+        <item quantity="many">%1$s إقامة في %2$s</item>
+        <item quantity="other">%1$s إقامة في %2$s</item>
+    </plurals>
+    <plurals name="priced_hours_ago">
+        <item quantity="zero">سُعّرت قبل أقل من ساعة</item>
+        <item quantity="one">سُعّرت قبل ساعة</item>
+        <item quantity="two">سُعّرت قبل ساعتين</item>
+        <item quantity="few">سُعّرت قبل %1$s ساعات</item>
+        <item quantity="many">سُعّرت قبل %1$s ساعة</item>
+        <item quantity="other">سُعّرت قبل %1$s ساعة</item>
+    </plurals>
+    <plurals name="priced_days_ago">
+        <item quantity="zero">سُعّرت اليوم</item>
+        <item quantity="one">سُعّرت قبل يوم</item>
+        <item quantity="two">سُعّرت قبل يومين</item>
+        <item quantity="few">سُعّرت قبل %1$s أيام</item>
+        <item quantity="many">سُعّرت قبل %1$s يومًا</item>
+        <item quantity="other">سُعّرت قبل %1$s يوم</item>
+    </plurals>
 </resources>

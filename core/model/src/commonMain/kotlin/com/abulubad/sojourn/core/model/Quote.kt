@@ -1,5 +1,7 @@
 package com.abulubad.sojourn.core.model
 
+import kotlin.time.Instant
+
 /**
  * A priced stay for specific dates. One quote feeds every surface that shows the total (P-02); the breakdown's
  * lines sum to the total by construction (P-05).
@@ -10,6 +12,8 @@ data class Quote(
     val dates: DateRange,
     val guests: Guests,
     val breakdown: PriceBreakdown,
+    /** When the API priced it, set as it is stored; null until then. Offline, older prices say their age. */
+    val pricedAt: Instant? = null,
 ) {
     val total: Money get() = breakdown.total
     val nights: Int get() = dates.nights

@@ -21,6 +21,8 @@ import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.SortOrder
 import com.abulubad.sojourn.core.model.StayLength
 import com.abulubad.sojourn.core.testing.FixedAppClock
+import com.abulubad.sojourn.core.testing.StayFixtures
+import com.abulubad.sojourn.core.testing.data.FakeCityRepository
 import com.abulubad.sojourn.core.testing.data.FakePricingRepository
 import com.abulubad.sojourn.core.testing.data.FakeSavedRepository
 import com.abulubad.sojourn.core.testing.data.FakeStayRepository
@@ -40,7 +42,8 @@ class SearchStaysTest {
     private val stays = FakeStayRepository(remote = london)
     private val pricing = FakePricingRepository(engine())
     private val saved = FakeSavedRepository()
-    private val search = SearchStays(stays, pricing, saved, FixedAppClock())
+    private val cities = FakeCityRepository(cached = listOf(StayFixtures.london))
+    private val search = SearchStays(stays, pricing, saved, cities, FixedAppClock())
 
     private suspend fun results(query: SearchQuery = SearchQuery(), filters: Filters = Filters.None) =
         assertNotNull(search(query, filters).first { !it.refreshing }.data)
@@ -85,7 +88,7 @@ class SearchStaysTest {
             blocked.value = mapOf(family.id to listOf(DateRange(LocalDate(2026, 3, 1), LocalDate(2026, 5, 1))))
         }
         val query = SearchQuery(length = StayLength.Month, startMonth = YearMonth(2026, 3))
-        val search = SearchStays(offline, pricing, saved, FixedAppClock())
+        val search = SearchStays(offline, pricing, saved, cities, FixedAppClock())
         val loadable = search(query, Filters.None).first { !it.refreshing }
         assertEquals(setOf(studio.id, flat.id), assertNotNull(loadable.data).ids())
         assertEquals(AppError.Offline, loadable.error)
@@ -146,14 +149,44 @@ class SearchStaysTest {
     }
 
     @Test
-    fun `price sorts order by the card price and a rating sort puts hidden ratings last - N-04`() = runSojournTest {
+    fun `the price sort orders by the card price and a rating sort puts hidden ratings last - N-04`() = runSojournTest {
         val low = results(filters = Filters(sort = SortOrder.PriceLowToHigh)).stays.map { it.stay.id }
         assertEquals(listOf(studio.id, flat.id, family.id), low)
-        val high = results(filters = Filters(sort = SortOrder.PriceHighToLow)).stays.map { it.stay.id }
-        assertEquals(listOf(family.id, flat.id, studio.id), high)
         val rated = results(filters = Filters(sort = SortOrder.Rating)).stays
         assertEquals(listOf(studio.id, flat.id, family.id), rated.map { it.stay.id })
         assertNull(rated.last().rating, "two reviews: hidden")
+    }
+
+    @Test
+    fun `distance sorts from the city centre to each stay's area`() = runSojournTest {
+        val near = results(filters = Filters(sort = SortOrder.DistanceToCentre)).stays
+        assertEquals(listOf(family.id, studio.id, flat.id), near.map { it.stay.id })
+        // The studio's area is about 3.5 km west of central London.
+        assertTrue(near[1].distanceMetres in 3_300..3_700, "was ${near[1].distanceMetres}")
+    }
+
+    @Test
+    fun `studio and free cancellation filter the stays - a closed window does not count`() = runSojournTest {
+        assertEquals(setOf(studio.id), results(filters = Filters(studioOnly = true)).ids())
+        // The clock reads 1 March; the studio's and the family flat's free cancellation closed on 26 February.
+        assertEquals(setOf(flat.id), results(filters = Filters(freeCancellation = true)).ids())
+    }
+
+    @Test
+    fun `a dated card carries when its price was quoted`() = runSojournTest {
+        val priced = kotlin.time.Instant.parse("2026-03-01T08:00:00Z")
+        val stamping = FakePricingRepository { id, dates, guests ->
+            when (val result = engine()(id, dates, guests)) {
+                is AppResult.Success -> AppResult.Success(result.value.copy(pricedAt = priced))
+                is AppResult.Failure -> result
+            }
+        }
+        val results = assertNotNull(
+            SearchStays(stays, stamping, saved, cities, FixedAppClock())(SearchQuery(dates = march), Filters.None)
+                .first { !it.refreshing }.data,
+        )
+        assertTrue(results.stays.isNotEmpty())
+        assertTrue(results.stays.all { it.pricedAt == priced })
     }
 
     @Test

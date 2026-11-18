@@ -43,6 +43,8 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
             .mapNotNullTo(LinkedHashSet()) { id -> Amenity.entries.find { it.id == id } },
         minBedrooms = settings.getIntOrNull(MIN_BEDROOMS),
         instantBook = settings.getBoolean(INSTANT_BOOK, false),
+        studioOnly = settings.getBoolean(STUDIO_ONLY, false),
+        freeCancellation = settings.getBoolean(FREE_CANCELLATION, false),
         sort = settings.getStringOrNull(SORT)?.let { id -> SortOrder.entries.find { it.id == id } }
             ?: Filters.None.sort,
     )
@@ -69,6 +71,8 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
         settings.putString(AMENITIES, filters.amenities.joinToString(SEPARATOR) { it.id })
         filters.minBedrooms?.let { settings.putInt(MIN_BEDROOMS, it) } ?: settings.remove(MIN_BEDROOMS)
         settings.putBoolean(INSTANT_BOOK, filters.instantBook)
+        settings.putBoolean(STUDIO_ONLY, filters.studioOnly)
+        settings.putBoolean(FREE_CANCELLATION, filters.freeCancellation)
         settings.putString(SORT, filters.sort.id)
     }
 
@@ -81,6 +85,8 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
         const val AMENITIES = "filters.amenities"
         const val MIN_BEDROOMS = "filters.min_bedrooms"
         const val INSTANT_BOOK = "filters.instant_book"
+        const val STUDIO_ONLY = "filters.studio_only"
+        const val FREE_CANCELLATION = "filters.free_cancellation"
         const val SORT = "filters.sort"
     }
 }

@@ -22,6 +22,10 @@ class TestDispatcherProvider(val dispatcher: TestDispatcher = StandardTestDispat
 /**
  * `runTest` with `Dispatchers.Main` set to the test dispatcher for the duration, which `viewModelScope` needs on
  * every platform. The multiplatform stand-in for a JUnit `MainDispatcherRule`.
+ *
+ * Main is reset only after `runTest` has returned, which on Android and iOS (the targets; `runTest` blocks there)
+ * is after its own clean-up: work a ViewModel queued after the body's last line still finds Main while it is
+ * cancelled.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 fun runSojournTest(
@@ -29,11 +33,9 @@ fun runSojournTest(
     body: suspend TestScope.(TestDispatcherProvider) -> Unit,
 ): TestResult {
     Dispatchers.setMain(dispatchers.dispatcher)
-    return runTest(dispatchers.dispatcher) {
-        try {
-            body(dispatchers)
-        } finally {
-            Dispatchers.resetMain()
-        }
+    try {
+        return runTest(dispatchers.dispatcher) { body(dispatchers) }
+    } finally {
+        Dispatchers.resetMain()
     }
 }

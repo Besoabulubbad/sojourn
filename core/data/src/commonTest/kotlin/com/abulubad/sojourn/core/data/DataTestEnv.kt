@@ -34,7 +34,7 @@ class DataTestEnv(val dispatchers: TestDispatcherProvider) {
 
     val cities: CityRepository = OfflineFirstCityRepository(db, api, policy, dispatchers)
     val stays: StayRepository = OfflineFirstStayRepository(store, api, policy, dispatchers)
-    val pricing: PricingRepository = OfflineFirstPricingRepository(db, api, dispatchers)
+    val pricing: PricingRepository = OfflineFirstPricingRepository(db, api, clock, dispatchers)
     val bookings: BookingRepository = OfflineFirstBookingRepository(db, api, dispatchers)
     val saved: SavedRepository = DatabaseSavedRepository(db, clock, dispatchers)
     val searches: SearchRepository = DatabaseSearchRepository(db, clock, dispatchers)

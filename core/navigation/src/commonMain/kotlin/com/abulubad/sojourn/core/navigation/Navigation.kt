@@ -33,6 +33,13 @@ interface Navigator {
 
     /** Pops the current tab until [key] is on top, or to the root if it is not in the stack. */
     fun popTo(key: SojournNavKey)
+
+    /**
+     * Pops every entry on top of the current tab that [replaces] matches (never the root), then pushes [key]: a flow
+     * that hands over to its result. A search finished from Results replaces both the flow and the old results, so
+     * back from the new results returns to where the search began.
+     */
+    fun goToReplacing(key: SojournNavKey, replaces: (SojournNavKey) -> Boolean)
 }
 
 /**
@@ -102,6 +109,14 @@ class TabbedNavigator(private val stacks: Map<Tab, NavBackStack<NavKey>>, initia
         } else {
             currentTab = tab
         }
+    }
+
+    override fun goToReplacing(key: SojournNavKey, replaces: (SojournNavKey) -> Boolean) {
+        val stack = currentStack
+        while (stack.size > 1 && (stack.last() as? SojournNavKey)?.let(replaces) == true) {
+            stack.removeAt(stack.lastIndex)
+        }
+        stack.add(key)
     }
 
     override fun popTo(key: SojournNavKey) {

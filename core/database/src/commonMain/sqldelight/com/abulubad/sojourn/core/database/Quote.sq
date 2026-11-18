@@ -7,7 +7,8 @@ CREATE TABLE quote (
     adults INTEGER NOT NULL,
     children INTEGER NOT NULL,
     total_minor INTEGER NOT NULL,
-    currency TEXT NOT NULL
+    currency TEXT NOT NULL,
+    priced_at INTEGER -- epoch milliseconds when the API priced it (added in version 3)
 );
 
 -- The lines sum to quote.total_minor; core:data rebuilds a PriceBreakdown, which checks it (P-05).

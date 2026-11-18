@@ -29,12 +29,14 @@ data class SearchQuery(
     val hasDates: Boolean get() = dates != null
 }
 
-/** Sort orders for results. Localized by id (S-05). */
+/** Sort orders for results, the four the ScreenResults card offers. Localized by id (S-05). */
 enum class SortOrder(val id: String) {
     Recommended("recommended"),
     PriceLowToHigh("price_low_to_high"),
-    PriceHighToLow("price_high_to_low"),
     Rating("rating"),
+
+    /** From the city's centre to the centre of the stay's area. */
+    DistanceToCentre("distance_to_centre"),
 }
 
 /**
@@ -48,11 +50,16 @@ data class Filters(
     val minBedrooms: Int? = null,
     val instantBook: Boolean = false,
     val sort: SortOrder = SortOrder.Recommended,
+    val studioOnly: Boolean = false,
+    val freeCancellation: Boolean = false,
 ) {
-    /** How many filters are active, for the "Show 14 stays" button and the filter count badge. */
+    /**
+     * How many filters are active, for the "Show 14 stays" button and the filter count badge. Each amenity counts
+     * on its own, so a quick-filter chip always moves the badge by one. Sort is an order, not a filter.
+     */
     val activeCount: Int
-        get() = listOf(priceRange != null, amenities.isNotEmpty(), minBedrooms != null, instantBook).count { it } +
-            if (sort != SortOrder.Recommended) 1 else 0
+        get() = amenities.size +
+            listOf(priceRange != null, minBedrooms != null, instantBook, studioOnly, freeCancellation).count { it }
 
     companion object {
         val None = Filters()

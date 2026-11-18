@@ -14,6 +14,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.time.Duration.Companion.hours
 
 class PricingRepositoryTest {
 
@@ -24,6 +25,17 @@ class PricingRepositoryTest {
         val stored = assertNotNull(pricing.observeQuote(quote.id).first())
         assertEquals(quote, stored)
         assertEquals(quote.display, stored.display)
+    }
+
+    @Test
+    fun `a quote is stamped with when it was priced and keeps that time offline`() = runDataTest {
+        val stay = catalogueStays().first()
+        val pricedAt = clock.now()
+        val online = assertNotNull(pricing.quote(stay.id, quarter(), Guests(2)).getOrNull())
+        assertEquals(pricedAt, online.pricedAt)
+        clock.advance(3.hours)
+        conditions.mode = Mode.Offline
+        assertEquals(pricedAt, pricing.quote(stay.id, quarter(), Guests(2)).getOrNull()?.pricedAt)
     }
 
     @Test
@@ -60,7 +72,7 @@ class PricingRepositoryTest {
 
     @Test
     fun `a stored quote whose lines do not sum to its total reads as missing`() = runDataTest {
-        db.quoteQueries.upsert(Quote("q-bad", "london-01", "2027-07-01", "2027-07-08", 1, 0, 10_000, "GBP"))
+        db.quoteQueries.upsert(Quote("q-bad", "london-01", "2027-07-01", "2027-07-08", 1, 0, 10_000, "GBP", null))
         db.quoteQueries.insertLine(Quote_line("q-bad", 0, "nights", 9_000, null, null))
         assertNull(pricing.observeQuote(QuoteId("q-bad")).first())
     }

@@ -1,0 +1,2 @@
+-- Version 2 to 3: a quote remembers when it was priced, so an offline card can say how old its price is.
+ALTER TABLE quote ADD COLUMN priced_at INTEGER;
