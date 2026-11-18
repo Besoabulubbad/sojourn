@@ -16,6 +16,7 @@ import com.abulubad.sojourn.core.localization.resources.area_el_kantara
 import com.abulubad.sojourn.core.localization.resources.area_front_de_mer
 import com.abulubad.sojourn.core.localization.resources.area_graca
 import com.abulubad.sojourn.core.localization.resources.area_hydra
+import com.abulubad.sojourn.core.localization.resources.area_in_city
 import com.abulubad.sojourn.core.localization.resources.area_kings_cross
 import com.abulubad.sojourn.core.localization.resources.area_le_marais
 import com.abulubad.sojourn.core.localization.resources.area_les_falaises
@@ -35,10 +36,20 @@ import com.abulubad.sojourn.core.localization.resources.city_lisbon
 import com.abulubad.sojourn.core.localization.resources.city_london
 import com.abulubad.sojourn.core.localization.resources.city_oran
 import com.abulubad.sojourn.core.localization.resources.city_paris
+import com.abulubad.sojourn.core.localization.resources.guests
 import com.abulubad.sojourn.core.localization.resources.list_pair
 import com.abulubad.sojourn.core.localization.resources.list_series
+import com.abulubad.sojourn.core.localization.resources.nights
+import com.abulubad.sojourn.core.localization.resources.problem_dates_in_past
+import com.abulubad.sojourn.core.localization.resources.problem_minimum_nights
+import com.abulubad.sojourn.core.localization.resources.problem_too_many_guests
+import com.abulubad.sojourn.core.localization.resources.problem_unavailable
+import com.abulubad.sojourn.core.localization.resources.state_error_body
+import com.abulubad.sojourn.core.localization.resources.state_offline_title
 import com.abulubad.sojourn.core.model.CityId
+import com.abulubad.sojourn.core.model.QuoteProblem
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
 /** The [SojournFormatter] for the current [LocalAppLocale]; composables format money, dates and counts through it. */
@@ -83,6 +94,35 @@ fun localizedCityName(id: CityId): String = when (id.value) {
  */
 @Composable
 fun localizedAreaName(key: String): String? = areaNames[key]?.let { stringResource(it) }
+
+/** "Paddington, London": the area when the app knows its name, else the city alone. */
+@Composable
+fun localizedPlace(cityId: CityId, areaKey: String): String {
+    val city = localizedCityName(cityId)
+    val area = localizedAreaName(areaKey) ?: return city
+    return stringResource(Res.string.area_in_city, area, city)
+}
+
+/** Why dates or guests could not be priced, said with the stay's own numbers ("at least 5 nights"). */
+@Composable
+fun quoteProblemText(problem: QuoteProblem): String {
+    val formatter = rememberSojournFormatter()
+    return when (problem) {
+        is QuoteProblem.MinimumNights -> stringResource(
+            Res.string.problem_minimum_nights,
+            pluralStringResource(Res.plurals.nights, problem.nights, formatter.count(problem.nights)),
+        )
+        is QuoteProblem.TooManyGuests -> stringResource(
+            Res.string.problem_too_many_guests,
+            pluralStringResource(Res.plurals.guests, problem.sleeps, formatter.count(problem.sleeps)),
+        )
+        QuoteProblem.Unavailable -> stringResource(Res.string.problem_unavailable)
+        QuoteProblem.InThePast -> stringResource(Res.string.problem_dates_in_past)
+        is QuoteProblem.Failed -> stringResource(
+            if (problem.offline) Res.string.state_offline_title else Res.string.state_error_body,
+        )
+    }
+}
 
 private val areaNames: Map<String, StringResource> = mapOf(
     "area_paddington" to Res.string.area_paddington,

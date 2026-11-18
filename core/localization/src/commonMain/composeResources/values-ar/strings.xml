@@ -444,4 +444,26 @@
     <string name="details_from_price_note">اختر التواريخ لترى الإجمالي شاملًا كل الرسوم.</string>
     <!-- A review's writer and month: "Hannah · September 2026". -->
     <string name="review_byline">%1$s · %2$s</string>
+
+    <!-- Checkout (ScreenCheckout card) and the booking confirmation -->
+    <string name="checkout_title">المراجعة والدفع</string>
+    <string name="checkout_dates">التواريخ</string>
+    <string name="checkout_guests">الضيوف</string>
+    <string name="checkout_dates_value">%1$s · %2$s</string>
+    <string name="checkout_price">السعر</string>
+    <string name="cd_edit_dates">تعديل التواريخ</string>
+    <string name="cd_edit_guests">تعديل الضيوف</string>
+    <string name="checkout_update_total">حدّث الإجمالي</string>
+    <string name="checkout_repriced">حُدّث السعر بعد تغييراتك. كان %1$s.</string>
+    <string name="checkout_price_changed">تغيّر السعر إلى %1$s أثناء الدفع. لم يُخصم أي مبلغ. راجِعه وادفع مرة أخرى.</string>
+    <string name="checkout_payment_failed">لم تتم عملية الدفع ولم يُخصم أي مبلغ. حاول مرة أخرى.</string>
+    <string name="checkout_offline">أنت غير متصل ولم يُخصم أي مبلغ. ادفع مرة أخرى عند عودة الاتصال.</string>
+    <string name="checkout_booking_failed">تعذّر تأكيد الحجز ولم يُخصم أي مبلغ. حاول مرة أخرى.</string>
+    <string name="checkout_gone_title">انتهت صلاحية هذا السعر</string>
+    <string name="checkout_gone_body">ارجع إلى الإقامة لترى سعرها لتواريخك اليوم.</string>
+    <string name="confirmed_title">تم الحجز</string>
+    <string name="confirmed_body">حجزك في الحجوزات، ويظهر هناك دون اتصال أيضًا. تصلك تفاصيل الوصول قبل إقامتك.</string>
+    <string name="confirmed_total_paid">المبلغ المدفوع</string>
+    <string name="action_view_booking">عرض الحجز</string>
+    <string name="action_done">تم</string>
 </resources>

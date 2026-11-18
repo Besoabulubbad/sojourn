@@ -381,4 +381,27 @@
     <string name="details_from_price_note">Choose dates to see the total, with every fee included.</string>
     <!-- A review's writer and month: "Hannah · September 2026". -->
     <string name="review_byline">%1$s · %2$s</string>
+
+    <!-- Checkout (ScreenCheckout card) and the booking confirmation -->
+    <string name="checkout_title">Review and pay</string>
+    <string name="checkout_dates">Dates</string>
+    <string name="checkout_guests">Guests</string>
+    <!-- The dates row: %1$s the range, %2$s the nights ("12–27 Mar 2027 · 15 nights"). -->
+    <string name="checkout_dates_value">%1$s · %2$s</string>
+    <string name="checkout_price">Price</string>
+    <string name="cd_edit_dates">Edit dates</string>
+    <string name="cd_edit_guests">Edit guests</string>
+    <string name="checkout_update_total">Update the total</string>
+    <string name="checkout_repriced">Updated for your changes. It was %1$s.</string>
+    <string name="checkout_price_changed">The price changed to %1$s while you were paying. Nothing was charged. Check it and pay again.</string>
+    <string name="checkout_payment_failed">The payment didn’t go through and nothing was charged. Try again.</string>
+    <string name="checkout_offline">You’re offline and nothing was charged. Pay again once you’re connected.</string>
+    <string name="checkout_booking_failed">We couldn’t confirm the booking and nothing was charged. Try again.</string>
+    <string name="checkout_gone_title">This price has expired</string>
+    <string name="checkout_gone_body">Go back to the stay to see its price for your dates today.</string>
+    <string name="confirmed_title">You’re booked</string>
+    <string name="confirmed_body">Your booking is in Bookings, and it’s there offline too. Check-in details arrive before your stay.</string>
+    <string name="confirmed_total_paid">Total paid</string>
+    <string name="action_view_booking">View booking</string>
+    <string name="action_done">Done</string>
 </resources>

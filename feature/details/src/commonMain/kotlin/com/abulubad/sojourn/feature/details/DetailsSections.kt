@@ -30,8 +30,7 @@ import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.domain.StayDetails
 import com.abulubad.sojourn.core.localization.LocalAppLocale
-import com.abulubad.sojourn.core.localization.localizedAreaName
-import com.abulubad.sojourn.core.localization.localizedCityName
+import com.abulubad.sojourn.core.localization.localizedPlace
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.action_read_less
@@ -40,7 +39,6 @@ import com.abulubad.sojourn.core.localization.resources.action_show_on_map
 import com.abulubad.sojourn.core.localization.resources.action_show_original
 import com.abulubad.sojourn.core.localization.resources.action_translate_to
 import com.abulubad.sojourn.core.localization.resources.amenity_wifi
-import com.abulubad.sojourn.core.localization.resources.area_in_city
 import com.abulubad.sojourn.core.localization.resources.check_in_self_check_in_detail
 import com.abulubad.sojourn.core.localization.resources.details_about
 import com.abulubad.sojourn.core.localization.resources.details_amenities
@@ -101,7 +99,7 @@ private fun Heading(details: StayDetails) {
     val stay = details.stay
     val c = SojournTheme.colors
     Column(verticalArrangement = Arrangement.spacedBy(SojournSpacing.space2)) {
-        IconLine(SojournIcon.MapPin, placeLine(stay), muted = true)
+        IconLine(SojournIcon.MapPin, localizedPlace(stay.cityId, stay.areaKey), muted = true)
         HostText(
             stay.title,
             modifier = Modifier.semantics { heading() },
@@ -131,7 +129,7 @@ private fun Includes(stay: Stay) {
 private fun Where(stay: Stay, onIntent: (DetailsIntent) -> Unit) {
     val formatter = rememberSojournFormatter()
     Section(Res.string.details_where) {
-        IconLine(SojournIcon.MapPin, placeLine(stay))
+        IconLine(SojournIcon.MapPin, localizedPlace(stay.cityId, stay.areaKey))
         stay.walkMinutesToTransit?.let { minutes ->
             val walk = pluralStringResource(Res.plurals.minutes_walk, minutes, formatter.count(minutes))
             val destination = stringResource(Res.string.transit_public)
@@ -274,14 +272,6 @@ private fun IconLine(icon: SojournIcon, text: String, modifier: Modifier = Modif
         SojournIcon(icon, contentDescription = null, tint = color, size = SojournSizes.iconSm)
         BasicText(text, style = SojournTheme.type.body.copy(color = color))
     }
-}
-
-/** "Paddington, London": the area when the app knows its name, else the city. */
-@Composable
-internal fun placeLine(stay: Stay): String {
-    val city = localizedCityName(stay.cityId)
-    val area = localizedAreaName(stay.areaKey) ?: return city
-    return stringResource(Res.string.area_in_city, area, city)
 }
 
 private val PriceInclusion.label: StringResource

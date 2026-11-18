@@ -29,6 +29,7 @@ import com.abulubad.sojourn.core.model.PriceLine
 import com.abulubad.sojourn.core.model.PriceLineKind
 import com.abulubad.sojourn.core.model.Quote
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.model.Rating
 import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.SearchQuery
@@ -139,7 +140,7 @@ object DetailsSamples {
         sheet = DetailsSheet.Dates(
             month = YearMonth(2026, 3),
             selection = DateRange(LocalDate(2026, 3, 12), LocalDate(2026, 3, 13)),
-            problem = DatesProblem.MinimumNights(2),
+            problem = QuoteProblem.MinimumNights(2),
         ),
     )
 

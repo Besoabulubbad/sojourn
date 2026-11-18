@@ -10,6 +10,7 @@ import com.abulubad.sojourn.core.domain.DomainFixtures.flat
 import com.abulubad.sojourn.core.domain.DomainFixtures.london
 import com.abulubad.sojourn.core.domain.DomainFixtures.march
 import com.abulubad.sojourn.core.domain.DomainFixtures.studio
+import com.abulubad.sojourn.core.model.BookingId
 import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.model.Currency
 import com.abulubad.sojourn.core.model.DateRange
@@ -19,6 +20,7 @@ import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.QuoteId
+import com.abulubad.sojourn.core.model.QuoteProblem
 import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.testing.FixedAppClock
@@ -157,6 +159,27 @@ class StayAndBookingUseCasesTest {
             items.map { it.booking.status },
         )
         assertEquals(flat, items.first().stay)
+    }
+
+    @Test
+    fun `a booking comes with its stay and is null until the device has it`() = runSojournTest {
+        val quote = DomainFixtures.quote(flat, march, Guests(1))
+        bookings.issued[quote.id] = quote
+        val booking = assertNotNull(bookings.book(quote.id).getOrNull())
+        val item = assertNotNull(GetBooking(bookings, stays)(booking.id).first())
+        assertEquals(booking, item.booking)
+        assertEquals(flat, item.stay)
+        assertNull(GetBooking(bookings, stays)(BookingId("b-unknown")).first())
+    }
+
+    @Test
+    fun `a failed quote is said with the stay's own numbers`() {
+        val minimum = StayRules.problemFor(AppError.Validation(StayRules.Problem.MINIMUM_NIGHTS), studio)
+        assertEquals(QuoteProblem.MinimumNights(StayRules.minimumNights(studio)), minimum)
+        val guests = StayRules.problemFor(AppError.Validation(StayRules.Problem.TOO_MANY_GUESTS), studio)
+        assertEquals(QuoteProblem.TooManyGuests(studio.facts.sleeps), guests)
+        assertEquals(QuoteProblem.Failed(offline = true), StayRules.problemFor(AppError.Offline, studio))
+        assertEquals(QuoteProblem.Failed(offline = false), StayRules.problemFor(AppError.Remote(500), null))
     }
 
     // --- Saved ---

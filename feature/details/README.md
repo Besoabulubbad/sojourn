@@ -10,7 +10,7 @@ Implements the design-system card **ScreenDetails** (with its states from **Scre
 
 **Navigation keys** (declared in `core:navigation`): `StayDetailsKey(stayId, quoteId?, args)` (the search it came from: its guests price a new quote), `GalleryKey(stayId, index)`.
 
-**Shape:** `DetailsUiState` · `DetailsSheet` · `DatesProblem` · `DetailsIntent` · `DetailsEffect` · `DetailsViewModel(key, …)` · `DetailsRoute` · `DetailsScreen`; `GalleryUiState` · `GalleryViewModel(key, …)` · `GalleryRoute` · `GalleryScreen` · `detailsModule` (keys come in with `parametersOf`) · `EntryProviderScope<NavKey>.detailsEntries(navigator)`. See [adding a feature](../../docs/guides/adding-a-feature.md).
+**Shape:** `DetailsUiState` · `DetailsSheet` · `DetailsIntent` · `DetailsEffect` · `DetailsViewModel(key, …)` · `DetailsRoute` · `DetailsScreen`; `GalleryUiState` · `GalleryViewModel(key, …)` · `GalleryRoute` · `GalleryScreen` · `detailsModule` (keys come in with `parametersOf`) · `EntryProviderScope<NavKey>.detailsEntries(navigator)`. See [adding a feature](../../docs/guides/adding-a-feature.md).
 
 **May depend on:** `core:ui`, `core:designsystem`, `core:localization`, `core:navigation`, `core:domain`, `core:platform`, `core:model`, `core:common`; never `core:data`, `core:database`, `core:network` or another feature (Konsist).
 

@@ -40,6 +40,9 @@ import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
  * - The [note] is announced politely when it changes, so a screen reader hears the night count as a range completes.
  * - With large text the note and button move below the link rather than squeezing it.
  * - Prefer a working [primary] to a disabled one; [primaryEnabled] is for the step that cannot go on yet (no dates).
+ * - [primaryLoading] keeps the button's place while its action runs ("Pay £1,383" while paying).
+ * - [fillPrimary] is for a flow's one final action (the ScreenCheckout card's "Pay £1,383"): the button spans the
+ *   bar and the link and note are not shown.
  */
 @Composable
 fun SojournActionBar(
@@ -50,19 +53,27 @@ fun SojournActionBar(
     secondary: String? = null,
     onSecondary: () -> Unit = {},
     note: String? = null,
+    primaryLoading: Boolean = false,
+    fillPrimary: Boolean = false,
 ) {
+    if (fillPrimary) {
+        Box(modifier.actionBarChrome()) {
+            SojournButton(
+                primary,
+                onClick = onPrimary,
+                modifier = Modifier.fillMaxWidth(),
+                loading = primaryLoading,
+                enabled = primaryEnabled,
+            )
+        }
+        return
+    }
     val c = SojournTheme.colors
     MessageActionLayout(
         gap = SojournSpacing.space3,
         // The link is short: it keeps the row unless it would wrap (large text, a narrow screen).
         stackOnlyIfWrapped = true,
-        modifier = modifier
-            .fillMaxWidth()
-            .background(c.surface)
-            .drawBehind { drawRect(c.hairline, size = Size(size.width, 1.dp.toPx())) }
-            .windowInsetsPadding(WindowInsets.navigationBars)
-            .defaultMinSize(minHeight = SojournSizes.bookingBar)
-            .padding(horizontal = SojournSpacing.space4, vertical = SojournSpacing.space2),
+        modifier = modifier.actionBarChrome(),
         message = {
             // Holds the row's height when there is no link, so the button keeps the end of the bar.
             Box(Modifier.defaultMinSize(minHeight = SojournSizes.touchMin), contentAlignment = Alignment.CenterStart) {
@@ -89,8 +100,20 @@ fun SojournActionBar(
                         style = SojournTheme.type.bodySm.copy(color = c.inkMuted),
                     )
                 }
-                SojournButton(primary, onClick = onPrimary, enabled = primaryEnabled)
+                SojournButton(primary, onClick = onPrimary, loading = primaryLoading, enabled = primaryEnabled)
             }
         },
     )
+}
+
+/** Docked, opaque, a hairline on top, clear of the navigation bar (I-01). */
+@Composable
+private fun Modifier.actionBarChrome(): Modifier {
+    val c = SojournTheme.colors
+    return fillMaxWidth()
+        .background(c.surface)
+        .drawBehind { drawRect(c.hairline, size = Size(size.width, 1.dp.toPx())) }
+        .windowInsetsPadding(WindowInsets.navigationBars)
+        .defaultMinSize(minHeight = SojournSizes.bookingBar)
+        .padding(horizontal = SojournSpacing.space4, vertical = SojournSpacing.space2)
 }

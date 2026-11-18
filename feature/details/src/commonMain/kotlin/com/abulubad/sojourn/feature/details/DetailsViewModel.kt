@@ -2,7 +2,6 @@ package com.abulubad.sojourn.feature.details
 
 import androidx.lifecycle.viewModelScope
 import com.abulubad.sojourn.core.common.AppClock
-import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.common.AppResult
 import com.abulubad.sojourn.core.domain.GetQuote
 import com.abulubad.sojourn.core.domain.GetStayDetails
@@ -10,7 +9,6 @@ import com.abulubad.sojourn.core.domain.ObserveQuote
 import com.abulubad.sojourn.core.domain.StayRules
 import com.abulubad.sojourn.core.domain.ToggleSaved
 import com.abulubad.sojourn.core.model.QuoteId
-import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
@@ -121,22 +119,11 @@ class DetailsViewModel(
                     editDates { copy(quoting = false) }
                     sendEffect(DetailsEffect.CloseSheet)
                 }
-                is AppResult.Failure -> editDates { copy(quoting = false, problem = problemFor(result.error)) }
+                is AppResult.Failure -> {
+                    val problem = StayRules.problemFor(result.error, currentState.stay)
+                    editDates { copy(quoting = false, problem = problem) }
+                }
             }
-        }
-    }
-
-    /** The validation ids the domain and API share, in the guest's terms with the stay's own numbers. */
-    private fun problemFor(error: AppError): DatesProblem {
-        val stay: Stay? = currentState.stay
-        val reason = (error as? AppError.Validation)?.reason
-        return when {
-            reason == StayRules.Problem.MINIMUM_NIGHTS && stay != null ->
-                DatesProblem.MinimumNights(StayRules.minimumNights(stay))
-            reason == StayRules.Problem.TOO_MANY_GUESTS && stay != null -> DatesProblem.TooManyGuests(stay.facts.sleeps)
-            reason == StayRules.Problem.UNAVAILABLE -> DatesProblem.Unavailable
-            reason == StayRules.Problem.DATES_IN_PAST -> DatesProblem.InThePast
-            else -> DatesProblem.Failed(error)
         }
     }
 
