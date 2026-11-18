@@ -18,6 +18,7 @@ import com.abulubad.sojourn.core.navigation.BookingConfirmedKey
 import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.FiltersKey
 import com.abulubad.sojourn.core.navigation.GalleryKey
+import com.abulubad.sojourn.core.navigation.MapKey
 import com.abulubad.sojourn.core.navigation.ResultsKey
 import com.abulubad.sojourn.core.navigation.SearchArgs
 import com.abulubad.sojourn.core.navigation.SearchKey
@@ -28,6 +29,7 @@ import com.abulubad.sojourn.feature.details.DetailsViewModel
 import com.abulubad.sojourn.feature.details.GalleryViewModel
 import com.abulubad.sojourn.feature.explore.ExploreViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
+import com.abulubad.sojourn.feature.map.MapViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
 import org.junit.After
@@ -77,5 +79,6 @@ class SojournGraphResolvesTest {
         koin.get<GalleryViewModel> { parametersOf(GalleryKey("london-01")) }
         koin.get<CheckoutViewModel> { parametersOf(CheckoutKey("q-london-01")) }
         koin.get<ConfirmationViewModel> { parametersOf(BookingConfirmedKey("b-1-london-01")) }
+        koin.get<MapViewModel> { parametersOf(MapKey(SearchArgs(cityId = "london"))) }
     }
 }

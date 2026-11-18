@@ -466,4 +466,10 @@
     <string name="confirmed_total_paid">المبلغ المدفوع</string>
     <string name="action_view_booking">عرض الحجز</string>
     <string name="action_done">تم</string>
+
+    <!-- Map -->
+    <string name="map_attribution">© مساهمو OpenStreetMap · OpenFreeMap</string>
+    <string name="map_area_empty_title">لا إقامات في هذه المنطقة</string>
+    <string name="map_area_empty_body">حرّك الخريطة، أو اعرض كل الإقامات في بحثك.</string>
+    <string name="action_show_all_stays">اعرض كل الإقامات</string>
 </resources>

@@ -156,7 +156,7 @@ class DetailsViewModelTest {
             vm.onIntent(DetailsIntent.ShareTapped)
             assertEquals(DetailsEffect.Share(studio), awaitItem())
             vm.onIntent(DetailsIntent.ShowOnMapTapped)
-            assertEquals(DetailsEffect.Navigate(MapKey(london)), awaitItem())
+            assertEquals(DetailsEffect.Navigate(MapKey(london, studio.id.value)), awaitItem())
             vm.onIntent(DetailsIntent.BackTapped)
             assertEquals(DetailsEffect.Back, awaitItem())
         }

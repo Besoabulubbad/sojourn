@@ -71,7 +71,7 @@ class DetailsViewModel(
             DetailsIntent.SaveTapped -> viewModelScope.launch { toggleSaved(stayId) }
             is DetailsIntent.PhotoTapped -> navigate(GalleryKey(key.stayId, intent.index))
             DetailsIntent.ShowOnMapTapped -> currentState.stay?.let { stay ->
-                navigate(MapKey(key.args.copy(cityId = stay.cityId.value)))
+                navigate(MapKey(key.args.copy(cityId = stay.cityId.value), stayId = stay.id.value))
             }
             DetailsIntent.TranslateTapped -> setState { copy(translated = !translated) }
             DetailsIntent.ReadMoreTapped -> setState { copy(expanded = !expanded) }

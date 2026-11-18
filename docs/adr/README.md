@@ -31,6 +31,7 @@ Every significant decision about this codebase, in [MADR](https://adr.github.io/
 | [0014](0014-static-analysis-dependency-hygiene.md) | Static analysis and dependency hygiene: detekt, Konsist, dependency-analysis, Renovate | accepted | 2026-11-15 |
 | [0015](0015-own-bottom-sheet.md) | Our own bottom sheet on AnchoredDraggable, not Material's ModalBottomSheet | accepted | 2026-11-16 |
 | [0016](0016-seed-catalogue-hosting.md) | Seed catalogue: bundled JSON, photos hosted on the docs site | accepted | 2026-11-17 |
+| [0017](0017-maps-maplibre-openfreemap.md) | Maps: MapLibre Compose with OpenFreeMap tiles, our own pins | accepted | 2026-11-18 |
 
 ## How these were decided
 

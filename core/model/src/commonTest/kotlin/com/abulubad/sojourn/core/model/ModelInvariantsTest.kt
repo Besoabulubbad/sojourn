@@ -5,6 +5,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class ModelInvariantsTest {
@@ -63,5 +65,14 @@ class ModelInvariantsTest {
     @Test
     fun `host text declares its language`() {
         assertFailsWith<IllegalArgumentException> { HostText("Bright studio", " ") }
+    }
+
+    @Test
+    fun `a box holds the points inside it and is built around a set of points`() {
+        val box = assertNotNull(GeoBounds.around(listOf(GeoPoint(51.50, -0.20), GeoPoint(51.53, -0.08))))
+        assertTrue(GeoPoint(51.52, -0.10) in box)
+        assertFalse(GeoPoint(51.60, -0.10) in box)
+        assertNull(GeoBounds.around(emptyList()))
+        assertFailsWith<IllegalArgumentException> { GeoBounds(south = 52.0, west = 0.0, north = 51.0, east = 1.0) }
     }
 }

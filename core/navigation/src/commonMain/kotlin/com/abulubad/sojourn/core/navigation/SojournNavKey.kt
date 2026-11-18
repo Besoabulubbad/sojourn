@@ -39,7 +39,8 @@ data class SearchKey(val step: SearchStep = SearchStep.Where, val args: SearchAr
 
 @Serializable data class ResultsKey(val args: SearchArgs) : SojournNavKey
 
-@Serializable data class MapKey(val args: SearchArgs) : SojournNavKey
+/** The map for [args]; [stayId] opens with that stay's pin selected and its card raised (Details' "Show on map"). */
+@Serializable data class MapKey(val args: SearchArgs, val stayId: String? = null) : SojournNavKey
 
 /** The filter sheet over the results for [args]: it counts and prices against the same search. */
 @Serializable data class FiltersKey(val args: SearchArgs) : SojournNavKey

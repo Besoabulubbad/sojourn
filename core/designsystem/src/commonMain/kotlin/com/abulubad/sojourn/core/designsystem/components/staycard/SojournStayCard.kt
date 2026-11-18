@@ -3,13 +3,12 @@ package com.abulubad.sojourn.core.designsystem.components.staycard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -141,34 +140,38 @@ private fun CompactCard(
 ) {
     val c = SojournTheme.colors
     val elevation = SojournTheme.elevation.level3
-    Row(
+    Box(
         modifier
             .fillMaxWidth()
             .shadow(elevation.elevation, SojournShapes.lg, ambientColor = elevation.color, spotColor = elevation.color)
             .background(c.surface, SojournShapes.lg)
             .cardClick(onClick)
-            .height(IntrinsicSize.Min)
             .padding(SojournSpacing.space2),
-        horizontalArrangement = Arrangement.spacedBy(SojournSpacing.space3),
     ) {
-        PhotoSlot(
-            stay.photos.first(),
-            contentDescription = null,
-            showFailureText = false,
-            modifier = Modifier
-                .width(SojournStayCardDefaults.CompactPhotoWidth)
-                .heightIn(min = SojournStayCardDefaults.CompactPhotoMinHeight)
-                .fillMaxHeight()
-                .clip(SojournShapes.md),
-        )
         Details(
             stay,
             price,
             priceNote,
             compact = true,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = SojournStayCardDefaults.CompactPhotoMinHeight)
+                .padding(start = SojournStayCardDefaults.CompactPhotoWidth + SojournSpacing.space3),
             trailing = { SaveButton(saved, onToggleSave, Modifier, floating = false) },
         )
+        // The text sets the card's height and the photo takes it, laid out after the text: a loaded photo's own
+        // height never stretches the card (it did through IntrinsicSize once the image was cached).
+        Box(Modifier.matchParentSize()) {
+            PhotoSlot(
+                stay.photos.first(),
+                contentDescription = null,
+                showFailureText = false,
+                modifier = Modifier
+                    .width(SojournStayCardDefaults.CompactPhotoWidth)
+                    .fillMaxHeight()
+                    .clip(SojournShapes.md),
+            )
+        }
     }
 }
 

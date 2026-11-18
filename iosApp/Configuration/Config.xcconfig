@@ -6,5 +6,7 @@ PRODUCT_BUNDLE_IDENTIFIER=com.abulubad.sojourn.Sojourn$(TEAM_ID)
 CURRENT_PROJECT_VERSION=1
 MARKETING_VERSION=1.0
 // The Shared framework is static, so its link flags do not reach this target. SQLDelight's native driver
-// (core:database) needs the system SQLite, as SQLDelight's docs say for static frameworks.
-OTHER_LDFLAGS = $(inherited) -lsqlite3
+// (core:database) needs the system SQLite, as SQLDelight's docs say for static frameworks. MapLibre Compose
+// (core:designsystem's SojournMap, ADR 0017) needs the C++ runtime, zlib and the graphics frameworks its iOS
+// platform setup lists.
+OTHER_LDFLAGS = $(inherited) -lsqlite3 -lc++ -lz -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework Foundation -framework ImageIO -framework Metal -framework QuartzCore

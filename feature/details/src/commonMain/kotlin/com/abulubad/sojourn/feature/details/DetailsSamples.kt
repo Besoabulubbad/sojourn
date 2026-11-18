@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.designsystem.preview.SojournSamplePhotos
+import com.abulubad.sojourn.core.designsystem.preview.WithSojournMapStandIn
 import com.abulubad.sojourn.core.designsystem.preview.WithSojournSamplePhotos
 import com.abulubad.sojourn.core.domain.StayDetails
 import com.abulubad.sojourn.core.model.Amenity
@@ -153,9 +154,11 @@ object DetailsSamples {
     /** The screen scrolled to [fraction] of its length (0 the top, 1 the end), as a guest reading on would see it. */
     @Composable
     fun Screen(state: DetailsUiState, fraction: Float = 0f) = WithSojournSamplePhotos {
-        val scroll = rememberScrollState()
-        LaunchedEffect(scroll.maxValue) { scroll.scrollTo((scroll.maxValue * fraction).toInt()) }
-        DetailsScreen(state, onIntent = {}, scroll = scroll)
+        WithSojournMapStandIn {
+            val scroll = rememberScrollState()
+            LaunchedEffect(scroll.maxValue) { scroll.scrollTo((scroll.maxValue * fraction).toInt()) }
+            DetailsScreen(state, onIntent = {}, scroll = scroll)
+        }
     }
 
     @Composable

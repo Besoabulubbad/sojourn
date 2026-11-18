@@ -21,4 +21,7 @@ dependencies {
     implementation(libs.koin.core) // initKoin's KoinAppDeclaration
     implementation(libs.compose.runtime) // setContent { App() }
     implementation(libs.compose.ui)
+    // The map's native renderer: an Android app packages one MapLibre runtime; Vulkan, as MapLibre Compose
+    // recommends (ADR 0017).
+    runtimeOnly(libs.maplibre.compose.runtimeVulkan)
 }

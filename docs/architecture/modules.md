@@ -24,7 +24,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `:feature:filters` | ScreenFilters (sheet) | `FiltersKey(args)` |
 | `:feature:details` | ScreenDetails, full-screen Gallery | `StayDetailsKey(stayId, quoteId?, args)`, `GalleryKey(stayId, index)` |
 | `:feature:checkout` | ScreenCheckout, confirmation | `CheckoutKey(quoteId)`, `BookingConfirmedKey(bookingId)` |
-| `:feature:map` | ScreenMap | `MapKey(query)` |
+| `:feature:map` | ScreenMap | `MapKey(args, stayId?)` |
 | `:feature:saved` | ScreenSaved | `SavedKey` |
 | `:feature:bookings` | ScreenBookings | `BookingsKey`, `BookingDetailsKey(id)` |
 | `:feature:profile` | ScreenProfile (language, theme, rewards) | `ProfileKey`, `LanguageKey`, `AppearanceKey` |
