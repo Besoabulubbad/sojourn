@@ -27,7 +27,7 @@ All feature modules share one contract: *may depend on* `:core:ui`, `:core:desig
 | `:feature:map` | ScreenMap | `MapKey(args, stayId?)` |
 | `:feature:saved` | ScreenSaved | `SavedKey` |
 | `:feature:bookings` | ScreenBookings | `BookingsKey`, `BookingDetailsKey(id)` |
-| `:feature:profile` | ScreenProfile (language, theme, rewards) | `ProfileKey`, `LanguageKey`, `AppearanceKey` |
+| `:feature:profile` | ScreenProfile (rewards, language, appearance, help) | `ProfileKey`, `RewardsKey`, `LanguageKey`, `AppearanceKey`, `HelpKey` |
 
 ## Core
 

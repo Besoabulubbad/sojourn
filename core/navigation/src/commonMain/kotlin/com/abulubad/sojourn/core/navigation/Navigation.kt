@@ -63,6 +63,8 @@ val sojournNavSerializersModule: SerializersModule = SerializersModule {
         subclass(ProfileKey::class, ProfileKey.serializer())
         subclass(LanguageKey::class, LanguageKey.serializer())
         subclass(AppearanceKey::class, AppearanceKey.serializer())
+        subclass(RewardsKey::class, RewardsKey.serializer())
+        subclass(HelpKey::class, HelpKey.serializer())
     }
 }
 

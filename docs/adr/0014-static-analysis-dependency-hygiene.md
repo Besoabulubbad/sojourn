@@ -74,6 +74,8 @@ Division of labour: detekt sees expressions (literals, call arguments); Konsist 
 
 **2026-11-16 (design-system rules).** `tooling/detekt-rules` ships five rules in the `sojourn` rule set: `TokensOnly` (C-01), `MotionTokensOnly` (M-01), `StartEndOnly` (L-02, L-05), `NoTextLiterals` (S-01, S-02) and `InsetsOnlyInOwners` (I-01, I-03). Each has a failing and a passing snippet in `SojournRulesTest`, and all five were seen firing in a real feature module before merge. Two choices: hex strings are not matched separately because a colour in Compose is always a `Color(…)` call, and `0.dp` is allowed because zero is the absence of a value. Scopes live in `config/detekt/detekt.yml`; `core:designsystem` is exempt from the token, motion and direction rules because it is where tokens become components.
 
+**2026-11-19 (end of Phase 5).** With Profile, every feature module has code, so `skeletonModules` is empty and every module fails on every category. The list stays, for a module added before its code.
+
 ## Links
 
 - [detekt](https://detekt.dev/) · [Writing custom detekt rules](https://detekt.dev/docs/introduction/extensions) · [Compose rules](https://mrmans0n.github.io/compose-rules/)

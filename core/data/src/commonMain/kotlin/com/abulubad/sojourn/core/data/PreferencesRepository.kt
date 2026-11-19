@@ -9,14 +9,16 @@ import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.MoneyRange
 import com.abulubad.sojourn.core.model.PriceBasis
 import com.abulubad.sojourn.core.model.SortOrder
+import com.abulubad.sojourn.core.model.ThemeMode
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 /**
- * The guest's preferences that outlive a screen: today, the filter sheet's state, so filters chosen once still apply
- * after a restart. Stored in key-value settings, not the database: small, read synchronously on start.
+ * The guest's preferences that outlive a screen: the filter sheet's state, so filters chosen once still apply after
+ * a restart, and the app's appearance. Stored in key-value settings, not the database: small, read synchronously
+ * on start.
  */
 interface PreferencesRepository {
 
@@ -24,6 +26,11 @@ interface PreferencesRepository {
     val filters: StateFlow<Filters>
 
     fun setFilters(filters: Filters)
+
+    /** System, Light or Dark; [ThemeMode.Default] until the guest chooses. */
+    val themeMode: StateFlow<ThemeMode>
+
+    fun setThemeMode(mode: ThemeMode)
 }
 
 internal class SettingsPreferencesRepository(private val settings: Settings) : PreferencesRepository {
@@ -31,9 +38,19 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
     private val state = MutableStateFlow(read())
     override val filters: StateFlow<Filters> = state.asStateFlow()
 
+    private val theme = MutableStateFlow(
+        settings.getStringOrNull(THEME_MODE)?.let { id -> ThemeMode.entries.find { it.id == id } } ?: ThemeMode.Default,
+    )
+    override val themeMode: StateFlow<ThemeMode> = theme.asStateFlow()
+
     override fun setFilters(filters: Filters) {
         write(filters)
         state.value = filters
+    }
+
+    override fun setThemeMode(mode: ThemeMode) {
+        settings.putString(THEME_MODE, mode.id)
+        theme.value = mode
     }
 
     private fun read(): Filters = Filters(
@@ -92,5 +109,6 @@ internal class SettingsPreferencesRepository(private val settings: Settings) : P
         const val INSTANT_BOOK = "filters.instant_book"
         const val FREE_CANCELLATION = "filters.free_cancellation"
         const val SORT = "filters.sort"
+        const val THEME_MODE = "appearance.theme_mode"
     }
 }

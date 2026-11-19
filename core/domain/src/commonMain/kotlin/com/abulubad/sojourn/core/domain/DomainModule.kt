@@ -25,4 +25,7 @@ val domainModule: Module = module {
     factoryOf(::UpdateFilters)
     factoryOf(::ObserveRecentSearches)
     factoryOf(::RecordSearch)
+    factoryOf(::ObserveThemeMode)
+    factoryOf(::SetThemeMode)
+    factoryOf(::ObserveRewards)
 }

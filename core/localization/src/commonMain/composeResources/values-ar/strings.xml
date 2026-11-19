@@ -503,4 +503,37 @@
     <string name="action_keep_booking">الإبقاء على الحجز</string>
     <string name="booking_cancelled_note">هذا الحجز ملغى، وأصبحت لياليه متاحة من جديد.</string>
     <string name="guide_key_code_value">⁦%1$s⁩</string>
+
+    <string name="profile_guest">ضيف</string>
+    <string name="profile_guest_detail">حجوزاتك والإقامات التي حفظتها موجودة على هذا الجهاز.</string>
+    <string name="profile_rewards">المكافآت</string>
+    <string name="profile_language">اللغة</string>
+    <string name="profile_appearance">المظهر</string>
+    <string name="profile_help">المساعدة</string>
+    <plurals name="points">
+        <item quantity="zero">لا نقاط</item>
+        <item quantity="one">نقطة واحدة</item>
+        <item quantity="two">نقطتان</item>
+        <item quantity="few">%1$s نقاط</item>
+        <item quantity="many">%1$s نقطة</item>
+        <item quantity="other">%1$s نقطة</item>
+    </plurals>
+    <string name="theme_system_detail">يتبع إعداد جهازك</string>
+    <string name="rewards_balance">نقاطك</string>
+    <string name="rewards_how">تكسب نقطة عن كل جنيه أو يورو تدفعه، أو عن كل 100 دج، عند انتهاء الإقامة.</string>
+    <string name="rewards_later">استبدال النقاط قريبًا. يُحفظ رصيدك على هذا الجهاز.</string>
+    <string name="rewards_earned">مكتسبة من</string>
+    <string name="rewards_stay_detail">%1$s · %2$s</string>
+    <string name="rewards_empty_title">لا نقاط بعد</string>
+    <string name="rewards_empty_body">تصلك أولى نقاطك بعد أول إقامة تكتمل.</string>
+    <string name="help_price_q">ماذا يشمل السعر؟</string>
+    <string name="help_price_a">المجموع الذي تراه قبل الدفع هو كل ما تدفعه: الليالي والتنظيف وأي ضريبة مدينة. ودون تواريخ تبدأ الأسعار من سعر الليلة أو الشهر، وتذكر ما لا تشمله.</string>
+    <string name="help_cancel_q">كيف ألغي الحجز، وما الذي يُسترد؟</string>
+    <string name="help_cancel_a">افتح الحجز من حجوزاتي واختر «ألغِ الحجز» قبل تسجيل الوصول. حتى تاريخ الإلغاء المجاني يُسترد كل شيء، وبعده يُسترد الكل عدا أول 7 ليالٍ.</string>
+    <string name="help_deposit_q">ما هو مبلغ التأمين؟</string>
+    <string name="help_deposit_a">تحجز بعض الإقامات مبلغ تأمين على بطاقتك. لا يُخصم منها، ويُفرج عنه خلال 7 أيام من المغادرة.</string>
+    <string name="help_key_q">متى أحصل على رمز المفتاح؟</string>
+    <string name="help_key_a">يوم الوصول، في دليل تسجيل الوصول للحجز. وإن كان مضيفك يستقبلك فسيلتقيك بالمفاتيح.</string>
+    <string name="help_offline_q">هل يعمل Sojourn دون اتصال؟</string>
+    <string name="help_offline_a">حجوزاتك وأدلة تسجيل الوصول والإقامات المحفوظة موجودة على هذا الجهاز وتفتح دون اتصال. أما البحث والحجز فيحتاجان إلى اتصال.</string>
 </resources>

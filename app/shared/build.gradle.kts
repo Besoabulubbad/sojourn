@@ -32,6 +32,7 @@ kotlin {
             implementation(project(":feature:map"))
             implementation(project(":feature:saved"))
             implementation(project(":feature:bookings"))
+            implementation(project(":feature:profile"))
             // The shell: theme, tab bar, navigation host, image loading.
             implementation(project(":core:designsystem"))
             implementation(project(":core:ui"))
@@ -47,6 +48,10 @@ kotlin {
             implementation(libs.navigation3.ui)
             implementation(libs.coil.compose)
             implementation(libs.coil.networkKtor3)
+        }
+        androidMain.dependencies {
+            // App reads the ThemeMode on Android's compilation too (the analyser asks for it there).
+            implementation(project(":core:model"))
         }
         named("androidHostTest").dependencies {
             // Koin's verify() (JVM): SojournModulesTest checks the whole graph.

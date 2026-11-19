@@ -2,10 +2,17 @@ package com.abulubad.sojourn
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -33,6 +40,7 @@ import com.abulubad.sojourn.feature.details.detailsEntries
 import com.abulubad.sojourn.feature.explore.exploreEntries
 import com.abulubad.sojourn.feature.filters.filtersEntries
 import com.abulubad.sojourn.feature.map.mapEntries
+import com.abulubad.sojourn.feature.profile.profileEntries
 import com.abulubad.sojourn.feature.results.resultsEntries
 import com.abulubad.sojourn.feature.saved.savedEntries
 import com.abulubad.sojourn.feature.search.searchEntries
@@ -42,12 +50,13 @@ import org.jetbrains.compose.resources.stringResource
  * The tabs whose feature exists. A tab joins in its feature's PR; the bottom nav appears once there are two, the
  * fewest it shows (`SojournBottomNav`).
  */
-internal val availableTabs: List<Tab> = listOf(Tab.Explore, Tab.Saved, Tab.Bookings)
+internal val availableTabs: List<Tab> = listOf(Tab.Explore, Tab.Saved, Tab.Bookings, Tab.Profile)
 
 /**
  * Navigation 3 with one back stack per tab (ADR 0005), after the official multiple-back-stacks recipe:
  *
- * - Each tab's stack is a `rememberNavBackStack`, so it survives configuration changes and process death.
+ * - Each tab's stack is a `rememberNavBackStack`, so it survives configuration changes and process death; so does
+ *   the current tab ([rememberSojournNavState], which `App` calls above the theme).
  * - Each stack's entries are decorated on their own (saved state, and a `ViewModelStore` per entry), so a tab keeps
  *   its screens' state while another tab is shown.
  * - An entry marked `SojournScenes.overlay()` draws over the one beneath it ([SojournOverlaySceneStrategy]).
@@ -55,10 +64,10 @@ internal val availableTabs: List<Tab> = listOf(Tab.Explore, Tab.Saved, Tab.Booki
  *   Explore, and back from Explore's root leaves the app ([TabbedNavigator.back]).
  */
 @Composable
-internal fun SojournNavHost(modifier: Modifier = Modifier) {
-    val stacks = Tab.entries.associateWith { tab -> rememberNavBackStack(sojournSavedStateConfiguration, tab.root) }
-    val navigator = remember(stacks) { TabbedNavigator(stacks) }
-    val provider = entryProvider<NavKey>(fallback = { key -> NavEntry(key) { NotBuiltYet() } }) {
+internal fun SojournNavHost(modifier: Modifier = Modifier, state: SojournNavState = rememberSojournNavState()) {
+    val stacks = state.stacks
+    val navigator = state.navigator
+    val provider = entryProvider<NavKey> {
         sojournEntries(navigator)
     }
     // Only tabs that exist are decorated: decorating resolves every key in a stack, and an unbuilt tab's root has no
@@ -87,6 +96,23 @@ internal fun SojournNavHost(modifier: Modifier = Modifier) {
     }
 }
 
+/** The tabs' back stacks and the navigator over them. */
+internal class SojournNavState(val stacks: Map<Tab, NavBackStack<NavKey>>, val navigator: TabbedNavigator)
+
+/**
+ * The back stacks and the current tab, saved so a recreated activity (rotation, process death, a language change)
+ * returns to where the guest was. Call it above `SojournTheme`: the theme keys its content by language, which would
+ * otherwise change the saved-state keys and lose them when the language changes.
+ */
+@Composable
+internal fun rememberSojournNavState(): SojournNavState {
+    val stacks = Tab.entries.associateWith { tab -> rememberNavBackStack(sojournSavedStateConfiguration, tab.root) }
+    var savedTab by rememberSaveable { mutableStateOf(Tab.Explore.name) }
+    val navigator = remember(stacks) { TabbedNavigator(stacks, Tab.valueOf(savedTab)) }
+    LaunchedEffect(navigator) { snapshotFlow { navigator.currentTab }.collect { savedTab = it.name } }
+    return remember(stacks, navigator) { SojournNavState(stacks, navigator) }
+}
+
 /** Every feature's entries. Each feature PR adds its `<name>Entries(navigator)` here. */
 private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     exploreEntries(navigator)
@@ -98,6 +124,7 @@ private fun EntryProviderScope<NavKey>.sojournEntries(navigator: Navigator) {
     mapEntries(navigator)
     savedEntries(navigator)
     bookingsEntries(navigator)
+    profileEntries(navigator)
 }
 
 @Composable

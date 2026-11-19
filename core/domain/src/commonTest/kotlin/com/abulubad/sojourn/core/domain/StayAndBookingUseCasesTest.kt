@@ -163,6 +163,24 @@ class StayAndBookingUseCasesTest {
     }
 
     @Test
+    fun `rewards count completed stays only at one point per pound paid`() = runSojournTest {
+        val past = DateRange(LocalDate(2026, 1, 5), LocalDate(2026, 1, 12))
+        val earlier = DateRange(LocalDate(2025, 11, 3), LocalDate(2025, 11, 10))
+        val now = DateRange(LocalDate(2026, 2, 25), LocalDate(2026, 3, 5))
+        listOf(past to studio, earlier to flat, now to flat, march to studio).forEach { (dates, stay) ->
+            val quote = DomainFixtures.quote(stay, dates, Guests(1))
+            bookings.issued[quote.id] = quote
+            bookings.book(quote.id)
+        }
+        val cancelled = bookings.bookings.value.first { it.dates == earlier }
+        bookings.cancel(cancelled.id)
+        val rewards = ObserveRewards(ListBookings(bookings, stays, clock))().first()
+        val completed = bookings.bookings.value.single { it.dates == past }
+        assertEquals(listOf(past), rewards.earned.map { it.item.booking.dates })
+        assertEquals(completed.total.major.toInt(), rewards.points)
+    }
+
+    @Test
     fun `a booking comes with its stay and is null until the device has it`() = runSojournTest {
         val quote = DomainFixtures.quote(flat, march, Guests(1))
         bookings.issued[quote.id] = quote

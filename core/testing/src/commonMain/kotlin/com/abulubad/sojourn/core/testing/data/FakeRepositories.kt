@@ -24,6 +24,7 @@ import com.abulubad.sojourn.core.model.SavedEntry
 import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
+import com.abulubad.sojourn.core.model.ThemeMode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -200,10 +201,19 @@ class FakeSearchRepository : SearchRepository {
     }
 }
 
-class FakePreferencesRepository(initial: Filters = Filters.None) : PreferencesRepository {
+class FakePreferencesRepository(
+    initial: Filters = Filters.None,
+    theme: ThemeMode = ThemeMode.Default,
+) : PreferencesRepository {
     private val state = MutableStateFlow(initial)
     override val filters: StateFlow<Filters> = state.asStateFlow()
     override fun setFilters(filters: Filters) {
         state.value = filters
+    }
+
+    private val themeState = MutableStateFlow(theme)
+    override val themeMode: StateFlow<ThemeMode> = themeState.asStateFlow()
+    override fun setThemeMode(mode: ThemeMode) {
+        themeState.value = mode
     }
 }
