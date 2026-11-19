@@ -10,7 +10,7 @@ The places where Android and iOS differ (brand book, Platform differences), behi
 | `AccessibilitySettings.reduceMotion()` | animator duration scale is 0 | `UIAccessibilityIsReduceMotionEnabled()` |
 | `PaymentSheet` | `StubPaymentSheet` until Phase 6 | `StubPaymentSheet` until Phase 6 |
 
-`StubPaymentSheet` authorizes every request with a deterministic token so the checkout flow can be shown end to end. No money moves in this demo; the real Google Pay and Apple Pay sheets need merchant accounts.
+`StubPaymentSheet` authorizes every request with a deterministic token so the checkout flow can be shown end to end. No money moves in this demo. Checkout shows a labelled demo wallet before it (ADR 0018); a real wallet would need a merchant account and replaces both.
 
 `platformModule` (expect/actual) registers the implementations with Koin.
 

@@ -11,4 +11,4 @@ The iOS application: a SwiftUI shell around the shared Compose UI.
 
 Build it with Xcode (`iosApp.xcodeproj`), or check the shared framework with `./gradlew :app:shared:linkDebugFrameworkIosSimulatorArm64`.
 
-Still to come: the Apple Pay demo button (Phase 6, next PR).
+**Payment:** no Apple Pay adapter. Checkout shows a labelled demo wallet from the shared UI (ADR 0018).

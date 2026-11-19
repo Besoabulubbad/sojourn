@@ -8,9 +8,9 @@ Legend for *may depend on*: **core-base** = `core:model`, `core:common`.
 
 | Module | Owns | May depend on | Plugin |
 |---|---|---|---|
-| `:app:android` | `MainActivity`, `enableEdgeToEdge`, splash, predictive back, per-app language (`LocaleManager`), Google Pay adapter `actual`s, app icon, manifest | `:app:shared`, `:core:platform` | `sojourn.android.application` |
+| `:app:android` | `MainActivity`, `enableEdgeToEdge`, splash, predictive back, per-app language (`LocaleManager`), app icon, manifest | `:app:shared`, `:core:platform` | `sojourn.android.application` |
 | `:app:shared` | `App()` root composable, `initKoin()`, root `NavDisplay` and tab back stacks, `Navigator` implementation, iOS `MainViewController()`, `Shared.framework` | everything | `sojourn.kmp.library` + `sojourn.compose` + `sojourn.koin` |
-| `iosApp/` | Xcode project: `iOSApp.swift`, `ContentView.swift` hosting the framework, Info.plist, assets, Apple Pay adapter | `Shared.framework` | — (Xcode) |
+| `iosApp/` | Xcode project: `iOSApp.swift`, `ContentView.swift` hosting the framework, Info.plist (languages), assets | `Shared.framework` | — (Xcode) |
 
 ## Features
 

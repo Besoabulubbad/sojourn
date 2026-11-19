@@ -536,4 +536,12 @@
     <string name="help_key_a">يوم الوصول، في دليل تسجيل الوصول للحجز. وإن كان مضيفك يستقبلك فسيلتقيك بالمفاتيح.</string>
     <string name="help_offline_q">هل يعمل Sojourn دون اتصال؟</string>
     <string name="help_offline_a">حجوزاتك وأدلة تسجيل الوصول والإقامات المحفوظة موجودة على هذا الجهاز وتفتح دون اتصال. أما البحث والحجز فيحتاجان إلى اتصال.</string>
+
+    <string name="wallet_title">محفظة تجريبية</string>
+    <string name="wallet_note">هذه المحفظة التجريبية تحل محل محفظة هاتفك. لا تُنقل أي أموال ولا تُخصم أي بطاقة.</string>
+    <string name="wallet_pay_to">الدفع إلى</string>
+    <string name="wallet_card">البطاقة</string>
+    <string name="wallet_card_value">بطاقة تجريبية تنتهي بـ ⁦4242⁩</string>
+    <string name="wallet_total">المبلغ</string>
+    <string name="wallet_hint">على هاتف حقيقي ستؤكد ببصمة إصبعك أو وجهك.</string>
 </resources>

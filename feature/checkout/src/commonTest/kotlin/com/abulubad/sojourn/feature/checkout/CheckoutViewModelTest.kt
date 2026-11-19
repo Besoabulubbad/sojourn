@@ -112,7 +112,8 @@ class CheckoutViewModelTest {
         val vm = viewModel()
         settled(vm)
         vm.effects.test {
-            vm.onIntent(CheckoutIntent.PayTapped)
+            payInWallet(vm)
+            assertEquals(CheckoutEffect.CloseWallet, awaitItem())
             assertEquals(CheckoutEffect.PaymentFeedback(success = true), awaitItem())
             val booked = assertIs<CheckoutEffect.Booked>(awaitItem())
             val booking = bookings.bookings.value.single()
@@ -125,7 +126,8 @@ class CheckoutViewModelTest {
     fun `a second tap while paying does not pay twice`() = runSojournTest {
         val vm = viewModel()
         settled(vm)
-        vm.onIntent(CheckoutIntent.PayTapped)
+        payInWallet(vm)
+        vm.onIntent(CheckoutIntent.WalletConfirmed)
         vm.onIntent(CheckoutIntent.PayTapped)
         settled(vm)
         assertEquals(1, paymentCalls)
@@ -170,7 +172,8 @@ class CheckoutViewModelTest {
         val vm = viewModel()
         settled(vm)
         vm.effects.test {
-            vm.onIntent(CheckoutIntent.PayTapped)
+            payInWallet(vm)
+            assertEquals(CheckoutEffect.CloseWallet, awaitItem())
             assertEquals(CheckoutEffect.PaymentFeedback(success = false), awaitItem())
         }
         val state = vm.state.value
@@ -185,7 +188,7 @@ class CheckoutViewModelTest {
         payment = PaymentResult.Cancelled
         val vm = viewModel()
         settled(vm)
-        vm.onIntent(CheckoutIntent.PayTapped)
+        payInWallet(vm)
         val state = settled(vm)
         assertNull(state.notice)
         assertFalse(state.paying)
@@ -198,7 +201,7 @@ class CheckoutViewModelTest {
         pricing.quoteFor = { _, dates, guests -> AppResult.Success(priced(dates, guests, nightly = 99)) }
         val vm = viewModel()
         settled(vm)
-        vm.onIntent(CheckoutIntent.PayTapped)
+        payInWallet(vm)
         val state = settled(vm)
         val fresh = priced(shown.dates, shown.guests, nightly = 99)
         assertEquals(fresh.total, state.quote?.total)
@@ -212,9 +215,32 @@ class CheckoutViewModelTest {
         bookings.offline = true
         val vm = viewModel()
         settled(vm)
-        vm.onIntent(CheckoutIntent.PayTapped)
+        payInWallet(vm)
         val state = settled(vm)
         assertEquals(CheckoutNotice.Offline, state.notice)
         assertFalse(state.paying)
+    }
+
+    @Test
+    fun `pay opens the demo wallet and closing it charges nothing`() = runSojournTest {
+        val vm = viewModel()
+        settled(vm)
+        vm.onIntent(CheckoutIntent.PayTapped)
+        assertTrue(vm.state.value.wallet)
+        assertEquals(0, paymentCalls)
+        vm.onIntent(CheckoutIntent.WalletDismissed)
+        settled(vm)
+        assertFalse(vm.state.value.wallet)
+        assertEquals(0, paymentCalls)
+        assertTrue(bookings.bookings.value.isEmpty())
+        vm.onIntent(CheckoutIntent.WalletConfirmed)
+        settled(vm)
+        assertEquals(0, paymentCalls, "a closed wallet cannot pay")
+    }
+
+    /** "Pay" on the page, then "Pay" in the demo wallet. */
+    private fun payInWallet(vm: CheckoutViewModel) {
+        vm.onIntent(CheckoutIntent.PayTapped)
+        vm.onIntent(CheckoutIntent.WalletConfirmed)
     }
 }

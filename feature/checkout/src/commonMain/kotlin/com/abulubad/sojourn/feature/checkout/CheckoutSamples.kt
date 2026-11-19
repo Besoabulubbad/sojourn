@@ -108,6 +108,9 @@ object CheckoutSamples {
     /** The payment sheet is working: "Pay £1,383" holds its place. */
     val paying = ready.copy(paying = true)
 
+    /** "Pay" tapped: the demo wallet over the page, asking again for the same total. */
+    val wallet = ready.copy(wallet = true)
+
     /** The payment was declined: the reason above the button, the page as it was. */
     val paymentFailed = ready.copy(notice = CheckoutNotice.PaymentFailed)
 

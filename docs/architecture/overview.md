@@ -7,9 +7,9 @@ One Kotlin Multiplatform codebase. Shared Compose Multiplatform UI. Modules spli
 ```mermaid
 flowchart TB
   subgraph app["app/"]
-    android["app:android<br/>Activity · edge-to-edge · per-app language · Google Pay adapter"]
+    android["app:android<br/>Activity · edge-to-edge · splash · per-app language"]
     shared["app:shared<br/>App() · Koin start · NavDisplay · iOS framework"]
-    ios["iosApp (Xcode)<br/>hosts Shared.framework · Apple Pay adapter"]
+    ios["iosApp (Xcode)<br/>hosts Shared.framework · per-app language"]
   end
   subgraph feature["feature/"]
     explore[explore] ; search[search] ; results[results] ; filters[filters] ; details[details]
@@ -102,13 +102,13 @@ One Koin module per Gradle module, named after it (`exploreModule`, `dataModule`
 
 ### Platform adapters
 
-`core:platform` declares `expect` interfaces for haptics, the share sheet, opening a location in Maps, the payment sheet (Google Pay / Apple Pay, stubbed) and the reduce-motion setting; `androidMain`/`iosMain` provide `actual`s. Features depend on the interfaces only.
+`core:platform` declares `expect` interfaces for haptics, the share sheet, opening a location in Maps, the payment sheet (stubbed; Checkout shows a labelled demo wallet, ADR 0018) and the reduce-motion setting; `androidMain`/`iosMain` provide `actual`s. Features depend on the interfaces only.
 
 ### Application shells
 
 - `app:shared` — the umbrella multiplatform module: `App()` root composable (theme, locale, Koin, `NavDisplay`), `MainViewController()` for iOS, and the `Shared.framework` binary. It is the only module that depends on everything.
-- `app:android` — one `Activity`, `enableEdgeToEdge()`, splash, predictive back, per-app language via `LocaleManager`, Google Pay adapter.
-- `iosApp` — Xcode project hosting the framework in a `UIViewControllerRepresentable`, safe areas, Apple Pay adapter.
+- `app:android` — one `Activity`, `enableEdgeToEdge()`, splash, predictive back, per-app language via `LocaleManager`.
+- `iosApp` — Xcode project hosting the framework in a `UIViewControllerRepresentable`, safe areas, per-app language.
 
 ## Cross-cutting rules and where they come from
 

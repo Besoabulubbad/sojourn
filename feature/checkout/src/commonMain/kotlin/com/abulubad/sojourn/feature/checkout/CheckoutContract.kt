@@ -29,6 +29,8 @@ data class CheckoutUiState(
     val paying: Boolean = false,
     val notice: CheckoutNotice? = null,
     val sheet: CheckoutSheet? = null,
+    /** The demo wallet is open: "Pay" asks there before anything is charged. */
+    val wallet: Boolean = false,
 ) : UiState {
 
     /** The stay, from content or the offline cache. */
@@ -104,7 +106,15 @@ sealed interface CheckoutIntent : UiIntent {
 
     /** An editor has closed, however it was closed. */
     data object SheetDismissed : CheckoutIntent
+
+    /** "Pay £1,383" on the page: opens the demo wallet. */
     data object PayTapped : CheckoutIntent
+
+    /** "Pay £1,383" in the demo wallet: pays, then books. */
+    data object WalletConfirmed : CheckoutIntent
+
+    /** The demo wallet has closed, however it was closed. Nothing is charged unless it was confirmed. */
+    data object WalletDismissed : CheckoutIntent
 
     /** "Try again" when the stay could not be loaded. */
     data object RetryTapped : CheckoutIntent
@@ -122,4 +132,7 @@ sealed interface CheckoutEffect : UiEffect {
 
     /** Animate the open editor closed: its change is priced. */
     data object CloseSheet : CheckoutEffect
+
+    /** Animate the demo wallet closed: the guest confirmed and paying has started. */
+    data object CloseWallet : CheckoutEffect
 }

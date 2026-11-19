@@ -474,4 +474,13 @@
     <string name="help_key_a">On arrival day, in the booking’s check-in guide. If your host welcomes you, they meet you with the keys.</string>
     <string name="help_offline_q">Does Sojourn work offline?</string>
     <string name="help_offline_a">Your bookings, check-in guides and saved stays are on this device and open without a connection. Searching and booking need one.</string>
+
+    <!-- The demo wallet (ScreenCheckout: the platform sheet first). It stands in for the phone's wallet; no money moves. -->
+    <string name="wallet_title">Demo wallet</string>
+    <string name="wallet_note">This demo stands in for your phone’s wallet. No money moves and no card is charged.</string>
+    <string name="wallet_pay_to">Pay to</string>
+    <string name="wallet_card">Card</string>
+    <string name="wallet_card_value">Demo card ending ⁦4242⁩</string>
+    <string name="wallet_total">Amount</string>
+    <string name="wallet_hint">On a real phone you would confirm with your fingerprint or face.</string>
 </resources>
