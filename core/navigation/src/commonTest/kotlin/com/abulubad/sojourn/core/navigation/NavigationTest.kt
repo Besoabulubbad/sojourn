@@ -32,6 +32,8 @@ class NavigationTest {
         ProfileKey,
         LanguageKey,
         AppearanceKey,
+        RewardsKey,
+        HelpKey,
     )
 
     @Test

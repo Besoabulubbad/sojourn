@@ -16,6 +16,7 @@ import com.abulubad.sojourn.feature.details.detailsModule
 import com.abulubad.sojourn.feature.explore.exploreModule
 import com.abulubad.sojourn.feature.filters.filtersModule
 import com.abulubad.sojourn.feature.map.mapModule
+import com.abulubad.sojourn.feature.profile.profileModule
 import com.abulubad.sojourn.feature.results.resultsModule
 import com.abulubad.sojourn.feature.saved.savedModule
 import com.abulubad.sojourn.feature.search.searchModule
@@ -52,6 +53,7 @@ val sojournModules: List<Module> = listOf(
     mapModule,
     savedModule,
     bookingsModule,
+    profileModule,
 )
 
 /**

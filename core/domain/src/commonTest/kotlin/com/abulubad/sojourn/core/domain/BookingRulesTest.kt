@@ -86,4 +86,14 @@ class BookingRulesTest {
         val clock = FixedAppClock(Instant.parse("2026-03-10T09:00:00Z"))
         assertEquals(null, ObserveArrivingStay(ListBookings(bookings, FakeStayRepository(), clock), clock)().first())
     }
+
+    @Test
+    fun `a completed stay earns a point per pound or euro or per 100 dinars`() {
+        val completed = booking.copy(status = BookingStatus.Completed)
+        assertEquals(0, RewardsRules.pointsFor(booking))
+        assertEquals(0, RewardsRules.pointsFor(booking.copy(status = BookingStatus.Cancelled)))
+        assertEquals(1_500, RewardsRules.pointsFor(completed))
+        assertEquals(1_500, RewardsRules.pointsFor(completed.copy(total = Money.of(1_500, Currency.EUR, 99))))
+        assertEquals(1_250, RewardsRules.pointsFor(completed.copy(total = Money.of(125_099, Currency.DZD))))
+    }
 }

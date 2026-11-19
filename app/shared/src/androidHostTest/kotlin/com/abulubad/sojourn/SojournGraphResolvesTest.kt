@@ -12,6 +12,7 @@ import com.abulubad.sojourn.core.domain.ObserveFilters
 import com.abulubad.sojourn.core.domain.ObserveQuote
 import com.abulubad.sojourn.core.domain.ObserveRecentSearches
 import com.abulubad.sojourn.core.domain.ObserveSaved
+import com.abulubad.sojourn.core.domain.ObserveThemeMode
 import com.abulubad.sojourn.core.domain.RecordSearch
 import com.abulubad.sojourn.core.domain.RemoveSaved
 import com.abulubad.sojourn.core.domain.RestoreSaved
@@ -37,6 +38,10 @@ import com.abulubad.sojourn.feature.details.GalleryViewModel
 import com.abulubad.sojourn.feature.explore.ExploreViewModel
 import com.abulubad.sojourn.feature.filters.FiltersViewModel
 import com.abulubad.sojourn.feature.map.MapViewModel
+import com.abulubad.sojourn.feature.profile.AppearanceViewModel
+import com.abulubad.sojourn.feature.profile.LanguageViewModel
+import com.abulubad.sojourn.feature.profile.ProfileViewModel
+import com.abulubad.sojourn.feature.profile.RewardsViewModel
 import com.abulubad.sojourn.feature.results.ResultsViewModel
 import com.abulubad.sojourn.feature.saved.SavedViewModel
 import com.abulubad.sojourn.feature.search.SearchViewModel
@@ -95,5 +100,10 @@ class SojournGraphResolvesTest {
         koin.get<BookingDetailsViewModel> { parametersOf(BookingDetailsKey("b-1-london-01")) }
         koin.get<CancelBooking>()
         koin.get<ObserveArrivingStay>()
+        koin.get<ProfileViewModel>()
+        koin.get<LanguageViewModel>()
+        koin.get<AppearanceViewModel>()
+        koin.get<RewardsViewModel>()
+        koin.get<ObserveThemeMode>()
     }
 }

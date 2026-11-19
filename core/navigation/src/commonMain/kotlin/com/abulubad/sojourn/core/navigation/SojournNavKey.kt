@@ -76,3 +76,7 @@ data class StayDetailsKey(
 @Serializable data object LanguageKey : SojournNavKey
 
 @Serializable data object AppearanceKey : SojournNavKey
+
+@Serializable data object RewardsKey : SojournNavKey
+
+@Serializable data object HelpKey : SojournNavKey

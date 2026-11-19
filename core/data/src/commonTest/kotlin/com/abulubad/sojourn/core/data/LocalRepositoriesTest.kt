@@ -14,6 +14,7 @@ import com.abulubad.sojourn.core.model.SearchQuery
 import com.abulubad.sojourn.core.model.SortOrder
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.model.StayLength
+import com.abulubad.sojourn.core.model.ThemeMode
 import com.russhwolf.settings.MapSettings
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.LocalDate
@@ -109,6 +110,14 @@ class LocalRepositoriesTest {
         )
         SettingsPreferencesRepository(settings).setFilters(chosen)
         assertEquals(chosen, SettingsPreferencesRepository(settings).filters.value)
+    }
+
+    @Test
+    fun `the appearance survives a restart and starts as the device's`() {
+        val settings = MapSettings()
+        assertEquals(ThemeMode.System, SettingsPreferencesRepository(settings).themeMode.value)
+        SettingsPreferencesRepository(settings).setThemeMode(ThemeMode.Dark)
+        assertEquals(ThemeMode.Dark, SettingsPreferencesRepository(settings).themeMode.value)
     }
 
     @Test

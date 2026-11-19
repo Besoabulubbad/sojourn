@@ -23,9 +23,7 @@ tasks.check {
 // `./gradlew buildHealth` (ADR 0014). The plugin is applied per module by the convention plugins; the root
 // aggregates. Policy: every category fails. Modules that are still skeletons (their convention plugin declares
 // dependencies their phase will use) warn instead; remove a module from this list in the PR that gives it code.
-val skeletonModules = listOf(
-    "profile",
-).map { ":feature:$it" } // Phase 5: each leaves this list in its own PR
+val skeletonModules = emptyList<String>() // Phase 5 done: every feature module has code
 dependencyAnalysis {
     abi {
         // The Compose compiler hoists capture-free composable lambdas into public `ComposableSingletons$<File>`

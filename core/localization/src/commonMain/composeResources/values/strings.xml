@@ -443,4 +443,35 @@
     <string name="booking_cancelled_note">This booking is cancelled. Its nights are free again.</string>
     <!-- The key code, isolated left to right (U+2066 … U+2069) so its digits keep their order in Arabic. -->
     <string name="guide_key_code_value">⁦%1$s⁩</string>
+
+    <!-- Profile (ScreenProfile card). There is no sign-in: the guest's data lives on this device. -->
+    <string name="profile_guest">Guest</string>
+    <string name="profile_guest_detail">Your bookings and saved stays are kept on this device.</string>
+    <string name="profile_rewards">Rewards</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_appearance">Appearance</string>
+    <string name="profile_help">Help</string>
+    <plurals name="points">
+        <item quantity="one">%1$s point</item>
+        <item quantity="other">%1$s points</item>
+    </plurals>
+    <string name="theme_system_detail">Follows your device</string>
+    <string name="rewards_balance">Your points</string>
+    <string name="rewards_how">You earn a point for every pound or euro you pay, or every 100 DA, once a stay is completed.</string>
+    <string name="rewards_later">Spending points is coming soon. Your balance is kept on this device.</string>
+    <string name="rewards_earned">Earned from</string>
+    <!-- Place · dates, e.g. "South Bank, London · 4–18 Jan". -->
+    <string name="rewards_stay_detail">%1$s · %2$s</string>
+    <string name="rewards_empty_title">No points yet</string>
+    <string name="rewards_empty_body">Your first points arrive after your first completed stay.</string>
+    <string name="help_price_q">What does the price include?</string>
+    <string name="help_price_a">The total you see before paying is all you pay: the nights, cleaning and any city tax. Without dates, prices start from a night or a month, and say what they leave out.</string>
+    <string name="help_cancel_q">How do I cancel, and what comes back?</string>
+    <string name="help_cancel_a">Open the booking in Bookings and choose Cancel booking before check-in. Until the free-cancellation date everything comes back; after it, all but the first 7 nights.</string>
+    <string name="help_deposit_q">What is the security deposit?</string>
+    <string name="help_deposit_a">Some stays hold a deposit on your card. It isn’t charged, and it’s released within 7 days of check-out.</string>
+    <string name="help_key_q">When do I get my key code?</string>
+    <string name="help_key_a">On arrival day, in the booking’s check-in guide. If your host welcomes you, they meet you with the keys.</string>
+    <string name="help_offline_q">Does Sojourn work offline?</string>
+    <string name="help_offline_a">Your bookings, check-in guides and saved stays are on this device and open without a connection. Searching and booking need one.</string>
 </resources>
