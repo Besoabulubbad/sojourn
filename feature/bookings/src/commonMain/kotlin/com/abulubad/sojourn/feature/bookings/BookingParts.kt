@@ -2,6 +2,7 @@ package com.abulubad.sojourn.feature.bookings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -203,10 +204,14 @@ internal fun GuideSheet(
             )
             val code = booking.keyCode
             if (code != null && BookingRules.showsKeyCode(booking, today)) {
+                // One line across the row: on iOS at 3x, the isolated code measured a little narrow in Arabic and
+                // its last digit wrapped under the rest.
                 BasicText(
                     stringResource(Res.string.guide_key_code_value, code),
-                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+                    modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite },
                     style = SojournTheme.type.display.copy(color = c.ink),
+                    softWrap = false,
+                    maxLines = 1,
                 )
                 SojournButton(
                     stringResource(Res.string.action_copy),
