@@ -12,6 +12,7 @@ import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetDeten
 import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetState
 import com.abulubad.sojourn.core.designsystem.components.sheet.rememberSojournSheetState
 import com.abulubad.sojourn.core.designsystem.components.stepper.SojournStepper
+import com.abulubad.sojourn.core.designsystem.components.wallet.SojournWalletSheet
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.domain.StayRules
@@ -19,6 +20,7 @@ import com.abulubad.sojourn.core.localization.quoteProblemText
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
 import com.abulubad.sojourn.core.localization.resources.action_choose_dates
+import com.abulubad.sojourn.core.localization.resources.action_pay
 import com.abulubad.sojourn.core.localization.resources.checkout_guests
 import com.abulubad.sojourn.core.localization.resources.checkout_update_total
 import com.abulubad.sojourn.core.localization.resources.guests
@@ -27,6 +29,7 @@ import com.abulubad.sojourn.core.localization.resources.guests_children
 import com.abulubad.sojourn.core.localization.resources.guests_children_hint
 import com.abulubad.sojourn.core.localization.resources.problem_too_many_guests
 import com.abulubad.sojourn.core.model.Guests
+import com.abulubad.sojourn.core.model.PriceDisplay
 import com.abulubad.sojourn.core.model.QuoteProblem
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
@@ -160,5 +163,25 @@ private fun ProblemText(problem: QuoteProblem) {
     BasicText(
         quoteProblemText(problem),
         style = SojournTheme.type.bodySm.copy(color = SojournTheme.colors.danger),
+    )
+}
+
+/** The demo wallet opens at full height: everything it says is read before "Pay". */
+@Composable
+internal fun rememberWalletSheetState(): SojournSheetState =
+    rememberSojournSheetState(SojournSheetDetent.Full, setOf(SojournSheetDetent.Full))
+
+/** The demo wallet for the quote's total, with the same "Pay £1,383" as the page. */
+@Composable
+internal fun WalletSheet(state: CheckoutUiState, onIntent: (CheckoutIntent) -> Unit, sheetState: SojournSheetState) {
+    val quote = state.quote
+    if (!state.wallet || quote == null) return
+    val formatter = rememberSojournFormatter()
+    SojournWalletSheet(
+        state = sheetState,
+        price = PriceDisplay.Total(quote.id, quote.total, quote.dates.nights),
+        payLabel = stringResource(Res.string.action_pay, formatter.money(quote.total)),
+        onPay = { onIntent(CheckoutIntent.WalletConfirmed) },
+        onDismiss = { onIntent(CheckoutIntent.WalletDismissed) },
     )
 }

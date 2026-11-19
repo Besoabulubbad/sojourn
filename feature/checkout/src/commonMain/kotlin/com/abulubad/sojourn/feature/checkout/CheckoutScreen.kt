@@ -79,7 +79,8 @@ import org.jetbrains.compose.resources.stringResource
  * - The stay, then the trip (dates and guests, each with "Edit"), then the price: the breakdown is open, never
  *   behind a link, with every line that makes up the total and the refundable deposit apart from it. Then the
  *   cancellation terms.
- * - "Pay £1,383" spans the docked bar and repeats the total. While paying it holds its place and shows progress.
+ * - "Pay £1,383" spans the docked bar and repeats the total. It opens the demo wallet, which says no money moves
+ *   and asks again with the same words. While paying the page's button holds its place and shows progress.
  * - A payment that did not book says why just above the button, in plain words, with the page unchanged.
  * - Loading shows the page's shape; an expired quote says so with a way back; offline keeps the cached page under
  *   the banner (paying then says it needs a connection).
@@ -91,6 +92,7 @@ fun CheckoutScreen(
     modifier: Modifier = Modifier,
     datesSheet: SojournSheetState = rememberSojournSheetState(),
     guestsSheet: SojournSheetState = rememberGuestsSheetState(),
+    walletSheet: SojournSheetState = rememberWalletSheetState(),
     scroll: ScrollState = rememberScrollState(),
 ) {
     Box(modifier.fillMaxSize()) {
@@ -124,6 +126,7 @@ fun CheckoutScreen(
             }
         }
         Sheets(state, onIntent, datesSheet, guestsSheet)
+        WalletSheet(state, onIntent, walletSheet)
     }
 }
 

@@ -33,7 +33,9 @@ import kotlinx.datetime.yearMonth
  * - The total is the quote's, the same number the card, the pin and the booking bar showed (P-02); "Pay" charges it.
  * - Dates and guests are edited in place. An edit is priced before it is shown, and a changed total says what it
  *   was, so a re-price is never silent.
- * - Paying goes through the platform sheet, then books. A payment that fails, or a booking that cannot be confirmed,
+ * - "Pay" opens the demo wallet, which stands where the platform sheet would (Google Pay, Apple Pay) and says no
+ *   money moves; its "Pay" goes through the payment seam, then books. Closing it charges nothing.
+ * - A payment that fails, or a booking that cannot be confirmed,
  *   keeps the guest here with the page as it was and the reason in plain words; nothing is charged, as the payment
  *   is only an authorization until the booking exists. A total that changed meanwhile is shown, not charged.
  */
@@ -70,7 +72,7 @@ class CheckoutViewModel(
         when (intent) {
             CheckoutIntent.BackTapped -> sendEffect(CheckoutEffect.Back)
             CheckoutIntent.RetryTapped -> refreshes.value++
-            CheckoutIntent.PayTapped -> pay()
+            CheckoutIntent.PayTapped, CheckoutIntent.WalletConfirmed, CheckoutIntent.WalletDismissed -> wallet(intent)
             CheckoutIntent.EditDatesTapped -> currentState.quote?.let { quote ->
                 setState { copy(sheet = CheckoutSheet.EditDates(quote.dates.start.yearMonth, quote.dates)) }
             }
@@ -119,6 +121,26 @@ class CheckoutViewModel(
     private fun edited(quote: Quote, sheet: CheckoutSheet): Pair<DateRange, Guests>? = when (sheet) {
         is CheckoutSheet.EditDates -> sheet.selection?.let { it to quote.guests }
         is CheckoutSheet.EditGuests -> quote.dates to sheet.guests
+    }
+
+    /**
+     * The platform sheet first (ScreenCheckout): here the demo wallet, which says nothing is charged (ADR 0018). The
+     * page's "Pay" opens it, its "Pay" pays, and closing it charges nothing.
+     */
+    private fun wallet(intent: CheckoutIntent) {
+        val state = currentState
+        when (intent) {
+            CheckoutIntent.PayTapped ->
+                if (state.quote != null && state.stay != null && !state.paying) {
+                    setState { copy(wallet = true, notice = null) }
+                }
+            CheckoutIntent.WalletConfirmed -> if (state.wallet) {
+                sendEffect(CheckoutEffect.CloseWallet)
+                pay()
+            }
+            CheckoutIntent.WalletDismissed -> setState { copy(wallet = false) }
+            else -> Unit
+        }
     }
 
     private fun pay() {

@@ -10,6 +10,7 @@ val checkoutSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("checkout_ready", fullMatrix = true) { CheckoutSamples.Screen(CheckoutSamples.ready) },
     SnapshotCase("checkout_repriced") { CheckoutSamples.Screen(CheckoutSamples.repriced, fraction = 1f) },
     SnapshotCase("checkout_paying") { CheckoutSamples.Screen(CheckoutSamples.paying) },
+    SnapshotCase("checkout_wallet") { CheckoutSamples.Screen(CheckoutSamples.wallet) },
     SnapshotCase("checkout_payment_failed") { CheckoutSamples.Screen(CheckoutSamples.paymentFailed) },
     SnapshotCase("checkout_price_changed") { CheckoutSamples.Screen(CheckoutSamples.priceChanged, fraction = 1f) },
     SnapshotCase("checkout_loading") { CheckoutSamples.Screen(CheckoutSamples.loading) },

@@ -26,6 +26,7 @@ fun CheckoutRoute(key: CheckoutKey, navigator: Navigator, modifier: Modifier = M
     val haptics = rememberSojournHaptics()
     val datesSheet = rememberSojournSheetState()
     val guestsSheet = rememberGuestsSheetState()
+    val walletSheet = rememberWalletSheetState()
     CollectEffects(viewModel.effects) { effect ->
         when (effect) {
             CheckoutEffect.Back -> navigator.back()
@@ -36,6 +37,7 @@ fun CheckoutRoute(key: CheckoutKey, navigator: Navigator, modifier: Modifier = M
                 is CheckoutSheet.EditGuests -> guestsSheet.hide()
                 null -> Unit
             }
+            CheckoutEffect.CloseWallet -> walletSheet.hide()
         }
     }
     CheckoutScreen(
@@ -44,6 +46,7 @@ fun CheckoutRoute(key: CheckoutKey, navigator: Navigator, modifier: Modifier = M
         modifier = modifier,
         datesSheet = datesSheet,
         guestsSheet = guestsSheet,
+        walletSheet = walletSheet,
     )
 }
 

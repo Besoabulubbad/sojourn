@@ -102,5 +102,6 @@ nav:
       - "0015 Our own bottom sheet": adr/0015-own-bottom-sheet.md
       - "0016 Seed catalogue hosting": adr/0016-seed-catalogue-hosting.md
       - "0017 Maps with MapLibre and OpenFreeMap": adr/0017-maps-maplibre-openfreemap.md
+      - "0018 Payment with a demo wallet": adr/0018-demo-wallet-payment.md
   # Enabled in Phase 7 once Dokka output is published under docs/api:
   # - API reference (Dokka): api/index.html
