@@ -14,8 +14,12 @@ import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import com.github.takahirom.roborazzi.RoborazziOptions
 import io.github.takahirom.roborazzi.captureRoboImage
 
-/** The iOS virtual device: the same 412 × 915 dp at 3× as the Android screenshots, so images line up. */
-private const val DEVICE_DENSITY = 3f
+/**
+ * The iOS virtual device: the same 412 × 915 dp as the Android screenshots, at 2× (Android stays 3×). The test binary
+ * is unoptimised Kotlin/Native, where an image's cost grows with its pixels: 3× took ~13 s per capture and pushed the
+ * CI job past its hour; 2× takes under 2 s and keeps text and icons reviewable (ADR 0010).
+ */
+private const val DEVICE_DENSITY = 2f
 private const val DEVICE_WIDTH_DP = 412f
 private const val DEVICE_HEIGHT_DP = 915f
 private const val SNAPSHOT_TAG = "sojourn-snapshot"
