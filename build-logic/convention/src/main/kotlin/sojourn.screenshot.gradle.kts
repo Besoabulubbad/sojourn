@@ -5,6 +5,9 @@
 // under screenshots/<androidHostTest|iosSimulatorArm64>/ (separate directories also stop the two finalizers racing).
 import com.abulubad.sojourn.buildlogic.libs
 import com.abulubad.sojourn.buildlogic.library
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithSimulatorTests
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -18,6 +21,12 @@ roborazzi {
 }
 
 kotlin {
+    // iOS screenshots run from an optimised (release) test binary. In a debug binary, rendering and comparing a
+    // 1236 × 2745 px image in Kotlin/Native takes ~13 s; the CI job outgrew its hour as screens were added.
+    targets.withType<KotlinNativeTargetWithSimulatorTests>().configureEach {
+        binaries.test(listOf(NativeBuildType.RELEASE))
+        testRuns.named("test") { setExecutionSourceFrom(binaries.getTest(NativeBuildType.RELEASE)) }
+    }
     sourceSets {
         commonTest.dependencies {
             // SnapshotCase; the platform runners come with it.
@@ -45,3 +54,16 @@ dependencies {
         }
     }
 }
+
+// A release link runs the Kotlin/Native optimiser inside the Gradle daemon and needs several GB; a dozen at once
+// exhaust the heap (and the CI runner's 7 GB). They take turns through one shared service; everything else stays
+// parallel.
+abstract class ReleaseTestLinks : BuildService<BuildServiceParameters.None>
+
+val releaseTestLinks = gradle.sharedServices.registerIfAbsent("releaseTestLinks", ReleaseTestLinks::class) {
+    maxParallelUsages.set(1)
+}
+
+tasks.withType<KotlinNativeLink>()
+    .matching { it.name.startsWith("linkReleaseTest") }
+    .configureEach { usesService(releaseTestLinks) }

@@ -83,6 +83,8 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 
 **2026-11-16, language pairs.** `AppLanguagePairsTest` in `core:designsystem` runs the four device/app language pairs on Robolectric (L-03). It was added after the Price screenshots showed Arabic layout with English text. Compose Multiplatform resources read the platform default locale, so `ProvideAppLocale` now sets it, following JetBrains' resource-environment guide. With that line removed, the test fails the two mismatched pairs.
 
+**2026-11-19, iOS tests run from a release test binary.** From #27 (Map) on, the iOS job was cancelled at its 60-minute limit on every PR; its tests passed, but the later modules never ran. The cause was not the map: each iOS screenshot took about 13 s, because the tests ran from a debug (unoptimised) Kotlin/Native binary, and rendering, encoding and comparing a 1236 × 2745 px image is slow there. The job grew past the hour as screens were added. Modules with screenshots (`sojourn.screenshot`) now also build a release test binary and run `iosSimulatorArm64Test` from it: Across all modules, time inside the iOS tests went from 3,780 s to 142 s (Profile's 24 screenshots: 308 s to 10 s), with every baseline passing unchanged. A release link runs the optimiser in the Gradle daemon and needs several GB; a dozen in parallel ran out of heap, so release test links take turns through one shared build service (`maxParallelUsages = 1`). The whole local iOS run now takes about 26 minutes, most of it those links.
+
 ## Links
 
 - [Roborazzi](https://takahirom.github.io/roborazzi/) · [Robolectric](https://robolectric.org/)
