@@ -21,5 +21,11 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.turbine)
         }
+        named("androidHostTest").dependencies {
+            // SojournScaffoldModalTest drives a compose rule under Robolectric.
+            implementation(libs.compose.uiTest)
+            implementation(libs.compose.uiTestJunit4)
+            implementation(libs.robolectric.annotations)
+        }
     }
 }

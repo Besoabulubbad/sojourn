@@ -42,6 +42,7 @@ import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.designsystem.theme.rememberSojournHaptics
 import com.abulubad.sojourn.core.designsystem.tokens.SojournMotion
 import com.abulubad.sojourn.core.designsystem.tokens.SojournShapes
+import com.abulubad.sojourn.core.designsystem.tokens.SojournSizes
 import com.abulubad.sojourn.core.designsystem.tokens.SojournSpacing
 import com.abulubad.sojourn.core.localization.rememberSojournFormatter
 import com.abulubad.sojourn.core.localization.resources.Res
@@ -187,7 +188,8 @@ private fun DayCell(
     val description = formatter.date(date, withYear = true).let { if (available) it else "$it, $unavailable" }
     Box(
         modifier = modifier
-            .heightIn(min = SojournDateRangePickerDefaults.DayHeight)
+            // The tap target is touch-min tall (48 dp); the disc and band inside stay DayHeight.
+            .heightIn(min = SojournSizes.touchMin)
             .then(if (available) Modifier.clickable(onClick = onClick) else Modifier)
             .semantics {
                 contentDescription = description
@@ -236,10 +238,13 @@ private fun BoxScope.RangeTint(role: DayRole, position: Float?, sweep: () -> Flo
                 val half = size.width * SojournDateRangePickerDefaults.HALF
                 val endHalf = if (layoutDirection == LayoutDirection.Ltr) half else 0f
                 val startHalf = if (layoutDirection == LayoutDirection.Ltr) 0f else half
+                // The band is as tall as the disc, centred in the taller tap target.
+                val band = SojournDateRangePickerDefaults.DayHeight.toPx().coerceAtMost(size.height)
+                val top = (size.height - band) / 2
                 when (role) {
-                    DayRole.Between -> drawRect(tint)
-                    DayRole.CheckInOfRange -> drawRect(tint, Offset(endHalf, 0f), Size(half, size.height))
-                    DayRole.CheckOut -> drawRect(tint, Offset(startHalf, 0f), Size(half, size.height))
+                    DayRole.Between -> drawRect(tint, Offset(0f, top), Size(size.width, band))
+                    DayRole.CheckInOfRange -> drawRect(tint, Offset(endHalf, top), Size(half, band))
+                    DayRole.CheckOut -> drawRect(tint, Offset(startHalf, top), Size(half, band))
                     DayRole.CheckIn, DayRole.None -> Unit
                 }
             },

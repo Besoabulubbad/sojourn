@@ -4,8 +4,11 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 import com.abulubad.sojourn.core.domain.ObserveThemeMode
@@ -35,8 +38,15 @@ fun App(modifier: Modifier = Modifier, onDarkTheme: (Boolean) -> Unit = {}) {
     LaunchedEffect(dark) { onDarkTheme(dark) }
     // Above the theme, which keys its content by language: a language change keeps the tab and back stacks.
     val navState = rememberSojournNavState()
+    // Reduce motion is read again whenever the app comes back to the front, so turning it on in Settings applies
+    // without a restart (Android "Remove animations", iOS "Reduce Motion").
+    var reduceMotion by remember { mutableStateOf(accessibility.reduceMotion()) }
+    LifecycleResumeEffect(accessibility) {
+        reduceMotion = accessibility.reduceMotion()
+        onPauseOrDispose {}
+    }
     ProvideImageLoader()
-    SojournTheme(locale = locale, darkTheme = dark, reduceMotion = accessibility.reduceMotion()) {
+    SojournTheme(locale = locale, darkTheme = dark, reduceMotion = reduceMotion) {
         SojournNavHost(modifier, navState)
     }
 }

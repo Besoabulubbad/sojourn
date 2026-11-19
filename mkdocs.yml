@@ -82,6 +82,7 @@ nav:
       - Adding a component: guides/adding-a-component.md
       - Testing: guides/testing.md
       - Localization: guides/localization.md
+      - Accessibility: guides/accessibility.md
       - Release: guides/release.md
   - Decisions (ADRs):
       - Index: adr/README.md

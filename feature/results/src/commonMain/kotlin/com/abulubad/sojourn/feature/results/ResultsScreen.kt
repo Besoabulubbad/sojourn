@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -96,7 +97,16 @@ import org.jetbrains.compose.resources.stringResource
  */
 @Composable
 fun ResultsScreen(state: ResultsUiState, onIntent: (ResultsIntent) -> Unit, modifier: Modifier = Modifier) {
-    SojournScaffold(modifier, bottomBar = { SojournTabBar() }) { padding ->
+    Box(modifier.fillMaxSize()) {
+        Page(state, onIntent)
+        // Beside the scaffold, not inside it: the page is hidden from screen readers while the sheet is open.
+        if (state.sortOpen) SortSheet(state.filters.sort, onIntent)
+    }
+}
+
+@Composable
+private fun Page(state: ResultsUiState, onIntent: (ResultsIntent) -> Unit) {
+    SojournScaffold(bottomBar = { SojournTabBar() }) { padding ->
         Box(Modifier.fillMaxSize()) {
             Column(Modifier.fillMaxSize()) {
                 Header(state, onIntent, padding)
@@ -121,7 +131,6 @@ fun ResultsScreen(state: ResultsUiState, onIntent: (ResultsIntent) -> Unit, modi
                     .align(Alignment.BottomCenter)
                     .padding(bottom = padding.calculateBottomPadding() + SojournSpacing.space3),
             )
-            if (state.sortOpen) SortSheet(state.filters.sort, onIntent)
         }
     }
 }
@@ -339,6 +348,7 @@ private fun SortSheet(selected: SortOrder, onIntent: (ResultsIntent) -> Unit) {
                         role = Role.RadioButton,
                         onClick = { onIntent(ResultsIntent.SortSelected(order)) },
                     )
+                    .heightIn(min = SojournSizes.touchMin)
                     .padding(vertical = SojournSpacing.space3),
                 verticalAlignment = Alignment.CenterVertically,
             ) {

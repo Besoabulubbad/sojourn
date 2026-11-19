@@ -50,3 +50,7 @@ Konsist requires a screenshot case for `SojournSheet`; `SojournSheetBehaviourTes
 - Good: less code; Material's gestures and semantics.
 - Bad: no peek stop, so the map would need a second component.
 - Bad: a separate window, so screenshots cover only the contents.
+## Implementation notes
+
+**2026-11-19 (Phase 6 accessibility pass).** The device audit found the page beneath a modal sheet still readable by screen readers: Back, Share and Save behind the scrim, which Material's sheet would have hidden by opening in its own window. A modal `SojournSheet` now registers in `SojournModalSheets` (provided by `SojournTheme`) while it is open, and `SojournScaffold` removes its page from the accessibility tree meanwhile. A modal sheet must therefore be drawn beside the scaffold, never inside its content; Results' sort sheet moved out. `SojournScaffoldModalTest` fails if the page stays readable.
+
