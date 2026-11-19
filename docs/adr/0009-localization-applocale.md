@@ -66,6 +66,10 @@ The catalogue spans London, Paris, Lisbon and three Algerian cities; the design 
 - Good: simplest control.
 - Bad: keyboards, system dialogs and share sheets in the wrong language; feels broken.
 
+## Implementation notes
+
+**2026-11-19 (Phase 6), the OS's choice is read back.** The sync now works both ways. `PlatformLocaleSync.current()` reads the per-app language the OS holds: Android's `LocaleManager.applicationLocales` (API 33+), iOS's `AppleLanguages`. `SettingsAppLocaleController` lets it win over the stored choice when it names a language the app ships (`AppLocale.supportedOrNull`). On Android, `App` calls `syncFromPlatform()` when the UI is created, because Settings › Apps › Sojourn › Language recreates the activity. iOS relaunches the app after a change in Settings, so reading at start is enough. The shells declare the two languages so the system offers them: Android `res/xml/locales_config.xml` (`android:localeConfig`), iOS `CFBundleLocalizations`. On iOS before any choice, `AppleLanguages` is the device's list, so a first launch on an Arabic device opens in Arabic.
+
 ## Links
 
 - [Compose Multiplatform resources — strings and plurals](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-resources-usage.html)

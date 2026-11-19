@@ -50,4 +50,40 @@ class AppLocaleControllerTest {
         assertEquals(AppLocale.EN_GB, AppLocale.fromTag(null))
         assertEquals(AppLocale.AR, AppLocale.fromTag("AR"))
     }
+
+    @Test
+    fun `the platform's per-app language wins when the app ships it`() {
+        val settings = MapSettings().apply { putString(SettingsAppLocaleController.KEY, "en-GB") }
+        val platform = FakePlatform("ar")
+        assertEquals(AppLocale.AR, SettingsAppLocaleController(settings, platform).locale.value)
+        platform.tag = "fr-FR"
+        assertEquals(AppLocale.EN_GB, SettingsAppLocaleController(settings, platform).locale.value, "stored wins")
+    }
+
+    @Test
+    fun `a change made in system settings is adopted and stored without echoing back`() {
+        val settings = MapSettings()
+        val platform = FakePlatform(null)
+        val controller = SettingsAppLocaleController(settings, platform)
+        assertEquals(AppLocale.EN_GB, controller.locale.value)
+
+        platform.tag = "ar"
+        controller.syncFromPlatform()
+
+        assertEquals(AppLocale.AR, controller.locale.value)
+        assertEquals("ar", settings.getStringOrNull(SettingsAppLocaleController.KEY))
+        assertEquals(emptyList(), platform.applied)
+
+        platform.tag = null
+        controller.syncFromPlatform()
+        assertEquals(AppLocale.AR, controller.locale.value, "system default keeps the in-app choice")
+    }
+}
+
+private class FakePlatform(var tag: String?) : PlatformLocaleSync {
+    val applied = mutableListOf<AppLocale>()
+    override fun apply(locale: AppLocale) {
+        applied += locale
+    }
+    override fun current(): String? = tag
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
@@ -26,6 +27,8 @@ fun App(modifier: Modifier = Modifier, onDarkTheme: (Boolean) -> Unit = {}) {
     val localeController = koinInject<AppLocaleController>()
     val accessibility = koinInject<AccessibilitySettings>()
     val observeThemeMode = koinInject<ObserveThemeMode>()
+    // A language chosen in system settings while the app was away; Android recreates the UI after such a change.
+    remember(localeController) { localeController.syncFromPlatform() }
     val locale by localeController.locale.collectAsStateWithLifecycle()
     val themeMode by observeThemeMode().collectAsStateWithLifecycle()
     val dark = themeMode.isDark(deviceIsDark = isSystemInDarkTheme())

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        The window before Compose draws: the screen colour of the device's theme (values-night for dark), so a cold
+        start never flashes white in dark mode. API 31+ adds the system splash (values-v31). Compose then draws the app
+        in the guest's Appearance choice; MainActivity sets the bar icons to match it.
+    -->
+    <style name="Theme.Sojourn" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>

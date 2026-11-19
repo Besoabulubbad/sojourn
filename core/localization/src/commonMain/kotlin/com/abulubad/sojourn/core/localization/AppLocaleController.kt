@@ -13,11 +13,20 @@ import kotlinx.coroutines.flow.asStateFlow
 interface AppLocaleController {
     val locale: StateFlow<AppLocale>
     fun set(locale: AppLocale)
+
+    /**
+     * Adopts a language the guest chose outside the app (Android's "App languages" setting, iOS Settings), if the app
+     * ships it. The shell calls it when its UI is (re)created: Android recreates the activity after such a change.
+     */
+    fun syncFromPlatform() {}
 }
 
 /** The OS side of a language change: Android's `LocaleManager`, iOS's `AppleLanguages`. */
 fun interface PlatformLocaleSync {
     fun apply(locale: AppLocale)
+
+    /** The per-app language the OS holds now (a BCP 47 tag), or null when it holds none. */
+    fun current(): String? = null
 
     companion object {
         val None = PlatformLocaleSync { }
@@ -25,8 +34,9 @@ fun interface PlatformLocaleSync {
 }
 
 /**
- * Persists the choice with multiplatform-settings. With no stored value the app starts in [AppLocale.Default];
- * platform shells may seed it from the device language on first launch via [initialTag].
+ * Persists the choice with multiplatform-settings. The OS's per-app language wins when it names a language the app
+ * ships (the guest may have changed it in system settings); else the stored choice; else [initialTag] (a shell may
+ * seed it from the device language); else [AppLocale.Default].
  */
 class SettingsAppLocaleController(
     private val settings: Settings,
@@ -34,7 +44,10 @@ class SettingsAppLocaleController(
     initialTag: String? = null,
 ) : AppLocaleController {
 
-    private val state = MutableStateFlow(AppLocale.fromTag(settings.getStringOrNull(KEY) ?: initialTag))
+    private val state = MutableStateFlow(
+        AppLocale.supportedOrNull(platformSync.current())
+            ?: AppLocale.fromTag(settings.getStringOrNull(KEY) ?: initialTag),
+    )
 
     override val locale: StateFlow<AppLocale> = state.asStateFlow()
 
@@ -43,6 +56,13 @@ class SettingsAppLocaleController(
         settings.putString(KEY, locale.tag)
         state.value = locale
         platformSync.apply(locale)
+    }
+
+    override fun syncFromPlatform() {
+        val chosen = AppLocale.supportedOrNull(platformSync.current()) ?: return
+        if (chosen == state.value) return
+        settings.putString(KEY, chosen.tag)
+        state.value = chosen
     }
 
     internal companion object {
