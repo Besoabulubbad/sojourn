@@ -16,4 +16,11 @@ class AndroidLocaleSync(private val context: Context) : PlatformLocaleSync {
             manager?.applicationLocales = LocaleList.forLanguageTags(locale.tag)
         }
     }
+
+    /** The per-app language from Settings › Apps › Sojourn › Language (API 33+), or null for "System default". */
+    override fun current(): String? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return null
+        val locales = context.getSystemService(LocaleManager::class.java)?.applicationLocales ?: return null
+        return if (locales.isEmpty) null else locales[0].toLanguageTag()
+    }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The languages Sojourn ships, so Settings › Apps › Sojourn › Language offers them (Android 13+, ADR 0009). -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en-GB" />
+    <locale android:name="ar" />
+</locale-config>

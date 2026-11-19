@@ -11,6 +11,13 @@ class IosLocaleSync : PlatformLocaleSync {
         NSUserDefaults.standardUserDefaults.setObject(listOf(locale.tag), forKey = APPLE_LANGUAGES)
     }
 
+    /**
+     * The app's first preferred language: the one chosen in Settings › Sojourn › Language (iOS relaunches the app
+     * after a change), or the in-app choice, or, before either, the device's first language.
+     */
+    override fun current(): String? =
+        NSUserDefaults.standardUserDefaults.stringArrayForKey(APPLE_LANGUAGES)?.firstOrNull() as? String
+
     private companion object {
         const val APPLE_LANGUAGES = "AppleLanguages"
     }

@@ -21,9 +21,13 @@ enum class AppLocale(val tag: String, val layoutDirection: LayoutDirection, val 
         val Default: AppLocale = EN_GB
 
         /** Resolves a stored or system tag (`ar`, `ar-DZ`, `en-US`) to a supported locale; English otherwise. */
-        fun fromTag(tag: String?): AppLocale = when (tag?.substringBefore('-')?.lowercase()) {
+        fun fromTag(tag: String?): AppLocale = supportedOrNull(tag) ?: Default
+
+        /** The app language [tag] names ("ar-DZ" → [AR]), or null for one the app does not ship. */
+        fun supportedOrNull(tag: String?): AppLocale? = when (tag?.substringBefore('-')?.lowercase()) {
             "ar" -> AR
-            else -> Default
+            "en" -> EN_GB
+            else -> null
         }
     }
 }
