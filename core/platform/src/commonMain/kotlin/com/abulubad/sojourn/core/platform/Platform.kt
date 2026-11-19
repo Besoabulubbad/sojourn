@@ -1,5 +1,6 @@
 package com.abulubad.sojourn.core.platform
 
+import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.GeoPoint
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.QuoteId
@@ -56,4 +57,19 @@ fun interface PaymentSheet {
 class StubPaymentSheet : PaymentSheet {
     override suspend fun pay(request: PaymentRequest): PaymentResult =
         PaymentResult.Authorized(token = "stub-${request.quoteId.value}")
+}
+
+/**
+ * A booked stay for the phone's calendar: one all-day event from check-in through check-out (the guest is there that
+ * morning), with where it is and what to remember.
+ */
+data class CalendarStay(val title: String, val location: String, val dates: DateRange, val notes: String)
+
+/**
+ * Adds a stay to the phone's calendar through the system's own event editor: the guest sees it and confirms, and the
+ * app needs no calendar permission (Android's insert screen; iOS's event editor, which since iOS 17 adds events
+ * without access). False when there is nowhere to add it, so the screen can say so.
+ */
+fun interface CalendarSaver {
+    fun add(stay: CalendarStay): Boolean
 }

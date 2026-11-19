@@ -12,7 +12,10 @@ CREATE TABLE booking (
     currency TEXT NOT NULL,
     status TEXT NOT NULL,
     created_at INTEGER NOT NULL,
-    key_code TEXT
+    key_code TEXT,
+    address TEXT,
+    wifi_network TEXT,
+    wifi_password TEXT
 );
 
 upsert:

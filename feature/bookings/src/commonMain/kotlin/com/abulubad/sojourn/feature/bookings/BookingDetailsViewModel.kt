@@ -42,7 +42,8 @@ class BookingDetailsViewModel(
             BookingDetailsIntent.DirectionsTapped ->
                 currentState.item?.let { sendEffect(BookingDetailsEffect.OpenMaps(it)) }
             BookingDetailsIntent.GuideTapped -> setState { copy(sheet = BookingSheet.Guide) }
-            is BookingDetailsIntent.CopyTapped -> sendEffect(BookingDetailsEffect.Copy(intent.code))
+            is BookingDetailsIntent.CopyTapped -> sendEffect(BookingDetailsEffect.Copy(intent.text, intent.what))
+            is BookingDetailsIntent.AddToCalendarTapped -> sendEffect(BookingDetailsEffect.AddToCalendar(intent.stay))
             BookingDetailsIntent.CancelTapped ->
                 if (currentState.canCancel) setState { copy(sheet = BookingSheet.Cancel()) }
             BookingDetailsIntent.CancelConfirmed -> cancel()

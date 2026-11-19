@@ -1,0 +1,4 @@
+-- Version 7: a booking's address (sent once booked) and the stay's Wi-Fi (shown from arrival day).
+ALTER TABLE booking ADD COLUMN address TEXT;
+ALTER TABLE booking ADD COLUMN wifi_network TEXT;
+ALTER TABLE booking ADD COLUMN wifi_password TEXT;

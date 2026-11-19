@@ -4,6 +4,7 @@ import com.abulubad.sojourn.core.common.AppError
 import com.abulubad.sojourn.core.domain.BookingItem
 import com.abulubad.sojourn.core.domain.BookingRules
 import com.abulubad.sojourn.core.domain.Refund
+import com.abulubad.sojourn.core.platform.CalendarStay
 import com.abulubad.sojourn.core.ui.ScreenState
 import com.abulubad.sojourn.core.ui.UiEffect
 import com.abulubad.sojourn.core.ui.UiIntent
@@ -41,7 +42,10 @@ sealed interface BookingDetailsIntent : UiIntent {
     data object BackTapped : BookingDetailsIntent
     data object DirectionsTapped : BookingDetailsIntent
     data object GuideTapped : BookingDetailsIntent
-    data class CopyTapped(val code: String) : BookingDetailsIntent
+    data class CopyTapped(val text: String, val what: Copied) : BookingDetailsIntent
+
+    /** [stay] is the calendar entry, worded on screen in the app's language. */
+    data class AddToCalendarTapped(val stay: CalendarStay) : BookingDetailsIntent
     data object CancelTapped : BookingDetailsIntent
     data object CancelConfirmed : BookingDetailsIntent
 
@@ -52,7 +56,10 @@ sealed interface BookingDetailsIntent : UiIntent {
 sealed interface BookingDetailsEffect : UiEffect {
     data object Back : BookingDetailsEffect
     data class OpenMaps(val item: BookingItem) : BookingDetailsEffect
-    data class Copy(val code: String) : BookingDetailsEffect
+    data class Copy(val text: String, val what: Copied) : BookingDetailsEffect
+
+    /** The stay into the phone's calendar, through the system's own editor. */
+    data class AddToCalendar(val stay: CalendarStay) : BookingDetailsEffect
 
     /** Animate the open sheet closed: the booking is cancelled. */
     data object CloseSheet : BookingDetailsEffect

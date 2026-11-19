@@ -9,6 +9,7 @@ import com.abulubad.sojourn.core.domain.ListBookings
 import com.abulubad.sojourn.core.domain.Refund
 import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.navigation.BookingDetailsKey
+import com.abulubad.sojourn.core.platform.CalendarStay
 import com.abulubad.sojourn.core.testing.FixedAppClock
 import com.abulubad.sojourn.core.testing.QuoteFixtures
 import com.abulubad.sojourn.core.testing.StayFixtures
@@ -61,8 +62,8 @@ class BookingsViewModelTest {
         vm.effects.test {
             vm.onIntent(BookingsIntent.BookingTapped(item))
             assertEquals(BookingsEffect.Navigate(BookingDetailsKey(booking.id.value)), awaitItem())
-            vm.onIntent(BookingsIntent.CopyTapped("482913"))
-            assertEquals(BookingsEffect.Copy("482913"), awaitItem())
+            vm.onIntent(BookingsIntent.CopyTapped("482913", Copied.KeyCode))
+            assertEquals(BookingsEffect.Copy("482913", Copied.KeyCode), awaitItem())
         }
     }
 
@@ -107,5 +108,24 @@ class BookingsViewModelTest {
         advanceUntilIdle()
         assertEquals(BookingSheet.Cancel(error = AppError.Offline), vm.state.value.sheet)
         assertEquals(BookingStatus.Upcoming, vm.state.value.item?.booking?.status)
+    }
+
+    @Test
+    fun `the booking page copies the address and adds the stay to the calendar`() = runSojournTest {
+        val booking = booked()
+        val vm = BookingDetailsViewModel(
+            BookingDetailsKey(booking.id.value),
+            GetBooking(bookings, stays, clock),
+            CancelBooking(bookings),
+            clock,
+        )
+        advanceUntilIdle()
+        val entry = CalendarStay("Bright studio by the canal", "Flat 4, Linden House", booking.dates, "SJ-ABCDEF")
+        vm.effects.test {
+            vm.onIntent(BookingDetailsIntent.CopyTapped("Flat 4, Linden House", Copied.Address))
+            assertEquals(BookingDetailsEffect.Copy("Flat 4, Linden House", Copied.Address), awaitItem())
+            vm.onIntent(BookingDetailsIntent.AddToCalendarTapped(entry))
+            assertEquals(BookingDetailsEffect.AddToCalendar(entry), awaitItem())
+        }
     }
 }

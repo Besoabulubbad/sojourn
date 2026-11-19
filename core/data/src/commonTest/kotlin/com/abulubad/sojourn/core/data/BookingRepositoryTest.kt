@@ -61,6 +61,11 @@ class BookingRepositoryTest {
         val quote = assertNotNull(pricing.quote(stay, quarter(), Guests(1)).getOrNull())
         val booking = assertNotNull(bookings.book(quote.id).getOrNull())
         assertNotNull(booking.keyCode)
+        // The address and Wi-Fi survive the round trip through the database.
+        val stored = assertNotNull(bookings.observeBooking(booking.id).first())
+        assertEquals(booking.address, stored.address)
+        assertEquals(booking.wifi, stored.wifi)
+        assertNotNull(stored.wifi)
         assertTrue(quarter() in stays.observeBlockedDates(stay).first())
         assertTrue(bookings.cancel(booking.id) is AppResult.Success)
         assertEquals(BookingStatus.Cancelled, bookings.observeBooking(booking.id).first()?.status)

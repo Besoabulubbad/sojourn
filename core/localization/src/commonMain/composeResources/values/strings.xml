@@ -483,4 +483,22 @@
     <string name="wallet_card_value">Demo card ending ⁦4242⁩</string>
     <string name="wallet_total">Amount</string>
     <string name="wallet_hint">On a real phone you would confirm with your fingerprint or face.</string>
+
+    <!-- Arrival details on a booking: the address (sent once booked), the calendar, and Wi-Fi from arrival day. -->
+    <string name="booking_address">Address</string>
+    <!-- The flat and building, isolated left to right (it is written in Latin letters). -->
+    <string name="booking_address_value">⁦%1$s⁩</string>
+    <string name="action_copy_address">Copy address</string>
+    <string name="address_copied">Address copied</string>
+    <string name="action_add_to_calendar">Add to calendar</string>
+    <string name="calendar_unavailable">There’s no calendar app on this phone to add it to.</string>
+    <string name="calendar_notes">Check-in from %1$s, check-out by %2$s. Booking reference %3$s.</string>
+    <string name="calendar_notes_reference">Booking reference %1$s.</string>
+    <string name="guide_wifi">Wi‑Fi</string>
+    <string name="guide_wifi_network">Network</string>
+    <string name="guide_wifi_password">Password</string>
+    <string name="guide_wifi_value">⁦%1$s⁩</string>
+    <string name="guide_wifi_later">The Wi‑Fi details appear here on arrival day, %1$s.</string>
+    <string name="action_copy_password">Copy password</string>
+    <string name="wifi_password_copied">Password copied</string>
 </resources>

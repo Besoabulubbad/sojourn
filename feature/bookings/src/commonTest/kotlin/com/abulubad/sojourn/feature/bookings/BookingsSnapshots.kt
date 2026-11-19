@@ -12,6 +12,7 @@ val bookingsSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("bookings_empty") { BookingsSamples.Tab(BookingsSamples.empty) },
     SnapshotCase("bookings_guide_before") { BookingsSamples.Tab(BookingsSamples.guideBefore) },
     SnapshotCase("bookings_guide_arrival") { BookingsSamples.Tab(BookingsSamples.guideOnArrival) },
+    SnapshotCase("bookings_guide_full") { BookingsSamples.GuideOpen(BookingsSamples.guideOnArrival) },
     SnapshotCase("booking_details", fullMatrix = true) { BookingsSamples.Details(BookingsSamples.details) },
     SnapshotCase("booking_cancel") { BookingsSamples.Details(BookingsSamples.cancelling) },
     SnapshotCase("booking_cancelled") { BookingsSamples.Details(BookingsSamples.cancelledDetails) },

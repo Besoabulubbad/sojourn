@@ -33,7 +33,7 @@ class BookingsViewModel(
             is BookingsIntent.DirectionsTapped -> sendEffect(BookingsEffect.OpenMaps(intent.item))
             is BookingsIntent.GuideTapped -> setState { copy(guide = intent.item) }
             BookingsIntent.GuideDismissed -> setState { copy(guide = null) }
-            is BookingsIntent.CopyTapped -> sendEffect(BookingsEffect.Copy(intent.code))
+            is BookingsIntent.CopyTapped -> sendEffect(BookingsEffect.Copy(intent.text, intent.what))
             BookingsIntent.ExploreTapped -> sendEffect(BookingsEffect.ShowExplore)
         }
     }

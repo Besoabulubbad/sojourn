@@ -19,6 +19,7 @@ import com.abulubad.sojourn.core.model.QuoteId
 import com.abulubad.sojourn.core.model.Review
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayId
+import com.abulubad.sojourn.core.model.Wifi
 import com.abulubad.sojourn.core.network.dto.CatalogDto
 import com.abulubad.sojourn.core.network.dto.StayDto
 
@@ -90,6 +91,8 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
             status = BookingStatus.Upcoming,
             createdAt = clock.now(),
             keyCode = keyCode(reference),
+            address = address(reference),
+            wifi = wifi(reference),
         )
         booked[booking.id] = booking
         return AppResult.Success(booking)
@@ -112,6 +115,27 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
     /** Six digits for the door, stable for a reference. */
     private fun keyCode(reference: String): String =
         ((reference.hashCode().toLong() and HASH_MASK) % KEY_CODE_RANGE).toString().padStart(KEY_CODE_DIGITS, '0')
+
+    /**
+     * The flat and building, stable for a reference. The buildings are made up, and there is no street or number, so
+     * a demo address never points at someone's real home; the area and city come from the stay.
+     */
+    private fun address(reference: String): String {
+        val hash = reference.hashCode().toLong() and HASH_MASK
+        val flat = hash % FLATS + 1
+        return "Flat $flat, ${BUILDINGS[((hash / FLATS) % BUILDINGS.size).toInt()]} House"
+    }
+
+    /** The stay's Wi-Fi, stable for a reference: a network named after the reference and a three-part password. */
+    private fun wifi(reference: String): Wifi {
+        val hash = reference.reversed().hashCode().toLong() and HASH_MASK
+        val word = { i: Int -> WIFI_WORDS[((hash shr (i * WORD_BITS)) % WIFI_WORDS.size).toInt()] }
+        val digits = (hash % WIFI_DIGITS_RANGE).toString().padStart(WIFI_DIGITS, '0')
+        return Wifi(
+            network = "Sojourn-${reference.takeLast(WIFI_NAME_CHARS)}",
+            password = "${word(0)}-${word(1)}-$digits",
+        )
+    }
 
     /** Nights × rate, the long-stay discount when it applies, then cleaning and city tax. Integer minor units. */
     private fun lines(dto: StayDto, nights: Int): List<PriceLine> {
@@ -155,6 +179,13 @@ internal class CatalogEngine(private val catalog: CatalogDto, private val clock:
         const val KEY_CODE_DIGITS = 6
         const val REFERENCE_LENGTH = 6
         const val HASH_MASK = 0x7FFFFFFFL
+        const val FLATS = 24L
+        val BUILDINGS = listOf("Linden", "Harbour", "Cedar", "Orchard", "Willow", "Juniper", "Meridian", "Larch")
+        val WIFI_WORDS = listOf("maple", "harbour", "lantern", "meadow", "copper", "river", "garden", "amber")
+        const val WORD_BITS = 4
+        const val WIFI_DIGITS = 2
+        const val WIFI_DIGITS_RANGE = 100L
+        const val WIFI_NAME_CHARS = 4
         const val REFERENCE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
     }
 }

@@ -544,4 +544,20 @@
     <string name="wallet_card_value">بطاقة تجريبية تنتهي بـ ⁦4242⁩</string>
     <string name="wallet_total">المبلغ</string>
     <string name="wallet_hint">على هاتف حقيقي ستؤكد ببصمة إصبعك أو وجهك.</string>
+
+    <string name="booking_address">العنوان</string>
+    <string name="booking_address_value">⁦%1$s⁩</string>
+    <string name="action_copy_address">انسخ العنوان</string>
+    <string name="address_copied">تم نسخ العنوان</string>
+    <string name="action_add_to_calendar">أضف إلى التقويم</string>
+    <string name="calendar_unavailable">لا يوجد تطبيق تقويم على هذا الهاتف لإضافتها إليه.</string>
+    <string name="calendar_notes">تسجيل الوصول من %1$s، والمغادرة قبل %2$s. مرجع الحجز %3$s.</string>
+    <string name="calendar_notes_reference">مرجع الحجز %1$s.</string>
+    <string name="guide_wifi">واي فاي</string>
+    <string name="guide_wifi_network">الشبكة</string>
+    <string name="guide_wifi_password">كلمة المرور</string>
+    <string name="guide_wifi_value">⁦%1$s⁩</string>
+    <string name="guide_wifi_later">تظهر بيانات الواي فاي هنا يوم الوصول، %1$s.</string>
+    <string name="action_copy_password">انسخ كلمة المرور</string>
+    <string name="wifi_password_copied">تم نسخ كلمة المرور</string>
 </resources>
