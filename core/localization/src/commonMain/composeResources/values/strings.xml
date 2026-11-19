@@ -501,4 +501,16 @@
     <string name="guide_wifi_later">The Wi‑Fi details appear here on arrival day, %1$s.</string>
     <string name="action_copy_password">Copy password</string>
     <string name="wifi_password_copied">Password copied</string>
+
+    <!-- The arrival reminder (a local notification, never a push): the offer, the confirmation, and the notification. -->
+    <string name="reminder_offer_title">Get a reminder the day before</string>
+    <string name="reminder_offer_body">A notification the evening before check-in, with the time and your check-in guide. Only on this phone.</string>
+    <string name="action_remind_me">Remind me</string>
+    <string name="reminder_set_title">Reminder set</string>
+    <string name="reminder_set_body">You’ll get a reminder on %1$s at %2$s.</string>
+    <string name="reminder_blocked_title">Notifications are off</string>
+    <string name="reminder_blocked_body">Turn on notifications for Sojourn in your phone’s settings to get a reminder.</string>
+    <string name="reminder_notification_title">Check-in tomorrow</string>
+    <string name="reminder_notification_body">%1$s · check-in from %2$s. Your check-in guide is in Sojourn.</string>
+    <string name="reminder_notification_body_no_time">%1$s. Your check-in guide is in Sojourn.</string>
 </resources>

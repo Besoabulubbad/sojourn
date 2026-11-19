@@ -7,9 +7,14 @@ import com.abulubad.sojourn.core.model.Policy
 import com.abulubad.sojourn.core.model.Stay
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.minus
+import kotlinx.datetime.toInstant
 import kotlin.math.min
+import kotlin.time.Instant
 
 /** What cancelling gives back (ScreenBookings card: free until the deadline; after it, the first 7 nights are kept). */
 sealed interface Refund {
@@ -45,6 +50,20 @@ object BookingRules {
 
     /** The key code shows from arrival day until check-out, never earlier (ScreenBookings card). */
     fun showsKeyCode(booking: Booking, today: LocalDate): Boolean = statusOn(booking, today) == BookingStatus.Active
+
+    /** The hour, on the phone's clock, of the evening before check-in when the arrival reminder shows. */
+    const val REMINDER_HOUR = 18
+
+    /**
+     * When the arrival reminder shows: [REMINDER_HOUR]:00 on the day before check-in, in [timeZone] (the phone's).
+     * Null when that moment has passed by [now], or the booking is cancelled: a reminder never shows late.
+     */
+    fun reminderAt(booking: Booking, now: Instant, timeZone: TimeZone): Instant? {
+        if (booking.status == BookingStatus.Cancelled) return null
+        val at = LocalDateTime(booking.dates.start.minus(DatePeriod(days = 1)), LocalTime(REMINDER_HOUR, 0))
+            .toInstant(timeZone)
+        return at.takeIf { it > now }
+    }
 
     /** From [ARRIVING_DAYS] before check-in until check-out, the stay leads Explore. */
     fun isArriving(booking: Booking, today: LocalDate): Boolean = when (statusOn(booking, today)) {

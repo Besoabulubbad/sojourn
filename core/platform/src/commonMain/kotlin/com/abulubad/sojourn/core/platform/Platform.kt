@@ -4,6 +4,7 @@ import com.abulubad.sojourn.core.model.DateRange
 import com.abulubad.sojourn.core.model.GeoPoint
 import com.abulubad.sojourn.core.model.Money
 import com.abulubad.sojourn.core.model.QuoteId
+import kotlin.time.Instant
 
 /**
  * Haptics (docs/design-system/motion.md): a light tick on save, stepper change, date selected and sheet detents;
@@ -72,4 +73,25 @@ data class CalendarStay(val title: String, val location: String, val dates: Date
  */
 fun interface CalendarSaver {
     fun add(stay: CalendarStay): Boolean
+}
+
+/**
+ * A notification the guest asked for. [id] (the booking's) replaces or cancels it; it shows at [at]. The words are
+ * written when it is scheduled, in the app's language, because nothing of the app runs when it shows.
+ */
+data class Reminder(val id: String, val at: Instant, val title: String, val body: String)
+
+/**
+ * Local notifications for arrival reminders. Nothing leaves the phone: no push service. [ask] shows the system's own
+ * question once (Android 13+, iOS); [allowed] says whether the guest has said yes.
+ */
+interface Reminders {
+    suspend fun allowed(): Boolean
+
+    /** Asks the system to let the app notify; true when it may. Only asks when the guest chose to be reminded. */
+    suspend fun ask(): Boolean
+
+    fun schedule(reminder: Reminder)
+
+    fun cancel(id: String)
 }

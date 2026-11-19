@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android system strings: the notification channel's name, shown in the phone's settings. -->
+<resources>
+    <string name="reminder_channel">Arrival reminders</string>
+</resources>

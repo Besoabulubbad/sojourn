@@ -4,6 +4,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.abulubad.sojourn.core.common.AppError
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderState
 import com.abulubad.sojourn.core.designsystem.preview.SojournSamplePhotos
 import com.abulubad.sojourn.core.designsystem.preview.WithSojournSamplePhotos
 import com.abulubad.sojourn.core.domain.BookingItem
@@ -158,7 +159,6 @@ object CheckoutSamples {
     }
 
     @Composable
-    fun Confirmation(state: ConfirmationUiState = confirmed) = WithSojournSamplePhotos {
-        ConfirmationScreen(state, onIntent = {})
-    }
+    fun Confirmation(state: ConfirmationUiState = confirmed, reminder: SojournReminderState? = null) =
+        WithSojournSamplePhotos { ConfirmationScreen(state, onIntent = {}, reminder = reminder) }
 }

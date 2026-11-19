@@ -12,6 +12,7 @@ import com.abulubad.sojourn.core.navigation.CheckoutKey
 import com.abulubad.sojourn.core.navigation.ExploreKey
 import com.abulubad.sojourn.core.navigation.Navigator
 import com.abulubad.sojourn.core.ui.CollectEffects
+import com.abulubad.sojourn.core.ui.ScreenState
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -65,5 +66,12 @@ fun ConfirmationRoute(key: BookingConfirmedKey, navigator: Navigator, modifier: 
             ConfirmationEffect.Done -> navigator.popTo(ExploreKey)
         }
     }
-    ConfirmationScreen(state = state, onIntent = viewModel::onIntent, modifier = modifier)
+    val reminder = rememberArrivalReminder((state.booking as? ScreenState.Content)?.data)
+    ConfirmationScreen(
+        state = state,
+        onIntent = viewModel::onIntent,
+        modifier = modifier,
+        reminder = reminder.state,
+        onRemind = reminder.remind,
+    )
 }

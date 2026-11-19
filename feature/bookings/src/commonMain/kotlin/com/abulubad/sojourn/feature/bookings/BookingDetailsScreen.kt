@@ -24,6 +24,8 @@ import com.abulubad.sojourn.core.designsystem.components.button.SojournButton
 import com.abulubad.sojourn.core.designsystem.components.button.SojournButtonVariant
 import com.abulubad.sojourn.core.designsystem.components.emptystate.SojournEmptyState
 import com.abulubad.sojourn.core.designsystem.components.emptystate.SojournEmptyStateAction
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderCard
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderState
 import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheet
 import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetDetent
 import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetState
@@ -71,6 +73,8 @@ fun BookingDetailsScreen(
     guideSheet: SojournSheetState = rememberHalfSheetState(),
     cancelSheet: SojournSheetState = rememberHalfSheetState(),
     snackbar: SojournSnackbarHostState = SojournSnackbarHostState(),
+    reminder: SojournReminderState? = null,
+    onRemind: () -> Unit = {},
 ) {
     SojournScaffold(
         modifier,
@@ -80,7 +84,7 @@ fun BookingDetailsScreen(
     ) { padding ->
         Box(Modifier.fillMaxSize()) {
             when (val booking = state.booking) {
-                is ScreenState.Content -> Page(booking.data, state, onIntent, padding)
+                is ScreenState.Content -> Page(booking.data, state, onIntent, padding, reminder, onRemind)
                 ScreenState.Loading -> Unit
                 else -> Missing(onIntent, padding)
             }
@@ -113,6 +117,8 @@ private fun Page(
     state: BookingDetailsUiState,
     onIntent: (BookingDetailsIntent) -> Unit,
     padding: PaddingValues,
+    reminder: SojournReminderState?,
+    onRemind: () -> Unit,
 ) {
     val c = SojournTheme.colors
     val formatter = rememberSojournFormatter()
@@ -150,6 +156,7 @@ private fun Page(
                 onAddToCalendar = { onIntent(BookingDetailsIntent.AddToCalendarTapped(it)) },
             )
         }
+        if (item.booking.status == BookingStatus.Upcoming) reminder?.let { SojournReminderCard(it, onRemind) }
         TotalPaid(stringResource(Res.string.confirmed_total_paid), formatter.money(item.booking.total))
         if (ongoing) BookingPolicies(item)
         if (state.canCancel) {
