@@ -99,7 +99,7 @@ fun BookingDetailsScreen(
             item = item,
             today = state.today,
             sheetState = guideSheet,
-            onCopy = { onIntent(BookingDetailsIntent.CopyTapped(it)) },
+            onCopy = { text, what -> onIntent(BookingDetailsIntent.CopyTapped(text, what)) },
             onDismiss = { onIntent(BookingDetailsIntent.SheetDismissed) },
         )
         is BookingSheet.Cancel -> CancelSheet(state, sheet, cancelSheet, onIntent)
@@ -141,9 +141,16 @@ private fun Page(
             onDirections = { onIntent(BookingDetailsIntent.DirectionsTapped) },
             onGuide = { onIntent(BookingDetailsIntent.GuideTapped) },
         )
-        TotalPaid(stringResource(Res.string.confirmed_total_paid), formatter.money(item.booking.total))
-        // The terms matter while the stay is still to come; a past or cancelled booking is a record.
+        // The address and the terms matter while the stay is still to come; a past or cancelled booking is a record.
         val ongoing = item.booking.status == BookingStatus.Upcoming || item.booking.status == BookingStatus.Active
+        if (ongoing) {
+            BookingAddress(
+                item = item,
+                onCopy = { text, what -> onIntent(BookingDetailsIntent.CopyTapped(text, what)) },
+                onAddToCalendar = { onIntent(BookingDetailsIntent.AddToCalendarTapped(it)) },
+            )
+        }
+        TotalPaid(stringResource(Res.string.confirmed_total_paid), formatter.money(item.booking.total))
         if (ongoing) BookingPolicies(item)
         if (state.canCancel) {
             SojournButton(

@@ -48,7 +48,7 @@ sealed interface BookingsIntent : UiIntent {
     data class DirectionsTapped(val item: BookingItem) : BookingsIntent
     data class GuideTapped(val item: BookingItem) : BookingsIntent
     data object GuideDismissed : BookingsIntent
-    data class CopyTapped(val code: String) : BookingsIntent
+    data class CopyTapped(val text: String, val what: Copied) : BookingsIntent
     data object ExploreTapped : BookingsIntent
 }
 
@@ -59,7 +59,7 @@ sealed interface BookingsEffect : UiEffect {
     /** The platform maps app at the stay's area. */
     data class OpenMaps(val item: BookingItem) : BookingsEffect
 
-    /** Copy the key code and say so. */
-    data class Copy(val code: String) : BookingsEffect
+    /** Copy the key code, address or Wi-Fi password, and say which. */
+    data class Copy(val text: String, val what: Copied) : BookingsEffect
     data object ShowExplore : BookingsEffect
 }

@@ -10,8 +10,9 @@ kotlin {
             api(libs.kotlinx.datetime)
             // The screens take the sheet and snackbar states their routes hoist.
             api(project(":core:designsystem"))
-            // Directions open the platform maps app; the key code goes to the clipboard.
-            implementation(project(":core:platform"))
+            // Directions open the platform maps app; the key code goes to the clipboard; the booking page's intents
+            // carry a CalendarStay.
+            api(project(":core:platform"))
         }
     }
 }

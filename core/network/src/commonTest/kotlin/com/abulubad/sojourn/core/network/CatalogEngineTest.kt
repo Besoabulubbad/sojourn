@@ -130,6 +130,11 @@ class CatalogEngineTest {
         val quote = assertNotNull(engine.quote(studio, march, Guests(2)).getOrNull())
         val booking = assertNotNull(engine.book(quote.id).getOrNull())
         assertTrue(Regex("[0-9]{6}").matches(assertNotNull(booking.keyCode)))
+        // A made-up building with no street or number, so it never points at a real home.
+        assertTrue(Regex("Flat [0-9]{1,2}, [A-Z][a-z]+ House").matches(assertNotNull(booking.address)))
+        val wifi = assertNotNull(booking.wifi)
+        assertEquals("Sojourn-${booking.reference.takeLast(4)}", wifi.network)
+        assertTrue(Regex("[a-z]+-[a-z]+-[0-9]{2}").matches(wifi.password))
         val overlapping = range("2027-03-20", "2027-03-30")
         assertEquals(AppError.Validation("unavailable"), engine.quote(studio, overlapping, Guests(1)).errorOrNull())
         assertEquals(AppError.Validation("unavailable"), engine.book(quote.id).errorOrNull())

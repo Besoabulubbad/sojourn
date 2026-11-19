@@ -33,6 +33,7 @@ import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayFacts
 import com.abulubad.sojourn.core.model.StayId
 import com.abulubad.sojourn.core.model.StayLength
+import com.abulubad.sojourn.core.model.Wifi
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.YearMonth
@@ -316,6 +317,9 @@ internal fun Booking.toRow(): BookingRow = BookingRow(
     status = status.id,
     created_at = createdAt.toEpochMilliseconds(),
     key_code = keyCode,
+    address = address,
+    wifi_network = wifi?.network,
+    wifi_password = wifi?.password,
 )
 
 internal fun BookingRow.toModel(): Booking? {
@@ -332,6 +336,8 @@ internal fun BookingRow.toModel(): Booking? {
         status = status,
         createdAt = Instant.fromEpochMilliseconds(created_at),
         keyCode = key_code,
+        address = address,
+        wifi = wifi_network?.let { network -> wifi_password?.let { Wifi(network, it) } },
     )
 }
 

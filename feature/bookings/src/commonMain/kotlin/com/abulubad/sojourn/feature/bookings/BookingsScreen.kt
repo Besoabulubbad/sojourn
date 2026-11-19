@@ -123,7 +123,7 @@ fun BookingsScreen(
             item = item,
             today = state.today,
             sheetState = guideSheet,
-            onCopy = { onIntent(BookingsIntent.CopyTapped(it)) },
+            onCopy = { text, what -> onIntent(BookingsIntent.CopyTapped(text, what)) },
             onDismiss = { onIntent(BookingsIntent.GuideDismissed) },
         )
     }

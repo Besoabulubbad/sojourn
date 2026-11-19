@@ -9,8 +9,14 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.provider.CalendarContract
 import android.provider.Settings
 import com.abulubad.sojourn.core.model.GeoPoint
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.plus
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -61,6 +67,27 @@ class AndroidAccessibilitySettings(private val context: Context) : Accessibility
         Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
 }
 
+/** The calendar app's insert screen, filled in; the guest saves it there. No calendar permission is needed. */
+class AndroidCalendarSaver(private val context: Context) : CalendarSaver {
+    override fun add(stay: CalendarStay): Boolean {
+        val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, utcMidnight(stay.dates.start))
+            // An all-day event ends at the start of the day after its last day: check-out day is included.
+            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, utcMidnight(stay.dates.end.plus(1, DateTimeUnit.DAY)))
+            .putExtra(CalendarContract.Events.TITLE, stay.title)
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, stay.location)
+            .putExtra(CalendarContract.Events.DESCRIPTION, stay.notes)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val handler = intent.resolveActivity(context.packageManager) ?: return false
+        context.startActivity(intent.setComponent(handler))
+        return true
+    }
+
+    // All-day events are stored at UTC midnight on Android.
+    private fun utcMidnight(date: LocalDate): Long = date.atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()
+}
+
 actual val platformModule: Module = module {
     single<Haptics> { AndroidHaptics(androidContext()) }
     single<ShareSheet> { AndroidShareSheet(androidContext()) }
@@ -68,4 +95,5 @@ actual val platformModule: Module = module {
     single<Clipboard> { AndroidClipboard(androidContext()) }
     single<AccessibilitySettings> { AndroidAccessibilitySettings(androidContext()) }
     single<PaymentSheet> { StubPaymentSheet() }
+    single<CalendarSaver> { AndroidCalendarSaver(androidContext()) }
 }

@@ -1,6 +1,8 @@
 package com.abulubad.sojourn.feature.bookings
 
 import androidx.compose.runtime.Composable
+import com.abulubad.sojourn.core.designsystem.components.sheet.SojournSheetDetent
+import com.abulubad.sojourn.core.designsystem.components.sheet.rememberSojournSheetState
 import com.abulubad.sojourn.core.designsystem.preview.SojournSamplePhotos
 import com.abulubad.sojourn.core.designsystem.preview.WithSojournSamplePhotos
 import com.abulubad.sojourn.core.domain.BookingItem
@@ -28,6 +30,7 @@ import com.abulubad.sojourn.core.model.Rating
 import com.abulubad.sojourn.core.model.Stay
 import com.abulubad.sojourn.core.model.StayFacts
 import com.abulubad.sojourn.core.model.StayId
+import com.abulubad.sojourn.core.model.Wifi
 import com.abulubad.sojourn.core.ui.ScreenState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
@@ -83,6 +86,8 @@ object BookingsSamples {
             status = status,
             createdAt = Instant.parse("2027-01-20T10:00:00Z"),
             keyCode = "482913",
+            address = "Flat 4, Linden House",
+            wifi = Wifi("Sojourn-QK7W", "maple-harbour-42"),
         ),
         stay,
     )
@@ -141,6 +146,16 @@ object BookingsSamples {
 
     @Composable
     fun Tab(state: BookingsUiState) = WithSojournSamplePhotos { BookingsScreen(state, onIntent = {}) }
+
+    /** The guide dragged open to full height: everything for arrival day, down to the Wi-Fi. */
+    @Composable
+    fun GuideOpen(state: BookingsUiState) = WithSojournSamplePhotos {
+        BookingsScreen(
+            state,
+            onIntent = {},
+            guideSheet = rememberSojournSheetState(SojournSheetDetent.Full, setOf(SojournSheetDetent.Full)),
+        )
+    }
 
     @Composable
     fun Details(state: BookingDetailsUiState) = WithSojournSamplePhotos { BookingDetailsScreen(state, onIntent = {}) }
