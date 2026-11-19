@@ -28,6 +28,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -141,6 +142,14 @@ fun SojournSheet(
         }
     }
     SheetBackHandler(state, modal, close)
+    if (modal) {
+        // Hides the page beneath from screen readers while this sheet is shown (SojournModalSheets).
+        val modalSheets = LocalSojournModalSheets.current
+        DisposableEffect(modalSheets) {
+            modalSheets.opened()
+            onDispose { modalSheets.closed() }
+        }
+    }
     val haptics = rememberSojournHaptics()
     LaunchedEffect(state) {
         // A light tick each time the sheet comes to rest at a new stop (not when it first appears or hides).

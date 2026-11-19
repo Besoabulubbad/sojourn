@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
 import com.abulubad.sojourn.core.designsystem.components.button.SojournButton
 import com.abulubad.sojourn.core.designsystem.components.button.SojournButtonVariant
@@ -297,6 +298,9 @@ private fun Cards(state: MapUiState, onIntent: (MapIntent) -> Unit) {
                     onClick = { onIntent(MapIntent.StayTapped(result)) },
                     onToggleSave = { onIntent(MapIntent.SaveTapped(result.stay.id)) },
                     layout = SojournStayCardLayout.Compact,
+                    // Only the card in view is read: the neighbours peek in at the edges with their content off
+                    // screen, and would be empty buttons to a screen reader. The pager still scrolls to them.
+                    modifier = if (page == pager.currentPage) Modifier else Modifier.clearAndSetSemantics {},
                 )
             }
         }

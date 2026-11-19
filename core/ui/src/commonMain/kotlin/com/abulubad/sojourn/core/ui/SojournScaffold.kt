@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import com.abulubad.sojourn.core.designsystem.components.sheet.LocalSojournModalSheets
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
 
 /**
@@ -24,6 +26,9 @@ import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
  *
  * The bars themselves (`SojournTopBar`, `SojournBottomNav`, `SojournBookingBar`) consume their own edge's inset,
  * so with a bar present the scaffold adds only the bar's measured height on that edge.
+ *
+ * While a modal `SojournSheet` is open the whole frame is hidden from screen readers (`SojournModalSheets`), so a
+ * modal sheet must be drawn beside the scaffold, never inside its [content].
  */
 @Composable
 fun SojournScaffold(
@@ -34,7 +39,14 @@ fun SojournScaffold(
 ) {
     val safe = WindowInsets.safeDrawing.asPaddingValues()
     val layoutDirection = LocalLayoutDirection.current
-    SubcomposeLayout(modifier.fillMaxSize().background(SojournTheme.colors.bg)) { constraints ->
+    // A modal sheet is open: the page beneath leaves the accessibility tree, so screen readers reach only the sheet.
+    val hidden = LocalSojournModalSheets.current.anyOpen
+    SubcomposeLayout(
+        modifier
+            .fillMaxSize()
+            .background(SojournTheme.colors.bg)
+            .then(if (hidden) Modifier.clearAndSetSemantics {} else Modifier),
+    ) { constraints ->
         val loose = constraints.copy(minWidth = 0, minHeight = 0)
         val top = subcompose(Slot.Top, topBar).map { it.measure(loose) }
         val bottom = subcompose(Slot.Bottom, bottomBar).map { it.measure(loose) }

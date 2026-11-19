@@ -4,7 +4,7 @@ import androidx.compose.ui.unit.dp
 
 /** Measurements from the DateRangePicker card. */
 object SojournDateRangePickerDefaults {
-    /** Day cell height; the check-in and check-out discs are this wide. */
+    /** The check-in and check-out discs, and the range band, are this tall; the cell itself is `touch-min`. */
     val DayHeight = 38.dp
 
     /** Weekday header row height. */

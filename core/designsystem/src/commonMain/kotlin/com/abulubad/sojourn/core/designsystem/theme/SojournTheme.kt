@@ -7,6 +7,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.abulubad.sojourn.core.designsystem.components.sheet.LocalSojournModalSheets
+import com.abulubad.sojourn.core.designsystem.components.sheet.SojournModalSheets
 import com.abulubad.sojourn.core.designsystem.tokens.SojournColors
 import com.abulubad.sojourn.core.designsystem.tokens.SojournElevation
 import com.abulubad.sojourn.core.designsystem.tokens.SojournType
@@ -50,6 +52,7 @@ fun SojournTheme(
     val text = SojournFonts.readexPro()
     val type = remember(display, text) { sojournType(display = display, text = text) }
 
+    val modalSheets = remember { SojournModalSheets() }
     ProvideAppLocale(locale) {
         CompositionLocalProvider(
             LocalSojournColors provides colors,
@@ -57,6 +60,7 @@ fun SojournTheme(
             LocalSojournElevation provides elevation,
             LocalSojournIsDark provides darkTheme,
             LocalReduceMotion provides reduceMotion,
+            LocalSojournModalSheets provides modalSheets,
         ) {
             MaterialTheme(
                 colorScheme = colors.toMaterialColorScheme(darkTheme),
