@@ -87,6 +87,8 @@ Eleven screens × two languages × two themes × font scale × width is a matrix
 
 **2026-11-19, iOS screenshots at 2× (decided with the maintainer); the release binary is reverted.** The release test binary fixed the time locally but not on CI: on the 3-core, 7 GB macOS runner one release link took 32 minutes (180 s and a 3.5 GB compiler locally), and the job was cancelled at 60 minutes again. The cost of an iOS capture in the debug binary grows with its pixels. Measured on Profile's 24 captures: 3× 308 s, 2× 39 s, 1× 14 s. iOS now renders at 2× (824 × 1830 px) from the ordinary debug binary, and every iOS baseline was re-recorded and reviewed. 2× keeps text and icons reviewable; Android stays 3× and exact. The release-binary configuration and its link service are removed.
 
+**2026-11-20, Maestro flows (decided with the maintainer).** The booking golden path and the language switch run in `main.yml` on an API 35 emulator after each merge to `main`, not on PRs, to keep PRs fast; failures upload Maestro's screenshots. Flows select by visible text. A fresh install follows the phone's language, so English flows first switch to English through `common/english.yaml`. Locally Maestro 2.12.1 is installed from its release zip into `~/.maestro` (Homebrew needed newer Command Line Tools); `tooling/scripts/maestro-ci.sh` runs the suite the same way CI does.
+
 ## Links
 
 - [Roborazzi](https://takahirom.github.io/roborazzi/) · [Robolectric](https://robolectric.org/)

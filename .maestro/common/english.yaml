@@ -1,0 +1,12 @@
+# Starts in English whatever the phone's language: on a fresh install the app follows the phone (an Arabic phone
+# opens it in Arabic), so the English flows switch first when they need to.
+appId: com.abulubad.sojourn
+---
+- runFlow:
+    when:
+      visible: "استكشف"
+    commands:
+      - tapOn: "حسابي"
+      - tapOn: "اللغة"
+      - tapOn: "English"
+      - tapOn: "Explore"

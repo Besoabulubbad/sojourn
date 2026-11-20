@@ -1,0 +1,54 @@
+# The hero reel (plan, Phase 6): the booking golden path with a theme and language switch half way. It starts in
+# English and light and opens London's stays, then switches to Arabic and dark in Profile and books from the same
+# list: the Explore tab kept it open. Paced for viewers. Recorded by tooling/scripts/record-flow.sh hero; not part of
+# the CI suite (.maestro/config.yaml runs the top-level flows only).
+appId: com.abulubad.sojourn
+name: Hero reel
+---
+# hero-setup.yaml has made a fresh install English and light; the reel starts on Explore.
+- launchApp:
+    stopApp: false
+- waitForAnimationToEnd
+- tapOn: "London"
+- waitForAnimationToEnd
+- swipe:
+    direction: UP
+    duration: 900
+- swipe:
+    direction: DOWN
+    duration: 900
+# Half way: dark and Arabic, from Profile.
+- tapOn: "Profile"
+- tapOn: "Appearance"
+- tapOn: "Dark"
+- waitForAnimationToEnd
+- back
+- tapOn: "Language"
+- tapOn: "العربية"
+- waitForAnimationToEnd
+# Back to Explore: the same list, now right to left and dark.
+- tapOn: "استكشف"
+- waitForAnimationToEnd
+- scrollUntilVisible:
+    element: "Riverside two-bed for longer stays"
+- tapOn: "Riverside two-bed for longer stays"
+- waitForAnimationToEnd
+- tapOn: "اختر التواريخ"
+- tapOn: "الشهر التالي"
+- tapOn:
+    text: "10"
+    index: 0
+- tapOn:
+    text: "20"
+    index: 0
+- tapOn: "اعرض الإجمالي"
+- waitForAnimationToEnd
+- tapOn: "احجز"
+- waitForAnimationToEnd
+- tapOn: "ادفع .*[0-9].*"
+- waitForAnimationToEnd
+- tapOn: "ادفع .*[0-9].*"
+- extendedWaitUntil:
+    visible: "تم الحجز"
+    timeout: 15000
+- waitForAnimationToEnd

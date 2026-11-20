@@ -1,0 +1,3 @@
+# `maestro test .maestro/` runs the flows here; shared steps live in common/ and are not flows of their own.
+flows:
+  - "*.yaml"

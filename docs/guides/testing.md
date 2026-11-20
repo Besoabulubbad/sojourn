@@ -105,10 +105,14 @@ For interactions screenshots cannot prove: sheet drag detents, gallery swipe, st
 
 Flows in `.maestro/`:
 
-- `booking-golden-path.yaml` — Explore → search London for a month → Results → Details → Checkout → confirmation; asserts the same price text on card, booking bar and pay button (P-02).
-- `language-switch.yaml` — switch to Arabic in Profile; assert direction and a translated title; switch back.
+- `booking-golden-path.yaml` — a fresh install: Explore → London → a stay → dates next month (so it never depends on today) → the total → Reserve → Review and pay → the demo wallet (asserts it says no money moves) → "You're booked" → the booking page with its address and "Add to calendar".
+- `language-switch.yaml` — Profile › Language › العربية: the UI turns Arabic and lands back on Profile; then back to English.
+- `common/english.yaml` — a fresh install follows the phone's language, so flows written in English switch first when the phone is in Arabic. `common/light.yaml` does the same for the theme.
+- `showcase/hero.yaml` (+ `hero-setup.yaml`) — the hero reel; not part of the suite (`config.yaml` runs the top-level flows only).
 
-Run locally against an emulator; CI runs them after the Android build on `main`.
+Selectors are the visible text, as a guest reads it. Two traps: a regex such as `Pay .*` also matches the wallet's "Pay to" row, so buttons are matched with their amount (`Pay .*[0-9].*`); and a sheet's buttons are tapped after `waitForAnimationToEnd`.
+
+Run locally: start an emulator, `./gradlew :app:android:assembleDebug`, then `tooling/scripts/maestro-ci.sh` (installs the app and runs every flow; Maestro from `~/.maestro/bin` or the PATH). CI runs the same script in `main.yml` on an API 35 emulator after each merge to `main`, not on PRs; failures upload Maestro's screenshots and logs.
 
 ## Flakiness policy
 

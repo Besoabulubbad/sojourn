@@ -1,5 +1,5 @@
-# Runs on every merge to main and nightly: the PR gate plus the iOS framework and simulator app on macOS
-# (ADR 0011). Emulator jobs (Compose UI tests, Maestro) join in Phase 6.
+# Runs on every merge to main and nightly: the PR gate, the iOS framework and simulator app on macOS (ADR 0011),
+# and the Maestro flows on an Android emulator (Phase 6: the booking golden path and the language switch).
 name: Main
 
 on:
@@ -71,3 +71,57 @@ jobs:
             -destination "generic/platform=iOS Simulator" \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+  maestro:
+    name: Maestro flows (Android emulator)
+    # On main only, not on PRs (decided with the maintainer): an emulator adds 10-15 minutes.
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      # The emulator image and the build need more than the runner's ~14 GB free; drop unused toolchains first.
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force > /dev/null
+          df -h /
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: true
+      - run: ./gradlew :app:android:assembleDebug
+      # Hardware acceleration for the emulator, as the emulator action's README describes for Linux runners.
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Install Maestro
+        env:
+          MAESTRO_VERSION: 2.12.1
+        run: |
+          curl -fsSL "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+      - name: Run the flows
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: tooling/scripts/maestro-ci.sh
+      - uses: mikepenz/action-junit-report@v6
+        if: always()
+        with:
+          report_paths: build/maestro-report.xml
+          check_name: Maestro flows (main)
+      - name: Maestro screenshots and logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: maestro-debug
+          path: ~/.maestro/tests
+          retention-days: 7
