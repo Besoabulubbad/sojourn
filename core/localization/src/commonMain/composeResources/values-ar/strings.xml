@@ -560,4 +560,15 @@
     <string name="guide_wifi_later">تظهر بيانات الواي فاي هنا يوم الوصول، %1$s.</string>
     <string name="action_copy_password">انسخ كلمة المرور</string>
     <string name="wifi_password_copied">تم نسخ كلمة المرور</string>
+
+    <string name="reminder_offer_title">احصل على تذكير قبل يوم</string>
+    <string name="reminder_offer_body">إشعار مساء اليوم السابق لتسجيل الوصول، فيه الموعد ودليل الدخول. على هذا الهاتف فقط.</string>
+    <string name="action_remind_me">ذكّرني</string>
+    <string name="reminder_set_title">تم ضبط التذكير</string>
+    <string name="reminder_set_body">سيصلك تذكير في %1$s الساعة %2$s.</string>
+    <string name="reminder_blocked_title">الإشعارات متوقفة</string>
+    <string name="reminder_blocked_body">فعّل إشعارات Sojourn من إعدادات هاتفك لتصلك التذكيرات.</string>
+    <string name="reminder_notification_title">تسجيل الوصول غدًا</string>
+    <string name="reminder_notification_body">%1$s · تسجيل الوصول من %2$s. دليل الدخول في Sojourn.</string>
+    <string name="reminder_notification_body_no_time">%1$s. دليل الدخول في Sojourn.</string>
 </resources>

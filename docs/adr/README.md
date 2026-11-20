@@ -33,6 +33,7 @@ Every significant decision about this codebase, in [MADR](https://adr.github.io/
 | [0016](0016-seed-catalogue-hosting.md) | Seed catalogue: bundled JSON, photos hosted on the docs site | accepted | 2026-11-17 |
 | [0017](0017-maps-maplibre-openfreemap.md) | Maps: MapLibre Compose with OpenFreeMap tiles, our own pins | accepted | 2026-11-18 |
 | [0018](0018-demo-wallet-payment.md) | Payment: a labelled demo wallet, no real wallet brands | accepted | 2026-11-19 |
+| [0019](0019-arrival-reminders-local-notifications.md) | Arrival reminders as local notifications | accepted | 2026-11-19 |
 
 ## How these were decided
 

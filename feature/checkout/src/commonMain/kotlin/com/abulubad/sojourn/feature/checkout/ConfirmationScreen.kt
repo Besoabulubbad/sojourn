@@ -21,6 +21,8 @@ import com.abulubad.sojourn.core.designsystem.components.actionbar.SojournAction
 import com.abulubad.sojourn.core.designsystem.components.divider.SojournDivider
 import com.abulubad.sojourn.core.designsystem.components.emptystate.SojournEmptyState
 import com.abulubad.sojourn.core.designsystem.components.emptystate.SojournEmptyStateAction
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderCard
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderState
 import com.abulubad.sojourn.core.designsystem.components.staysummary.SojournStaySummary
 import com.abulubad.sojourn.core.designsystem.icon.SojournIcon
 import com.abulubad.sojourn.core.designsystem.theme.SojournTheme
@@ -56,6 +58,8 @@ fun ConfirmationScreen(
     state: ConfirmationUiState,
     onIntent: (ConfirmationIntent) -> Unit,
     modifier: Modifier = Modifier,
+    reminder: SojournReminderState? = null,
+    onRemind: () -> Unit = {},
 ) {
     SojournScaffold(
         modifier = modifier,
@@ -70,7 +74,7 @@ fun ConfirmationScreen(
         },
     ) { padding ->
         when (val booking = state.booking) {
-            is ScreenState.Content -> Confirmed(booking.data, padding)
+            is ScreenState.Content -> Confirmed(booking.data, padding, reminder, onRemind)
             ScreenState.Loading -> Unit
             // The booking was stored before this screen opened; anything else is unexpected.
             is ScreenState.Error, is ScreenState.Offline, ScreenState.Empty -> Missing(onIntent, padding)
@@ -79,7 +83,12 @@ fun ConfirmationScreen(
 }
 
 @Composable
-private fun Confirmed(item: BookingItem, padding: PaddingValues) {
+private fun Confirmed(
+    item: BookingItem,
+    padding: PaddingValues,
+    reminder: SojournReminderState?,
+    onRemind: () -> Unit,
+) {
     val c = SojournTheme.colors
     val booking = item.booking
     Column(
@@ -121,6 +130,8 @@ private fun Confirmed(item: BookingItem, padding: PaddingValues) {
             Fact(stringResource(Res.string.checkout_guests), guestsText(booking.guests))
             Fact(stringResource(Res.string.confirmed_total_paid), rememberSojournFormatter().money(booking.total))
         }
+        // The moment to offer the arrival reminder: the guest has just booked.
+        reminder?.let { SojournReminderCard(it, onRemind) }
     }
 }
 

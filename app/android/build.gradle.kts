@@ -14,6 +14,8 @@ android {
 
 dependencies {
     implementation(project(":app:shared"))
+    // MainActivity binds the notification-permission launcher to AndroidReminders.
+    implementation(project(":core:platform"))
 
     implementation(libs.androidx.activity) // enableEdgeToEdge
     implementation(libs.androidx.activity.compose)

@@ -127,4 +127,5 @@ actual val platformModule: Module = module {
     single<AccessibilitySettings> { IosAccessibilitySettings() }
     single<PaymentSheet> { StubPaymentSheet() }
     single<CalendarSaver> { IosCalendarSaver() }
+    single<Reminders> { IosReminders() }
 }

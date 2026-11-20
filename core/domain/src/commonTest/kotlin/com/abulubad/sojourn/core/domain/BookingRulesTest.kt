@@ -17,10 +17,12 @@ import com.abulubad.sojourn.core.testing.data.FakeStayRepository
 import com.abulubad.sojourn.core.testing.runSojournTest
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
 
@@ -95,5 +97,21 @@ class BookingRulesTest {
         assertEquals(1_500, RewardsRules.pointsFor(completed))
         assertEquals(1_500, RewardsRules.pointsFor(completed.copy(total = Money.of(1_500, Currency.EUR, 99))))
         assertEquals(1_250, RewardsRules.pointsFor(completed.copy(total = Money.of(125_099, Currency.DZD))))
+    }
+
+    @Test
+    fun `the arrival reminder is the evening before check-in and never late`() {
+        val london = TimeZone.of("Europe/London")
+        // Check-in 12 March: the reminder is 18:00 on 11 March, London time.
+        val expected = Instant.parse("2026-03-11T18:00:00Z")
+        assertEquals(expected, BookingRules.reminderAt(booking, Instant.parse("2026-03-01T09:00:00Z"), london))
+        assertNull(BookingRules.reminderAt(booking, Instant.parse("2026-03-11T18:30:00Z"), london), "already passed")
+        val cancelled = booking.copy(status = BookingStatus.Cancelled)
+        assertNull(BookingRules.reminderAt(cancelled, Instant.parse("2026-03-01T09:00:00Z"), london))
+        val algiers = TimeZone.of("Africa/Algiers")
+        assertEquals(
+            Instant.parse("2026-03-11T17:00:00Z"),
+            BookingRules.reminderAt(booking, Instant.parse("2026-03-01T09:00:00Z"), algiers),
+        )
     }
 }

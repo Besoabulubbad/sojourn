@@ -21,6 +21,14 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
+      # The free Ubuntu runner has ~14 GB free; the build, Robolectric and the screenshot matrix now need more.
+      # Remove preinstalled toolchains this project never uses (.NET, Haskell, Boost, CodeQL, Docker images).
+      - name: Free disk space
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force > /dev/null
+          df -h /
 
       - uses: actions/setup-java@v6
         with:

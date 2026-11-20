@@ -1,5 +1,6 @@
 package com.abulubad.sojourn.feature.checkout
 
+import com.abulubad.sojourn.core.designsystem.components.reminder.SojournReminderState
 import com.abulubad.sojourn.core.testing.SnapshotCase
 
 /**
@@ -19,4 +20,7 @@ val checkoutSnapshots: List<SnapshotCase> = listOf(
     SnapshotCase("checkout_edit_dates") { CheckoutSamples.Screen(CheckoutSamples.editingDates) },
     SnapshotCase("checkout_edit_guests") { CheckoutSamples.Screen(CheckoutSamples.editingGuests) },
     SnapshotCase("booking_confirmed", fullMatrix = true) { CheckoutSamples.Confirmation() },
+    SnapshotCase("booking_confirmed_reminder") {
+        CheckoutSamples.Confirmation(reminder = SojournReminderState.Offer)
+    },
 )

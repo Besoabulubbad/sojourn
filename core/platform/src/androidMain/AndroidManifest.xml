@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Arrival reminders (AndroidReminders): asked for only when the guest chooses to be reminded. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Alarms are cleared by a restart; RebootReceiver arms the stored reminders again. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application>
+        <receiver
+            android:name="com.abulubad.sojourn.core.platform.ReminderReceiver"
+            android:exported="false" />
+        <receiver
+            android:name="com.abulubad.sojourn.core.platform.RebootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

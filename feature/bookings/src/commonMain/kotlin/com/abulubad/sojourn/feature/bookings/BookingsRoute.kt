@@ -1,6 +1,7 @@
 package com.abulubad.sojourn.feature.bookings
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -15,6 +16,7 @@ import com.abulubad.sojourn.core.localization.resources.address_copied
 import com.abulubad.sojourn.core.localization.resources.calendar_unavailable
 import com.abulubad.sojourn.core.localization.resources.key_code_copied
 import com.abulubad.sojourn.core.localization.resources.wifi_password_copied
+import com.abulubad.sojourn.core.model.BookingStatus
 import com.abulubad.sojourn.core.navigation.BookingDetailsKey
 import com.abulubad.sojourn.core.navigation.Navigator
 import com.abulubad.sojourn.core.navigation.Tab
@@ -22,6 +24,7 @@ import com.abulubad.sojourn.core.platform.CalendarSaver
 import com.abulubad.sojourn.core.platform.CalendarStay
 import com.abulubad.sojourn.core.platform.Clipboard
 import com.abulubad.sojourn.core.platform.MapsLauncher
+import com.abulubad.sojourn.core.platform.Reminders
 import com.abulubad.sojourn.core.ui.CollectEffects
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -70,7 +73,14 @@ fun BookingDetailsRoute(key: BookingDetailsKey, navigator: Navigator, modifier: 
             BookingDetailsEffect.CloseSheet -> cancelSheet.hide()
         }
     }
+    val reminder = rememberArrivalReminder(state.item)
+    // A cancelled stay has nothing to remind the guest about.
+    val reminders = koinInject<Reminders>()
+    val cancelled = state.item?.booking?.takeIf { it.status == BookingStatus.Cancelled }
+    LaunchedEffect(cancelled?.id) { cancelled?.let { reminders.cancel(it.id.value) } }
     BookingDetailsScreen(
+        reminder = reminder.state,
+        onRemind = reminder.remind,
         state = state,
         onIntent = viewModel::onIntent,
         modifier = modifier,

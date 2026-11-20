@@ -96,4 +96,7 @@ actual val platformModule: Module = module {
     single<AccessibilitySettings> { AndroidAccessibilitySettings(androidContext()) }
     single<PaymentSheet> { StubPaymentSheet() }
     single<CalendarSaver> { AndroidCalendarSaver(androidContext()) }
+    // One instance, so the activity that binds the permission launcher and the screens that ask share it.
+    single { AndroidReminders(androidContext()) }
+    single<Reminders> { get<AndroidReminders>() }
 }
