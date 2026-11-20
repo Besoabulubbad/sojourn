@@ -40,4 +40,6 @@ tags:
     timeout: 15000
 - tapOn: "View booking"
 - assertVisible: "Address"
-- assertVisible: "Add to calendar"
+# On a small screen (CI's emulator) the page continues below the fold.
+- scrollUntilVisible:
+    element: "Add to calendar"
