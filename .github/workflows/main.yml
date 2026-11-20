@@ -79,6 +79,12 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
+      # The emulator image and the build need more than the runner's ~14 GB free; drop unused toolchains first.
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force > /dev/null
+          df -h /
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
