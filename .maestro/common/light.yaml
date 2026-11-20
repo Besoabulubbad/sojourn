@@ -1,0 +1,8 @@
+# Starts in the light theme whatever the phone's setting (the hero reel switches to dark half way).
+appId: com.abulubad.sojourn
+---
+- tapOn: "Profile"
+- tapOn: "Appearance"
+- tapOn: "Light"
+- back
+- tapOn: "Explore"

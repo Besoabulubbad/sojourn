@@ -1,0 +1,8 @@
+# Before the hero reel is recorded: a fresh install in English and light, back on Explore. Run by record-flow.sh
+# ahead of the recording, so the reel starts on Explore.
+appId: com.abulubad.sojourn
+---
+- launchApp:
+    clearState: true
+- runFlow: ../common/english.yaml
+- runFlow: ../common/light.yaml

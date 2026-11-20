@@ -1,0 +1,19 @@
+# The language switch (plan, Phase 6): English to Arabic and back from Profile, the whole UI turning right to left
+# and landing back on Profile.
+appId: com.abulubad.sojourn
+name: Language switch
+tags:
+  - localization
+---
+- launchApp:
+    clearState: true
+- runFlow: common/english.yaml
+- tapOn: "Profile"
+- tapOn: "Language"
+- tapOn: "العربية"
+- assertVisible: "حسابي"
+- assertVisible: "المكافآت"
+- tapOn: "اللغة"
+- tapOn: "English"
+- assertVisible: "Rewards"
+- assertVisible: "Language"

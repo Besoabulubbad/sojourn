@@ -13,9 +13,9 @@ The visual record of the app as it is built — every component and screen in En
 | Token sheet | Roborazzi baselines in `core/designsystem` | copied from `src/androidHostTest/screenshots` (automated by `exportShowcase` in Phase 3) |
 | Component contact sheet | Roborazzi baselines in `core/designsystem` | `./gradlew exportShowcase` |
 | Screen grids (412 dp, 4 variants) | Roborazzi baselines in each `feature:*` | `./gradlew exportShowcase` |
-| Flow recordings (GIF / WebP) | emulator screen recording while a Maestro flow drives the app, converted with ffmpeg | `scripts/record-flow.sh <flow>` |
-| Hero reel | the booking golden path with a mid-flow theme and language switch | `scripts/record-flow.sh hero` |
-| Social preview (1280 × 640) | composed from the hero frames and the wordmark | `scripts/social-preview.sh` |
+| Flow recordings (MP4 + GIF) | emulator screen recording while a Maestro flow drives the app, converted with ffmpeg | `tooling/scripts/record-flow.sh <flow>` |
+| Hero reel | the booking golden path with a mid-flow theme and language switch | `tooling/scripts/record-flow.sh hero` |
+| Social preview (1280 × 640) | the lockup and three showcase screens | `python3 -I tooling/scripts/social_preview.py` |
 
 Exports are committed under `docs/showcase/` so the README and this page work offline and in forks.
 
@@ -90,4 +90,12 @@ Every case renders on both platforms from the same Kotlin, and both sets of base
 
 ## Recordings
 
-*pending — Phase 5/6.* Per-feature flows, the hero reel, and Android/iOS side by side.
+**Hero reel** (62 s): London's stays in English and light, then Arabic and dark from Profile, and the booking through the demo wallet to "تم الحجز". [MP4](recordings/hero.mp4) · GIF below.
+
+![The hero reel](recordings/hero.gif){ width="270" }
+
+**Social preview**, set on the repository by hand (Settings › General › Social preview):
+
+![Social preview](social-preview.png){ width="640" }
+
+*pending:* Android and iOS side by side (the iOS simulator cannot be driven by Maestro here yet).

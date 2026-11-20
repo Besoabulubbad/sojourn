@@ -18,8 +18,10 @@ A premium flexible-stay reservation app — one Kotlin Multiplatform codebase, s
 
 <br/>
 
-<!-- Hero: recorded golden path (Explore → search a month in London → Details → Checkout), light→dark, English→Arabic. Produced by the showcase pipeline from Phase 5. -->
-<img src="docs/showcase/hero.gif" width="300" alt="Sojourn — booking a month in London, switching theme and language mid-flow" />
+<!-- Hero: the booking golden path, light→dark and English→Arabic half way. Recorded by tooling/scripts/record-flow.sh hero. -->
+<a href="docs/showcase/recordings/hero.mp4"><img src="docs/showcase/recordings/hero.gif" width="270" alt="Sojourn: opening London's stays in English, switching to Arabic and dark in Profile, then booking a stay through the demo wallet" /></a>
+
+<sub>Sharper as video: <a href="docs/showcase/recordings/hero.mp4">hero.mp4</a></sub>
 
 </div>
 
@@ -97,10 +99,10 @@ How it was decided, and what was deliberately *not* automated: [ADR 0013](docs/a
 | 0 | Repository & documentation foundation | ✅ |
 | 1 | Build system & quality gates | ✅ |
 | 2 | Core foundations (tokens, theme, localization, navigation) | ✅ |
-| 3 | Design system — 26 components × 4 variants | ⚪ |
-| 4 | Data — SQLDelight, repositories, pricing invariants | ⚪ |
-| 5 | Screens — 10 features | ⚪ |
-| 6 | Platform polish & end-to-end | ⚪ |
+| 3 | Design system — 26 components × 4 variants | ✅ |
+| 4 | Data — SQLDelight, repositories, pricing invariants | ✅ |
+| 5 | Screens — 10 features | ✅ |
+| 6 | Platform polish & end-to-end | 🟡 |
 | 7 | Release v0.1.0 | ⚪ |
 
 [Plan with exit criteria →](docs/plan.md)
