@@ -11,8 +11,10 @@ tags:
 - assertVisible: "Find your next home base"
 - tapOn: "London"
 - assertVisible: ".*stays in London"
+# Centre the card: stopped at the bottom edge it sits under the tab bar, and the tap opens Bookings instead.
 - scrollUntilVisible:
     element: "Riverside two-bed for longer stays"
+    centerElement: true
 - tapOn: "Riverside two-bed for longer stays"
 - tapOn: "Choose dates"
 - tapOn: "Next month"
@@ -43,3 +45,4 @@ tags:
 # On a small screen (CI's emulator) the page continues below the fold.
 - scrollUntilVisible:
     element: "Add to calendar"
+    centerElement: true
