@@ -29,8 +29,10 @@ name: Hero reel
 # Back to Explore: the same list, now right to left and dark.
 - tapOn: "استكشف"
 - waitForAnimationToEnd
+# Centre the card: stopped at the bottom edge it sits under the tab bar, and the tap opens Bookings instead.
 - scrollUntilVisible:
     element: "Riverside two-bed for longer stays"
+    centerElement: true
 - tapOn: "Riverside two-bed for longer stays"
 - waitForAnimationToEnd
 - tapOn: "اختر التواريخ"
